@@ -1,0 +1,483 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D16222115EB315500C0F3CC /* KSPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D16222015EB315500C0F3CC /* KSPViewController.m */; };
+		1D16222415EBC82900C0F3CC /* Asset.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D16222315EBC82900C0F3CC /* Asset.m */; };
+		1D16222815EBC87200C0F3CC /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D16222715EBC87200C0F3CC /* Plugin.m */; };
+		1D16222B15EBCCFB00C0F3CC /* Line.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D16222A15EBCCFB00C0F3CC /* Line.m */; };
+		1D16222F15EDBB8F00C0F3CC /* ShipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D16222D15EDBB8F00C0F3CC /* ShipViewController.m */; };
+		1D16223015EDBB8F00C0F3CC /* ShipViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D16222E15EDBB8F00C0F3CC /* ShipViewController.xib */; };
+		1D16223615EE721300C0F3CC /* PortableExecutableFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D16223515EE721300C0F3CC /* PortableExecutableFormat.m */; };
+		1D16223815EE97D800C0F3CC /* KSPM-Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1D16223715EE97D800C0F3CC /* KSPM-Icon.icns */; };
+		1D16223C15EE9F2B00C0F3CC /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 1D16223A15EE9F2B00C0F3CC /* LICENSE */; };
+		1D16223D15EE9F2B00C0F3CC /* README in Resources */ = {isa = PBXBuildFile; fileRef = 1D16223B15EE9F2B00C0F3CC /* README */; };
+		1D2ED54215EB156900402EF1 /* InventoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D2ED54015EB156900402EF1 /* InventoryViewController.m */; };
+		1D2ED54315EB156900402EF1 /* InventoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D2ED54115EB156900402EF1 /* InventoryViewController.xib */; };
+		1D67803115E431BC00A29C2C /* DropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D67803015E431BC00A29C2C /* DropView.m */; };
+		1D67803415E80E5B00A29C2C /* PersistenceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D67803315E80E5B00A29C2C /* PersistenceFile.m */; };
+		1DB405B915DB3E230041807D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DB405B815DB3E230041807D /* Cocoa.framework */; };
+		1DB405C315DB3E230041807D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1DB405C115DB3E230041807D /* InfoPlist.strings */; };
+		1DB405C515DB3E230041807D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB405C415DB3E230041807D /* main.m */; };
+		1DB405C915DB3E230041807D /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1DB405C715DB3E230041807D /* Credits.rtf */; };
+		1DB405CC15DB3E230041807D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB405CB15DB3E230041807D /* AppDelegate.m */; };
+		1DB405CF15DB3E230041807D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DB405CD15DB3E230041807D /* MainMenu.xib */; };
+		1DB405DF15DB3F2F0041807D /* PartsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB405DD15DB3F2F0041807D /* PartsViewController.m */; };
+		1DB405E015DB3F2F0041807D /* PartsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DB405DE15DB3F2F0041807D /* PartsViewController.xib */; };
+		1DB405E415DB3F3D0041807D /* MissionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB405E215DB3F3D0041807D /* MissionsViewController.m */; };
+		1DB405E515DB3F3D0041807D /* MissionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DB405E315DB3F3D0041807D /* MissionsViewController.xib */; };
+		1DB405ED15DB45390041807D /* KSP.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB405EC15DB45390041807D /* KSP.m */; };
+		1DB405F415DB569E0041807D /* PluginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB405F215DB569E0041807D /* PluginViewController.m */; };
+		1DB405F515DB569E0041807D /* PluginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DB405F315DB569E0041807D /* PluginViewController.xib */; };
+		1DB405F915DBFF4C0041807D /* Part.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB405F815DBFF4C0041807D /* Part.m */; };
+		1DB5D91915DE889100E9438E /* ConfigFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB5D91815DE889100E9438E /* ConfigFile.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D16221F15EB315500C0F3CC /* KSPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPViewController.h; sourceTree = "<group>"; };
+		1D16222015EB315500C0F3CC /* KSPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPViewController.m; sourceTree = "<group>"; };
+		1D16222215EBC82900C0F3CC /* Asset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Asset.h; sourceTree = "<group>"; };
+		1D16222315EBC82900C0F3CC /* Asset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Asset.m; sourceTree = "<group>"; };
+		1D16222615EBC87200C0F3CC /* Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plugin.h; sourceTree = "<group>"; };
+		1D16222715EBC87200C0F3CC /* Plugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plugin.m; sourceTree = "<group>"; };
+		1D16222915EBCCFB00C0F3CC /* Line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Line.h; sourceTree = "<group>"; };
+		1D16222A15EBCCFB00C0F3CC /* Line.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Line.m; sourceTree = "<group>"; };
+		1D16222C15EDBB8F00C0F3CC /* ShipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShipViewController.h; sourceTree = "<group>"; };
+		1D16222D15EDBB8F00C0F3CC /* ShipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipViewController.m; sourceTree = "<group>"; };
+		1D16222E15EDBB8F00C0F3CC /* ShipViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShipViewController.xib; sourceTree = "<group>"; };
+		1D16223415EE721300C0F3CC /* PortableExecutableFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PortableExecutableFormat.h; sourceTree = "<group>"; };
+		1D16223515EE721300C0F3CC /* PortableExecutableFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PortableExecutableFormat.m; sourceTree = "<group>"; };
+		1D16223715EE97D800C0F3CC /* KSPM-Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "KSPM-Icon.icns"; sourceTree = "<group>"; };
+		1D16223A15EE9F2B00C0F3CC /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
+		1D16223B15EE9F2B00C0F3CC /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = SOURCE_ROOT; };
+		1D2ED53F15EB156900402EF1 /* InventoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryViewController.h; sourceTree = "<group>"; };
+		1D2ED54015EB156900402EF1 /* InventoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryViewController.m; sourceTree = "<group>"; };
+		1D2ED54115EB156900402EF1 /* InventoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InventoryViewController.xib; sourceTree = "<group>"; };
+		1D67802F15E431BC00A29C2C /* DropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropView.h; sourceTree = "<group>"; };
+		1D67803015E431BC00A29C2C /* DropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropView.m; sourceTree = "<group>"; };
+		1D67803215E80E5B00A29C2C /* PersistenceFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistenceFile.h; sourceTree = "<group>"; };
+		1D67803315E80E5B00A29C2C /* PersistenceFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistenceFile.m; sourceTree = "<group>"; };
+		1DB405B415DB3E230041807D /* KSPManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KSPManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DB405B815DB3E230041807D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		1DB405BB15DB3E230041807D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		1DB405BC15DB3E230041807D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		1DB405BD15DB3E230041807D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1DB405C015DB3E230041807D /* KSPManager-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KSPManager-Info.plist"; sourceTree = "<group>"; };
+		1DB405C215DB3E230041807D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1DB405C415DB3E230041807D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1DB405C615DB3E230041807D /* KSPManager-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KSPManager-Prefix.pch"; sourceTree = "<group>"; };
+		1DB405C815DB3E230041807D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		1DB405CA15DB3E230041807D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1DB405CB15DB3E230041807D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1DB405CE15DB3E230041807D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		1DB405DC15DB3F2F0041807D /* PartsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartsViewController.h; sourceTree = "<group>"; };
+		1DB405DD15DB3F2F0041807D /* PartsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartsViewController.m; sourceTree = "<group>"; };
+		1DB405DE15DB3F2F0041807D /* PartsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PartsViewController.xib; sourceTree = "<group>"; };
+		1DB405E115DB3F3D0041807D /* MissionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissionsViewController.h; sourceTree = "<group>"; };
+		1DB405E215DB3F3D0041807D /* MissionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionsViewController.m; sourceTree = "<group>"; };
+		1DB405E315DB3F3D0041807D /* MissionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MissionsViewController.xib; sourceTree = "<group>"; };
+		1DB405EB15DB45390041807D /* KSP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSP.h; sourceTree = "<group>"; };
+		1DB405EC15DB45390041807D /* KSP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSP.m; sourceTree = "<group>"; };
+		1DB405F115DB569E0041807D /* PluginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginViewController.h; sourceTree = "<group>"; };
+		1DB405F215DB569E0041807D /* PluginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginViewController.m; sourceTree = "<group>"; };
+		1DB405F315DB569E0041807D /* PluginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PluginViewController.xib; sourceTree = "<group>"; };
+		1DB405F615DBFD060041807D /* KSP_Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSP_Constants.h; sourceTree = "<group>"; };
+		1DB405F715DBFF4C0041807D /* Part.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Part.h; sourceTree = "<group>"; };
+		1DB405F815DBFF4C0041807D /* Part.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Part.m; sourceTree = "<group>"; };
+		1DB5D91715DE889100E9438E /* ConfigFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigFile.h; sourceTree = "<group>"; };
+		1DB5D91815DE889100E9438E /* ConfigFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigFile.m; sourceTree = "<group>"; };
+		1DF455EB15EA7050001CD433 /* DropViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DropViewDelegate.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1DB405B115DB3E230041807D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DB405B915DB3E230041807D /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1D16222515EBC83800C0F3CC /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				1D16222215EBC82900C0F3CC /* Asset.h */,
+				1D16222315EBC82900C0F3CC /* Asset.m */,
+				1DB405F715DBFF4C0041807D /* Part.h */,
+				1DB405F815DBFF4C0041807D /* Part.m */,
+				1D16222615EBC87200C0F3CC /* Plugin.h */,
+				1D16222715EBC87200C0F3CC /* Plugin.m */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		1D16223915EE9F1800C0F3CC /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				1D16223A15EE9F2B00C0F3CC /* LICENSE */,
+				1D16223B15EE9F2B00C0F3CC /* README */,
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
+		1D67802D15E4319200A29C2C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1D67802F15E431BC00A29C2C /* DropView.h */,
+				1DF455EB15EA7050001CD433 /* DropViewDelegate.h */,
+				1D67803015E431BC00A29C2C /* DropView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		1DB405A915DB3E230041807D = {
+			isa = PBXGroup;
+			children = (
+				1DB405BE15DB3E230041807D /* KSPManager */,
+				1DB405B715DB3E230041807D /* Frameworks */,
+				1DB405B515DB3E230041807D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1DB405B515DB3E230041807D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1DB405B415DB3E230041807D /* KSPManager.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1DB405B715DB3E230041807D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1DB405B815DB3E230041807D /* Cocoa.framework */,
+				1DB405BA15DB3E230041807D /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1DB405BA15DB3E230041807D /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1DB405BB15DB3E230041807D /* AppKit.framework */,
+				1DB405BC15DB3E230041807D /* CoreData.framework */,
+				1DB405BD15DB3E230041807D /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		1DB405BE15DB3E230041807D /* KSPManager */ = {
+			isa = PBXGroup;
+			children = (
+				1D16223915EE9F1800C0F3CC /* Documentation */,
+				1DB405CA15DB3E230041807D /* AppDelegate.h */,
+				1DB405CB15DB3E230041807D /* AppDelegate.m */,
+				1DB405E615DB3F450041807D /* Model */,
+				1D67802D15E4319200A29C2C /* Views */,
+				1DB405D615DB3E7A0041807D /* View Controllers */,
+				1DB405D515DB3E670041807D /* NIBs */,
+				1DB405BF15DB3E230041807D /* Supporting Files */,
+			);
+			path = KSPManager;
+			sourceTree = "<group>";
+		};
+		1DB405BF15DB3E230041807D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1D16223715EE97D800C0F3CC /* KSPM-Icon.icns */,
+				1DB405C015DB3E230041807D /* KSPManager-Info.plist */,
+				1DB405C115DB3E230041807D /* InfoPlist.strings */,
+				1DB405C415DB3E230041807D /* main.m */,
+				1DB405C615DB3E230041807D /* KSPManager-Prefix.pch */,
+				1DB405C715DB3E230041807D /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1DB405D515DB3E670041807D /* NIBs */ = {
+			isa = PBXGroup;
+			children = (
+				1DB405CD15DB3E230041807D /* MainMenu.xib */,
+				1DB405DE15DB3F2F0041807D /* PartsViewController.xib */,
+				1DB405F315DB569E0041807D /* PluginViewController.xib */,
+				1DB405E315DB3F3D0041807D /* MissionsViewController.xib */,
+				1D2ED54115EB156900402EF1 /* InventoryViewController.xib */,
+				1D16222E15EDBB8F00C0F3CC /* ShipViewController.xib */,
+			);
+			name = NIBs;
+			sourceTree = "<group>";
+		};
+		1DB405D615DB3E7A0041807D /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1D16221F15EB315500C0F3CC /* KSPViewController.h */,
+				1D16222015EB315500C0F3CC /* KSPViewController.m */,
+				1DB405DC15DB3F2F0041807D /* PartsViewController.h */,
+				1DB405DD15DB3F2F0041807D /* PartsViewController.m */,
+				1DB405E115DB3F3D0041807D /* MissionsViewController.h */,
+				1DB405E215DB3F3D0041807D /* MissionsViewController.m */,
+				1DB405F115DB569E0041807D /* PluginViewController.h */,
+				1DB405F215DB569E0041807D /* PluginViewController.m */,
+				1D2ED53F15EB156900402EF1 /* InventoryViewController.h */,
+				1D2ED54015EB156900402EF1 /* InventoryViewController.m */,
+				1D16222C15EDBB8F00C0F3CC /* ShipViewController.h */,
+				1D16222D15EDBB8F00C0F3CC /* ShipViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		1DB405E615DB3F450041807D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1DB405F615DBFD060041807D /* KSP_Constants.h */,
+				1DB405FD15DC4E010041807D /* Utility */,
+				1DB405EB15DB45390041807D /* KSP.h */,
+				1DB405EC15DB45390041807D /* KSP.m */,
+				1D16222515EBC83800C0F3CC /* Assets */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		1DB405FD15DC4E010041807D /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				1DB5D91715DE889100E9438E /* ConfigFile.h */,
+				1DB5D91815DE889100E9438E /* ConfigFile.m */,
+				1D67803215E80E5B00A29C2C /* PersistenceFile.h */,
+				1D67803315E80E5B00A29C2C /* PersistenceFile.m */,
+				1D16222915EBCCFB00C0F3CC /* Line.h */,
+				1D16222A15EBCCFB00C0F3CC /* Line.m */,
+				1D16223415EE721300C0F3CC /* PortableExecutableFormat.h */,
+				1D16223515EE721300C0F3CC /* PortableExecutableFormat.m */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1DB405B315DB3E230041807D /* KSPManager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DB405D215DB3E230041807D /* Build configuration list for PBXNativeTarget "KSPManager" */;
+			buildPhases = (
+				1DB405B015DB3E230041807D /* Sources */,
+				1DB405B115DB3E230041807D /* Frameworks */,
+				1DB405B215DB3E230041807D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KSPManager;
+			productName = KSPManager;
+			productReference = 1DB405B415DB3E230041807D /* KSPManager.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1DB405AB15DB3E230041807D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = "Symbolic Armageddon";
+			};
+			buildConfigurationList = 1DB405AE15DB3E230041807D /* Build configuration list for PBXProject "KSPManager" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1DB405A915DB3E230041807D;
+			productRefGroup = 1DB405B515DB3E230041807D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1DB405B315DB3E230041807D /* KSPManager */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1DB405B215DB3E230041807D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DB405C315DB3E230041807D /* InfoPlist.strings in Resources */,
+				1DB405C915DB3E230041807D /* Credits.rtf in Resources */,
+				1DB405CF15DB3E230041807D /* MainMenu.xib in Resources */,
+				1DB405E015DB3F2F0041807D /* PartsViewController.xib in Resources */,
+				1DB405E515DB3F3D0041807D /* MissionsViewController.xib in Resources */,
+				1DB405F515DB569E0041807D /* PluginViewController.xib in Resources */,
+				1D2ED54315EB156900402EF1 /* InventoryViewController.xib in Resources */,
+				1D16223015EDBB8F00C0F3CC /* ShipViewController.xib in Resources */,
+				1D16223815EE97D800C0F3CC /* KSPM-Icon.icns in Resources */,
+				1D16223C15EE9F2B00C0F3CC /* LICENSE in Resources */,
+				1D16223D15EE9F2B00C0F3CC /* README in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1DB405B015DB3E230041807D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DB405C515DB3E230041807D /* main.m in Sources */,
+				1DB405CC15DB3E230041807D /* AppDelegate.m in Sources */,
+				1DB405DF15DB3F2F0041807D /* PartsViewController.m in Sources */,
+				1DB405E415DB3F3D0041807D /* MissionsViewController.m in Sources */,
+				1DB405ED15DB45390041807D /* KSP.m in Sources */,
+				1DB405F415DB569E0041807D /* PluginViewController.m in Sources */,
+				1DB405F915DBFF4C0041807D /* Part.m in Sources */,
+				1DB5D91915DE889100E9438E /* ConfigFile.m in Sources */,
+				1D67803115E431BC00A29C2C /* DropView.m in Sources */,
+				1D67803415E80E5B00A29C2C /* PersistenceFile.m in Sources */,
+				1D2ED54215EB156900402EF1 /* InventoryViewController.m in Sources */,
+				1D16222115EB315500C0F3CC /* KSPViewController.m in Sources */,
+				1D16222415EBC82900C0F3CC /* Asset.m in Sources */,
+				1D16222815EBC87200C0F3CC /* Plugin.m in Sources */,
+				1D16222B15EBCCFB00C0F3CC /* Line.m in Sources */,
+				1D16222F15EDBB8F00C0F3CC /* ShipViewController.m in Sources */,
+				1D16223615EE721300C0F3CC /* PortableExecutableFormat.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		1DB405C115DB3E230041807D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1DB405C215DB3E230041807D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1DB405C715DB3E230041807D /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1DB405C815DB3E230041807D /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		1DB405CD15DB3E230041807D /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1DB405CE15DB3E230041807D /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1DB405D015DB3E230041807D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		1DB405D115DB3E230041807D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		1DB405D315DB3E230041807D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KSPManager/KSPManager-Prefix.pch";
+				INFOPLIST_FILE = "KSPManager/KSPManager-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1DB405D415DB3E230041807D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KSPManager/KSPManager-Prefix.pch";
+				INFOPLIST_FILE = "KSPManager/KSPManager-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DB405AE15DB3E230041807D /* Build configuration list for PBXProject "KSPManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DB405D015DB3E230041807D /* Debug */,
+				1DB405D115DB3E230041807D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DB405D215DB3E230041807D /* Build configuration list for PBXNativeTarget "KSPManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DB405D315DB3E230041807D /* Debug */,
+				1DB405D415DB3E230041807D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1DB405AB15DB3E230041807D /* Project object */;
+}
