@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'KSPManager' target in the 'KSPManager' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
