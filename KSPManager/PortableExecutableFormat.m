@@ -14,21 +14,42 @@
 
 @synthesize url = _url;
 @synthesize data = _data;
+
 @synthesize doshdr = _doshdr;
 @synthesize pehdr = _pehdr;
 
-@synthesize version = _version;
-@synthesize e_magic = _e_magic;
-@synthesize e_lfanew = _e_lfanew;
-@synthesize signature = _signature;
+@synthesize sectionHeaders = _sectionHeaders;
+
+@synthesize resourceSectionHeader = _resourceSectionHeader;
+@synthesize resourceSection = _resourceSection;
+
+@synthesize fixedFileInfo = _fixedFileInfo;
+
+@synthesize fileVersionValue = _fileVersionValue;
+@synthesize productVersionValue = _productVersionValue;
+@synthesize fileTimestampValue = _fileTimestampValue;
+
+@synthesize productVersion = _productVersion;
+@synthesize fileVersion = _fileVersion;
+@synthesize fileTimestamp = _fileTimestamp;
+
 
 - (id)initWithContentsOfURL:(NSURL *)url
 {
     if( self = [super init] ){
         
         self.url = url;
-        
-    
+#if 0
+        @try {
+            if( self.fixedFileInfo->dwFileType != VFT_APP ){
+                self = nil;
+            }
+        }
+        @catch (NSException *exception) {
+            NSLog(@"Exception! %@",exception);
+            self = nil;
+        }
+#endif
     }
     return self;
 }
@@ -39,7 +60,11 @@
 - (NSString *)description
 {
  
-    return [NSString stringWithFormat:@"PLUGIN %@ @ %@ ",self.url.lastPathComponent,self.version];
+    return [NSString stringWithFormat:@"PFE %@ @ %@ magic %04x",
+                self.url.lastPathComponent,
+                self.productVersion,
+                self.doshdr->e_magic];
+
     
 }
 
@@ -47,17 +72,10 @@
 {
     if( _data == nil ){
         NSError *error = nil;
-        
         _data = [[NSData alloc] initWithContentsOfURL:self.url options:NSDataReadingMappedIfSafe error:&error];
-        
         if( error ){
             NSLog(@"data getter: %@",error);
         }
-        
-        _doshdr = (IMAGE_DOS_HEADER *)self.data.bytes;
-        _e_magic = _doshdr->e_magic;
-        _e_lfanew = _doshdr->e_lfanew;
-        
     }
     return _data;
     
@@ -79,27 +97,115 @@
     return _pehdr;
 }
 
-- (NSUInteger)e_magic
+- (NSPointerArray *)sectionHeaders
 {
-    return self.doshdr->e_magic;
-}
+    if( _sectionHeaders == nil ){
+    
+        NSPointerFunctionsOptions options = NSPointerFunctionsOpaqueMemory | NSPointerFunctionsOpaquePersonality;
+            
+        _sectionHeaders = [NSPointerArray pointerArrayWithOptions:options];
+        
+        IMAGE_SECTION_HEADER *sbase = IMAGE_GET_FIRST_SECTION(self.pehdr);
+        
+        for(uint16_t i=0;i<self.pehdr->FileHeader.NumberOfSections;i++)
+            [_sectionHeaders addPointer:sbase+i];
 
-- (NSUInteger)e_lfanew
-{
-    return self.doshdr->e_lfanew;
-}
-
-- (NSUInteger)signature
-{
-    return self.pehdr->Signature;
-}
-
-- (NSString *)version
-{
-    if( _version == nil ){
-            _version = @"V 1.1 Slippery Snake";
     }
-    return _version;
+    return _sectionHeaders;
 }
+
+- (IMAGE_SECTION_HEADER *)resourceSectionHeader
+{
+    if( _resourceSectionHeader == NULL ){
+
+        // XXX this is weak
+        
+#define kRESOURCE_SECTION_NAME ".rsrc"
+        
+        for(NSUInteger i=0;i<self.sectionHeaders.count;i++) {
+            IMAGE_SECTION_HEADER *shdr = [self.sectionHeaders pointerAtIndex:i];
+            if( shdr && strncmp((const char *)shdr->Name, kRESOURCE_SECTION_NAME,strlen(kRESOURCE_SECTION_NAME)) == 0 ){
+                _resourceSectionHeader = shdr;
+                break;
+            }
+        }
+    }
+    return _resourceSectionHeader;
+}
+
+- (void *)resourceSection
+{
+    if( _resourceSection == NULL ){
+        _resourceSection = (BYTE *)self.doshdr + self.resourceSectionHeader->PointerToRawData;
+    }
+    return _resourceSection;
+    
+}
+
+- (VS_FIXEDFILEINFO *)fixedFileInfo
+{
+    if( _fixedFileInfo == NULL ) {
+        BYTE *buf = (BYTE *)self.resourceSection;
+        
+        for(NSUInteger i=0;i<self.resourceSectionHeader->SizeOfRawData;i++){
+            DWORD *ptr = (DWORD *)(buf+i);
+            if( *ptr == VS_FIXEDFILEINFO_SIGNATURE ){
+                _fixedFileInfo = (VS_FIXEDFILEINFO *)ptr;
+                break;
+            }
+        }
+    }
+    return _fixedFileInfo;
+}
+
+- (uint64_t)combineMSB:(uint32_t)msb andLSB:(uint32_t)lsb
+{
+    return ((uint64_t)msb << 32) | ( (uint64_t)lsb & 0x00000000FFFFFFFF );
+}
+
+- (uint64_t)fileVersionValue
+{
+    if( _fileVersionValue == 0 ) {
+        _fileVersionValue   = [self combineMSB:self.fixedFileInfo->dwFileVersionMS
+                                 andLSB:self.fixedFileInfo->dwFileVersionLS];
+    }
+    return _fileVersionValue;
+}
+
+- (uint64_t)productVersionValue
+{
+    if( _productVersionValue == 0 ) {
+        _productVersionValue = [self combineMSB:self.fixedFileInfo->dwProductVersionMS
+                                    andLSB:self.fixedFileInfo->dwProductVersionLS];
+    }
+    return _productVersionValue;
+}
+
+- (uint64_t)fileTimestampValue
+{
+    if( _fileTimestampValue == 0 ){
+        _fileTimestampValue = [self combineMSB:self.fixedFileInfo->dwFileDateMS
+                                   andLSB:self.fixedFileInfo->dwFileDateLS];
+    }
+    return _fileTimestampValue;
+}
+
+
+- (NSString *)productVersion
+{
+    if( _productVersion == nil ){
+        uint64_t value = self.productVersionValue;
+        uint16_t *nibbles = (uint16_t *)& value;
+        
+        _productVersion = [NSString stringWithFormat:@"%d.%d.%d.%d",
+                            nibbles[3],
+                           nibbles[2],
+                           nibbles[1],
+                           nibbles[0]];
+    }
+    return _productVersion;
+}
+
+
 
 @end

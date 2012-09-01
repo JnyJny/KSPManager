@@ -11,7 +11,7 @@
 @class PortableExecutableFormat;
 
 @interface Plugin : Asset {
-    PortableExecutableFormat *_pfe;
+    PortableExecutableFormat *_pef;
 }
 
 @property (strong, nonatomic, readonly) NSString *fileName;

@@ -36,7 +36,7 @@ enum {
 };
 
 typedef struct {
-  DWORD dwSignature;		/* used with with szKey to find struct in file */
+  DWORD dwSignature;		/* used with with szKey to find struct in file, VS_FIXEDFILEINFO_SIGNATURE */
   DWORD dwStrucVersion;		/* packed field - hi word: major lo word: minor */
   DWORD dwFileVersionMS;	/* MSB of file binary version number */
   DWORD dwFileVersionLS;	/* LSB of file binary version number */
@@ -44,8 +44,8 @@ typedef struct {
   DWORD dwProductVersionLS;	/* LSB of product file version number */
   DWORD dwFileFlagsMask;	/* Mask of valid parts of dwFileFlags */
   DWORD dwFileFlags;		/* Bit mask constructed with VS_FF_* */
-  DWORD dwFileOS;		/* Bit mask of VOS_* */
-  DWORD dwFileType;		/* VFT_* */
+  DWORD dwFileOS;           /* Bit mask of VOS_* */
+  DWORD dwFileType;         /* VFT_* */
   DWORD dwFileSubtype;		/* file sub types, dnc */
   DWORD dwFileDateMS;		/* MSB of datetimestamp */
   DWORD dwFileDateLS;		/* LSB of datetimestamp */

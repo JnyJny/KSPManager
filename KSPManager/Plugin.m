@@ -12,6 +12,7 @@
 @implementation Plugin
 
 @synthesize fileName = _fileName;
+@synthesize version = _version;
 
 - (id)initWithPluginFileURL:(NSURL *)pluginFileURL
 {
@@ -20,11 +21,9 @@
     _fileName = self.baseURL.lastPathComponent;
 
     if (self) {
-        _pfe = [[PortableExecutableFormat alloc] initWithContentsOfURL:self.baseURL];
+        _pef = [[PortableExecutableFormat alloc] initWithContentsOfURL:self.baseURL];
         
-        NSLog(@"magic %lx",_pfe.e_magic);
-        NSLog(@"nthdr %lx",_pfe.e_lfanew);
-        NSLog(@"signa %lx",_pfe.signature);
+
     }
     
     return self;
@@ -47,7 +46,7 @@
 
 - (NSString *)version
 {
-    return [_pfe version];
+    return _pef.productVersion;
 }
 
 - (BOOL)isInstalled
