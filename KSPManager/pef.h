@@ -10,6 +10,7 @@
 #define KSPManager_pef_h
 
 
+
 typedef unsigned char  BYTE;
 typedef unsigned short WORD;
 typedef unsigned int   DWORD;
@@ -154,6 +155,16 @@ typedef struct {
     IMAGE_FILE_HEADER FileHeader;
     IMAGE_OPTIONAL_HEADER OptionalHeader;
 } IMAGE_NT_HEADER;
+
+#define DOSHDR(P) ((IMAGE_DOS_HEADER *)P)
+
+#define NTHDR(P,DOSHDRP) (IMAGE_NT_HEADER *)(((BYTE *)(P))+(DOSHDRP->e_lfanew))
+
+#define DATADIR(NTHDRP,WHICH) (NTHDRP)->OptionalHeader.DataDirectory[(WHICH)]
+
+#define DOSMAGIC 0x4d5a
+
+#define PE32SIGNATURE  0x50450000
 
 
 

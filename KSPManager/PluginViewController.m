@@ -117,12 +117,12 @@
 
 - (IBAction)moveSelectedToAvailable:(id)sender
 {
-    
+    NSLog(@"moveSelectedToAvailable:");
 }
 
 - (IBAction)moveSelectedToInstalled:(id)sender
 {
-    
+    NSLog(@"moveSelectedToInstalled:");
 }
 
 - (IBAction)tableViewInstalledAction:(NSTableView *)sender

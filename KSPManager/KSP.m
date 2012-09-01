@@ -246,7 +246,12 @@
         _plugins = [[NSMutableArray alloc] init];
         [_plugins addObjectsFromArray:[Plugin inventory:self.pluginsURL]];
         [_plugins addObjectsFromArray:[Plugin inventory:self.availablePluginsURL]];
+        
+        NSLog(@"plugins %@",_plugins);
     }
+    
+
+    
     return _plugins;
 }
 

@@ -16,7 +16,6 @@
 		1D16223615EE721300C0F3CC /* PortableExecutableFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D16223515EE721300C0F3CC /* PortableExecutableFormat.m */; };
 		1D16223815EE97D800C0F3CC /* KSPM-Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1D16223715EE97D800C0F3CC /* KSPM-Icon.icns */; };
 		1D16223C15EE9F2B00C0F3CC /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 1D16223A15EE9F2B00C0F3CC /* LICENSE */; };
-		1D16223D15EE9F2B00C0F3CC /* README in Resources */ = {isa = PBXBuildFile; fileRef = 1D16223B15EE9F2B00C0F3CC /* README */; };
 		1D2ED54215EB156900402EF1 /* InventoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D2ED54015EB156900402EF1 /* InventoryViewController.m */; };
 		1D2ED54315EB156900402EF1 /* InventoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D2ED54115EB156900402EF1 /* InventoryViewController.xib */; };
 		1D67803115E431BC00A29C2C /* DropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D67803015E431BC00A29C2C /* DropView.m */; };
@@ -36,6 +35,7 @@
 		1DB405F515DB569E0041807D /* PluginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DB405F315DB569E0041807D /* PluginViewController.xib */; };
 		1DB405F915DBFF4C0041807D /* Part.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB405F815DBFF4C0041807D /* Part.m */; };
 		1DB5D91915DE889100E9438E /* ConfigFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB5D91815DE889100E9438E /* ConfigFile.m */; };
+		1DB7013515F12C90002EC18D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1DB7013415F12C90002EC18D /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,7 +54,6 @@
 		1D16223515EE721300C0F3CC /* PortableExecutableFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PortableExecutableFormat.m; sourceTree = "<group>"; };
 		1D16223715EE97D800C0F3CC /* KSPM-Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "KSPM-Icon.icns"; sourceTree = "<group>"; };
 		1D16223A15EE9F2B00C0F3CC /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
-		1D16223B15EE9F2B00C0F3CC /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = SOURCE_ROOT; };
 		1D2ED53F15EB156900402EF1 /* InventoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryViewController.h; sourceTree = "<group>"; };
 		1D2ED54015EB156900402EF1 /* InventoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryViewController.m; sourceTree = "<group>"; };
 		1D2ED54115EB156900402EF1 /* InventoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InventoryViewController.xib; sourceTree = "<group>"; };
@@ -91,6 +90,8 @@
 		1DB405F815DBFF4C0041807D /* Part.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Part.m; sourceTree = "<group>"; };
 		1DB5D91715DE889100E9438E /* ConfigFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigFile.h; sourceTree = "<group>"; };
 		1DB5D91815DE889100E9438E /* ConfigFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigFile.m; sourceTree = "<group>"; };
+		1DB7013215F12C3C002EC18D /* pef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pef.h; sourceTree = "<group>"; };
+		1DB7013415F12C90002EC18D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		1DF455EB15EA7050001CD433 /* DropViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DropViewDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,7 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				1D16223A15EE9F2B00C0F3CC /* LICENSE */,
-				1D16223B15EE9F2B00C0F3CC /* README */,
+				1DB7013415F12C90002EC18D /* README.md */,
 			);
 			name = Documentation;
 			sourceTree = "<group>";
@@ -249,6 +250,7 @@
 		1DB405FD15DC4E010041807D /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				1DB7013215F12C3C002EC18D /* pef.h */,
 				1DB5D91715DE889100E9438E /* ConfigFile.h */,
 				1DB5D91815DE889100E9438E /* ConfigFile.m */,
 				1D67803215E80E5B00A29C2C /* PersistenceFile.h */,
@@ -322,7 +324,7 @@
 				1D16223015EDBB8F00C0F3CC /* ShipViewController.xib in Resources */,
 				1D16223815EE97D800C0F3CC /* KSPM-Icon.icns in Resources */,
 				1D16223C15EE9F2B00C0F3CC /* LICENSE in Resources */,
-				1D16223D15EE9F2B00C0F3CC /* README in Resources */,
+				1DB7013515F12C90002EC18D /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

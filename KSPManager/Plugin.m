@@ -21,6 +21,10 @@
 
     if (self) {
         _pfe = [[PortableExecutableFormat alloc] initWithContentsOfURL:self.baseURL];
+        
+        NSLog(@"magic %lx",_pfe.e_magic);
+        NSLog(@"nthdr %lx",_pfe.e_lfanew);
+        NSLog(@"signa %lx",_pfe.signature);
     }
     
     return self;
@@ -31,7 +35,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"PLUGIN %@, %@",self.fileName,self.version];
+    return [NSString stringWithFormat:@"PLUGIN %@, %@ %@",self.fileName,self.version,self.isInstalled?@"YES":@"NO"];
     
 }
 
