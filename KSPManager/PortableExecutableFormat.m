@@ -15,7 +15,7 @@
 @synthesize url = _url;
 @synthesize data = _data;
 @synthesize doshdr = _doshdr;
-@synthesize nthdr = _nthdr;
+@synthesize pehdr = _pehdr;
 
 @synthesize version = _version;
 @synthesize e_magic = _e_magic;
@@ -75,14 +75,14 @@
     return _doshdr;
 }
 
-- (IMAGE_NT_HEADER *)nthdr
+- (IMAGE_PE_HEADERS *)pehdr
 {
-    if( _nthdr == NULL) {
-        NSRange range = { self.e_lfanew, sizeof(IMAGE_NT_HEADER) };
-        _nthdr = calloc(1,range.length);
-        [self.data getBytes:_nthdr range:range];
+    if( _pehdr == NULL) {
+        NSRange range = { self.e_lfanew, sizeof(IMAGE_PE_HEADERS) };
+        _pehdr = calloc(1,range.length);
+        [self.data getBytes:_pehdr range:range];
     }
-    return _nthdr;
+    return _pehdr;
 }
 
 - (NSUInteger)e_magic
@@ -102,7 +102,7 @@
 
 - (NSUInteger)signature
 {
-    return self.nthdr->Signature;
+    return self.pehdr->Signature;
 }
 
 - (NSString *)version

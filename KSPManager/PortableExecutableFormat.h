@@ -21,7 +21,7 @@
 @property (strong, nonatomic) NSData *data;
 
 @property (assign, readonly) IMAGE_DOS_HEADER *doshdr;
-@property (assign, readonly) IMAGE_NT_HEADER *nthdr;
+@property (assign, readonly) IMAGE_PE_HEADERS *pehdr;
 
 @property (assign, readonly) NSUInteger e_magic;
 @property (assign, readonly) NSUInteger e_lfanew;
