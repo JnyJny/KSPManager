@@ -66,11 +66,7 @@
 - (IMAGE_DOS_HEADER *)doshdr
 {
     if( _doshdr == NULL ) {
-        NSRange range = { 0x0, sizeof(IMAGE_DOS_HEADER) };
-
-        _doshdr = malloc(range.length);
-        
-        [self.data getBytes:_doshdr range:range];
+        _doshdr = IMAGE_GET_DOS_HEADER(self.data.bytes);
     }
     return _doshdr;
 }
@@ -78,26 +74,19 @@
 - (IMAGE_PE_HEADERS *)pehdr
 {
     if( _pehdr == NULL) {
-        NSRange range = { self.e_lfanew, sizeof(IMAGE_PE_HEADERS) };
-        _pehdr = calloc(1,range.length);
-        [self.data getBytes:_pehdr range:range];
+        _pehdr = IMAGE_GET_PE_HEADER(self.doshdr);
     }
     return _pehdr;
 }
 
 - (NSUInteger)e_magic
 {
-    NSRange range = {0x0,2};
-    [self.data getBytes:&_e_magic range:range];
-    
-    return _e_magic;
+    return self.doshdr->e_magic;
 }
 
 - (NSUInteger)e_lfanew
 {
-    NSRange range = { 0x3c, 4 };
-    [self.data getBytes:&_e_lfanew range:range];
-    return _e_lfanew;
+    return self.doshdr->e_lfanew;
 }
 
 - (NSUInteger)signature

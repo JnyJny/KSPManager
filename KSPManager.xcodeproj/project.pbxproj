@@ -90,8 +90,9 @@
 		1DB405F815DBFF4C0041807D /* Part.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Part.m; sourceTree = "<group>"; };
 		1DB5D91715DE889100E9438E /* ConfigFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigFile.h; sourceTree = "<group>"; };
 		1DB5D91815DE889100E9438E /* ConfigFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigFile.m; sourceTree = "<group>"; };
-		1DB7013215F12C3C002EC18D /* pef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pef.h; sourceTree = "<group>"; };
 		1DB7013415F12C90002EC18D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
+		1DB7013B15F2864F002EC18D /* pe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pe.h; sourceTree = "<group>"; };
+		1DB7013C15F2864F002EC18D /* msve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = msve.h; sourceTree = "<group>"; };
 		1DF455EB15EA7050001CD433 /* DropViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DropViewDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -264,7 +265,8 @@
 		1DB7013A15F193FF002EC18D /* Portable Executable */ = {
 			isa = PBXGroup;
 			children = (
-				1DB7013215F12C3C002EC18D /* pef.h */,
+				1DB7013B15F2864F002EC18D /* pe.h */,
+				1DB7013C15F2864F002EC18D /* msve.h */,
 				1D16223415EE721300C0F3CC /* PortableExecutableFormat.h */,
 				1D16223515EE721300C0F3CC /* PortableExecutableFormat.m */,
 			);

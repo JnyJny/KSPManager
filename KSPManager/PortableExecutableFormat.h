@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import "pef.h"
+#import "pe.h"
+#import "msve.h"
 
 @interface PortableExecutableFormat : NSObject {
 
