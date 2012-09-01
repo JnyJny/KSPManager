@@ -1,4 +1,10 @@
 KSPManager: A Kerbal Space Program Part & Plugin Manager
 
-I Suck at Git right now.
+KSP Manager is a native Mac OS X application designed to make it easy to manage the amazing
+wealth of add-on parts and plugins for Kerbal Space Program.
 
+- XCode project files can be found at https://github.com/JnyJny/KSPManager.git
+
+- Standby for a binary distribution.
+
+Also, I don't understand version control with git... yet.  I will try not to break this repository.
