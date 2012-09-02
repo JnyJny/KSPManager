@@ -59,19 +59,19 @@ typedef struct {
 } VS_VARLENGTH;
 
 typedef struct {
-  WORD             wLength;	 /* length of this struct */
+  WORD             wLength;	     /* length of this struct */
   WORD             wValueLength; /* length in bytes of Value member */
-  WORD             wType;	 /* 0: binary 1: text */
-  WCHAR            szKey;	 /* Unicode string "VS_VERSION_INFO" */
-  WORD             Padding1;     /* variable zeros to 32 bit boundar */
-  VS_FIXEDFILEINFO Value;	 /*  */
+  WORD             wType;	     /* 0: binary 1: text */
+  WCHAR            szKey[15];	 /* Unicode string "VS_VERSION_INFO" */
+  WORD             pad0;
+  VS_FIXEDFILEINFO Value;	     /*  */
   WORD             Padding2;	 /* variable zeros to 32 bit boundary */
-  WORD             Children;	 /* Aarry of 0|1 StringFileInfo and 0|1 VarFileInfo structs */
+  WORD             Children;	 /* Array of 0|1 StringFileInfo and 0|1 VarFileInfo structs */
 } VS_VERSIONINFO;
 
 typedef struct {
   WORD  wLength;		/* length in bytes of this structure (Leaf) */
-  WORD  wValueLength;		/* size in WORDS of Value member */
+  WORD  wValueLength;   /* size in WORDS of Value member */
   WORD  wType;			/* 0: binary 1: text */
   WCHAR szKey;			/* arbitrary unicode string */
   WORD  Padding;		/* variable zeros to 32 bit boundary */
@@ -80,7 +80,7 @@ typedef struct {
 
 typedef struct {
   WORD   wLength;		/* length in bytes of this struct including children */
-  WORD   wValueLength;		/* always zero */
+  WORD   wValueLength;	/* always zero */
   WORD   wType;			/* 0: binary 1: text */
   WCHAR  szKey;			/* 8 digit hex unicode string, encodes language identifier */
   WORD   Padding;

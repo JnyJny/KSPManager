@@ -22,6 +22,7 @@
 
 @synthesize resourceSectionHeader = _resourceSectionHeader;
 @synthesize resourceSection = _resourceSection;
+@synthesize versionInfo = _versionInfo;
 
 @synthesize fixedFileInfo = _fixedFileInfo;
 
@@ -114,6 +115,7 @@
     return _sectionHeaders;
 }
 
+
 - (IMAGE_SECTION_HEADER *)resourceSectionHeader
 {
     if( _resourceSectionHeader == NULL ){
@@ -142,9 +144,26 @@
     
 }
 
+
+
+#define kVersionInfoKey @"VS_VERSION_INFO"
+
+- (VS_VERSIONINFO *)versionInfo
+{
+    if( _versionInfo == NULL ){
+        
+    }
+    return _versionInfo;
+}
+
+
 - (VS_FIXEDFILEINFO *)fixedFileInfo
 {
     if( _fixedFileInfo == NULL ) {
+
+#if 0
+        _fixedFileInfo = &(self.versionInfo->Value);
+#else
         BYTE *buf = (BYTE *)self.resourceSection;
         
         for(NSUInteger i=0;i<self.resourceSectionHeader->SizeOfRawData;i++){
@@ -154,6 +173,7 @@
                 break;
             }
         }
+#endif
     }
     return _fixedFileInfo;
 }
@@ -185,7 +205,7 @@
 {
     if( _fileTimestampValue == 0 ){
         _fileTimestampValue = [self combineMSB:self.fixedFileInfo->dwFileDateMS
-                                   andLSB:self.fixedFileInfo->dwFileDateLS];
+                                   andLSB:self.fixedFileInfo->dwFileDateLS];	
     }
     return _fileTimestampValue;
 }
@@ -206,6 +226,19 @@
     return _productVersion;
 }
 
+- (NSComparisonResult)compareByProductVersion:(id)target
+{
+    if( [[target class] isSubclassOfClass:[PortableExecutableFormat class]] == NO){
+        NSLog(@"compareByProductVersion:%@ can't act on target.",[target className]);
+        return NSOrderedSame;
+    }
+    
+    NSNumber *a = [NSNumber numberWithUnsignedLong:[self productVersionValue]];
+    NSNumber *b = [NSNumber numberWithUnsignedLong:[(PortableExecutableFormat *)target productVersionValue]];
+    
+    return [a compare:b];
 
+        
+}
 
 @end
