@@ -7,4 +7,3 @@ wealth of add-on parts and plugins for Kerbal Space Program.
 
 - Standby for a binary distribution.
 
-Also, I don't understand version control with git... yet.  I will try not to break this repository.
