@@ -26,8 +26,12 @@
 @property (assign, readonly) IMAGE_DOS_HEADER *doshdr;
 @property (assign, readonly) IMAGE_PE_HEADERS *pehdr;
 @property (assign, readonly) IMAGE_SECTION_HEADER *resourceSectionHeader;
-@property (assign, readonly) VS_VERSIONINFO *versionInfo;
 @property (assign, readonly) void *resourceSection;
+@property (assign, readonly) VS_VERSIONINFO *versionInfo;
+@property (assign, readonly) StringFileInfo *stringFileInfo;
+
+@property (strong, readonly) NSDictionary *stringTable;
+
 @property (assign, readonly) VS_FIXEDFILEINFO *fixedFileInfo;
 
 @property (strong, readonly) NSPointerArray *sectionHeaders;

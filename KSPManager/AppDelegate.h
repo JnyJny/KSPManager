@@ -25,6 +25,8 @@
 @property (weak) IBOutlet PluginViewController *pluginViewController;
 @property (weak) IBOutlet InventoryViewController *inventoryViewController;
 @property (weak) IBOutlet ShipViewController *shipViewController;
+@property (weak) IBOutlet NSButton *terminateKSPButton;
+@property (weak) IBOutlet NSButton *launchKSPButton;
 
 
 @property (strong, nonatomic) KSP *ksp;

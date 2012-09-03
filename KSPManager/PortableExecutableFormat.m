@@ -25,6 +25,9 @@
 @synthesize versionInfo = _versionInfo;
 
 @synthesize fixedFileInfo = _fixedFileInfo;
+@synthesize stringFileInfo = _stringFileInfo;
+
+@synthesize stringTable = _stringTable;
 
 @synthesize fileVersionValue = _fileVersionValue;
 @synthesize productVersionValue = _productVersionValue;
@@ -145,6 +148,28 @@
 }
 
 
+- (NSUInteger )offsetOfString:(NSString *)string inBuffer:(BYTE *)buffer ofSizeInBytes:(NSUInteger)size
+{
+    NSString *s0 = [[NSString alloc] initWithBytes:buffer length:size encoding:NSUTF16StringEncoding];
+    
+    NSRange range = [s0 rangeOfString:string];
+    
+    if( range.location != NSNotFound )
+        return  range.location * sizeof(WORD);
+
+     
+    s0 = [[NSString alloc] initWithBytes:buffer+1 length:size-1 encoding:NSUTF16StringEncoding];
+        
+    range = [s0 rangeOfString:string];
+    
+    
+    if( range.location != NSNotFound ) {
+        range.location += 1;
+        range.location *= sizeof(WORD);
+    }
+    
+    return range.location;
+}
 
 #define kVersionInfoKey @"VS_VERSION_INFO"
 
@@ -152,18 +177,100 @@
 {
     if( _versionInfo == NULL ){
         
+        NSUInteger off = [self offsetOfString:kVersionInfoKey
+                                     inBuffer:self.resourceSection
+                                ofSizeInBytes:self.resourceSectionHeader->SizeOfRawData];
+        
+        if( off != NSNotFound ) {
+            off -= sizeof(WORD) * 3;
+            _versionInfo = (VS_VERSIONINFO *)((BYTE *)self.resourceSection + off);
+        }
     }
     return _versionInfo;
 }
+
+#define kStringFileInfoKey @"StringFileInfo"
+
+- (StringFileInfo *) stringFileInfo
+{
+    if( _stringFileInfo == NULL ) {
+        
+        NSUInteger off = [self offsetOfString:kStringFileInfoKey
+                                     inBuffer:self.resourceSection
+                                ofSizeInBytes:self.resourceSectionHeader->SizeOfRawData];
+        
+        if( off != NSNotFound ) {
+            off -= sizeof(WORD) * 3;
+            _stringFileInfo = (StringFileInfo *)((BYTE *)self.resourceSection +off);
+        }
+        
+    }
+    return _stringFileInfo;
+}
+
+- (BYTE *)skipPastNull:(BYTE *)p forCount:(NSUInteger)count
+{
+    // XXX need to use count to make this method bounded
+    
+    while( *(p++) != 0 ) ;
+    
+    // assert p == 0
+    
+    while ( *(p++) == 0 ) ;
+    
+    // assert p != 0
+
+    return p;
+}
+
+
+
+- (NSDictionary *)stringTable
+{
+    if( _stringTable == nil ){
+
+        NSMutableDictionary *tmp = [NSMutableDictionary dictionaryWithCapacity:16];
+#if 0
+        BYTE *p = (BYTE *)self.stringFileInfo->szKey + (kStringFileInfoKey.length*2);
+        
+        p = [self skipPastNull:p forCount:self.stringFileInfo->wLength];
+        // assert p is now at String Table structure
+        
+        StringTable *stab = (StringTable *)p;
+        
+        p += sizeof(WORD)*3;
+        
+        // assert p is at szKey of StringTable
+        
+        p = [self skipPastNull:p forCount:stab->wLength];
+        
+        // assert p is at String Children in StringTable
+        
+        // figure size by subtracting p from stab and then subtracting from wLength
+        
+        // ugh. finding strings in this mess sucks.
+#endif
+
+        _stringTable = tmp;
+        
+        
+    }
+    return _stringTable;
+}
+
+
 
 
 - (VS_FIXEDFILEINFO *)fixedFileInfo
 {
     if( _fixedFileInfo == NULL ) {
+        
+        NSLog(@"VersionInfo Length       %x",self.versionInfo->wLength);
+        NSLog(@"VersionInfo Value Length %x",self.versionInfo->wValueLength);
+        NSLog(@"VersionInfo Type         %x",self.versionInfo->wType);
+        
 
-#if 0
-        _fixedFileInfo = &(self.versionInfo->Value);
-#else
+
         BYTE *buf = (BYTE *)self.resourceSection;
         
         for(NSUInteger i=0;i<self.resourceSectionHeader->SizeOfRawData;i++){
@@ -173,7 +280,6 @@
                 break;
             }
         }
-#endif
     }
     return _fixedFileInfo;
 }

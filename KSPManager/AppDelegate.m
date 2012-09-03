@@ -16,6 +16,8 @@
 @synthesize pluginViewController;
 @synthesize inventoryViewController;
 @synthesize shipViewController;
+@synthesize terminateKSPButton;
+@synthesize launchKSPButton;
 
 @synthesize pathControl;
 
@@ -26,6 +28,15 @@
 
 #pragma mark -
 #pragma mark NSApplicationDelegate Methods
+
+- (void)setupToolTips
+{
+ 
+    [self.launchKSPButton setToolTip:@"Start this installation of KSP."];
+    [self.terminateKSPButton setToolTip:@"Terminate ALL running instances of KSP."];
+    [self.pathControl setToolTip:@"Path for current KSP, double click to select another installation directory."];
+    
+}
 
 - (void)setupTabControllers
 {
@@ -57,6 +68,9 @@
             self.ksp = tmp;
             return ;
         }
+        // if the save user default path is bogus, remove it from userDefaults
+        
+        [userDefaults removeObjectForKey:kKSP_DEFAULT_INSTALLATION_KEY];
     }
 
     // if no user default value found, search in the ususal places
@@ -70,19 +84,14 @@
     }
     
     // otherwise ask the user to locate it for us, will terminiate if the user fails to pick a valid installation
-    
-    NSLog(@"no default KSP path, couldn't find it in the usual places, ask the user..");
-    
+
     [self chooseInstallationDirectory:self];
-        
 }
 
 - (void)setupPathControl
 {
-    
     [self.pathControl setTarget:self];
     [self.pathControl setDoubleAction:@selector(chooseInstallationDirectory:)];
-
 }
 
 
@@ -95,6 +104,8 @@
     [self setupPathControl];
     
     [self setupTabControllers];
+    
+    [self setupToolTips];
 
 }
 
@@ -106,8 +117,6 @@
 #pragma mark -
 #pragma mark Properties
 
-
-
 - (void)setKsp:(KSP *)ksp
 {
     if( _ksp == ksp )
@@ -115,19 +124,28 @@
         
     _ksp = ksp;
     
+    // the following walks the list of known viewControllers and uses Key/Value to set their ksp property
+    
     [self.viewControllers enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop ){
             [object setValue:_ksp forKey:@"ksp"];
         }];
 
+    
+    // next, if _ksp is not nil, save it's baseURL.path to the persistent user defaults key store.
+    // on next start, this ksp installation will be chosen first if it exists. 
+    
     if( _ksp ) {
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setValue:_ksp.baseURL.path forKey:kKSP_DEFAULT_INSTALLATION_KEY];
-        [self.pathControl setURL:_ksp.baseURL];
     }
+    [self.pathControl setURL:_ksp.baseURL];
 }
 
 - (NSArray *)viewControllers
 {
+    
+    // When adding view controllers for the TabController, add them to this list
+    
     if( _viewControllers == nil ) {
         _viewControllers = [NSArray arrayWithObjects:
                             self.partsViewController,
@@ -173,6 +191,7 @@
                       }];
     
 }
+
 
 - (IBAction)didPushLaunchButton:(id)sender
 {

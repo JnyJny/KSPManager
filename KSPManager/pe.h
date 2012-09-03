@@ -11,7 +11,7 @@ typedef uint8_t   BYTE;
 typedef uint16_t  WORD;
 typedef uint32_t DWORD;
 typedef uint64_t QWORD;
-typedef wchar_t  WCHAR;
+typedef WORD     WCHAR;
 
 #define IMAGE_DOS_SIGNATURE                 0x5A4D      /* MZ */
 #define IMAGE_DOS_SIGNATURE_REV             0x4D5A      /* ZM */

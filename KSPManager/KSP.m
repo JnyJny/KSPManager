@@ -9,7 +9,6 @@
 #import "KSP.h"
 #import "KSP_Constants.h"
 #import "PersistenceFile.h"
-#import "Asset.h"
 #import "Part.h"
 #import "Plugin.h"
 
@@ -69,8 +68,10 @@
                                               attributes:nil
                                                    error:&error];
     
-    if( error )
+    if( error ){
+        NSLog(@"buildRelativeFileURL:%@ failed: %@",path,error);
         return nil;
+    }
 
     return url;
 }
@@ -84,8 +85,10 @@
     if( [url checkResourceIsReachableAndReturnError:&error ] == NO)
         url = nil;
     
-    if( error )
+    if( error ){
+        NSLog(@"buildValidRelativeFileURL:%@ failed: %@",path,error);
         return nil;
+    }
     
     return url;
 }
@@ -278,6 +281,15 @@
         _unrarURL = nil;
     }
     return _unrarURL;
+    
+}
+
+#pragma mark -
+#pragma mark Super Method Overrides
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"KSP Installation [%@] @ %@",self.isValidInstallation?@"VALID":@"INVALID",self.baseURL];
     
 }
 
@@ -527,67 +539,73 @@
 #pragma mark Class Methods
 
 
+
+
 + (NSArray *)locateInstallationDirectories
 {
-    NSMutableArray *searchPaths = [[NSMutableArray alloc] init];
+    
+    
+    NSMutableArray *searchURLS = [[NSMutableArray alloc] init];
+    
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSMutableArray *results = [[NSMutableArray alloc] init];
-    NSSearchPathDomainMask domainMask = NSUserDomainMask | NSLocalDomainMask;
-
+    NSSearchPathDomainMask domains = NSUserDomainMask;
     
-    [searchPaths addObjectsFromArray:[fileManager URLsForDirectory:NSAllApplicationsDirectory
-                                                         inDomains:domainMask]];
+    // deep search the user's Desktop, Downloads and Document directory
 
-    [searchPaths addObjectsFromArray:[fileManager URLsForDirectory:NSDesktopDirectory
-                                                         inDomains:domainMask]];
+    [searchURLS addObjectsFromArray:[fileManager URLsForDirectory:NSDesktopDirectory
+                                                        inDomains:domains]];
 
-    [searchPaths addObjectsFromArray:[fileManager URLsForDirectory:NSDownloadsDirectory
-                                                         inDomains:domainMask]];
+    [searchURLS addObjectsFromArray:[fileManager URLsForDirectory:NSDownloadsDirectory
+                                                        inDomains:domains]];
 
-    [searchPaths addObjectsFromArray:[fileManager URLsForDirectory:NSDocumentDirectory
-                                                         inDomains:domainMask]];
+    [searchURLS addObjectsFromArray:[fileManager URLsForDirectory:NSDocumentDirectory
+                                                        inDomains:domains]];
     
-    for (NSURL *url in searchPaths) {
-        for (NSString *dirName in @[ kKSP_OSX, kKSP_SHORT, kKSP_LONG ] ){
-            KSP *ksp = [[KSP alloc] initWithURL:[url URLByAppendingPathComponent:dirName]];
-            if ( ksp.isValidInstallation == YES)
-                [results addObject:ksp];
+    for(NSURL *url in searchURLS) {
+        
+        NSError *error = nil;
+        NSArray *subPaths = [fileManager subpathsOfDirectoryAtPath:url.path error:&error];
+        
+        if( error ) {
+            [[NSAlert alertWithError:error] runModal];
+            continue;
+        }
+        
+        for(NSString *subPath in subPaths) {
+            if( [[subPath lastPathComponent] isEqualToString:kKSP_APP]) {
+                NSURL *targetURL = [url URLByAppendingPathComponent:subPath.stringByDeletingLastPathComponent isDirectory:YES];
+                [results addObject:[[KSP alloc]initWithURL:targetURL]];
+            }
         }
     }
     
-    return results;
-}
-
-+ (NSArray *)locateInstallationDirectories2
-{
-    NSMutableArray *searchPaths = [[NSMutableArray alloc] init];
+    [searchURLS removeAllObjects];
     
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSMutableArray *results;
-    NSSearchPathDomainMask domains = NSUserDomainMask | NSLocalDomainMask;
+    // shallow search /Applications & the users's home directory
     
-    [searchPaths addObjectsFromArray:[fileManager URLsForDirectory:NSAllApplicationsDirectory
-                                                         inDomains:domains]];
-
-    [searchPaths addObjectsFromArray:[fileManager URLsForDirectory:NSDesktopDirectory
-                                                         inDomains:domains]];
-
-    [searchPaths addObjectsFromArray:[fileManager URLsForDirectory:NSDownloadsDirectory
-                                                         inDomains:domains]];
-
-    [searchPaths addObjectsFromArray:[fileManager URLsForDirectory:NSDocumentDirectory
-                                                         inDomains:domains]];
+    [searchURLS addObjectsFromArray:[fileManager URLsForDirectory:NSAllApplicationsDirectory
+                                                        inDomains:NSLocalDomainMask]];
     
-    for(NSURL *searchPath in searchPaths) {
+    [searchURLS addObjectsFromArray:[fileManager URLsForDirectory:NSUserDirectory
+                                                        inDomains:NSUserDomainMask]];
+    
+    for(NSURL *url in searchURLS){
+        NSError *error = nil;
+     
+        NSArray *subURLs = [fileManager contentsOfDirectoryAtURL:url
+                                      includingPropertiesForKeys:@[ NSURLIsDirectoryKey, NSURLLocalizedNameKey ]
+                                                         options:NSDirectoryEnumerationSkipsHiddenFiles | NSDirectoryEnumerationSkipsSubdirectoryDescendants
+                                                           error:&error];
         
-        
-       NSArray *candidates = [Asset assetSearch:searchPath usingBlock:^BOOL(NSString *path) {
-           NSRange range = [path rangeOfString:kKSP_APP];
-           return range.location != NSNotFound;
-        }];
-        
-        [results addObjectsFromArray:candidates];
+        for(NSURL *subURL in subURLs){
+            if( [subURL.lastPathComponent isEqualToString:kKSP_APP] == YES ){
+                NSURL *targetURL = [url URLByAppendingPathComponent:subURL.path.stringByDeletingLastPathComponent];
+                [results addObject:[[KSP alloc] initWithURL:targetURL]];
+            }
+        }
     }
+    
 
     return results;
 }
