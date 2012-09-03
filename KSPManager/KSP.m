@@ -9,6 +9,7 @@
 #import "KSP.h"
 #import "KSP_Constants.h"
 #import "PersistenceFile.h"
+#import "Asset.h"
 #import "Part.h"
 #import "Plugin.h"
 
@@ -68,10 +69,8 @@
                                               attributes:nil
                                                    error:&error];
     
-    if( error ) {
-        [[NSAlert alertWithError:error] runModal];
+    if( error )
         return nil;
-    }
 
     return url;
 }
@@ -86,7 +85,7 @@
         url = nil;
     
     if( error )
-        [[NSAlert alertWithError:error] runModal];
+        return nil;
     
     return url;
 }
@@ -556,6 +555,40 @@
         }
     }
     
+    return results;
+}
+
++ (NSArray *)locateInstallationDirectories2
+{
+    NSMutableArray *searchPaths = [[NSMutableArray alloc] init];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSMutableArray *results;
+    NSSearchPathDomainMask domains = NSUserDomainMask | NSLocalDomainMask;
+    
+    [searchPaths addObjectsFromArray:[fileManager URLsForDirectory:NSAllApplicationsDirectory
+                                                         inDomains:domains]];
+
+    [searchPaths addObjectsFromArray:[fileManager URLsForDirectory:NSDesktopDirectory
+                                                         inDomains:domains]];
+
+    [searchPaths addObjectsFromArray:[fileManager URLsForDirectory:NSDownloadsDirectory
+                                                         inDomains:domains]];
+
+    [searchPaths addObjectsFromArray:[fileManager URLsForDirectory:NSDocumentDirectory
+                                                         inDomains:domains]];
+    
+    for(NSURL *searchPath in searchPaths) {
+        
+        
+       NSArray *candidates = [Asset assetSearch:searchPath usingBlock:^BOOL(NSString *path) {
+           NSRange range = [path rangeOfString:kKSP_APP];
+           return range.location != NSNotFound;
+        }];
+        
+        [results addObjectsFromArray:candidates];
+    }
+
     return results;
 }
 

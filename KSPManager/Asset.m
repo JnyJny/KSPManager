@@ -35,6 +35,8 @@
    return [self assetSearch:baseURL usingBlock:pathTest error:nil];
 }
 
+
+
 + (NSArray *)assetSearch:(NSURL *)baseURL usingBlock:(BOOL (^)(NSString *path))pathTest error:(NSError **)error
 {
     NSMutableArray *results = [[NSMutableArray alloc] init];

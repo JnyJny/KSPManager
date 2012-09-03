@@ -59,16 +59,19 @@
         }
     }
 
+    // if no user default value found, search in the ususal places
 
     NSArray *ksps = [KSP locateInstallationDirectories];
     
-    if( ksps ) {
+    if( ksps && ksps.count ) {
         // XXX should probably let the user pick if there are multiple
         self.ksp = [ksps objectAtIndex:0];
         return;
     }
     
     // otherwise ask the user to locate it for us, will terminiate if the user fails to pick a valid installation
+    
+    NSLog(@"no default KSP path, couldn't find it in the usual places, ask the user..");
     
     [self chooseInstallationDirectory:self];
         
