@@ -7,34 +7,32 @@
 //
 
 #import "PortableExecutableFormat.h"
-#import <dlfcn.h>
-
 
 @implementation PortableExecutableFormat
 
 @synthesize url = _url;
 @synthesize data = _data;
 
+#ifdef EXPOSED_POINTERS
 @synthesize doshdr = _doshdr;
 @synthesize pehdr = _pehdr;
-
-@synthesize sectionHeaders = _sectionHeaders;
 
 @synthesize resourceSectionHeader = _resourceSectionHeader;
 @synthesize resourceSection = _resourceSection;
 @synthesize versionInfo = _versionInfo;
-
-@synthesize fixedFileInfo = _fixedFileInfo;
 @synthesize stringFileInfo = _stringFileInfo;
-
+@synthesize fixedFileInfo = _fixedFileInfo;
+@synthesize sectionHeaders = _sectionHeaders;
 @synthesize stringTable = _stringTable;
+#endif
 
 @synthesize fileVersionValue = _fileVersionValue;
 @synthesize productVersionValue = _productVersionValue;
 @synthesize fileTimestampValue = _fileTimestampValue;
 
-@synthesize productVersion = _productVersion;
+
 @synthesize fileVersion = _fileVersion;
+@synthesize productVersion = _productVersion;
 @synthesize fileTimestamp = _fileTimestamp;
 
 
@@ -43,17 +41,18 @@
     if( self = [super init] ){
         
         self.url = url;
-#if 0
-        @try {
-            if( self.fixedFileInfo->dwFileType != VFT_APP ){
-                self = nil;
-            }
-        }
-        @catch (NSException *exception) {
-            NSLog(@"Exception! %@",exception);
-            self = nil;
-        }
-#endif
+        
+        _rsrcStrings0 = [[NSString alloc] initWithBytes:self.resourceSection
+                                                length:self.resourceSectionHeader->SizeOfRawData
+                                              encoding:NSUTF16StringEncoding];
+        
+        _rsrcStrings1 = [[NSString alloc] initWithBytes:((BYTE *)self.resourceSection) + 1
+                                                 length:self.resourceSectionHeader->SizeOfRawData - 1
+                                               encoding:NSUTF16StringEncoding];
+
+        
+        NSLog(@"resourceValueForKey:%@ = %@",kPEStringInternalName,
+              [self resourceValueForKey:kPEStringInternalName]);
     }
     return self;
 }
@@ -68,8 +67,6 @@
                 self.url.lastPathComponent,
                 self.productVersion,
                 self.doshdr->e_magic];
-
-    
 }
 
 - (NSData *)data
@@ -82,8 +79,46 @@
         }
     }
     return _data;
-    
+
 }
+
+- (NSString *)resourceValueForKey:(NSString *)key
+{
+    NSString *value;
+    NSRange range = [_rsrcStrings0 rangeOfString:key];
+    BYTE *bp;
+
+    
+    if( range.location != NSNotFound ) {
+        
+        bp = (BYTE *)self.resourceSection + (range.location + range.length) * sizeof(WORD);
+             
+        while( bp++ == 0 );
+              
+        
+        
+        value = [_rsrcStrings1 substringWithRange:range];
+        
+
+        
+        return value;
+    }
+    
+    range = [_rsrcStrings1 rangeOfString:key];
+    
+    if( range.location != NSNotFound ) {
+        value = [_rsrcStrings1 substringWithRange:range];
+        
+
+        return value;
+    }
+
+    return nil;
+}
+
+
+
+
 
 - (IMAGE_DOS_HEADER *)doshdr
 {
@@ -211,16 +246,21 @@
 - (BYTE *)skipPastNull:(BYTE *)p forCount:(NSUInteger)count
 {
     // XXX need to use count to make this method bounded
+    BOOL nullFound = NO;
     
-    while( *(p++) != 0 ) ;
-    
-    // assert p == 0
-    
-    while ( *(p++) == 0 ) ;
-    
-    // assert p != 0
+    for(NSUInteger i=0;i<count;i++) {
+        
+        if ( *(p++) == 0) {
+            nullFound = YES;
+            continue;
+        }
+        // only ever fall thru if *p is not null
+        
+        if( nullFound )
+            return p;
+    }
 
-    return p;
+    return NULL;
 }
 
 
@@ -231,24 +271,7 @@
 
         NSMutableDictionary *tmp = [NSMutableDictionary dictionaryWithCapacity:16];
 #if 0
-        BYTE *p = (BYTE *)self.stringFileInfo->szKey + (kStringFileInfoKey.length*2);
-        
-        p = [self skipPastNull:p forCount:self.stringFileInfo->wLength];
-        // assert p is now at String Table structure
-        
-        StringTable *stab = (StringTable *)p;
-        
-        p += sizeof(WORD)*3;
-        
-        // assert p is at szKey of StringTable
-        
-        p = [self skipPastNull:p forCount:stab->wLength];
-        
-        // assert p is at String Children in StringTable
-        
-        // figure size by subtracting p from stab and then subtracting from wLength
-        
-        // ugh. finding strings in this mess sucks.
+
 #endif
 
         _stringTable = tmp;
