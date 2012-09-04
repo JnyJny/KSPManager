@@ -14,8 +14,6 @@
 @synthesize data = _data;
 
 #ifdef EXPOSED_POINTERS
-@synthesize doshdr = _doshdr;
-@synthesize pehdr = _pehdr;
 
 @synthesize resourceSectionHeader = _resourceSectionHeader;
 @synthesize resourceSection = _resourceSection;
@@ -23,7 +21,6 @@
 @synthesize stringFileInfo = _stringFileInfo;
 @synthesize fixedFileInfo = _fixedFileInfo;
 @synthesize sectionHeaders = _sectionHeaders;
-@synthesize stringTable = _stringTable;
 #endif
 
 @synthesize fileVersionValue = _fileVersionValue;
@@ -45,6 +42,9 @@
         
         self.url = url;
         
+        _doshdr = IMAGE_GET_DOS_HEADER(self.data.bytes);
+        _pehdr = IMAGE_GET_PE_HEADER(_doshdr);
+        
         _rsrcStrings0 = [[NSString alloc] initWithBytes:self.resourceSection
                                                 length:self.resourceSectionHeader->SizeOfRawData
                                               encoding:NSUTF16StringEncoding];
@@ -63,10 +63,13 @@
 - (NSString *)description
 {
  
-    return [NSString stringWithFormat:@"PFE %@ @ %@ magic %04x",
-                self.url.lastPathComponent,
+    return [NSString stringWithFormat:@"PFE url %@ pn %@ pv %@ fn %@ fv %@",
+                self.url,
+                self.productName,
                 self.productVersion,
-                self.doshdr->e_magic];
+                self.originalFileName,
+                self.fileVersion];
+
 }
 
 - (NSData *)data
@@ -114,16 +117,17 @@
 - (NSString *)productVersion
 {
     if( _productVersion == nil ){
-        uint64_t value = self.productVersionValue;
-        uint16_t *nibbles = (uint16_t *)& value;
-        
-        _productVersion = [NSString stringWithFormat:@"%d.%d.%d.%d",
-                           nibbles[3],
-                           nibbles[2],
-                           nibbles[1],
-                           nibbles[0]];
+        _productVersion = [self resourceValueForKey:kPEStringProductVersion];
     }
     return _productVersion;
+}
+
+- (NSString *)fileVersion
+{
+    if( _fileVersion == nil ) {
+        _fileVersion = [self resourceValueForKey:kPEStringFileVersion];
+    }
+    return _fileVersion;
 }
 
 - (NSString *)internalName
@@ -167,6 +171,21 @@
 }
 
 
+// resourceValueForKey is a huge nasty hack.
+//
+// we have two "strings" initialized from _all_ the data in the resource section.
+// there are two since i'm not sure what byte alignment is required to build the big
+// string WRT UTF16.
+//
+// Making the huge assumption that the kPEString* strings exist in the resource section,
+// we first search _rsrcString0 and then _rsrcString1
+// if we find the key string, we skip over zero bytes until the first non-zero byte
+// which is the beginning of the Value UTF16 string.  Unfortunately, we need to know the
+// the length of the string before we can turn it into a NSString.  So skip thru the
+// string until we find a WORD (2 bytes, thank you MS) worth of zeros.  Do some pointer
+// arithmetic to get the length and then create a new NSString for value.  It can all go
+// off the rails if any one of the assumptions breaks ( nulls etc ).
+
 - (NSString *)resourceValueForKey:(NSString *)key
 {
     BYTE *vStart;
@@ -178,10 +197,8 @@
     if( range.location != NSNotFound ) {
         
         vStart = (BYTE *)self.resourceSection + ((range.location + range.length) * sizeof(WORD));
-        NSLog(@"first");
         
         while (1) {
-            NSLog(@"1: vStart %x",*vStart);
             if( *vStart != 0)
                 break;
             vStart++;
@@ -189,15 +206,17 @@
         
         vEnd = (WORD *)vStart;
         while(1) {
-            NSLog(@"1: vEnd %x",*vEnd);
             if( *vEnd == 0 )
                 break;
             vEnd++;
         }
-        
+
         len = (NSUInteger)( (BYTE *)vEnd - vStart);
-        
+#if 0
+        NSLog(@"1: vStart %p",vStart);
+        NSLog(@"1: vEnd %p",vEnd);
         NSLog(@"len = %lu",len);
+#endif
 
         return [[NSString alloc] initWithBytes:vStart length:len encoding:NSUTF16StringEncoding];
     }
@@ -205,12 +224,10 @@
     range = [_rsrcStrings1 rangeOfString:key];
     
     if( range.location != NSNotFound ) {
-        NSLog(@"second");
-        
+
         vStart = (BYTE *)self.resourceSection + ((range.location+1 + range.length) * sizeof(WORD));
         
         while (1) {
-            NSLog(@"2: vStart %x",*vStart);
             if( *vStart != 0)
                 break;
             vStart++;
@@ -218,37 +235,26 @@
         
         vEnd = (WORD *)vStart;
         while(1) {
-            NSLog(@"2: vEnd %x",*vEnd);
             if( *vEnd == 0 )
                 break;
             vEnd++;
         }
         
         len =  (NSUInteger)((BYTE *)vEnd - vStart);
+#if 0
+        NSLog(@"2: vStart %p",vStart);
+        NSLog(@"2: vEnd %p",vEnd);
         NSLog(@"len = %lu",len);
-        
+#endif
         return [[NSString alloc] initWithBytes:vStart-1 length:len encoding:NSUTF16StringEncoding];
     }
 
     return nil;
 }
 
+#pragma mark -
+#pragma mark Exposed Pointers
 
-- (IMAGE_DOS_HEADER *)doshdr
-{
-    if( _doshdr == NULL ) {
-        _doshdr = IMAGE_GET_DOS_HEADER(self.data.bytes);
-    }
-    return _doshdr;
-}
-
-- (IMAGE_PE_HEADERS *)pehdr
-{
-    if( _pehdr == NULL) {
-        _pehdr = IMAGE_GET_PE_HEADER(self.doshdr);
-    }
-    return _pehdr;
-}
 
 - (NSPointerArray *)sectionHeaders
 {
@@ -258,9 +264,9 @@
             
         _sectionHeaders = [NSPointerArray pointerArrayWithOptions:options];
         
-        IMAGE_SECTION_HEADER *sbase = IMAGE_GET_FIRST_SECTION(self.pehdr);
+        IMAGE_SECTION_HEADER *sbase = IMAGE_GET_FIRST_SECTION(_pehdr);
         
-        for(uint16_t i=0;i<self.pehdr->FileHeader.NumberOfSections;i++)
+        for(uint16_t i=0;i<_pehdr->FileHeader.NumberOfSections;i++)
             [_sectionHeaders addPointer:sbase+i];
 
     }
@@ -290,7 +296,7 @@
 - (void *)resourceSection
 {
     if( _resourceSection == NULL ){
-        _resourceSection = (BYTE *)self.doshdr + self.resourceSectionHeader->PointerToRawData;
+        _resourceSection = (BYTE *)_doshdr + self.resourceSectionHeader->PointerToRawData;
     }
     return _resourceSection;
     
@@ -358,38 +364,10 @@
 }
 
 
-
-
-
-- (NSDictionary *)stringTable
-{
-    if( _stringTable == nil ){
-
-        NSMutableDictionary *tmp = [NSMutableDictionary dictionaryWithCapacity:16];
-#if 0
-
-#endif
-
-        _stringTable = tmp;
-        
-        
-    }
-    return _stringTable;
-}
-
-
-
-
 - (VS_FIXEDFILEINFO *)fixedFileInfo
 {
     if( _fixedFileInfo == NULL ) {
         
-        NSLog(@"VersionInfo Length       %x",self.versionInfo->wLength);
-        NSLog(@"VersionInfo Value Length %x",self.versionInfo->wValueLength);
-        NSLog(@"VersionInfo Type         %x",self.versionInfo->wType);
-        
-
-
         BYTE *buf = (BYTE *)self.resourceSection;
         
         for(NSUInteger i=0;i<self.resourceSectionHeader->SizeOfRawData;i++){

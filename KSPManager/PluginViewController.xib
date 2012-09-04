@@ -44,7 +44,7 @@
 			</object>
 			<object class="NSArrayController" id="945553261">
 				<array class="NSMutableArray" key="NSDeclaredKeys">
-					<string>installedFileName</string>
+					<string>productName</string>
 					<string>version</string>
 				</array>
 				<string key="NSObjectClassName">Plugin</string>
@@ -55,7 +55,7 @@
 			</object>
 			<object class="NSArrayController" id="735774506">
 				<array class="NSMutableArray" key="NSDeclaredKeys">
-					<string>installedFileName</string>
+					<string>productName</string>
 					<string>version</string>
 				</array>
 				<string key="NSObjectClassName">Plugin</string>
@@ -174,7 +174,7 @@
 																		<bool key="NSIsResizeable">YES</bool>
 																		<reference key="NSTableView" ref="441954777"/>
 																		<object class="NSSortDescriptor" key="NSSortDescriptorPrototype">
-																			<string key="NSKey">installedFileName</string>
+																			<string key="NSKey">productName</string>
 																			<bool key="NSAscending">YES</bool>
 																			<string key="NSSelector">compare:</string>
 																		</object>
@@ -397,7 +397,7 @@
 																		<bool key="NSIsResizeable">YES</bool>
 																		<reference key="NSTableView" ref="330601525"/>
 																		<object class="NSSortDescriptor" key="NSSortDescriptorPrototype">
-																			<string key="NSKey">installedFileName</string>
+																			<string key="NSKey">productName</string>
 																			<bool key="NSAscending">YES</bool>
 																			<string key="NSSelector">compare:</string>
 																		</object>
@@ -764,15 +764,15 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: arrangedObjects.installedFileName</string>
+						<string key="label">value: arrangedObjects.productName</string>
 						<reference key="source" ref="204097956"/>
 						<reference key="destination" ref="945553261"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="204097956"/>
 							<reference key="NSDestination" ref="945553261"/>
-							<string key="NSLabel">value: arrangedObjects.installedFileName</string>
+							<string key="NSLabel">value: arrangedObjects.productName</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">arrangedObjects.installedFileName</string>
+							<string key="NSKeyPath">arrangedObjects.productName</string>
 							<object class="NSDictionary" key="NSOptions">
 								<string key="NS.key.0">NSConditionallySetsEditable</string>
 								<boolean value="YES" key="NS.object.0"/>
@@ -780,7 +780,7 @@
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">244</int>
+					<int key="connectionID">246</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -804,15 +804,15 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: arrangedObjects.installedFileName</string>
+						<string key="label">value: arrangedObjects.productName</string>
 						<reference key="source" ref="622463935"/>
 						<reference key="destination" ref="735774506"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="622463935"/>
 							<reference key="NSDestination" ref="735774506"/>
-							<string key="NSLabel">value: arrangedObjects.installedFileName</string>
+							<string key="NSLabel">value: arrangedObjects.productName</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">arrangedObjects.installedFileName</string>
+							<string key="NSKeyPath">arrangedObjects.productName</string>
 							<object class="NSDictionary" key="NSOptions">
 								<string key="NS.key.0">NSConditionallySetsEditable</string>
 								<boolean value="YES" key="NS.object.0"/>
@@ -820,7 +820,7 @@
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">243</int>
+					<int key="connectionID">245</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -1979,7 +1979,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">244</int>
+			<int key="maxID">246</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

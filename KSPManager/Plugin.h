@@ -18,6 +18,8 @@
 @property (strong, nonatomic, readonly) NSString *installedFileName;
 @property (strong, nonatomic, readonly) NSString *availableFileName;
 @property (strong, nonatomic, readonly) NSString *version;
+@property (strong, nonatomic, readonly) NSString *productName;
+@property (strong, nonatomic, readonly) NSString *companyName;
 
 
 - (id)initWithPluginFileURL:(NSURL *)pluginFileURL;

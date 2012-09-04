@@ -24,22 +24,12 @@
 @synthesize availableDropView;
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Initialization code here.
-    }
-    
-    return self;
-}
-
 - (void)awakeFromNib
 {
     
     NSArray *sortDescriptors = [NSArray arrayWithObjects:
                                 [[NSSortDescriptor alloc] initWithKey:@"version" ascending:YES],
-                                [[NSSortDescriptor alloc] initWithKey:@"fileName" ascending:YES],
+                                [[NSSortDescriptor alloc] initWithKey:@"productName" ascending:YES],
                                 nil];
  
     [self.installedTableView deselectAll:self];
@@ -98,6 +88,7 @@
     if( dropView == self.installedDropView ){
         NSLog(@"URL dropped on Installed: %@",url);
         assets = [self.ksp createAssetsWith:url install:YES];
+        // assets may be a mix of different asset types, eg Part or Plugin or ..
         if( assets && assets.count )
             [self.installedPluginController rearrangeObjects];
         
@@ -106,6 +97,7 @@
     if( dropView == self.availableDropView ){
         NSLog(@"URL dropped on Available: %@",url);
         assets = [self.ksp createAssetsWith:url install:NO];
+        // assets may be a mix of different asset types, eg Part or Plugin or ..
         if( assets && assets.count )
             [self.availablePluginController rearrangeObjects];
     }
@@ -118,6 +110,13 @@
 - (IBAction)moveSelectedToAvailable:(id)sender
 {
     NSLog(@"moveSelectedToAvailable:");
+    
+    for(Plugin *plugin in self.installedPluginController.selectedObjects) {
+     
+        NSLog(@"plugin selected: %@",plugin);
+        
+    }
+    
 }
 
 - (IBAction)moveSelectedToInstalled:(id)sender

@@ -22,8 +22,8 @@
 
 
 @interface PortableExecutableFormat : NSObject {
-    IMAGE_DOS_HEADER *_dosheader;
-    IMAGE_PE_HEADERS *_peheader;
+    IMAGE_DOS_HEADER *_doshdr;
+    IMAGE_PE_HEADERS *_pehdr;
     NSString         *_rsrcStrings0;
     NSString         *_rsrcStrings1;
 
@@ -48,8 +48,8 @@
 
 #define EXPOSED_POINTERS
 #ifdef EXPOSED_POINTERS
-@property (assign, readonly) IMAGE_DOS_HEADER *doshdr;
-@property (assign, readonly) IMAGE_PE_HEADERS *pehdr;
+
+
 @property (assign, readonly) IMAGE_SECTION_HEADER *resourceSectionHeader;
 @property (assign, readonly) void *resourceSection;
 @property (assign, readonly) VS_VERSIONINFO *versionInfo;
@@ -58,7 +58,7 @@
 @property (strong, readonly) NSPointerArray *sectionHeaders;
 #endif
 
-@property (strong, readonly) NSDictionary *stringTable;
+
 
 
 

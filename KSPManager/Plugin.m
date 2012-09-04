@@ -77,7 +77,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"PLUGIN %@, %@ %@",self.installedFileName,self.version,self.isInstalled?@"YES":@"NO"];
+    return [NSString stringWithFormat:@"PLUGIN %@, %@ pef:%@",self.installedFileName,self.version,_pef];
 }
 
 - (NSString *)version
@@ -85,6 +85,15 @@
     return _pef.productVersion;
 }
 
+- (NSString *)productName
+{
+    return _pef.productName;
+}
+
+- (NSString *)companyName
+{
+    return _pef.companyName;
+}
 
 - (BOOL)isInstalled
 {
