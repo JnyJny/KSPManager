@@ -29,11 +29,14 @@
 @synthesize fileVersionValue = _fileVersionValue;
 @synthesize productVersionValue = _productVersionValue;
 @synthesize fileTimestampValue = _fileTimestampValue;
-
-
 @synthesize fileVersion = _fileVersion;
 @synthesize productVersion = _productVersion;
 @synthesize fileTimestamp = _fileTimestamp;
+@synthesize internalName = _internalName;
+@synthesize companyName = _companyName;
+@synthesize productName = _productName;
+@synthesize fileDescription = _fileDescription;
+@synthesize originalFileName = _originalFileName;
 
 
 - (id)initWithContentsOfURL:(NSURL *)url
@@ -50,9 +53,6 @@
                                                  length:self.resourceSectionHeader->SizeOfRawData - 1
                                                encoding:NSUTF16StringEncoding];
 
-        
-        NSLog(@"resourceValueForKey:%@ = %@",kPEStringInternalName,
-              [self resourceValueForKey:kPEStringInternalName]);
     }
     return self;
 }
@@ -82,42 +82,156 @@
 
 }
 
+
+- (uint64_t)fileVersionValue
+{
+    if( _fileVersionValue == 0 ) {
+        _fileVersionValue   = [self combineMSB:self.fixedFileInfo->dwFileVersionMS
+                                        andLSB:self.fixedFileInfo->dwFileVersionLS];
+    }
+    return _fileVersionValue;
+}
+
+- (uint64_t)productVersionValue
+{
+    if( _productVersionValue == 0 ) {
+        _productVersionValue = [self combineMSB:self.fixedFileInfo->dwProductVersionMS
+                                         andLSB:self.fixedFileInfo->dwProductVersionLS];
+    }
+    return _productVersionValue;
+}
+
+- (uint64_t)fileTimestampValue
+{
+    if( _fileTimestampValue == 0 ){
+        _fileTimestampValue = [self combineMSB:self.fixedFileInfo->dwFileDateMS
+                                        andLSB:self.fixedFileInfo->dwFileDateLS];
+    }
+    return _fileTimestampValue;
+}
+
+
+- (NSString *)productVersion
+{
+    if( _productVersion == nil ){
+        uint64_t value = self.productVersionValue;
+        uint16_t *nibbles = (uint16_t *)& value;
+        
+        _productVersion = [NSString stringWithFormat:@"%d.%d.%d.%d",
+                           nibbles[3],
+                           nibbles[2],
+                           nibbles[1],
+                           nibbles[0]];
+    }
+    return _productVersion;
+}
+
+- (NSString *)internalName
+{
+    if( _internalName == nil ){
+        _internalName = [self resourceValueForKey:kPEStringInternalName];
+    }
+    return _internalName;
+}
+
+- (NSString *)companyName
+{
+    if( _companyName == nil ) {
+        _companyName = [self resourceValueForKey:kPEStringCompanyName];
+    }
+    return _companyName;
+}
+
+- (NSString *)productName
+{
+    if( _productName == nil ) {
+        _productName = [self resourceValueForKey:kPEStringProductName];
+    }
+    return _productName;
+}
+
+- (NSString *)fileDescription
+{
+    if( _fileDescription == nil ) {
+        _fileDescription = [self resourceValueForKey:kPEStringFileDescription];
+    }
+    return _fileDescription;
+}
+
+- (NSString *)originalFileName
+{
+    if( _originalFileName == nil ) {
+        _originalFileName = [self resourceValueForKey:kPEStringOriginalFilename];
+    }
+    return _originalFileName;
+}
+
+
 - (NSString *)resourceValueForKey:(NSString *)key
 {
-    NSString *value;
+    BYTE *vStart;
+    WORD *vEnd;
+    NSUInteger len;
+    
     NSRange range = [_rsrcStrings0 rangeOfString:key];
-    BYTE *bp;
-
     
     if( range.location != NSNotFound ) {
         
-        bp = (BYTE *)self.resourceSection + (range.location + range.length) * sizeof(WORD);
-             
-        while( bp++ == 0 );
-              
+        vStart = (BYTE *)self.resourceSection + ((range.location + range.length) * sizeof(WORD));
+        NSLog(@"first");
         
+        while (1) {
+            NSLog(@"1: vStart %x",*vStart);
+            if( *vStart != 0)
+                break;
+            vStart++;
+        }
         
-        value = [_rsrcStrings1 substringWithRange:range];
+        vEnd = (WORD *)vStart;
+        while(1) {
+            NSLog(@"1: vEnd %x",*vEnd);
+            if( *vEnd == 0 )
+                break;
+            vEnd++;
+        }
         
+        len = (NSUInteger)( (BYTE *)vEnd - vStart);
+        
+        NSLog(@"len = %lu",len);
 
-        
-        return value;
+        return [[NSString alloc] initWithBytes:vStart length:len encoding:NSUTF16StringEncoding];
     }
     
     range = [_rsrcStrings1 rangeOfString:key];
     
     if( range.location != NSNotFound ) {
-        value = [_rsrcStrings1 substringWithRange:range];
+        NSLog(@"second");
         
-
-        return value;
+        vStart = (BYTE *)self.resourceSection + ((range.location+1 + range.length) * sizeof(WORD));
+        
+        while (1) {
+            NSLog(@"2: vStart %x",*vStart);
+            if( *vStart != 0)
+                break;
+            vStart++;
+        }
+        
+        vEnd = (WORD *)vStart;
+        while(1) {
+            NSLog(@"2: vEnd %x",*vEnd);
+            if( *vEnd == 0 )
+                break;
+            vEnd++;
+        }
+        
+        len =  (NSUInteger)((BYTE *)vEnd - vStart);
+        NSLog(@"len = %lu",len);
+        
+        return [[NSString alloc] initWithBytes:vStart-1 length:len encoding:NSUTF16StringEncoding];
     }
 
     return nil;
 }
-
-
-
 
 
 - (IMAGE_DOS_HEADER *)doshdr
@@ -243,25 +357,7 @@
     return _stringFileInfo;
 }
 
-- (BYTE *)skipPastNull:(BYTE *)p forCount:(NSUInteger)count
-{
-    // XXX need to use count to make this method bounded
-    BOOL nullFound = NO;
-    
-    for(NSUInteger i=0;i<count;i++) {
-        
-        if ( *(p++) == 0) {
-            nullFound = YES;
-            continue;
-        }
-        // only ever fall thru if *p is not null
-        
-        if( nullFound )
-            return p;
-    }
 
-    return NULL;
-}
 
 
 
@@ -312,48 +408,7 @@
     return ((uint64_t)msb << 32) | ( (uint64_t)lsb & 0x00000000FFFFFFFF );
 }
 
-- (uint64_t)fileVersionValue
-{
-    if( _fileVersionValue == 0 ) {
-        _fileVersionValue   = [self combineMSB:self.fixedFileInfo->dwFileVersionMS
-                                 andLSB:self.fixedFileInfo->dwFileVersionLS];
-    }
-    return _fileVersionValue;
-}
 
-- (uint64_t)productVersionValue
-{
-    if( _productVersionValue == 0 ) {
-        _productVersionValue = [self combineMSB:self.fixedFileInfo->dwProductVersionMS
-                                    andLSB:self.fixedFileInfo->dwProductVersionLS];
-    }
-    return _productVersionValue;
-}
-
-- (uint64_t)fileTimestampValue
-{
-    if( _fileTimestampValue == 0 ){
-        _fileTimestampValue = [self combineMSB:self.fixedFileInfo->dwFileDateMS
-                                   andLSB:self.fixedFileInfo->dwFileDateLS];	
-    }
-    return _fileTimestampValue;
-}
-
-
-- (NSString *)productVersion
-{
-    if( _productVersion == nil ){
-        uint64_t value = self.productVersionValue;
-        uint16_t *nibbles = (uint16_t *)& value;
-        
-        _productVersion = [NSString stringWithFormat:@"%d.%d.%d.%d",
-                            nibbles[3],
-                           nibbles[2],
-                           nibbles[1],
-                           nibbles[0]];
-    }
-    return _productVersion;
-}
 
 - (NSComparisonResult)compareByProductVersion:(id)target
 {

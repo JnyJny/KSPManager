@@ -14,7 +14,9 @@
     PortableExecutableFormat *_pef;
 }
 
-@property (strong, nonatomic, readonly) NSString *fileName;
+
+@property (strong, nonatomic, readonly) NSString *installedFileName;
+@property (strong, nonatomic, readonly) NSString *availableFileName;
 @property (strong, nonatomic, readonly) NSString *version;
 
 

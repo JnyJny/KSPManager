@@ -44,7 +44,7 @@
 			</object>
 			<object class="NSArrayController" id="945553261">
 				<array class="NSMutableArray" key="NSDeclaredKeys">
-					<string>fileName</string>
+					<string>installedFileName</string>
 					<string>version</string>
 				</array>
 				<string key="NSObjectClassName">Plugin</string>
@@ -55,7 +55,7 @@
 			</object>
 			<object class="NSArrayController" id="735774506">
 				<array class="NSMutableArray" key="NSDeclaredKeys">
-					<string>fileName</string>
+					<string>installedFileName</string>
 					<string>version</string>
 				</array>
 				<string key="NSObjectClassName">Plugin</string>
@@ -105,16 +105,14 @@
 																	<string key="NSFrameSize">{338, 17}</string>
 																	<reference key="NSSuperview" ref="385877701"/>
 																	<reference key="NSWindow"/>
-																	<reference key="NSNextKeyView" ref="676096390"/>
+																	<reference key="NSNextKeyView" ref="184874708"/>
 																	<string key="NSReuseIdentifierKey">_NS:16</string>
 																	<reference key="NSTableView" ref="441954777"/>
 																</object>
-																<object class="_NSCornerView" key="NSCornerView" id="676096390">
-																	<reference key="NSNextResponder" ref="651967045"/>
+																<object class="_NSCornerView" key="NSCornerView">
+																	<nil key="NSNextResponder"/>
 																	<int key="NSvFlags">-2147483392</int>
 																	<string key="NSFrame">{{224, 0}, {16, 17}}</string>
-																	<reference key="NSSuperview" ref="651967045"/>
-																	<reference key="NSWindow"/>
 																	<reference key="NSNextKeyView" ref="184874708"/>
 																	<string key="NSReuseIdentifierKey">_NS:19</string>
 																</object>
@@ -176,7 +174,7 @@
 																		<bool key="NSIsResizeable">YES</bool>
 																		<reference key="NSTableView" ref="441954777"/>
 																		<object class="NSSortDescriptor" key="NSSortDescriptorPrototype">
-																			<string key="NSKey">name</string>
+																			<string key="NSKey">installedFileName</string>
 																			<bool key="NSAscending">YES</bool>
 																			<string key="NSSelector">compare:</string>
 																		</object>
@@ -296,7 +294,6 @@
 														<reference key="NSBGColor" ref="30727984"/>
 														<int key="NScvFlags">4</int>
 													</object>
-													<reference ref="676096390"/>
 												</array>
 												<string key="NSFrameSize">{340, 562}</string>
 												<reference key="NSSuperview" ref="64557527"/>
@@ -308,7 +305,6 @@
 												<reference key="NSHScroller" ref="959890890"/>
 												<reference key="NSContentView" ref="184874708"/>
 												<reference key="NSHeaderClipView" ref="385877701"/>
-												<reference key="NSCornerView" ref="676096390"/>
 												<bytes key="NSScrollAmts">QSAAAEEgAABBmAAAQZgAAA</bytes>
 												<double key="NSMinMagnification">0.25</double>
 												<double key="NSMaxMagnification">4</double>
@@ -364,16 +360,14 @@
 																	<string key="NSFrameSize">{338, 17}</string>
 																	<reference key="NSSuperview" ref="590488133"/>
 																	<reference key="NSWindow"/>
-																	<reference key="NSNextKeyView" ref="797863102"/>
+																	<reference key="NSNextKeyView" ref="505306611"/>
 																	<string key="NSReuseIdentifierKey">_NS:16</string>
 																	<reference key="NSTableView" ref="330601525"/>
 																</object>
-																<object class="_NSCornerView" key="NSCornerView" id="797863102">
-																	<reference key="NSNextResponder" ref="619891041"/>
+																<object class="_NSCornerView" key="NSCornerView">
+																	<nil key="NSNextResponder"/>
 																	<int key="NSvFlags">-2147483392</int>
 																	<string key="NSFrame">{{224, 0}, {16, 17}}</string>
-																	<reference key="NSSuperview" ref="619891041"/>
-																	<reference key="NSWindow"/>
 																	<reference key="NSNextKeyView" ref="505306611"/>
 																	<string key="NSReuseIdentifierKey">_NS:19</string>
 																</object>
@@ -403,7 +397,7 @@
 																		<bool key="NSIsResizeable">YES</bool>
 																		<reference key="NSTableView" ref="330601525"/>
 																		<object class="NSSortDescriptor" key="NSSortDescriptorPrototype">
-																			<string key="NSKey">name</string>
+																			<string key="NSKey">installedFileName</string>
 																			<bool key="NSAscending">YES</bool>
 																			<string key="NSSelector">compare:</string>
 																		</object>
@@ -506,7 +500,6 @@
 														<reference key="NSBGColor" ref="30727984"/>
 														<int key="NScvFlags">4</int>
 													</object>
-													<reference ref="797863102"/>
 												</array>
 												<string key="NSFrameSize">{340, 562}</string>
 												<reference key="NSSuperview" ref="545170353"/>
@@ -518,7 +511,6 @@
 												<reference key="NSHScroller" ref="569562760"/>
 												<reference key="NSContentView" ref="505306611"/>
 												<reference key="NSHeaderClipView" ref="590488133"/>
-												<reference key="NSCornerView" ref="797863102"/>
 												<bytes key="NSScrollAmts">QSAAAEEgAABBmAAAQZgAAA</bytes>
 												<double key="NSMinMagnification">0.25</double>
 												<double key="NSMaxMagnification">4</double>
@@ -772,15 +764,15 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: arrangedObjects.fileName</string>
+						<string key="label">value: arrangedObjects.installedFileName</string>
 						<reference key="source" ref="204097956"/>
 						<reference key="destination" ref="945553261"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="204097956"/>
 							<reference key="NSDestination" ref="945553261"/>
-							<string key="NSLabel">value: arrangedObjects.fileName</string>
+							<string key="NSLabel">value: arrangedObjects.installedFileName</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">arrangedObjects.fileName</string>
+							<string key="NSKeyPath">arrangedObjects.installedFileName</string>
 							<object class="NSDictionary" key="NSOptions">
 								<string key="NS.key.0">NSConditionallySetsEditable</string>
 								<boolean value="YES" key="NS.object.0"/>
@@ -788,7 +780,7 @@
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">224</int>
+					<int key="connectionID">244</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -812,15 +804,15 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: arrangedObjects.fileName</string>
+						<string key="label">value: arrangedObjects.installedFileName</string>
 						<reference key="source" ref="622463935"/>
 						<reference key="destination" ref="735774506"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="622463935"/>
 							<reference key="NSDestination" ref="735774506"/>
-							<string key="NSLabel">value: arrangedObjects.fileName</string>
+							<string key="NSLabel">value: arrangedObjects.installedFileName</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">arrangedObjects.fileName</string>
+							<string key="NSKeyPath">arrangedObjects.installedFileName</string>
 							<object class="NSDictionary" key="NSOptions">
 								<string key="NS.key.0">NSConditionallySetsEditable</string>
 								<boolean value="YES" key="NS.object.0"/>
@@ -828,7 +820,7 @@
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">229</int>
+					<int key="connectionID">243</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -1987,7 +1979,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">241</int>
+			<int key="maxID">244</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

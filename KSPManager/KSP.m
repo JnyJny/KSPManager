@@ -234,7 +234,6 @@
 - (NSMutableArray *)parts
 {
     if( _parts == nil) {
-        
         _parts = [[NSMutableArray alloc] init];
         [_parts addObjectsFromArray:[Part inventory:self.partsURL]];
         [_parts addObjectsFromArray:[Part inventory:self.availablePartsURL]];
@@ -248,12 +247,7 @@
         _plugins = [[NSMutableArray alloc] init];
         [_plugins addObjectsFromArray:[Plugin inventory:self.pluginsURL]];
         [_plugins addObjectsFromArray:[Plugin inventory:self.availablePluginsURL]];
-        
-        NSLog(@"plugins %@",_plugins);
     }
-    
-
-    
     return _plugins;
 }
 
@@ -264,15 +258,13 @@
     }
     return _persistenceFile;
 }
+
 - (NSURL *)unzipURL
 {
     if( _unzipURL == nil) {
-        
         _unzipURL = [NSURL fileURLWithPath:kKSP_DEFAULT_UNZIP_PATH];
-        
     }
     return _unzipURL;
-    
 }
 
 - (NSURL *)unrarURL
@@ -373,9 +365,8 @@
 {
     if( [[object class] isSubclassOfClass:[Part class]] ) {
         Part *part = (Part *)object;
-        NSMutableArray *tmp = (NSMutableArray *)_parts;
         
-        [tmp removeObject:part];
+        [self.parts removeObject:part];
         
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSError *error = nil;
@@ -392,10 +383,8 @@
     if( [[object class] isSubclassOfClass:[Plugin class]] == YES ){
         
         Plugin *plugin = (Plugin *)object;
-        
-        NSMutableArray *tmp = (NSMutableArray *)_plugins;
-        
-        [tmp removeObject:plugin];
+
+        [self.plugins removeObject:plugin];
         
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSError *error = nil;
@@ -419,7 +408,8 @@
     
     if ( dstURL == nil ) {
         NSURL *caches = [[fileManager URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
-        dstURL = [caches URLByAppendingPathComponent:kKSP_TEMP_ASSETS isDirectory:YES];
+        dstURL = [caches URLByAppendingPathComponent:[NSString pathWithComponents:@[[NSBundle mainBundle].bundleIdentifier,kKSP_TEMP_ASSETS]]
+                                         isDirectory:YES];
     }
     
     NSError *error = nil;
