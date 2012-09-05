@@ -18,6 +18,6 @@
 @property (strong, nonatomic) NSNumber *ToD;
 @property (strong, nonatomic) NSNumber *idx;
 
-- (id)initWithOptions:(NSDictionary *)options;
+
 
 @end

@@ -18,18 +18,6 @@
 @synthesize ToD = _ToD;
 @synthesize idx = _idx;
 
-- (id)initWithOptions:(NSDictionary *)options
-{
-    if( self = [super init] ) {
-        if( options ) {
-            for(NSString *key in options.allKeys){
-                id val = [options valueForKey:key];
-                [self setValue:val forKey:key];
-            }
-        }
-    }
-    return self;
-}
 
 #pragma mark -
 #pragma mark Properties

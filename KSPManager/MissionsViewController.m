@@ -22,7 +22,7 @@
 - (void)awakeFromNib
 {
     
-    [self.ksp.persistenceFile parseLines];
+    NSLog(@"Crew = %@",self.ksp.persistenceFile.crew);
 }
 
 - (IBAction)didPushAdd:(id)sender {

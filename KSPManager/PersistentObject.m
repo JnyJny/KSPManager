@@ -26,6 +26,6 @@
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key
 {
-    NSLog(@"%@ no KVO for key %@ ",[self class],key);
+    NSLog(@"%@ no KVO for key %@ value %@ rejected",[self class],key,value);
 }
 @end

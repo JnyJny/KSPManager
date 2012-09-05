@@ -23,6 +23,7 @@
     if ( self = [super init]) {
         _url = url;
         _lines = [NSMutableArray arrayWithArray:[Line linesFromURL:url]];
+        [self parseLines];
     }
     return self;
 }
@@ -91,7 +92,9 @@
     curState = kWorkingOnGlobal;
     
     for(Line *line in _lines){
-        NSLog(@"state %@ for %@",[[self keywords] objectAtIndex:curState],line);
+        NSLog(@"state %@ : %@",
+              [[self keywords] objectAtIndex:curState],
+              line);
         
         if ( line.isEmpty || !line.hasContent )
             continue ;
