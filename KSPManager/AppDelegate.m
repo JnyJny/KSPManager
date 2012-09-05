@@ -193,6 +193,8 @@
 }
 
 
+
+
 - (IBAction)didPushLaunchButton:(id)sender
 {
     [self.ksp launchKSP];
@@ -201,6 +203,25 @@
 - (IBAction)didPushTerminateButton:(id)sender
 {
     [KSP terminateRunningKSP];
+}
+
+- (IBAction)didChooseOpen:(id)sender {
+    
+    NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+    
+    openPanel.canChooseDirectories = YES;
+    openPanel.canChooseFiles = YES;
+    openPanel.canCreateDirectories = NO;
+    openPanel.canSelectHiddenExtension = NO;
+    openPanel.allowsMultipleSelection = YES;
+
+    [openPanel beginSheetModalForWindow:self.window
+                      completionHandler:^(NSInteger result){
+                          if( result == NSFileHandlingPanelOKButton){
+                              for(NSURL *url in openPanel.URLs)
+                                  [self.ksp createAssetsWith:url install:NO];
+                          }
+     }];
 }
 
 

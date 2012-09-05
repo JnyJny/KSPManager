@@ -36,5 +36,6 @@
 
 - (IBAction)didPushLaunchButton:(id)sender;
 - (IBAction)didPushTerminateButton:(id)sender;
+- (IBAction)didChooseOpen:(id)sender;
 
 @end

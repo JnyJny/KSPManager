@@ -18,8 +18,11 @@
 		1D16223C15EE9F2B00C0F3CC /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 1D16223A15EE9F2B00C0F3CC /* LICENSE */; };
 		1D2ED54215EB156900402EF1 /* InventoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D2ED54015EB156900402EF1 /* InventoryViewController.m */; };
 		1D2ED54315EB156900402EF1 /* InventoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D2ED54115EB156900402EF1 /* InventoryViewController.xib */; };
+		1D3746AC15F7F23F00F858B3 /* PersistentObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3746AB15F7F23F00F858B3 /* PersistentObject.m */; };
 		1D67803115E431BC00A29C2C /* DropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D67803015E431BC00A29C2C /* DropView.m */; };
-		1D67803415E80E5B00A29C2C /* PersistenceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D67803315E80E5B00A29C2C /* PersistenceFile.m */; };
+		1D75BD6D15F79FA40037393E /* PersistenceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D75BD6C15F79FA40037393E /* PersistenceFile.m */; };
+		1D75BD7015F7A6770037393E /* Crew.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D75BD6F15F7A6770037393E /* Crew.m */; };
+		1D82916515F7A90600463E99 /* Vessel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D82916415F7A90600463E99 /* Vessel.m */; };
 		1DB405B915DB3E230041807D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DB405B815DB3E230041807D /* Cocoa.framework */; };
 		1DB405C315DB3E230041807D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1DB405C115DB3E230041807D /* InfoPlist.strings */; };
 		1DB405C515DB3E230041807D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB405C415DB3E230041807D /* main.m */; };
@@ -57,10 +60,16 @@
 		1D2ED53F15EB156900402EF1 /* InventoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryViewController.h; sourceTree = "<group>"; };
 		1D2ED54015EB156900402EF1 /* InventoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryViewController.m; sourceTree = "<group>"; };
 		1D2ED54115EB156900402EF1 /* InventoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InventoryViewController.xib; sourceTree = "<group>"; };
+		1D3746AA15F7F23F00F858B3 /* PersistentObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistentObject.h; sourceTree = "<group>"; };
+		1D3746AB15F7F23F00F858B3 /* PersistentObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistentObject.m; sourceTree = "<group>"; };
 		1D67802F15E431BC00A29C2C /* DropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropView.h; sourceTree = "<group>"; };
 		1D67803015E431BC00A29C2C /* DropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropView.m; sourceTree = "<group>"; };
-		1D67803215E80E5B00A29C2C /* PersistenceFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistenceFile.h; sourceTree = "<group>"; };
-		1D67803315E80E5B00A29C2C /* PersistenceFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistenceFile.m; sourceTree = "<group>"; };
+		1D75BD6B15F79FA40037393E /* PersistenceFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistenceFile.h; sourceTree = "<group>"; };
+		1D75BD6C15F79FA40037393E /* PersistenceFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistenceFile.m; sourceTree = "<group>"; };
+		1D75BD6E15F7A6770037393E /* Crew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crew.h; sourceTree = "<group>"; };
+		1D75BD6F15F7A6770037393E /* Crew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Crew.m; sourceTree = "<group>"; };
+		1D82916315F7A90600463E99 /* Vessel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vessel.h; sourceTree = "<group>"; };
+		1D82916415F7A90600463E99 /* Vessel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vessel.m; sourceTree = "<group>"; };
 		1DB405B415DB3E230041807D /* KSPManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KSPManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DB405B815DB3E230041807D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		1DB405BB15DB3E230041807D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -138,6 +147,21 @@
 				1D67803015E431BC00A29C2C /* DropView.m */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		1D75BD6715F79F570037393E /* Mission */ = {
+			isa = PBXGroup;
+			children = (
+				1D75BD6B15F79FA40037393E /* PersistenceFile.h */,
+				1D75BD6C15F79FA40037393E /* PersistenceFile.m */,
+				1D3746AA15F7F23F00F858B3 /* PersistentObject.h */,
+				1D3746AB15F7F23F00F858B3 /* PersistentObject.m */,
+				1D75BD6E15F7A6770037393E /* Crew.h */,
+				1D75BD6F15F7A6770037393E /* Crew.m */,
+				1D82916315F7A90600463E99 /* Vessel.h */,
+				1D82916415F7A90600463E99 /* Vessel.m */,
+			);
+			name = Mission;
 			sourceTree = "<group>";
 		};
 		1DB405A915DB3E230041807D = {
@@ -244,6 +268,7 @@
 				1DB405EB15DB45390041807D /* KSP.h */,
 				1DB405EC15DB45390041807D /* KSP.m */,
 				1D16222515EBC83800C0F3CC /* Assets */,
+				1D75BD6715F79F570037393E /* Mission */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -254,8 +279,6 @@
 				1DB7013A15F193FF002EC18D /* Portable Executable */,
 				1DB5D91715DE889100E9438E /* ConfigFile.h */,
 				1DB5D91815DE889100E9438E /* ConfigFile.m */,
-				1D67803215E80E5B00A29C2C /* PersistenceFile.h */,
-				1D67803315E80E5B00A29C2C /* PersistenceFile.m */,
 				1D16222915EBCCFB00C0F3CC /* Line.h */,
 				1D16222A15EBCCFB00C0F3CC /* Line.m */,
 			);
@@ -371,7 +394,6 @@
 				1DB405F915DBFF4C0041807D /* Part.m in Sources */,
 				1DB5D91915DE889100E9438E /* ConfigFile.m in Sources */,
 				1D67803115E431BC00A29C2C /* DropView.m in Sources */,
-				1D67803415E80E5B00A29C2C /* PersistenceFile.m in Sources */,
 				1D2ED54215EB156900402EF1 /* InventoryViewController.m in Sources */,
 				1D16222115EB315500C0F3CC /* KSPViewController.m in Sources */,
 				1D16222415EBC82900C0F3CC /* Asset.m in Sources */,
@@ -379,6 +401,10 @@
 				1D16222B15EBCCFB00C0F3CC /* Line.m in Sources */,
 				1D16222F15EDBB8F00C0F3CC /* ShipViewController.m in Sources */,
 				1D16223615EE721300C0F3CC /* PortableExecutableFormat.m in Sources */,
+				1D75BD6D15F79FA40037393E /* PersistenceFile.m in Sources */,
+				1D75BD7015F7A6770037393E /* Crew.m in Sources */,
+				1D82916515F7A90600463E99 /* Vessel.m in Sources */,
+				1D3746AC15F7F23F00F858B3 /* PersistentObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

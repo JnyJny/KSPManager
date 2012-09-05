@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PersistenceFile.h"
 
-@class PersistenceFile;
 
 @interface KSP : NSObject {
 

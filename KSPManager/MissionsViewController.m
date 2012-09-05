@@ -14,17 +14,15 @@
 
 @implementation MissionsViewController
 
+@synthesize vesselArrayController;
+@synthesize crewArrayController;
 @synthesize tableView;
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (void)awakeFromNib
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Initialization code here.
-    }
     
-    return self;
+    [self.ksp.persistenceFile parseLines];
 }
 
 - (IBAction)didPushAdd:(id)sender {

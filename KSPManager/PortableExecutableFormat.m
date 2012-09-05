@@ -8,6 +8,8 @@
 
 #import "PortableExecutableFormat.h"
 
+
+
 @implementation PortableExecutableFormat
 
 @synthesize url = _url;
@@ -317,7 +319,6 @@
         
     range = [s0 rangeOfString:string];
     
-    
     if( range.location != NSNotFound ) {
         range.location += 1;
         range.location *= sizeof(WORD);
@@ -399,8 +400,6 @@
     NSNumber *b = [NSNumber numberWithUnsignedLong:[(PortableExecutableFormat *)target productVersionValue]];
     
     return [a compare:b];
-
-        
 }
 
 @end

@@ -463,17 +463,19 @@
  
     // if the URL is a file
     //   - can we unarchive/access it?
-    //   - locate temporary directory to store/unarchive into
-    //   - copy file to temporary directory
-    //   - unarchive
-    //   - create a new URL of the unarchived directory
-    //   - the URL is now a directory
+    //     - locate temporary directory to store/unarchive into
+    //     - copy file to temporary directory
+    //     - unarchive
+    //     - create a new URL of the unarchived directory
+    //     - the URL is now a directory
+    //   - is it a bare DLL file?
+    //     - make a Plugin object and add it to the inventory
     
     // if the URL is a directory
     //   - conduct a deep part inventory of directory
     //        append results to assets
     //   - conduct a deep plugin inventory
-    //        append restuls to assets
+    //        append results to assets
     //   - unassociated game assets ( sounds destined for kKSP_SOUNDS, etc )
     //   - other stuff to handle?
     
@@ -490,19 +492,22 @@
         }
         
         if( [ext caseInsensitiveCompare:@"dll"] == NSOrderedSame ){
-            
+            [assets addObject:[[Plugin alloc]initWithPluginFileURL:url]];
+            goto AddAndInstall;
         }
         
         if( [ext caseInsensitiveCompare:@"rar"] == NSOrderedSame ){
             // it's a RAR which needs a third-party helper to unarchive
-            
+            NSLog(@"rar archives are currently unsupported.");
+            return assets;
         }
         
     }
-
+    
     [assets addObjectsFromArray:[Part inventory:url]];
     [assets addObjectsFromArray:[Plugin inventory:url]];
     
+AddAndInstall:
     
     for (id asset in assets) {
         [self add:asset];
