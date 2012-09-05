@@ -280,6 +280,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DB405D215DB3E230041807D /* Build configuration list for PBXNativeTarget "KSPManager" */;
 			buildPhases = (
+				1D75BD6615F701390037393E /* ShellScript */,
 				1DB405B015DB3E230041807D /* Sources */,
 				1DB405B115DB3E230041807D /* Frameworks */,
 				1DB405B215DB3E230041807D /* Resources */,
@@ -339,6 +340,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1D75BD6615F701390037393E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "buildPlist=${INFOPLIST_FILE}\nCFBundleVersion=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" $buildPlist)\nCFBundleVersion=$(($CFBundleVersion + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $CFBundleVersion\" $buildPlist";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1DB405B015DB3E230041807D /* Sources */ = {
