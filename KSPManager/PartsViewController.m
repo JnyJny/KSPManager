@@ -31,15 +31,7 @@
 
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Initialization code here.
-    }
-    
-    return self;
-}
+
 
 - (void)awakeFromNib
 {
@@ -180,8 +172,6 @@
     
     [self.availablePartsController rearrangeObjects];
     [self.installedPartsController rearrangeObjects];
-    [self.installedTableView deselectAll:self];
-    [self.availableTableView deselectAll:self];
 }
 
 
@@ -207,9 +197,6 @@
 
     [self.availablePartsController rearrangeObjects];
     [self.installedPartsController rearrangeObjects];
-    [self.installedTableView deselectAll:self];
-    [self.availableTableView deselectAll:self];
-
 }
 
 

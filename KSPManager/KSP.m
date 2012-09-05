@@ -490,7 +490,6 @@
         }
         
         if( [ext caseInsensitiveCompare:@"dll"] == NSOrderedSame ){
-            // it's a trap! err. a plugin.
             
         }
         

@@ -106,6 +106,26 @@
 #pragma mark -
 #pragma mark Action Methods
 
+- (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{
+    
+    if( (__bridge NSButton *)contextInfo == self.removeButton ) {
+        switch(returnCode){
+            case NSAlertDefaultReturn:
+                for(Plugin *plugin in self.availablePluginController.selectedObjects){
+                    [self.ksp remove:plugin];
+                }
+                [self.availableTableView deselectAll:self];
+                [self.availablePluginController rearrangeObjects];
+                break;
+            default:
+                break;
+        }
+    }
+    
+    return ;
+}
+
 
 - (IBAction)moveSelectedToAvailable:(id)sender
 {
@@ -115,13 +135,47 @@
      
         NSLog(@"plugin selected: %@",plugin);
         
+        if( [self.ksp uninstall:plugin] == NO ){
+            if ( plugin.error) {
+                NSAlert *alert = [NSAlert alertWithError:plugin.error];
+                [alert beginSheetModalForWindow:self.view.window
+                                  modalDelegate:self
+                                 didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
+                                    contextInfo:nil];
+            }
+        }
+        [self.installedTableView deselectAll:self];
+        [self.availableTableView deselectAll:self];
+        
+        [self.availablePluginController rearrangeObjects];
+        [self.installedPluginController rearrangeObjects];
     }
-    
 }
 
 - (IBAction)moveSelectedToInstalled:(id)sender
 {
     NSLog(@"moveSelectedToInstalled:");
+    
+    for(Plugin *plugin in self.availablePluginController.selectedObjects){
+             
+        BOOL r = [self.ksp install:plugin];
+        
+        NSLog(@"ksp install: returned %d",r);
+        
+        if( plugin.error ) {
+            NSAlert *alert = [NSAlert alertWithError:plugin.error];
+            
+            [alert beginSheetModalForWindow:self.view.window
+                              modalDelegate:self
+                             didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
+                                contextInfo:nil];
+        }
+    }
+    
+    [self.installedTableView deselectAll:self];
+    [self.availableTableView deselectAll:self];
+    [self.installedPluginController rearrangeObjects];
+    [self.availablePluginController rearrangeObjects];
 }
 
 - (IBAction)tableViewInstalledAction:(NSTableView *)sender
@@ -155,6 +209,15 @@
 
 - (IBAction)didPushRemove:(id)sender
 {
+    NSAlert *alert = [NSAlert alertWithMessageText:@"Are you sure you want to delete the selected plugin(s)?"
+                                     defaultButton:@"Delete"
+                                   alternateButton:@"Cancel"
+                                       otherButton:nil
+                         informativeTextWithFormat:@"Deleting the plugin(s) will remove them permanently."];
+    
+    [alert beginSheetModalForWindow:self.view.window
+                      modalDelegate:self
+                     didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:(__bridge void *)(sender)];
     
 }
 

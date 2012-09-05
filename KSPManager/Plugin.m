@@ -165,8 +165,10 @@
 {
     NSMutableArray *results = [[NSMutableArray alloc] init];
     
+    
     NSArray *paths = [self assetSearch:baseURL usingBlock:^BOOL(NSString *path){
-        return [path.pathExtension isEqualToString:kPLUGIN_EXT];
+        NSRange range = [path rangeOfString:kPLUGIN_EXT];
+        return range.location==NSNotFound?NO:YES;
     }];
                 
     for(NSString *path in paths){
