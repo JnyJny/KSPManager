@@ -10,14 +10,28 @@
 
 @interface Orbit : PersistentObject
 
-@property (strong, nonatomic) NSString *SMA;
-@property (strong, nonatomic) NSString *ECC;
-@property (strong, nonatomic) NSString *INC;
-@property (strong, nonatomic) NSString *LPE;
-@property (strong, nonatomic) NSString *LAN;
-@property (strong, nonatomic) NSString *MNA;
-@property (strong, nonatomic) NSString *EPH;
-@property (strong, nonatomic) NSString *REF;
-@property (strong, nonatomic) NSString *OBJ;
+#define kOrbitKeySemiMajorAxis            @"SMA"
+#define kOrbitKeyEccentricity             @"ECC"
+#define kOrbitKeyInclination              @"INC"
+#define kOrbitKeyLongitudeOfPeriapsis     @"LPE"
+#define kOrbitKeyLongitudeOfAscendingNode @"LAN"
+#define kOrbitKeyMeanAnomalyAtEpoch       @"MNA"
+#define kOrbitKeyEpoch                    @"EPH"
+#define kOrbitKeyReferenceBody            @"REF"
+#define kOrbitKeyObjectType               @"OBJ"
+
+
+enum {
+    kReferenceBodyKerbol,
+    kReferenceBodyKerbin,
+    kReferenceBodyMun,
+    kReferenceBodyMinmus
+    // more to come
+} ;
+
+enum {
+    kObjectTypePilotable,
+    kObjectTypeDebris
+};
 
 @end

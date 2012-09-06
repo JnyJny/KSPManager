@@ -10,14 +10,21 @@
 
 @implementation Orbit
 
-@synthesize SMA = _SMA;
-@synthesize ECC = _ECC;
-@synthesize INC = _INC;
-@synthesize LPE = _LPE;
-@synthesize LAN = _LAN;
-@synthesize MNA = _MNA;
-@synthesize EPH = _EPH;
-@synthesize REF = _REF;
-@synthesize OBJ = _OBJ;
+
+- (NSArray *)contentKeys
+{
+ return @[
+    kOrbitKeySemiMajorAxis,
+    kOrbitKeyEccentricity,
+    kOrbitKeyInclination,
+    kOrbitKeyLongitudeOfPeriapsis,
+    kOrbitKeyLongitudeOfAscendingNode,
+    kOrbitKeyMeanAnomalyAtEpoch,
+    kOrbitKeyEpoch,
+    kOrbitKeyReferenceBody,
+    kOrbitKeyObjectType
+    ];
+}
+
 
 @end

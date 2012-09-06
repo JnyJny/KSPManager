@@ -12,6 +12,7 @@
 #import "PluginViewController.h"
 #import "InventoryViewController.h"
 #import "ShipViewController.h"
+#import "SavesViewController.h"
 #import "KSP.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
@@ -25,6 +26,8 @@
 @property (weak) IBOutlet PluginViewController *pluginViewController;
 @property (weak) IBOutlet InventoryViewController *inventoryViewController;
 @property (weak) IBOutlet ShipViewController *shipViewController;
+@property (weak) IBOutlet SavesViewController *savesViewController;
+
 @property (weak) IBOutlet NSButton *terminateKSPButton;
 @property (weak) IBOutlet NSButton *launchKSPButton;
 

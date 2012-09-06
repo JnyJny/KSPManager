@@ -13,11 +13,12 @@
 }
 
 @property (strong, nonatomic, readonly) NSURL *url;
+@property (assign, nonatomic) NSStringEncoding encoding;
 @property (strong, nonatomic) NSMutableDictionary *global;
 @property (strong, nonatomic) NSMutableArray *crew;
 @property (strong, nonatomic) NSMutableArray *vessels;
 
 - (id)initWithURL:(NSURL *)url;
-- (void)parseLines;
+- (BOOL)writeToURL:(NSURL *)url;
 
 @end

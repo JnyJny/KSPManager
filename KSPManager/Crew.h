@@ -8,18 +8,18 @@
 
 #import "PersistentObject.h"
 
+
+#define kCrewKeyword  @"CREW"
+#define kCrewKeyName  @"name"
+#define kCrewKeyBrave @"brave"
+#define kCrewKeyDumb  @"dumb"
+#define kCrewKeyBadS  @"badS"
+#define kCrewKeyState @"state"
+#define kCrewKeyToD   @"ToD"
+#define kCrewKeyIdx   @"idx"
+
+
 @interface Crew : PersistentObject
-
-@property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSString *brave;
-@property (strong, nonatomic) NSString *dumb;
-@property (strong, nonatomic) NSString *badS;
-@property (strong, nonatomic) NSString *state;
-@property (strong, nonatomic) NSString *ToD;
-@property (strong, nonatomic) NSString *idx;
-
-- (id)initWithOptions:(NSDictionary *)options;
-
-
-
+@property (strong, nonatomic) NSString *firstName;
+@property (strong, nonatomic) NSString *lastName;
 @end

@@ -10,15 +10,18 @@
 
 @implementation Crew
 
+@synthesize firstName = _firstName;
+@synthesize lastName = _lastName;
 
-@synthesize name = _name;
-@synthesize brave = _brave;
-@synthesize dumb = _dumb;
-@synthesize badS = _badS;
-@synthesize state = _state;
-@synthesize ToD = _ToD;
-@synthesize idx = _idx;
 
+- (id)initWithOptions:(NSDictionary *)options
+{
+    if( self = [super initWithOptions:options] ) {
+        
+        [self.columnHeaders addEntriesFromDictionary:@{ kCrewKeyName:@"Kerbalnaut" }];
+    }
+    return self;
+}
 
 #pragma mark -
 #pragma mark Properties
@@ -26,17 +29,39 @@
 #pragma mark -
 #pragma mark Overridden Properties
 
-- (NSString *)description
+
+
+
+- (NSString *)firstName
 {
- return [NSString  stringWithFormat:@"Crew: %@  Brave: %@ Dumb: %@ badS: %@ state: %@ ToD: %@ idx: %@",
-         self.name,
-         self.brave,
-         self.dumb,
-         self.badS,
-         self.state,
-         self.ToD,
-         self.idx];
+    if( _firstName == nil ){
+        NSString *name = [self.contents valueForKey:kCrewKeyName];
+        _firstName = [[name componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] objectAtIndex:0];
+    }
+    return _firstName;
 }
+
+- (NSString *)lastName
+{
+    if( _lastName == nil ) {
+        NSString *name = [self.contents valueForKey:kCrewKeyName];
+        _lastName = [[name componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] lastObject];
+    }
+    return _lastName;
+}
+
+- (NSArray *)contentKeys
+{
+    return @[ kCrewKeyName,
+              kCrewKeyBrave,
+              kCrewKeyDumb,
+              kCrewKeyBadS,
+              kCrewKeyState,
+              kCrewKeyToD,
+              kCrewKeyIdx];
+}
+
+
 
 
 #pragma mark -

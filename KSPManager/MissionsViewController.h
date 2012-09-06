@@ -9,16 +9,16 @@
 #import "KSPViewController.h"
 
 
-@interface MissionsViewController : KSPViewController
+@interface MissionsViewController : KSPViewController 
 @property (strong) IBOutlet NSArrayController *vesselArrayController;
 @property (strong) IBOutlet NSArrayController *crewArrayController;
+@property (strong) IBOutlet NSSegmentedControl *tableSwitchControl;
 
 @property (weak) IBOutlet NSTableView *tableView;
 
 - (IBAction)didPushAdd:(id)sender;
 - (IBAction)didPushRemove:(id)sender;
 - (IBAction)didPushAction:(id)sender;
-
-
+- (IBAction)switchTableContent:(NSSegmentedControl *)sender;
 
 @end

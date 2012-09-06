@@ -10,34 +10,45 @@
 
 @implementation VesselPart
 
-@synthesize name = _name;
-@synthesize uid = _uid;
-@synthesize parent = _parent;
-@synthesize position = _position;
-@synthesize rotation = _rotation;
-@synthesize mirror = _mirror;
-@synthesize istg = _istg;
-@synthesize dstg = _dstg;
-@synthesize sqor = _sqor;
-@synthesize sidx = _sidx;
-@synthesize attm = _attm;
-@synthesize srfN = _srfN;
-@synthesize attN = _attN;
-@synthesize mass = _mass;
-@synthesize temp = _temp;
-@synthesize expt = _expt;
-@synthesize state = _state;
-@synthesize connected = _connected;
-@synthesize attached = _attached;
-@synthesize crew = _crew;
-@synthesize fuel = _fuel;
-@synthesize hasShroud = _hasShroud;
-@synthesize allowFlow = _allowFlow;
-@synthesize lgSt = _lgSt;
-@synthesize nTime = _nTime;
-@synthesize aSpeed = _aSpeed;
-@synthesize qty = _qty;
-@synthesize sym = _sym;
-@synthesize cData = _cData;
 
+- (NSArray *)contentKeys
+{
+    return @[
+    kVesselPartKeyName,
+    kVesselPartKeyUID,
+    kVesselPartKeyParent,
+    kVesselPartKeyPosition,
+    kVesselPartKeyRotation,
+    kVesselPartKeyMirror,
+    kVesselPartKeyISTG,
+    kVesselPartKeyDSTG,
+    kVesselPartKeySQOR,
+    kVesselPartKeySIDX,
+    kVesselPartKeyAttm,
+    kVesselPartKeyMass,
+    kVesselPartKeyTemp,
+    kVesselPartKeyEXPT,
+    kVesselPartKeyState,
+    kVesselPartKeyConnected,
+    kVesselPartKeyAttached,
+    kVesselPartKeyHasShroud,
+    kVesselPartKeyNTime,
+    kVesselPartKeyASpeed,
+    kVesselPartKeyQTY,
+    kVesselPartKeySYM,
+    kVesselPartKeyCData
+    ];
+    
+}
+
+
+
++ (NSString *)keyword
+{
+    // This Class is VesselPart, instead of the expected Part
+    // which is already a class in the Assets group.  So we
+    // intervene here manually to provide the right configuration
+    // file keyword.  This filters up/down/up through - keyword.
+    return @"PART";
+}
 @end

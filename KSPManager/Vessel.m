@@ -13,28 +13,18 @@
 @synthesize orbit = _orbit;
 @synthesize parts = _parts;
 
+
+- (id)initWithOptions:(NSDictionary *)options
+{
+    
+    if ( self = [super initWithOptions:options] ) {
+        [self.columnHeaders addEntriesFromDictionary:@{ kVesselKeyName : @"Name"}];
+    }
+    return self;
+}
+
 #pragma mark -
 #pragma mark Properties
-
-@synthesize pid = _pid;
-@synthesize name = _name;
-@synthesize sit = _sit;
-@synthesize landed = _landed;
-@synthesize landedAt = _landedAt;
-@synthesize splashed = _splashed;
-@synthesize met = _met;
-@synthesize lct = _lct;
-@synthesize root = _root;
-@synthesize lat = _lat;
-@synthesize lon = _lon;
-@synthesize alt = _alt;
-@synthesize hgt = _hgt;
-@synthesize nrm = _nrm;
-@synthesize rot = _rot;
-@synthesize CoM = _CoM;
-@synthesize stg = _stg;
-@synthesize prst = _prst;
-@synthesize eva = _eva;
 
 - (Orbit *)orbit
 {
@@ -47,6 +37,31 @@
         _parts = [[NSMutableArray alloc] init];
     }
     return _parts;
+}
+
+- (NSArray *)contentKeys
+{
+ return @[
+    kVesselKeyPid,
+    kVesselKeyName,
+    kVesselKeySituation,
+    kVesselKeyLanded,
+    kVesselKeyLandedAt,
+    kVesselKeySplashed,
+    kVesselKeyMissionElapsedTime,
+    kVesselKeyLocation,
+    kVesselKeyRoot,
+    kVesselKeyLatitude,
+    kVesselKeyLongitude,
+    kVesselKeyAltitude,
+    kVesselKeyHGT,
+    kVesselKeyNRM,
+    kVesselKeyROT,
+    kVesselKeyCenterOfMass,
+    kVesselKeyStage,
+    kVesselKeyPRST,
+    kVesselKeyEVA,
+    ];
 }
 
 #pragma mark -

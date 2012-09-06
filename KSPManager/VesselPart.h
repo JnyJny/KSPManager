@@ -8,38 +8,35 @@
 
 #import "PersistentObject.h"
 
+#define kVesselPartKeyName      @"name"
+#define kVesselPartKeyUID       @"uid"
+#define kVesselPartKeyParent    @"parent"
+#define kVesselPartKeyPosition  @"position"
+#define kVesselPartKeyRotation  @"rotation"
+#define kVesselPartKeyMirror    @"mirror"
+#define kVesselPartKeyISTG      @"istg"
+#define kVesselPartKeyDSTG      @"dstg"
+#define kVesselPartKeySQOR      @"sqor"
+#define kVesselPartKeySIDX      @"sidx"
+#define kVesselPartKeyAttm      @"attm"
+#define kVesselPartKeySrfN      @"srfN"
+#define kVesselPartKeyAttN      @"attN"
+#define kVesselPartKeyMass      @"mass"
+#define kVesselPartKeyTemp      @"temp"
+#define kVesselPartKeyEXPT      @"expt"
+#define kVesselPartKeyState     @"state"
+#define kVesselPartKeyConnected @"connected"
+#define kVesselPartKeyAttached  @"attached"
+#define kVesselPartKeyHasShroud @"hasShroud"
+#define kVesselPartKeyNTime     @"nTime"
+#define kVesselPartKeyASpeed    @"aSpeed"
+#define kVesselPartKeyQTY       @"qty"
+#define kVesselPartKeySYM       @"sym"
+#define kVesselPartKeyCData     @"cData"
+
+
 @interface VesselPart : PersistentObject
 
-
-@property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSString *uid;
-@property (strong, nonatomic) NSString *parent;
-@property (strong, nonatomic) NSString *position;
-@property (strong, nonatomic) NSString *rotation;
-@property (strong, nonatomic) NSString *mirror;
-@property (strong, nonatomic) NSString *istg;
-@property (strong, nonatomic) NSString *dstg;
-@property (strong, nonatomic) NSString *sqor;
-@property (strong, nonatomic) NSString *sidx;
-@property (strong, nonatomic) NSString *attm;
-@property (strong, nonatomic) NSString *srfN;
-@property (strong, nonatomic) NSString *attN; // this is an array
-@property (strong, nonatomic) NSString *mass;
-@property (strong, nonatomic) NSString *temp;
-@property (strong, nonatomic) NSString *expt;
-@property (strong, nonatomic) NSString *state;
-@property (strong, nonatomic) NSString *connected;
-@property (strong, nonatomic) NSString *attached;
-@property (strong, nonatomic) NSString *crew; // also array
-@property (strong, nonatomic) NSString *fuel;
-@property (strong, nonatomic) NSString *hasShroud;
-@property (strong, nonatomic) NSString *allowFlow;
-@property (strong, nonatomic) NSString *lgSt;
-@property (strong, nonatomic) NSString *nTime;
-@property (strong, nonatomic) NSString *aSpeed;
-@property (strong, nonatomic) NSString *qty;
-@property (strong, nonatomic) NSString *sym; // another array
-@property (strong, nonatomic) NSString *cData;
 
 
 @end

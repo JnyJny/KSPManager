@@ -41,6 +41,8 @@
 		1DB7013515F12C90002EC18D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1DB7013415F12C90002EC18D /* README.md */; };
 		1DD06E9215F7FCB100202CB4 /* Orbit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD06E9115F7FCB100202CB4 /* Orbit.m */; };
 		1DD06E9615F7FCC700202CB4 /* VesselPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD06E9515F7FCC600202CB4 /* VesselPart.m */; };
+		1DD06E9A15F93DC700202CB4 /* SavesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD06E9815F93DC700202CB4 /* SavesViewController.m */; };
+		1DD06E9B15F93DC700202CB4 /* SavesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DD06E9915F93DC700202CB4 /* SavesViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +110,9 @@
 		1DD06E9115F7FCB100202CB4 /* Orbit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Orbit.m; sourceTree = "<group>"; };
 		1DD06E9415F7FCC600202CB4 /* VesselPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VesselPart.h; sourceTree = "<group>"; };
 		1DD06E9515F7FCC600202CB4 /* VesselPart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VesselPart.m; sourceTree = "<group>"; };
+		1DD06E9715F93DC700202CB4 /* SavesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavesViewController.h; sourceTree = "<group>"; };
+		1DD06E9815F93DC700202CB4 /* SavesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavesViewController.m; sourceTree = "<group>"; };
+		1DD06E9915F93DC700202CB4 /* SavesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SavesViewController.xib; sourceTree = "<group>"; };
 		1DF455EB15EA7050001CD433 /* DropViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DropViewDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -247,6 +252,7 @@
 				1DB405E315DB3F3D0041807D /* MissionsViewController.xib */,
 				1D2ED54115EB156900402EF1 /* InventoryViewController.xib */,
 				1D16222E15EDBB8F00C0F3CC /* ShipViewController.xib */,
+				1DD06E9915F93DC700202CB4 /* SavesViewController.xib */,
 			);
 			name = NIBs;
 			sourceTree = "<group>";
@@ -266,6 +272,8 @@
 				1D2ED54015EB156900402EF1 /* InventoryViewController.m */,
 				1D16222C15EDBB8F00C0F3CC /* ShipViewController.h */,
 				1D16222D15EDBB8F00C0F3CC /* ShipViewController.m */,
+				1DD06E9715F93DC700202CB4 /* SavesViewController.h */,
+				1DD06E9815F93DC700202CB4 /* SavesViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -369,6 +377,7 @@
 				1D16223815EE97D800C0F3CC /* KSPM-Icon.icns in Resources */,
 				1D16223C15EE9F2B00C0F3CC /* LICENSE in Resources */,
 				1DB7013515F12C90002EC18D /* README.md in Resources */,
+				1DD06E9B15F93DC700202CB4 /* SavesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +426,7 @@
 				1D3746AC15F7F23F00F858B3 /* PersistentObject.m in Sources */,
 				1DD06E9215F7FCB100202CB4 /* Orbit.m in Sources */,
 				1DD06E9615F7FCC700202CB4 /* VesselPart.m in Sources */,
+				1DD06E9A15F93DC700202CB4 /* SavesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

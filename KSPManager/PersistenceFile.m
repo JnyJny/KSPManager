@@ -7,9 +7,12 @@
 //
 
 #import "PersistenceFile.h"
+#import "PersistentObject.h"
 #import "Line.h"
 #import "Crew.h"
 #import "Vessel.h"
+#import "Orbit.h"
+#import "VesselPart.h"
 
 @implementation PersistenceFile
 
@@ -17,12 +20,15 @@
 @synthesize global = _global;
 @synthesize crew = _crew;
 @synthesize vessels = _vessels;
+@synthesize encoding = _encoding;
 
 - (id)initWithURL:(NSURL *)url
 {
     if ( self = [super init]) {
         _url = url;
-        _lines = [NSMutableArray arrayWithArray:[Line linesFromURL:url]];
+
+        _lines = [NSMutableArray arrayWithArray:[Line linesFromURL:url withEncoding:&_encoding]];
+        
         [self parseLines];
     }
     return self;
@@ -73,29 +79,12 @@
 #define kWorkingOnOrbit   4
 #define kWorkingOnPart    5
 
-#define kBarewordInvalid @"INVALID"
-#define kBarewordGlobal  @"GLOBAL"
-#define kBarewordCrew    @"CREW"
-#define kBarewordVessel  @"VESSEL"
-#define kBarewordOrbit   @"ORBIT"
-#define kBarewordPart    @"PART"
-
-- (NSArray *)keywords
-{
-    return @[kBarewordInvalid,
-                kBarewordGlobal,
-                kBarewordCrew,
-                kBarewordVessel,
-                kBarewordOrbit,
-                kBarewordPart];
-}
 
 - (void)parseLines
 {
-
-    Crew   *crew;
-    Vessel *vessel;
-    NSMutableDictionary *dict;
+    PersistentObject *po = nil;
+    PersistentObject *child = nil;
+    
     int curState;
     int lastState;
 
@@ -107,55 +96,47 @@
     
     curState = kWorkingOnGlobal;
     
+    po = nil;
+    
     for(Line *line in _lines){
-        NSLog(@"state %@ : %@",
-              [[self keywords] objectAtIndex:curState],
-              line);
         
         if ( line.isEmpty || !line.hasContent )
             continue ;
         
-        if ( line.hasBareword ) {
+        if ( line.hasKeyword ) {
 
-            if( [line.bareword caseInsensitiveCompare:kBarewordCrew] == NSOrderedSame ){
+            if( [Crew keywordMatch:line.keyword] ) {
                 [state addObject:[NSNumber numberWithInt:curState]];
                 curState = kWorkingOnCrew;
+                po = [[Crew alloc] init];
                 continue;
             }
             
-            if( [line.bareword caseInsensitiveCompare:kBarewordVessel] == NSOrderedSame ){
+            if( [Vessel keywordMatch:line.keyword] ) {
                 [state addObject:[NSNumber numberWithInt:curState]];
                 curState = kWorkingOnVessel;
+                po = [[Vessel alloc] init];
                 continue;
             }
             
-            if( [line.bareword caseInsensitiveCompare:kBarewordOrbit] == NSOrderedSame ){
+            if( [Orbit keywordMatch:line.keyword] ) {
                 [state addObject:[NSNumber numberWithInt:curState]];
                 curState = kWorkingOnOrbit;
+                child = [[Orbit alloc] init];
                 continue;
             }
         
-            if( [line.bareword caseInsensitiveCompare:kBarewordPart] == NSOrderedSame ){
+            if( [VesselPart keywordMatch:line.keyword] ) {
                 [state addObject:[NSNumber numberWithInt:curState]];
                 curState = kWorkingOnPart;
+                child = [[VesselPart alloc] init];
                 continue;
             }
-            NSLog(@"Unknown bareword: %@",line.bareword);
+            NSLog(@"Unknown keyword: %@",line.keyword);
             continue;
         }
         
         if ( line.hasDictBegin ) {
-            dict = [[NSMutableDictionary alloc] init];
-            
-            switch(curState) {
-                case kWorkingOnVessel:
-                    vessel = [[Vessel alloc] initWithOptions:nil];
-                    [self.vessels addObject:vessel];
-                    break;
-                default:
-                    break;
-            }
-            
             continue;
         }
         
@@ -166,23 +147,26 @@
                     // whut?
                     break;
                 case kWorkingOnCrew:
-                    crew = [[Crew alloc] initWithOptions:dict];
-                    [self.crew addObject:crew];
-                    NSLog(@"dictEnd: crew = %@",crew);
+                    [self.crew addObject:po];
+                    po = nil;
                     break;
                 case kWorkingOnVessel:
-                    vessel = nil; // retained in self.vessels
+                    [self.vessels addObject:po];
+                    po = nil;
                     break;
                 case kWorkingOnOrbit:
-                    [vessel addOrbit:dict];
+                    ((Vessel *)po).orbit = (Orbit *)child;
+                    child = nil;
                     break;
+                    
                 case kWorkingOnPart:
-                    [vessel addPart:dict];
+                    [((Vessel *)po).parts addObject:child];
+                    child = nil;
                     break;
                 default:
                     break;
             }
-            //            curState = [state pop];
+
             NSNumber *n = [state lastObject];
             curState = [n intValue];
             [state removeLastObject];
@@ -190,18 +174,25 @@
         }
         
         if ( line.hasKeyValue ) {
-            switch (curState) {
+            
+            switch(curState) {
                 case kWorkingOnGlobal:
                     [self.global addEntriesFromDictionary:line.keyValue];
                     break;
-                default:
-                    [dict addEntriesFromDictionary:line.keyValue];
+                case kWorkingOnCrew:
+                case kWorkingOnVessel:
+                    [po setValue:line.value forKey:line.key];
+                    break;
+                case kWorkingOnOrbit:
+                case kWorkingOnPart:
+                    [child setValue:line.value forKey:line.key];
                     break;
             }
+            
             continue;
         }
         
-        NSLog(@"unprocessed line: %@",line);
+        //NSLog(@"unprocessed line: %@",line);
     }
 }
 
@@ -210,7 +201,19 @@
 
 - (BOOL)writeToURL:(NSURL *)url
 {
- 
+    NSError *error = nil;
+    NSString *newContents = @"";
+    
+    for(Crew *crew in self.crew)
+        newContents = [newContents stringByAppendingString:crew.description];
+    
+    for(Vessel *vessel in self.vessels)
+        newContents = [newContents stringByAppendingString:vessel.description];
+    
+    [newContents writeToURL:url atomically:YES encoding:self.encoding error:&error];
+    
+    // write lines to url
+    
     return NO;
 }
 

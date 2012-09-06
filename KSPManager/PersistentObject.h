@@ -7,9 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Line.h"
 
 @interface PersistentObject : NSObject
 
+@property (strong, nonatomic) NSString *keyword;
+@property (strong, nonatomic) NSMutableDictionary *contents;
+@property (strong, nonatomic) NSArray *contentKeys;
+@property (strong, nonatomic) NSArray *lines;
+@property (strong, nonatomic) NSMutableDictionary *columnHeaders;
+
+- (id)init;
 - (id)initWithOptions:(NSDictionary *)options;
+- (void)setOptions:(NSDictionary *)options;
+
++ (NSString *)keyword;
++ (BOOL)keywordMatch:(NSString *)candidate;
 
 @end

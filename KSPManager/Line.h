@@ -24,7 +24,7 @@
 @property (strong, nonatomic) NSString *content;
 @property (strong, nonatomic) NSString *key;
 @property (strong, nonatomic) NSString *value;
-@property (strong, nonatomic) NSString *bareword;
+@property (strong, nonatomic) NSString *keyword;
 @property (weak, nonatomic) NSDictionary *keyValue;
 
 
@@ -33,7 +33,7 @@
 @property (assign, readonly) BOOL hasComment;
 @property (assign, readonly) BOOL hasContent;
 @property (assign, readonly) BOOL hasKeyValue;
-@property (assign, readonly) BOOL hasBareword;
+@property (assign, readonly) BOOL hasKeyword;
 @property (assign, readonly) BOOL hasDictBegin;
 @property (assign, readonly) BOOL hasDictEnd;
 @property (assign, readonly) BOOL isEmpty;
@@ -50,9 +50,14 @@
 #define kLineOptionDictEndTokenKey   @"endDictToken"
 #define kLineOptionLineNumberKey     @"lineNumber"
 
+
+- (id)initWithString:(NSString *)string withOptions:(NSDictionary *)options;
+
 - (void)setOptions:(NSDictionary *)options;
 
-+ (NSMutableArray *)linesFromURL:(NSURL *)url;
+
++ (NSMutableArray *)linesFromURL:(NSURL *)url withEncoding:(NSStringEncoding *)encoding;
+
 
 
 @end

@@ -16,6 +16,7 @@
 @synthesize pluginViewController;
 @synthesize inventoryViewController;
 @synthesize shipViewController;
+@synthesize savesViewController;
 @synthesize terminateKSPButton;
 @synthesize launchKSPButton;
 
@@ -153,6 +154,7 @@
                             self.missionsViewController,
                             self.shipViewController,
                             self.inventoryViewController,
+                            self.savesViewController,
                             nil];
     }
     return _viewControllers;

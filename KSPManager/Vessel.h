@@ -10,30 +10,32 @@
 #import "Orbit.h"
 #import "VesselPart.h"
 
+
+#define kVesselKeyPid                @"pid"
+#define kVesselKeyName               @"name"
+#define kVesselKeySituation          @"sit"
+#define kVesselKeyLanded             @"landed"
+#define kVesselKeyLandedAt           @"landedAt"
+#define kVesselKeySplashed           @"splashed"
+#define kVesselKeyMissionElapsedTime @"met"
+#define kVesselKeyLocation           @"lct"
+#define kVesselKeyRoot               @"root"
+#define kVesselKeyLatitude           @"lat"
+#define kVesselKeyLongitude          @"lon"
+#define kVesselKeyAltitude           @"alt"
+#define kVesselKeyHGT                @"hgt"
+#define kVesselKeyNRM                @"nrm"
+#define kVesselKeyROT                @"rot"
+#define kVesselKeyCenterOfMass       @"CoM"
+#define kVesselKeyStage              @"stg"
+#define kVesselKeyPRST               @"prst"
+#define kVesselKeyEVA                @"eva"
+
+
 @interface Vessel : PersistentObject
 
 @property (strong, nonatomic) Orbit *orbit;
 @property (strong, nonatomic) NSMutableArray *parts;
-
-@property (strong, nonatomic) NSString *pid;
-@property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSString *sit;
-@property (strong, nonatomic) NSString *landed;
-@property (strong, nonatomic) NSString *landedAt;
-@property (strong, nonatomic) NSString *splashed;
-@property (strong, nonatomic) NSString *met;
-@property (strong, nonatomic) NSString *lct;
-@property (strong, nonatomic) NSString *root;
-@property (strong, nonatomic) NSString *lat;
-@property (strong, nonatomic) NSString *lon;
-@property (strong, nonatomic) NSString *alt;
-@property (strong, nonatomic) NSString *hgt;
-@property (strong, nonatomic) NSString *nrm;
-@property (strong, nonatomic) NSString *rot;
-@property (strong, nonatomic) NSString *CoM;
-@property (strong, nonatomic) NSString *stg;
-@property (strong, nonatomic) NSString *prst;
-@property (strong, nonatomic) NSString *eva;
 
 - (void)addOrbit:(NSDictionary *)orbitInfo;
 - (void)addPart:(NSDictionary *)partInfo;

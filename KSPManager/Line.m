@@ -21,7 +21,7 @@
 @synthesize comment = _comment;
 @synthesize key = _key;
 @synthesize value = _value;
-@synthesize bareword = _bareword;
+@synthesize keyword = _keyword;
 @synthesize lineNumber = _lineNumber;
 @synthesize keyValue = _keyValue;
 
@@ -30,10 +30,18 @@
 @synthesize hasComment = _hasComment;
 @synthesize hasContent = _hasContent;
 @synthesize hasKeyValue = _hasKeyValue;
-@synthesize hasBareword = _hasBareword;
+@synthesize hasKeyword = _hasKeyword;
 @synthesize hasDictBegin = _hasDictBegin;
 @synthesize hasDictEnd = _hasDictEnd;
 @synthesize isEmpty = _isEmpty;
+
+#pragma mark -
+#pragma mark LifeCycle
+
+- (id)init
+{
+    return [self initWithString:nil withOptions:nil];
+}
 
 - (id)initWithString:(NSString *)string withOptions:(NSDictionary *)options
 {
@@ -60,7 +68,7 @@
     _comment  = nil;
     _key      = nil;
     _value    = nil;
-    _bareword = nil;
+    _keyword = nil;
 }
 
 - (void)parse
@@ -151,11 +159,11 @@
         goto doneParsing;
     }
     
-    // _content is not assignment, dictBegin or dictEnd, must be bareword
+    // _content is not assignment, dictBegin or dictEnd, must be Keyword
     
     // split _content on whitespace in case it's a multi-word sequence, take the first word
     
-    _bareword = [[[_content componentsSeparatedByCharactersInSet:whiteSpace] objectAtIndex:0] stringByTrimmingCharactersInSet:whiteSpace];
+    _keyword = [[[_content componentsSeparatedByCharactersInSet:whiteSpace] objectAtIndex:0] stringByTrimmingCharactersInSet:whiteSpace];
 
 doneParsing:
        
@@ -323,18 +331,18 @@ doneParsing:
     return (self.key!=nil) && (self.value !=nil);
 }
 
-- (NSString *)bareword
+- (NSString *)Keyword
 {
-    if( _bareword == nil ) {
+    if( _keyword == nil ) {
         if( _isParsed == NO )
             [self parse];
     }
-    return _bareword;
+    return _keyword;
 }
 
-- (BOOL)hasBareword
+- (BOOL)hasKeyword
 {
-    return self.bareword != nil;
+    return self.keyword != nil;
 }
 
 - (BOOL)hasDictBegin
@@ -358,7 +366,7 @@ doneParsing:
     NSString *state = [NSString stringWithFormat:@"c:%d kv:%d bw:%d db:%d de:%d e:%d p:%d b:%d ## ",
                        self.hasComment,
                         self.hasKeyValue,
-                       self.hasBareword,
+                       self.hasKeyword,
                        self.hasDictBegin,
                        self.hasDictEnd,
                        self.isEmpty,
@@ -368,7 +376,7 @@ doneParsing:
     if( self.isEmpty )
         return [state stringByAppendingString:[NSString stringWithFormat:@"%05lu <empty>",self.lineNumber.unsignedIntegerValue]];
     
-    if( self.hasDictBegin || self.hasDictEnd || self.hasBareword )
+    if( self.hasDictBegin || self.hasDictEnd || self.hasKeyword )
         return [state stringByAppendingString:[NSString stringWithFormat:@"%05lu -%@- c%@c",
                 self.lineNumber.unsignedIntegerValue,
                 self.content,
@@ -394,19 +402,20 @@ doneParsing:
 #pragma mark -
 #pragma Class Methods
 
-+ (NSMutableArray *)linesFromURL:(NSURL *)url
++ (NSMutableArray *)linesFromURL:(NSURL *)url withEncoding:(NSStringEncoding *)encoding
 {
     NSMutableArray *lines = [[NSMutableArray alloc] init];
     NSCharacterSet *newlines = [NSCharacterSet newlineCharacterSet];
     NSError *error = nil;
-    NSStringEncoding encoding;
-    
+
+
     NSString *fileText = [NSString stringWithContentsOfURL:url
-                                                usedEncoding:&encoding
+                                                usedEncoding:encoding
                                                      error:&error];
     if( !fileText ) {
+        *encoding = NSISOLatin1StringEncoding;
         fileText = [NSString stringWithContentsOfURL:url
-                                            encoding:NSISOLatin1StringEncoding
+                                            encoding:*encoding
                                                error:&error];
     }
     
