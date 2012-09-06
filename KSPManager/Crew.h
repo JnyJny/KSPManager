@@ -11,12 +11,14 @@
 @interface Crew : PersistentObject
 
 @property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSNumber *brave;
-@property (strong, nonatomic) NSNumber *dumb;
-@property (strong, nonatomic) NSNumber *badS;
-@property (strong, nonatomic) NSNumber *state;
-@property (strong, nonatomic) NSNumber *ToD;
-@property (strong, nonatomic) NSNumber *idx;
+@property (strong, nonatomic) NSString *brave;
+@property (strong, nonatomic) NSString *dumb;
+@property (strong, nonatomic) NSString *badS;
+@property (strong, nonatomic) NSString *state;
+@property (strong, nonatomic) NSString *ToD;
+@property (strong, nonatomic) NSString *idx;
+
+- (id)initWithOptions:(NSDictionary *)options;
 
 
 

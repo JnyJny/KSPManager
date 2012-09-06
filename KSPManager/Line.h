@@ -25,6 +25,7 @@
 @property (strong, nonatomic) NSString *key;
 @property (strong, nonatomic) NSString *value;
 @property (strong, nonatomic) NSString *bareword;
+@property (weak, nonatomic) NSDictionary *keyValue;
 
 
 @property (strong, nonatomic, readonly) NSArray *optionKeys;

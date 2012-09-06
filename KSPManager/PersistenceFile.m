@@ -14,7 +14,7 @@
 @implementation PersistenceFile
 
 @synthesize url = _url;
-@synthesize options = _options;
+@synthesize global = _global;
 @synthesize crew = _crew;
 @synthesize vessels = _vessels;
 
@@ -31,12 +31,28 @@
 #pragma mark -
 #pragma mark Properties
 
-- (NSMutableDictionary *)options
+- (NSMutableDictionary *)global
 {
-    if( _options == nil ) {
-        _options = [[NSMutableDictionary alloc] init];
+    if( _global == nil ) {
+        _global = [[NSMutableDictionary alloc] init];
     }
-    return _options;
+    return _global;
+}
+
+- (NSMutableArray *)crew
+{
+    if( _crew == nil ) {
+        _crew = [[NSMutableArray alloc] init];
+    }
+    return _crew;
+}
+
+- (NSMutableArray *)vessels
+{
+    if( _vessels == nil ) {
+        _vessels = [[NSMutableArray alloc] init];
+    }
+    return _vessels;
 }
 
 #pragma mark -
@@ -152,6 +168,7 @@
                 case kWorkingOnCrew:
                     crew = [[Crew alloc] initWithOptions:dict];
                     [self.crew addObject:crew];
+                    NSLog(@"dictEnd: crew = %@",crew);
                     break;
                 case kWorkingOnVessel:
                     vessel = nil; // retained in self.vessels
@@ -175,10 +192,10 @@
         if ( line.hasKeyValue ) {
             switch (curState) {
                 case kWorkingOnGlobal:
-                    [self.options setValue:line.value forKey:line.key];
+                    [self.global addEntriesFromDictionary:line.keyValue];
                     break;
                 default:
-                    [dict setValue:line.value forKey:line.key];
+                    [dict addEntriesFromDictionary:line.keyValue];
                     break;
             }
             continue;

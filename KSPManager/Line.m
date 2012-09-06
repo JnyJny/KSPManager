@@ -23,6 +23,7 @@
 @synthesize value = _value;
 @synthesize bareword = _bareword;
 @synthesize lineNumber = _lineNumber;
+@synthesize keyValue = _keyValue;
 
 @synthesize optionKeys = _optionKeys;
 
@@ -383,7 +384,12 @@ doneParsing:
     return [state stringByAppendingString:[NSString stringWithFormat:@"BUSTED %lu: -%@-",self.rawText.length,self.rawText]];
 }
 
-
+- (NSDictionary *)keyValue
+{
+    if( self.hasKeyValue )
+        return @{ self.key:self.value };
+    return nil;
+}
 
 #pragma mark -
 #pragma Class Methods

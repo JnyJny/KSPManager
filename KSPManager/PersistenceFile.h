@@ -13,7 +13,7 @@
 }
 
 @property (strong, nonatomic, readonly) NSURL *url;
-@property (strong, nonatomic) NSMutableDictionary *options;
+@property (strong, nonatomic) NSMutableDictionary *global;
 @property (strong, nonatomic) NSMutableArray *crew;
 @property (strong, nonatomic) NSMutableArray *vessels;
 
