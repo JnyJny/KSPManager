@@ -30,8 +30,8 @@ enum {
 } ;
 
 enum {
-    kObjectTypePilotable,
-    kObjectTypeDebris
+    kOrbitObjectTypePilotable,
+    kOrbitObjectTypeDebris
 };
 
 @end

@@ -11,6 +11,14 @@
 @implementation Orbit
 
 
+- (id)initWithOptions:(NSDictionary *)options
+{
+    if( self = [super initWithOptions:options] ) {
+        
+    }
+    return self;
+}
+
 - (NSArray *)contentKeys
 {
  return @[
@@ -24,6 +32,11 @@
     kOrbitKeyReferenceBody,
     kOrbitKeyObjectType
     ];
+}
+
++ (NSArray *)referenceBodies
+{
+    return @[ @"Kerbol", @"Kerbin", @"Mün", @"Minmus" ];
 }
 
 

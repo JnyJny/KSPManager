@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSArray *contentKeys;
 @property (strong, nonatomic) NSArray *lines;
 @property (strong, nonatomic) NSMutableDictionary *columnHeaders;
+@property (strong, nonatomic) NSMutableDictionary *columnOrder;
 
 - (id)init;
 - (id)initWithOptions:(NSDictionary *)options;

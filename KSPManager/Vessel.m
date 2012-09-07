@@ -18,7 +18,24 @@
 {
     
     if ( self = [super initWithOptions:options] ) {
-        [self.columnHeaders addEntriesFromDictionary:@{ kVesselKeyName : @"Name"}];
+
+        [self.columnHeaders addEntriesFromDictionary:@{ kVesselKeyName : @"Name",
+                                      kVesselKeyLCT : @"Location",
+                        kVesselKeyMissionElapsedTime: @"MET",
+                                 kVesselKeySituation: @"Situation",
+                                       kVesselKeyHGT: @"HGT",
+                                 kVesselKeyAltitude : @"Altitude",
+                        kVesselOrbitKeyReferenceBody: @"Body" }];
+        
+        [self.columnOrder addEntriesFromDictionary: @{ @"0" : kVesselKeyName,
+                                                       @"1" : kVesselKeyLCT,
+                                                       @"2" : kVesselKeyMissionElapsedTime,
+                                                       @"3" : kVesselKeySituation,
+                                                       @"4" : kVesselKeyHGT,
+                                                       @"5" : kVesselKeyAltitude,
+                                                       @"6" : kVesselOrbitKeyReferenceBody }];
+            
+
     }
     return self;
 }
@@ -49,7 +66,7 @@
     kVesselKeyLandedAt,
     kVesselKeySplashed,
     kVesselKeyMissionElapsedTime,
-    kVesselKeyLocation,
+    kVesselKeyLCT,
     kVesselKeyRoot,
     kVesselKeyLatitude,
     kVesselKeyLongitude,

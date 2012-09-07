@@ -18,7 +18,24 @@
 {
     if( self = [super initWithOptions:options] ) {
         
-        [self.columnHeaders addEntriesFromDictionary:@{ kCrewKeyName:@"Kerbalnaut" }];
+        [self.columnHeaders addEntriesFromDictionary:
+                                     @{ kCrewKeyName:@"Kerbalnaut",
+                                       kCrewKeyBrave:@"Brave",
+                                        kCrewKeyDumb:@"Dumb",
+                                      kCrewKeyBadAzz:@"BadAzz",
+                                       kCrewKeyState:@"Flight Status",
+                                 kCrewKeyTimeOfDeath:@"ToD",
+                                         kCrewKeyIdx:@"Index" }];
+        
+        [self.columnOrder addEntriesFromDictionary:@{@"0":kCrewKeyName,
+                                                     @"1":kCrewKeyBrave,
+                                                     @"2":kCrewKeyDumb,
+                                                     @"3":kCrewKeyBadAzz,
+                                                     @"4":kCrewKeyState,
+                                                     @"5":kCrewKeyTimeOfDeath,
+                                                     @"6":kCrewKeyIdx}];
+        
+
     }
     return self;
 }
@@ -55,9 +72,9 @@
     return @[ kCrewKeyName,
               kCrewKeyBrave,
               kCrewKeyDumb,
-              kCrewKeyBadS,
+              kCrewKeyBadAzz,
               kCrewKeyState,
-              kCrewKeyToD,
+              kCrewKeyTimeOfDeath,
               kCrewKeyIdx];
 }
 

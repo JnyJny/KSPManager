@@ -15,6 +15,7 @@
 @synthesize contents = _content;
 @synthesize lines = _lines;
 @synthesize columnHeaders = _columnHeaders;
+@synthesize columnOrder = _columnOrder;
 
 #pragma mark -
 #pragma mark LifeCycle
@@ -56,6 +57,14 @@
         _columnHeaders = [[NSMutableDictionary alloc] init];
     }
     return _columnHeaders;
+}
+
+- (NSMutableDictionary *)columnOrder
+{
+    if( _columnOrder == nil ) {
+        _columnOrder = [[NSMutableDictionary alloc] init];
+    }
+    return _columnOrder;
 }
 
 - (NSString *)description

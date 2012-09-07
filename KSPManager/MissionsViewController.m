@@ -53,13 +53,15 @@ typedef enum {
         [self.tableView addTableColumn:[[NSTableColumn alloc] initWithIdentifier:[pObject.columnHeaders.allValues objectAtIndex:i]]];
 
     [self.tableView.tableColumns enumerateObjectsUsingBlock:^(NSTableColumn *c,NSUInteger idx,BOOL *stop) {
-        NSLog(@"idx %lu k.count %lu",idx,pObject.columnHeaders.count);
+
         if( idx >= pObject.columnHeaders.count) {
             [c setHidden:YES];
             return ;
         }
-        NSString *key = [pObject.columnHeaders.allKeys objectAtIndex:idx];
-        NSString *hdr = [pObject.columnHeaders.allValues objectAtIndex:idx];
+
+        NSString *key = [pObject.columnOrder valueForKey:[NSString stringWithFormat:@"%lu",idx]];
+        NSString *hdr = [pObject.columnHeaders valueForKey:key];
+        
         [c setHidden:NO];
         [c unbind:@"value"];
         [c.headerCell setStringValue:hdr];
@@ -78,17 +80,29 @@ typedef enum {
 - (void)configureTableForVesselsWithOption:(MissionTableConfigureOptions )option
 {
     Vessel * tmp = [[Vessel alloc] init];
+    NSPredicate *predicate;
     
     switch (option) {
         case MissionTableOptionAll:
+            predicate = nil;
             break;
         case MissionTableOptionPilotable:
+
+            predicate = [NSPredicate predicateWithFormat:@"%K == '%d'",kVesselOrbitKeyObjectType,kOrbitObjectTypePilotable];
+            
             break;
         case MissionTableOptionDebris:
+            predicate = [NSPredicate predicateWithFormat:@"%K == '%d'",kVesselOrbitKeyObjectType,kOrbitObjectTypeDebris];
+
+
             break;
         default:
             break;
     }
+    
+    NSLog(@"filter = %@",predicate);
+    
+    //    [self.vesselArrayController setFilterPredicate:predicate];
     
     [self configureTableViewWithArrayController:self.vesselArrayController
                             forPersistentObject:tmp];
