@@ -10,28 +10,10 @@
 
 @interface Orbit : PersistentObject
 
-#define kOrbitKeySemiMajorAxis            @"SMA"
-#define kOrbitKeyEccentricity             @"ECC"
-#define kOrbitKeyInclination              @"INC"
-#define kOrbitKeyLongitudeOfPeriapsis     @"LPE"
-#define kOrbitKeyLongitudeOfAscendingNode @"LAN"
-#define kOrbitKeyMeanAnomalyAtEpoch       @"MNA"
-#define kOrbitKeyEpoch                    @"EPH"
-#define kOrbitKeyReferenceBody            @"REF"
-#define kOrbitKeyObjectType               @"OBJ"
+@property (strong, nonatomic) NSString *referenceBodyName;
+@property (assign, nonatomic,getter = isPilotable) BOOL pilotable;
+@property (assign, nonatomic,getter = isDebris) BOOL debris;
 
-
-enum {
-    kReferenceBodyKerbol,
-    kReferenceBodyKerbin,
-    kReferenceBodyMun,
-    kReferenceBodyMinmus
-    // more to come
-} ;
-
-enum {
-    kOrbitObjectTypePilotable,
-    kOrbitObjectTypeDebris
-};
++ (NSDictionary *)referenceBodies;
 
 @end

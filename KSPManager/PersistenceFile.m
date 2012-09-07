@@ -82,7 +82,7 @@
 
 - (void)parseLines
 {
-    PersistentObject *po = nil;
+    PersistentObject *parent = nil;
     PersistentObject *child = nil;
     
     int curState;
@@ -96,10 +96,12 @@
     
     curState = kWorkingOnGlobal;
     
-    po = nil;
+    parent = nil;
     
     for(Line *line in _lines){
-        
+        //NSLog(@"line = %@",line);
+              
+              
         if ( line.isEmpty || !line.hasContent )
             continue ;
         
@@ -108,14 +110,14 @@
             if( [Crew keywordMatch:line.keyword] ) {
                 [state addObject:[NSNumber numberWithInt:curState]];
                 curState = kWorkingOnCrew;
-                po = [[Crew alloc] init];
+                parent = [[Crew alloc] init];
                 continue;
             }
             
             if( [Vessel keywordMatch:line.keyword] ) {
                 [state addObject:[NSNumber numberWithInt:curState]];
                 curState = kWorkingOnVessel;
-                po = [[Vessel alloc] init];
+                parent = [[Vessel alloc] init];
                 continue;
             }
             
@@ -147,20 +149,20 @@
                     // whut?
                     break;
                 case kWorkingOnCrew:
-                    [self.crew addObject:po];
-                    po = nil;
+                    [self.crew addObject:parent];
+                    parent = nil;
                     break;
                 case kWorkingOnVessel:
-                    [self.vessels addObject:po];
-                    po = nil;
+                    [self.vessels addObject:parent];
+                    parent = nil;
                     break;
                 case kWorkingOnOrbit:
-                    ((Vessel *)po).orbit = (Orbit *)child;
+                    ((Vessel *)parent).orbit = (Orbit *)child;
                     child = nil;
                     break;
                     
                 case kWorkingOnPart:
-                    [((Vessel *)po).parts addObject:child];
+                    [((Vessel *)parent).parts addObject:child];
                     child = nil;
                     break;
                 default:
@@ -181,7 +183,7 @@
                     break;
                 case kWorkingOnCrew:
                 case kWorkingOnVessel:
-                    [po setValue:line.value forKey:line.key];
+                    [parent setValue:line.value forKey:line.key];
                     break;
                 case kWorkingOnOrbit:
                 case kWorkingOnPart:

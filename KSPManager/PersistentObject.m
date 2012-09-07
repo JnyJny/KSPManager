@@ -14,8 +14,7 @@
 @synthesize keyword = _keyword;
 @synthesize contents = _content;
 @synthesize lines = _lines;
-@synthesize columnHeaders = _columnHeaders;
-@synthesize columnOrder = _columnOrder;
+@synthesize columnInfo = _columnInfo;
 
 #pragma mark -
 #pragma mark LifeCycle
@@ -51,20 +50,12 @@
     return _content;
 }
 
-- (NSMutableDictionary *)columnHeaders
+- (NSMutableArray *)columnInfo
 {
-    if( _columnHeaders == nil ) {
-        _columnHeaders = [[NSMutableDictionary alloc] init];
+    if( _columnInfo == nil ) {
+        _columnInfo = [[NSMutableArray alloc] init];
     }
-    return _columnHeaders;
-}
-
-- (NSMutableDictionary *)columnOrder
-{
-    if( _columnOrder == nil ) {
-        _columnOrder = [[NSMutableDictionary alloc] init];
-    }
-    return _columnOrder;
+    return _columnInfo;
 }
 
 - (NSString *)description
@@ -90,6 +81,34 @@
         id val = [self valueForKey:key];
         [self setValue:val forKey:key];
     }
+}
+
+- (void)addColumnHeader:(NSString *)header forKey:(NSString *)key
+{
+    [self.columnInfo addObject: @{ header : key }];
+}
+
+- (NSString *)keyForIndex:(NSInteger)index
+{
+    if( index >= self.columnInfo.count )
+        return @"";
+    
+    NSDictionary *info = [self.columnInfo objectAtIndex:index];
+    NSString *key = info.allValues.lastObject;
+    
+    return key;
+}
+
+- (NSString *)headerForIndex:(NSInteger)index
+{
+
+    if( index >= self.columnInfo.count )
+        return @"";
+    
+    NSDictionary *info = [self.columnInfo objectAtIndex:index];
+    NSString *header = info.allKeys.lastObject;
+    
+    return header;
 }
 
 #pragma mark -

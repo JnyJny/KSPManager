@@ -66,4 +66,84 @@
 
 #define kPLUGIN_EXT            @"dll"
 
+// persistent.sfs parameter names
+
+// Crew
+#define kCrewKeyName         @"name"
+#define kCrewKeyBrave        @"brave"
+#define kCrewKeyDumb         @"dumb"
+#define kCrewKeyBadAzz       @"badS"
+#define kCrewKeyState        @"state"
+#define kCrewKeyTimeOfDeath  @"ToD"
+#define kCrewKeyIdx          @"idx"
+
+typedef enum {
+    kCrewStateAvailable,
+    kCrewStateAssigned,
+    kCrewStateDead,
+    kCrewStateRewspawning
+} CrewState;
+
+
+// Vessel
+#define kVesselKeyPid                @"pid"
+#define kVesselKeyName               @"name"
+#define kVesselKeySituation          @"sit"
+#define kVesselKeyLanded             @"landed"
+#define kVesselKeyLandedAt           @"landedAt"
+#define kVesselKeySplashed           @"splashed"
+#define kVesselKeyMissionElapsedTime @"met"
+#define kVesselKeyLCT                @"lct"
+#define kVesselKeyRoot               @"root"
+#define kVesselKeyLatitude           @"lat"
+#define kVesselKeyLongitude          @"lon"
+#define kVesselKeyAltitude           @"alt"
+#define kVesselKeyHGT                @"hgt"
+#define kVesselKeyNRM                @"nrm"
+#define kVesselKeyROT                @"rot"
+#define kVesselKeyCenterOfMass       @"CoM"
+#define kVesselKeyStage              @"stg"
+#define kVesselKeyPRST               @"prst"
+#define kVesselKeyEVA                @"eva"
+
+// Orbit
+
+#define kOrbitKeySemiMajorAxis            @"SMA"
+#define kOrbitKeyEccentricity             @"ECC"
+#define kOrbitKeyInclination              @"INC"
+#define kOrbitKeyLongitudeOfPeriapsis     @"LPE"
+#define kOrbitKeyLongitudeOfAscendingNode @"LAN"
+#define kOrbitKeyMeanAnomalyAtEpoch       @"MNA"
+#define kOrbitKeyEpoch                    @"EPH"
+#define kOrbitKeyReferenceBody            @"REF"
+#define kOrbitKeyObjectType               @"OBJ"
+
+enum {
+    kReferenceBodyKerbol,
+    kReferenceBodyKerbin,
+    kReferenceBodyMun,
+    kReferenceBodyMinmus,
+    // add more reference bodies before here
+    kReferenceBodyCount
+} ;
+
+enum {
+    kOrbitObjectTypePilotable,
+    kOrbitObjectTypeDebris
+};
+
+// Vessel.Orbit Keypaths
+
+#define kVesselOrbitKeySemiMajorAxis            @"orbit." kOrbitKeySemiMajorAxis
+#define kVesselOrbitKeyEccentricity             @"orbit." kOrbitKeyEccentricity
+#define kVesselOrbitKeyInclination              @"orbit." kOrbitKeyInclination
+#define kVesselOrbitKeyLongitudeOfPeriapsis     @"orbit." kOrbitKeyLongitudeOfPeriapsis
+#define kVesselOrbitKeyLongitudeOfAscendingNode @"orbit." kOrbitKeyLongitudeOfAscendingNode
+#define kVesselOrbitKeyMeanAnomalyAtEpoch       @"orbit." kOrbitKeyMeanAnomalyAtEpoch
+#define kVesselOrbitKeyReferenceBody            @"orbit." kOrbitKeyReferenceBody
+#define kVesselOrbitKeyReferenceBodyName        @"orbit.referenceBodyName"
+#define kVesselOrbitKeyObjectType               @"orbit." kOrbitKeyObjectType
+
+
+
 #endif

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "KSP_Constants.h"
 #import "Line.h"
 
 @interface PersistentObject : NSObject
@@ -15,14 +16,20 @@
 @property (strong, nonatomic) NSMutableDictionary *contents;
 @property (strong, nonatomic) NSArray *contentKeys;
 @property (strong, nonatomic) NSArray *lines;
-@property (strong, nonatomic) NSMutableDictionary *columnHeaders;
-@property (strong, nonatomic) NSMutableDictionary *columnOrder;
+@property (strong, nonatomic) NSMutableArray *columnInfo;
 
 - (id)init;
 - (id)initWithOptions:(NSDictionary *)options;
+
 - (void)setOptions:(NSDictionary *)options;
+
+- (void)addColumnHeader:(NSString *)header forKey:(NSString *)key;
+- (NSString *)keyForIndex:(NSInteger)index;
+- (NSString *)headerForIndex:(NSInteger)index;
 
 + (NSString *)keyword;
 + (BOOL)keywordMatch:(NSString *)candidate;
+
+
 
 @end

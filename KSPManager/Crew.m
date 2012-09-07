@@ -17,25 +17,13 @@
 - (id)initWithOptions:(NSDictionary *)options
 {
     if( self = [super initWithOptions:options] ) {
-        
-        [self.columnHeaders addEntriesFromDictionary:
-                                     @{ kCrewKeyName:@"Kerbalnaut",
-                                       kCrewKeyBrave:@"Brave",
-                                        kCrewKeyDumb:@"Dumb",
-                                      kCrewKeyBadAzz:@"BadAzz",
-                                       kCrewKeyState:@"Flight Status",
-                                 kCrewKeyTimeOfDeath:@"ToD",
-                                         kCrewKeyIdx:@"Index" }];
-        
-        [self.columnOrder addEntriesFromDictionary:@{@"0":kCrewKeyName,
-                                                     @"1":kCrewKeyBrave,
-                                                     @"2":kCrewKeyDumb,
-                                                     @"3":kCrewKeyBadAzz,
-                                                     @"4":kCrewKeyState,
-                                                     @"5":kCrewKeyTimeOfDeath,
-                                                     @"6":kCrewKeyIdx}];
-        
-
+        [self addColumnHeader:@"Kerbalnaut" forKey:kCrewKeyName];
+        [self addColumnHeader:@"Brave" forKey:kCrewKeyBrave];
+        [self addColumnHeader:@"Dumb" forKey:kCrewKeyDumb];
+        [self addColumnHeader:@"BadAss" forKey:kCrewKeyBadAzz];
+        [self addColumnHeader:@"Flight Status" forKey:kCrewKeyState];
+        [self addColumnHeader:@"ToD" forKey:kCrewKeyTimeOfDeath];
+        [self addColumnHeader:@"Index" forKey:kCrewKeyIdx];
     }
     return self;
 }
@@ -45,8 +33,6 @@
 
 #pragma mark -
 #pragma mark Overridden Properties
-
-
 
 
 - (NSString *)firstName
@@ -78,6 +64,11 @@
               kCrewKeyIdx];
 }
 
+- (NSString *)flightStatus
+{
+    return @"flightStatus";
+}
+
 
 
 
@@ -86,6 +77,25 @@
 
 #pragma mark -
 #pragma mark Overridden Instance Methods
+
+#if 0
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+    NSLog(@"CREW setValue:%@ (%@) forUndefinedKey: %@",value,[value class],key);
+    [super setValue:value forUndefinedKey:key];
+}
+
+
+- (id)valueForUndefinedKey:(NSString *)key
+{
+    id val = [super valueForUndefinedKey:key];
+    
+    NSLog(@"CREW valueForUndefinedKey:%@ = %@ %@",key,val,[val class]);
+    
+    return val;
+}
+#endif
+
 
 #pragma mark -
 #pragma mark Class Methods

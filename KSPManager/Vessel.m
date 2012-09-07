@@ -18,24 +18,13 @@
 {
     
     if ( self = [super initWithOptions:options] ) {
-
-        [self.columnHeaders addEntriesFromDictionary:@{ kVesselKeyName : @"Name",
-                                      kVesselKeyLCT : @"Location",
-                        kVesselKeyMissionElapsedTime: @"MET",
-                                 kVesselKeySituation: @"Situation",
-                                       kVesselKeyHGT: @"HGT",
-                                 kVesselKeyAltitude : @"Altitude",
-                        kVesselOrbitKeyReferenceBody: @"Body" }];
         
-        [self.columnOrder addEntriesFromDictionary: @{ @"0" : kVesselKeyName,
-                                                       @"1" : kVesselKeyLCT,
-                                                       @"2" : kVesselKeyMissionElapsedTime,
-                                                       @"3" : kVesselKeySituation,
-                                                       @"4" : kVesselKeyHGT,
-                                                       @"5" : kVesselKeyAltitude,
-                                                       @"6" : kVesselOrbitKeyReferenceBody }];
-            
-
+        [self addColumnHeader:@"Mission" forKey:kVesselKeyName];
+        [self addColumnHeader:@"M.E.T." forKey:kVesselKeyMissionElapsedTime ];
+        [self addColumnHeader:@"Situation" forKey:kVesselKeySituation ];
+        [self addColumnHeader:@"Altitude (m)" forKey:kVesselKeyAltitude ];
+        [self addColumnHeader:@"Body" forKey:kVesselOrbitKeyReferenceBodyName ];
+        //[self addColumnHeader:@"Is Debris" forKey:kVesselOrbitKeyObjectType];
     }
     return self;
 }
@@ -81,22 +70,23 @@
     ];
 }
 
+- (BOOL)isPilotable
+{
+    return self.orbit.isPilotable;
+}
+
+- (BOOL)isDebris
+{
+    return self.orbit.isDebris;
+}
+
+
 #pragma mark -
 #pragma mark Overridden Properties
 
 #pragma mark -
 #pragma mark Instance Methods
 
-- (void)addOrbit:(NSDictionary *)orbitInfo
-{
-    _orbit = [[Orbit alloc] initWithOptions:orbitInfo];
-}
-
-- (void)addPart:(NSDictionary *)partInfo
-{
-    VesselPart *vPart = [[VesselPart alloc] initWithOptions:partInfo];
-    [self.parts addObject:vPart];
-}
 
 #pragma mark -
 #pragma mark Overridden Instance Methods
