@@ -19,7 +19,7 @@
     
     if ( self = [super initWithOptions:options] ) {
         [self addColumnHeader:@"Mission" forKey:kVesselKeyName];
-        [self addColumnHeader:@"M.E.T." forKey:kVesselKeyMissionElapsedTime ];
+        [self addColumnHeader:@"M.E.T." forKey:@"missionElapsedTime" ];
         [self addColumnHeader:@"Situation" forKey:kVesselKeySituation ];
         [self addColumnHeader:@"Altitude (m)" forKey:kVesselKeyAltitude ];
         [self addColumnHeader:@"Body" forKey:kVesselOrbitKeyReferenceBodyName ];
@@ -51,6 +51,20 @@
 - (BOOL)isDebris
 {
     return self.orbit.isDebris;
+}
+
+
+
+- (NSString *)missionElapsedTime
+{
+    NSString *metString = [self valueForKey:kVesselKeyMissionElapsedTime];
+    
+
+    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:metString.doubleValue];
+    
+    //    NSLog(@"date %@",date);
+    
+    return date.description;
 }
 
 

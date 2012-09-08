@@ -247,6 +247,13 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		1D682A1A15FAD309007C84CB /* Ships */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Ships;
+			sourceTree = "<group>";
+		};
 		1D75BD6715F79F570037393E /* Mission */ = {
 			isa = PBXGroup;
 			children = (
@@ -372,6 +379,7 @@
 				1DB405EC15DB45390041807D /* KSP.m */,
 				1D16222515EBC83800C0F3CC /* Assets */,
 				1D75BD6715F79F570037393E /* Mission */,
+				1D682A1A15FAD309007C84CB /* Ships */,
 			);
 			name = Model;
 			sourceTree = "<group>";
