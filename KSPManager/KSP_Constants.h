@@ -98,11 +98,11 @@ typedef enum {
 #define kVesselKeyLatitude           @"lat"
 #define kVesselKeyLongitude          @"lon"
 #define kVesselKeyAltitude           @"alt"
-#define kVesselKeyHGT                @"hgt"
+#define kVesselKeyHeightAboveGround  @"hgt"
 #define kVesselKeyNRM                @"nrm"
 #define kVesselKeyROT                @"rot"
 #define kVesselKeyCenterOfMass       @"CoM"
-#define kVesselKeyStage              @"stg"
+#define kVesselKeyStage              @"istg"
 #define kVesselKeyPRST               @"prst"
 #define kVesselKeyEVA                @"eva"
 
@@ -144,6 +144,34 @@ enum {
 #define kVesselOrbitKeyReferenceBodyName        @"orbit.referenceBodyName"
 #define kVesselOrbitKeyObjectType               @"orbit." kOrbitKeyObjectType
 
+// VesselPart Keypaths
+//
+// Documention needed.
 
+#define kVesselPartKeyName        @"name"
+#define kVesselPartKeyUID         @"uid"
+#define kVesselPartKeyParent      @"parent"
+#define kVesselPartKeyPosition    @"position"
+#define kVesselPartKeyRotation    @"rotation"
+#define kVesselPartKeyMirror      @"mirror"
+#define kVesselPartKeyISTG        @"istg"
+#define kVesselPartKeyDSTG        @"dstg"
+#define kVesselPartKeySQOR        @"sqor"
+#define kVesselPartKeySIDX        @"sidx"
+#define kVesselPartKeyAttm        @"attm"
+#define kVesselPartKeySrfN        @"srfN"
+#define kVesselPartKeyAttN        @"attN"
+#define kVesselPartKeyMass        @"mass"
+#define kVesselPartKeyTemperature @"temp"
+#define kVesselPartKeyEXPT        @"expt"
+#define kVesselPartKeyState       @"state"
+#define kVesselPartKeyConnected   @"connected"
+#define kVesselPartKeyAttached    @"attached"
+#define kVesselPartKeyHasShroud   @"hasShroud"
+#define kVesselPartKeyNTime       @"nTime"
+#define kVesselPartKeyASpeed      @"aSpeed"
+#define kVesselPartKeyQTY         @"qty"
+#define kVesselPartKeySymmetry    @"sym"
+#define kVesselPartKeyCData       @"cData"
 
 #endif

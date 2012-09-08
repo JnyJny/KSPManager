@@ -14,7 +14,6 @@
 
 @property (strong, nonatomic) NSString *keyword;
 @property (strong, nonatomic) NSMutableDictionary *contents;
-@property (strong, nonatomic) NSArray *contentKeys;
 @property (strong, nonatomic) NSArray *lines;
 @property (strong, nonatomic) NSMutableArray *columnInfo;
 

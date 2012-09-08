@@ -13,6 +13,7 @@
 @synthesize tabView;
 @synthesize partsViewController;
 @synthesize missionsViewController;
+@synthesize crewViewController;
 @synthesize pluginViewController;
 @synthesize inventoryViewController;
 @synthesize shipViewController;
@@ -148,14 +149,14 @@
     // When adding view controllers for the TabController, add them to this list
     
     if( _viewControllers == nil ) {
-        _viewControllers = [NSArray arrayWithObjects:
-                            self.partsViewController,
+        _viewControllers = @[self.partsViewController,
                             self.pluginViewController,
                             self.missionsViewController,
+                            self.crewViewController,
                             self.shipViewController,
                             self.inventoryViewController,
-                            self.savesViewController,
-                            nil];
+                            self.savesViewController];
+                            
     }
     return _viewControllers;
 }

@@ -48,13 +48,6 @@
 				<bool key="NSFilterRestrictsInsertion">YES</bool>
 				<bool key="NSAutomaticallyRearrangesObjects">YES</bool>
 			</object>
-			<object class="NSArrayController" id="875685331">
-				<string key="NSObjectClassName">Crew</string>
-				<bool key="NSEditable">YES</bool>
-				<object class="_NSManagedProxy" key="_NSManagedProxy"/>
-				<bool key="NSFilterRestrictsInsertion">YES</bool>
-				<bool key="NSAutomaticallyRearrangesObjects">YES</bool>
-			</object>
 			<object class="NSCustomView" id="1005">
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">4364</int>
@@ -62,7 +55,7 @@
 					<object class="NSSegmentedControl" id="542159012">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{407, 769}, {229, 24}}</string>
+						<string key="NSFrame">{{384, 760}, {274, 23}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="677115253"/>
@@ -80,22 +73,24 @@
 							<reference key="NSControlView" ref="542159012"/>
 							<array class="NSMutableArray" key="NSSegmentImages">
 								<object class="NSSegmentItem">
-									<string key="NSSegmentItemLabel">Vehicles</string>
+									<double key="NSSegmentItemWidth">90</double>
+									<string key="NSSegmentItemLabel">All Vehicles</string>
 									<bool key="NSSegmentItemSelected">YES</bool>
 									<int key="NSSegmentItemImageScaling">0</int>
 								</object>
 								<object class="NSSegmentItem">
-									<double key="NSSegmentItemWidth">88</double>
-									<string key="NSSegmentItemLabel">Crew</string>
+									<double key="NSSegmentItemWidth">90</double>
+									<string key="NSSegmentItemLabel">Pilotable</string>
 									<int key="NSSegmentItemTag">1</int>
 									<int key="NSSegmentItemImageScaling">0</int>
 								</object>
 								<object class="NSSegmentItem">
+									<double key="NSSegmentItemWidth">90</double>
 									<string key="NSSegmentItemLabel">Debris</string>
 									<int key="NSSegmentItemImageScaling">0</int>
 								</object>
 							</array>
-							<int key="NSSegmentStyle">1</int>
+							<int key="NSSegmentStyle">6</int>
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 					</object>
@@ -109,8 +104,8 @@
 								<array class="NSMutableArray" key="NSSubviews">
 									<object class="NSTableView" id="37516258">
 										<reference key="NSNextResponder" ref="286804306"/>
-										<int key="NSvFlags">256</int>
-										<string key="NSFrameSize">{1000, 666}</string>
+										<int key="NSvFlags">4352</int>
+										<string key="NSFrameSize">{1000, 662}</string>
 										<reference key="NSSuperview" ref="286804306"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="313803331"/>
@@ -164,7 +159,7 @@
 										<int key="NSTableViewGroupRowStyle">1</int>
 									</object>
 								</array>
-								<string key="NSFrame">{{1, 17}, {1000, 666}}</string>
+								<string key="NSFrame">{{1, 17}, {1000, 662}}</string>
 								<reference key="NSSuperview" ref="677115253"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="37516258"/>
@@ -224,7 +219,7 @@
 								<int key="NScvFlags">4</int>
 							</object>
 						</array>
-						<string key="NSFrame">{{20, 64}, {1002, 684}}</string>
+						<string key="NSFrame">{{20, 68}, {1002, 680}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="498510789"/>
@@ -386,14 +381,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">crewArrayController</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="875685331"/>
-					</object>
-					<int key="connectionID">131</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">tableSwitchControl</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="542159012"/>
@@ -407,22 +394,6 @@
 						<reference key="destination" ref="542159012"/>
 					</object>
 					<int key="connectionID">231</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">contentArray: ksp.persistenceFile.crew</string>
-						<reference key="source" ref="875685331"/>
-						<reference key="destination" ref="1001"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="875685331"/>
-							<reference key="NSDestination" ref="1001"/>
-							<string key="NSLabel">contentArray: ksp.persistenceFile.crew</string>
-							<string key="NSBinding">contentArray</string>
-							<string key="NSKeyPath">ksp.persistenceFile.crew</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">129</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -599,7 +570,7 @@
 								<float key="scoringTypeFloat">29</float>
 								<int key="contentType">3</int>
 							</object>
-							<object class="IBNSLayoutConstraint" id="48044336">
+							<object class="IBNSLayoutConstraint" id="612355154">
 								<reference key="firstItem" ref="542159012"/>
 								<int key="firstAttribute">3</int>
 								<int key="relation">0</int>
@@ -607,12 +578,12 @@
 								<int key="secondAttribute">3</int>
 								<float key="multiplier">1</float>
 								<object class="IBLayoutConstant" key="constant">
-									<double key="value">0.0</double>
+									<double key="value">10</double>
 								</object>
 								<float key="priority">1000</float>
 								<reference key="containingView" ref="1005"/>
-								<int key="scoringType">8</int>
-								<float key="scoringTypeFloat">29</float>
+								<int key="scoringType">3</int>
+								<float key="scoringTypeFloat">9</float>
 								<int key="contentType">3</int>
 							</object>
 							<object class="IBNSLayoutConstraint" id="655665506">
@@ -655,7 +626,7 @@
 								<int key="secondAttribute">4</int>
 								<float key="multiplier">1</float>
 								<object class="IBLayoutConstant" key="constant">
-									<double key="value">64</double>
+									<double key="value">68</double>
 								</object>
 								<float key="priority">1000</float>
 								<reference key="containingView" ref="1005"/>
@@ -889,12 +860,6 @@
 						<reference key="parent" ref="1005"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">121</int>
-						<reference key="object" ref="875685331"/>
-						<reference key="parent" ref="0"/>
-						<string key="objectName">Crew</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">122</int>
 						<reference key="object" ref="402965079"/>
 						<reference key="parent" ref="0"/>
@@ -944,13 +909,13 @@
 						<reference key="parent" ref="1005"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">222</int>
-						<reference key="object" ref="48044336"/>
+						<int key="objectID">223</int>
+						<reference key="object" ref="772631712"/>
 						<reference key="parent" ref="1005"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">223</int>
-						<reference key="object" ref="772631712"/>
+						<int key="objectID">246</int>
+						<reference key="object" ref="612355154"/>
 						<reference key="parent" ref="1005"/>
 					</object>
 				</array>
@@ -965,7 +930,7 @@
 					<reference ref="64568636"/>
 					<reference ref="772631712"/>
 					<reference ref="655665506"/>
-					<reference ref="48044336"/>
+					<reference ref="612355154"/>
 					<reference ref="324118368"/>
 					<reference ref="851682504"/>
 					<reference ref="898337341"/>
@@ -982,7 +947,6 @@
 				<string key="118.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="12.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="120.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="121.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="122.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="136.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="14.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -995,11 +959,11 @@
 				<string key="203.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="NO" key="207.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="207.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<integer value="0" key="208.IBNSSegmentedControlInspectorSelectedSegmentMetadataKey"/>
+				<integer value="1" key="208.IBNSSegmentedControlInspectorSelectedSegmentMetadataKey"/>
 				<string key="208.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="212.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="222.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="223.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="246.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="NO" key="3.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="3.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<array class="NSMutableArray" key="4.IBNSViewMetadataConstraints">
@@ -1030,7 +994,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">231</int>
+			<int key="maxID">247</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1070,16 +1034,11 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="crewArrayController">NSArrayController</string>
 						<string key="tableSwitchControl">NSSegmentedControl</string>
 						<string key="tableView">NSTableView</string>
 						<string key="vesselArrayController">NSArrayController</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="crewArrayController">
-							<string key="name">crewArrayController</string>
-							<string key="candidateClassName">NSArrayController</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="tableSwitchControl">
 							<string key="name">tableSwitchControl</string>
 							<string key="candidateClassName">NSSegmentedControl</string>

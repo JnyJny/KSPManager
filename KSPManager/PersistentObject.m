@@ -62,7 +62,7 @@
 {
     NSString *s = self.keyword;
     
-    for(NSString *key in self.contentKeys ) {
+    for(NSString *key in self.contents.allKeys ) {
         id val = [self valueForKey:key];
         s = [s stringByAppendingFormat:@" %@:%@",key,val];
     }

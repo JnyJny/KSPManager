@@ -18,13 +18,11 @@
 {
     
     if ( self = [super initWithOptions:options] ) {
-        
         [self addColumnHeader:@"Mission" forKey:kVesselKeyName];
         [self addColumnHeader:@"M.E.T." forKey:kVesselKeyMissionElapsedTime ];
         [self addColumnHeader:@"Situation" forKey:kVesselKeySituation ];
         [self addColumnHeader:@"Altitude (m)" forKey:kVesselKeyAltitude ];
         [self addColumnHeader:@"Body" forKey:kVesselOrbitKeyReferenceBodyName ];
-        //[self addColumnHeader:@"Is Debris" forKey:kVesselOrbitKeyObjectType];
     }
     return self;
 }
@@ -43,31 +41,6 @@
         _parts = [[NSMutableArray alloc] init];
     }
     return _parts;
-}
-
-- (NSArray *)contentKeys
-{
- return @[
-    kVesselKeyPid,
-    kVesselKeyName,
-    kVesselKeySituation,
-    kVesselKeyLanded,
-    kVesselKeyLandedAt,
-    kVesselKeySplashed,
-    kVesselKeyMissionElapsedTime,
-    kVesselKeyLCT,
-    kVesselKeyRoot,
-    kVesselKeyLatitude,
-    kVesselKeyLongitude,
-    kVesselKeyAltitude,
-    kVesselKeyHGT,
-    kVesselKeyNRM,
-    kVesselKeyROT,
-    kVesselKeyCenterOfMass,
-    kVesselKeyStage,
-    kVesselKeyPRST,
-    kVesselKeyEVA,
-    ];
 }
 
 - (BOOL)isPilotable

@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PartsViewController.h"
 #import "MissionsViewController.h"
+#import "CrewViewController.h"
 #import "PluginViewController.h"
 #import "InventoryViewController.h"
 #import "ShipViewController.h"
@@ -23,6 +24,7 @@
 
 @property (weak) IBOutlet PartsViewController *partsViewController;
 @property (weak) IBOutlet MissionsViewController *missionsViewController;
+@property (unsafe_unretained) IBOutlet CrewViewController *crewViewController;
 @property (weak) IBOutlet PluginViewController *pluginViewController;
 @property (weak) IBOutlet InventoryViewController *inventoryViewController;
 @property (weak) IBOutlet ShipViewController *shipViewController;

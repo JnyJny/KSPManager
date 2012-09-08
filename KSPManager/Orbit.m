@@ -18,24 +18,20 @@
     if( self = [super initWithOptions:options] ) {
         // orbit doesn't have any column info yet
         // but if it did, it would go here.
+        [self addColumnHeader:@"Eccentricity" forKey:kOrbitKeyEccentricity];
+        [self addColumnHeader:@"Epoch" forKey:kOrbitKeyEpoch ];
+        [self addColumnHeader:@"Inclination" forKey:kOrbitKeyInclination ];
+        [self addColumnHeader:@"Longitude Of Ascending Node" forKey:kOrbitKeyLongitudeOfAscendingNode ];
+        [self addColumnHeader:@"Longitude of Periapsis" forKey:kOrbitKeyLongitudeOfPeriapsis];
+        [self addColumnHeader:@"Mean Anomaly At Epoch" forKey:kOrbitKeyMeanAnomalyAtEpoch ];
+        [self addColumnHeader:@"Object Type" forKey:kOrbitKeyObjectType];
+        [self addColumnHeader:@"Reference Body" forKey:kOrbitKeyReferenceBody];
     }
     return self;
 }
 
-- (NSArray *)contentKeys
-{
- return @[
-    kOrbitKeySemiMajorAxis,
-    kOrbitKeyEccentricity,
-    kOrbitKeyInclination,
-    kOrbitKeyLongitudeOfPeriapsis,
-    kOrbitKeyLongitudeOfAscendingNode,
-    kOrbitKeyMeanAnomalyAtEpoch,
-    kOrbitKeyEpoch,
-    kOrbitKeyReferenceBody,
-    kOrbitKeyObjectType
-    ];
-}
+#pragma mark -
+#pragma mark Properties
 
 -(void)setReferenceBodyName:(NSString *)referenceBodyName
 {

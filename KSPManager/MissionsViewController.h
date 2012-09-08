@@ -11,7 +11,6 @@
 
 @interface MissionsViewController : KSPViewController 
 @property (strong) IBOutlet NSArrayController *vesselArrayController;
-@property (strong) IBOutlet NSArrayController *crewArrayController;
 @property (strong) IBOutlet NSSegmentedControl *tableSwitchControl;
 
 @property (weak) IBOutlet NSTableView *tableView;

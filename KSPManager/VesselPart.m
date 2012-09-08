@@ -10,38 +10,13 @@
 
 @implementation VesselPart
 
-
-- (NSArray *)contentKeys
+- (id)initWithOptions:(NSDictionary *)options
 {
-    return @[
-    kVesselPartKeyName,
-    kVesselPartKeyUID,
-    kVesselPartKeyParent,
-    kVesselPartKeyPosition,
-    kVesselPartKeyRotation,
-    kVesselPartKeyMirror,
-    kVesselPartKeyISTG,
-    kVesselPartKeyDSTG,
-    kVesselPartKeySQOR,
-    kVesselPartKeySIDX,
-    kVesselPartKeyAttm,
-    kVesselPartKeyMass,
-    kVesselPartKeyTemp,
-    kVesselPartKeyEXPT,
-    kVesselPartKeyState,
-    kVesselPartKeyConnected,
-    kVesselPartKeyAttached,
-    kVesselPartKeyHasShroud,
-    kVesselPartKeyNTime,
-    kVesselPartKeyASpeed,
-    kVesselPartKeyQTY,
-    kVesselPartKeySYM,
-    kVesselPartKeyCData
-    ];
-    
+    if( self = [super initWithOptions:options] ) {
+        // addColumnHeader here
+    }
+    return self;
 }
-
-
 
 + (NSString *)keyword
 {

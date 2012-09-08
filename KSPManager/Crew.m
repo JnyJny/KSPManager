@@ -21,7 +21,7 @@
         [self addColumnHeader:@"Brave" forKey:kCrewKeyBrave];
         [self addColumnHeader:@"Dumb" forKey:kCrewKeyDumb];
         [self addColumnHeader:@"BadAss" forKey:kCrewKeyBadAzz];
-        [self addColumnHeader:@"Flight Status" forKey:kCrewKeyState];
+        [self addColumnHeader:@"Flight Status" forKey:@"flightStatus"];
         [self addColumnHeader:@"ToD" forKey:kCrewKeyTimeOfDeath];
         [self addColumnHeader:@"Index" forKey:kCrewKeyIdx];
     }
@@ -53,23 +53,17 @@
     return _lastName;
 }
 
-- (NSArray *)contentKeys
-{
-    return @[ kCrewKeyName,
-              kCrewKeyBrave,
-              kCrewKeyDumb,
-              kCrewKeyBadAzz,
-              kCrewKeyState,
-              kCrewKeyTimeOfDeath,
-              kCrewKeyIdx];
-}
-
 - (NSString *)flightStatus
 {
-    return @"flightStatus";
+    NSString *v = [self valueForKey:kCrewKeyState];
+    
+    return [[Crew crewStatus] valueForKey:v];
 }
 
-
++ (NSDictionary *)crewStatus
+{
+    return @{ @"0":@"Available",@"1":@"Assigned",@"2":@"Dead",@"3":@"Respawning" };
+}
 
 
 #pragma mark -
