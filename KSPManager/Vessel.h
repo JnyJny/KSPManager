@@ -14,12 +14,15 @@
 
 
 
-@interface Vessel : PersistentObject
+@interface Vessel : PersistentObject {
+    NSDate *_date;
+}
 
 @property (strong, nonatomic) Orbit *orbit;
 @property (strong, nonatomic) NSMutableArray *parts;
 @property (assign, nonatomic) BOOL isPilotable;
 @property (assign, nonatomic) BOOL isDebris;
+
 
 
 

@@ -23,6 +23,8 @@
         [self addColumnHeader:@"Situation" forKey:kVesselKeySituation ];
         [self addColumnHeader:@"Altitude (m)" forKey:kVesselKeyAltitude ];
         [self addColumnHeader:@"Body" forKey:kVesselOrbitKeyReferenceBodyName ];
+
+        
     }
     return self;
 }
@@ -53,18 +55,41 @@
     return self.orbit.isDebris;
 }
 
-
+#define kSecPerMinute 60
+#define kSecPerHour   3600
+#define kSecPerDay    86400
+#define kSecPerYear   31536000
 
 - (NSString *)missionElapsedTime
 {
-    NSString *metString = [self valueForKey:kVesselKeyMissionElapsedTime];
+
+    NSString *metStr = [self valueForKey:kVesselKeyMissionElapsedTime];
+    
+    NSInteger t,years,days,hours,minutes,seconds;
+    
+    t = metStr.integerValue;
+    
+    ldiv_t result;
+    
+    result = ldiv(t, kSecPerYear);
+    
+    years = result.quot;
+    
+    result = ldiv(result.rem, kSecPerDay);
+    
+    days = result.quot;
+    
+    result = ldiv(result.rem, kSecPerHour);
+    
+    hours = result.quot;
+    
+    result = ldiv(result.rem, kSecPerMinute);
+    
+    minutes = result.quot;
+    seconds = result.rem;
     
 
-    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:metString.doubleValue];
-    
-    //    NSLog(@"date %@",date);
-    
-    return date.description;
+    return [NSString  stringWithFormat:@"%03ld:%03ld %02ld:%02ld:%02ld",years,days,hours,minutes,seconds];
 }
 
 
