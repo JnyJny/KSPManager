@@ -116,7 +116,7 @@
 									<object class="NSTableView" id="90682820">
 										<reference key="NSNextResponder" ref="254570569"/>
 										<int key="NSvFlags">4352</int>
-										<string key="NSFrameSize">{965, 832}</string>
+										<string key="NSFrameSize">{965, 815}</string>
 										<reference key="NSSuperview" ref="254570569"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="344266923"/>
@@ -130,14 +130,16 @@
 											<string key="NSFrameSize">{965, 17}</string>
 											<reference key="NSSuperview" ref="652076456"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="254570569"/>
+											<reference key="NSNextKeyView" ref="1030294815"/>
 											<string key="NSReuseIdentifierKey">_NS:16</string>
 											<reference key="NSTableView" ref="90682820"/>
 										</object>
-										<object class="_NSCornerView" key="NSCornerView">
-											<nil key="NSNextResponder"/>
+										<object class="_NSCornerView" key="NSCornerView" id="1030294815">
+											<reference key="NSNextResponder" ref="547733884"/>
 											<int key="NSvFlags">-2147483392</int>
 											<string key="NSFrame">{{224, 0}, {16, 17}}</string>
+											<reference key="NSSuperview" ref="547733884"/>
+											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="254570569"/>
 											<string key="NSReuseIdentifierKey">_NS:19</string>
 										</object>
@@ -170,7 +172,7 @@
 										<int key="NSTableViewGroupRowStyle">1</int>
 									</object>
 								</array>
-								<string key="NSFrame">{{1, 17}, {965, 832}}</string>
+								<string key="NSFrame">{{1, 17}, {965, 815}}</string>
 								<reference key="NSSuperview" ref="547733884"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="90682820"/>
@@ -229,8 +231,9 @@
 								<reference key="NSBGColor" ref="499397047"/>
 								<int key="NScvFlags">4</int>
 							</object>
+							<reference ref="1030294815"/>
 						</array>
-						<string key="NSFrame">{{20, 68}, {967, 850}}</string>
+						<string key="NSFrame">{{20, 68}, {967, 833}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="652076456"/>
@@ -240,6 +243,7 @@
 						<reference key="NSHScroller" ref="356120577"/>
 						<reference key="NSContentView" ref="254570569"/>
 						<reference key="NSHeaderClipView" ref="652076456"/>
+						<reference key="NSCornerView" ref="1030294815"/>
 						<bytes key="NSScrollAmts">QSAAAEEgAABBmAAAQZgAAA</bytes>
 						<double key="NSMinMagnification">0.25</double>
 						<double key="NSMaxMagnification">4</double>
@@ -275,7 +279,7 @@
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 					</object>
 				</array>
-				<string key="NSFrameSize">{1007, 938}</string>
+				<string key="NSFrameSize">{1007, 945}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="547733884"/>
@@ -544,13 +548,13 @@
 								<reference key="secondItem" ref="1005"/>
 								<int key="secondAttribute">3</int>
 								<float key="multiplier">1</float>
-								<object class="IBNSLayoutSymbolicConstant" key="constant">
-									<double key="value">20</double>
+								<object class="IBLayoutConstant" key="constant">
+									<double key="value">44</double>
 								</object>
 								<float key="priority">1000</float>
 								<reference key="containingView" ref="1005"/>
-								<int key="scoringType">8</int>
-								<float key="scoringTypeFloat">29</float>
+								<int key="scoringType">9</int>
+								<float key="scoringTypeFloat">40</float>
 								<int key="contentType">3</int>
 							</object>
 							<reference ref="547733884"/>
@@ -848,7 +852,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">86</int>
+			<int key="maxID">88</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

@@ -21,8 +21,8 @@
         [self addColumnHeader:@"Mission" forKey:kVesselKeyName];
         [self addColumnHeader:@"M.E.T." forKey:@"missionElapsedTime" ];
         [self addColumnHeader:@"Situation" forKey:kVesselKeySituation ];
-        [self addColumnHeader:@"Altitude (m)" forKey:kVesselKeyAltitude ];
-        [self addColumnHeader:@"Body" forKey:kVesselOrbitKeyReferenceBodyName ];
+        [self addColumnHeader:@"Altitude" forKey:@"altitude" ];
+        [self addColumnHeader:@"Sphere Of Influence" forKey:kVesselOrbitKeyReferenceBodyName ];
 
         
     }
@@ -90,6 +90,17 @@
     
 
     return [NSString  stringWithFormat:@"%03ld:%03ld %02ld:%02ld:%02ld",years,days,hours,minutes,seconds];
+}
+
+- (NSString *)altitude
+{
+    NSString *altStr = [self valueForKey:kVesselKeyAltitude];
+
+    
+    if( altStr.doubleValue > 1000.0)
+        return [NSString stringWithFormat:@"%.2f km",altStr.doubleValue / 1000.0];
+    
+    return [NSString stringWithFormat:@"%.2f m",altStr.doubleValue];
 }
 
 
