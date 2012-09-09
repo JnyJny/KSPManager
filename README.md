@@ -5,4 +5,4 @@ wealth of add-on parts and plugins for Kerbal Space Program.
 
 - XCode project files can be found at https://github.com/JnyJny/KSPManager.git
 
-- Version 1.0 available now in the Downloads page!
+- Version 1.1 available now in the Downloads page!
