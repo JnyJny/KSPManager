@@ -108,6 +108,12 @@
     return _detail;
 }
 
+- (NSString *)categoryName
+{
+    NSString *val = [self valueForKey:kPartKeyCategory];
+    return [[Part categoryNames] objectAtIndex:val.integerValue];
+}
+
 
 #pragma mark -
 #pragma mark Overriden Properties

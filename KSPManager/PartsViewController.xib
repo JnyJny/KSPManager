@@ -113,16 +113,14 @@
 																	<string key="NSFrameSize">{338, 17}</string>
 																	<reference key="NSSuperview" ref="935571047"/>
 																	<reference key="NSWindow"/>
-																	<reference key="NSNextKeyView" ref="1063751782"/>
+																	<reference key="NSNextKeyView" ref="852470137"/>
 																	<string key="NSReuseIdentifierKey">_NS:16</string>
 																	<reference key="NSTableView" ref="20384337"/>
 																</object>
-																<object class="_NSCornerView" key="NSCornerView" id="1063751782">
-																	<reference key="NSNextResponder" ref="1055574475"/>
+																<object class="_NSCornerView" key="NSCornerView">
+																	<nil key="NSNextResponder"/>
 																	<int key="NSvFlags">-2147483392</int>
 																	<string key="NSFrame">{{224, 0}, {16, 17}}</string>
-																	<reference key="NSSuperview" ref="1055574475"/>
-																	<reference key="NSWindow"/>
 																	<reference key="NSNextKeyView" ref="852470137"/>
 																	<string key="NSReuseIdentifierKey">_NS:19</string>
 																</object>
@@ -304,7 +302,6 @@
 														<reference key="NSBGColor" ref="398505276"/>
 														<int key="NScvFlags">4</int>
 													</object>
-													<reference ref="1063751782"/>
 												</array>
 												<string key="NSFrameSize">{340, 465}</string>
 												<reference key="NSSuperview" ref="1057089704"/>
@@ -316,7 +313,6 @@
 												<reference key="NSHScroller" ref="542411116"/>
 												<reference key="NSContentView" ref="852470137"/>
 												<reference key="NSHeaderClipView" ref="935571047"/>
-												<reference key="NSCornerView" ref="1063751782"/>
 												<bytes key="NSScrollAmts">QSAAAEEgAABBmAAAQZgAAA</bytes>
 												<double key="NSMinMagnification">0.25</double>
 												<double key="NSMaxMagnification">4</double>
@@ -404,7 +400,7 @@
 														<reference key="NSDocView" ref="100669922"/>
 														<reference key="NSBGColor" ref="741473946"/>
 														<object class="NSCursor" key="NSCursor" id="486668370">
-															<string key="NSHotSpot">{5, 5}</string>
+															<string key="NSHotSpot">{1, -1}</string>
 															<int key="NSCursorType">0</int>
 														</object>
 														<int key="NScvFlags">4</int>
@@ -501,16 +497,14 @@
 																	<string key="NSFrameSize">{338, 17}</string>
 																	<reference key="NSSuperview" ref="608226411"/>
 																	<reference key="NSWindow"/>
-																	<reference key="NSNextKeyView" ref="344693208"/>
+																	<reference key="NSNextKeyView" ref="960358102"/>
 																	<string key="NSReuseIdentifierKey">_NS:16</string>
 																	<reference key="NSTableView" ref="78022559"/>
 																</object>
-																<object class="_NSCornerView" key="NSCornerView" id="344693208">
-																	<reference key="NSNextResponder" ref="814492157"/>
+																<object class="_NSCornerView" key="NSCornerView">
+																	<nil key="NSNextResponder"/>
 																	<int key="NSvFlags">-2147483392</int>
 																	<string key="NSFrame">{{224, 0}, {16, 17}}</string>
-																	<reference key="NSSuperview" ref="814492157"/>
-																	<reference key="NSWindow"/>
 																	<reference key="NSNextKeyView" ref="960358102"/>
 																	<string key="NSReuseIdentifierKey">_NS:19</string>
 																</object>
@@ -643,7 +637,6 @@
 														<reference key="NSBGColor" ref="398505276"/>
 														<int key="NScvFlags">4</int>
 													</object>
-													<reference ref="344693208"/>
 												</array>
 												<string key="NSFrameSize">{340, 466}</string>
 												<reference key="NSSuperview" ref="796520224"/>
@@ -655,7 +648,6 @@
 												<reference key="NSHScroller" ref="710903610"/>
 												<reference key="NSContentView" ref="960358102"/>
 												<reference key="NSHeaderClipView" ref="608226411"/>
-												<reference key="NSCornerView" ref="344693208"/>
 												<bytes key="NSScrollAmts">QSAAAEEgAABBmAAAQZgAAA</bytes>
 												<double key="NSMinMagnification">0.25</double>
 												<double key="NSMaxMagnification">4</double>
@@ -1053,19 +1045,23 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: arrangedObjects.name</string>
+						<string key="label">value: arrangedObjects.title</string>
 						<reference key="source" ref="209417097"/>
 						<reference key="destination" ref="925630550"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="209417097"/>
 							<reference key="NSDestination" ref="925630550"/>
-							<string key="NSLabel">value: arrangedObjects.name</string>
+							<string key="NSLabel">value: arrangedObjects.title</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">arrangedObjects.name</string>
+							<string key="NSKeyPath">arrangedObjects.title</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSConditionallySetsEditable</string>
+								<boolean value="YES" key="NS.object.0"/>
+							</object>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">814</int>
+					<int key="connectionID">1816</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -1097,15 +1093,15 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: arrangedObjects.name</string>
+						<string key="label">value: arrangedObjects.title</string>
 						<reference key="source" ref="743839761"/>
 						<reference key="destination" ref="699550460"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="743839761"/>
 							<reference key="NSDestination" ref="699550460"/>
-							<string key="NSLabel">value: arrangedObjects.name</string>
+							<string key="NSLabel">value: arrangedObjects.title</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">arrangedObjects.name</string>
+							<string key="NSKeyPath">arrangedObjects.title</string>
 							<dictionary key="NSOptions">
 								<boolean value="NO" key="NSAllowsEditingMultipleValuesSelection"/>
 								<boolean value="YES" key="NSAlwaysPresentsApplicationModalAlerts"/>
@@ -1115,7 +1111,7 @@
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">1452</int>
+					<int key="connectionID">1817</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -2334,7 +2330,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1815</int>
+			<int key="maxID">1817</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2382,6 +2378,8 @@
 						<string key="didPushRemoveButton:">id</string>
 						<string key="moveSelectedToAvailable:">id</string>
 						<string key="moveSelectedToInstalled:">id</string>
+						<string key="tableViewAvailableAction:">NSTableView</string>
+						<string key="tableViewInstalledAction:">NSTableView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="didPushActionButton:">
@@ -2403,6 +2401,14 @@
 						<object class="IBActionInfo" key="moveSelectedToInstalled:">
 							<string key="name">moveSelectedToInstalled:</string>
 							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="tableViewAvailableAction:">
+							<string key="name">tableViewAvailableAction:</string>
+							<string key="candidateClassName">NSTableView</string>
+						</object>
+						<object class="IBActionInfo" key="tableViewInstalledAction:">
+							<string key="name">tableViewInstalledAction:</string>
+							<string key="candidateClassName">NSTableView</string>
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
