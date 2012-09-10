@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "KSP_Constants.h"
-#import "Line.h"
+#import "LineToken.h"
 
 @interface PersistentObject : NSObject
 

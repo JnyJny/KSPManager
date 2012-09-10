@@ -14,7 +14,7 @@
 		1D16222115EB315500C0F3CC /* KSPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D16222015EB315500C0F3CC /* KSPViewController.m */; };
 		1D16222415EBC82900C0F3CC /* Asset.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D16222315EBC82900C0F3CC /* Asset.m */; };
 		1D16222815EBC87200C0F3CC /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D16222715EBC87200C0F3CC /* Plugin.m */; };
-		1D16222B15EBCCFB00C0F3CC /* Line.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D16222A15EBCCFB00C0F3CC /* Line.m */; };
+		1D16222B15EBCCFB00C0F3CC /* LineToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D16222A15EBCCFB00C0F3CC /* LineToken.m */; };
 		1D16222F15EDBB8F00C0F3CC /* ShipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D16222D15EDBB8F00C0F3CC /* ShipViewController.m */; };
 		1D16223015EDBB8F00C0F3CC /* ShipViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D16222E15EDBB8F00C0F3CC /* ShipViewController.xib */; };
 		1D16223615EE721300C0F3CC /* PortableExecutableFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D16223515EE721300C0F3CC /* PortableExecutableFormat.m */; };
@@ -25,9 +25,11 @@
 		1D3746AC15F7F23F00F858B3 /* PersistentObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3746AB15F7F23F00F858B3 /* PersistentObject.m */; };
 		1D56F41615FA377C0047042A /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1D56F41515FA377C0047042A /* dsa_pub.pem */; };
 		1D67803115E431BC00A29C2C /* DropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D67803015E431BC00A29C2C /* DropView.m */; };
+		1D682A2615FCD93E007C84CB /* ConfigurationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D682A2515FCD93E007C84CB /* ConfigurationParser.m */; };
 		1D75BD6D15F79FA40037393E /* PersistenceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D75BD6C15F79FA40037393E /* PersistenceFile.m */; };
 		1D75BD7015F7A6770037393E /* Crew.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D75BD6F15F7A6770037393E /* Crew.m */; };
 		1D82916515F7A90600463E99 /* Vessel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D82916415F7A90600463E99 /* Vessel.m */; };
+		1DB2E08C15FE2E3A00B1E0AF /* ParseContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB2E08B15FE2E3A00B1E0AF /* ParseContext.m */; };
 		1DB405B915DB3E230041807D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DB405B815DB3E230041807D /* Cocoa.framework */; };
 		1DB405C315DB3E230041807D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1DB405C115DB3E230041807D /* InfoPlist.strings */; };
 		1DB405C515DB3E230041807D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB405C415DB3E230041807D /* main.m */; };
@@ -42,7 +44,6 @@
 		1DB405F415DB569E0041807D /* PluginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB405F215DB569E0041807D /* PluginViewController.m */; };
 		1DB405F515DB569E0041807D /* PluginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DB405F315DB569E0041807D /* PluginViewController.xib */; };
 		1DB405F915DBFF4C0041807D /* Part.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB405F815DBFF4C0041807D /* Part.m */; };
-		1DB5D91915DE889100E9438E /* ConfigFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB5D91815DE889100E9438E /* ConfigFile.m */; };
 		1DB7013515F12C90002EC18D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1DB7013415F12C90002EC18D /* README.md */; };
 		1DD06E9215F7FCB100202CB4 /* Orbit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD06E9115F7FCB100202CB4 /* Orbit.m */; };
 		1DD06E9615F7FCC700202CB4 /* VesselPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD06E9515F7FCC600202CB4 /* VesselPart.m */; };
@@ -74,8 +75,8 @@
 		1D16222315EBC82900C0F3CC /* Asset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Asset.m; sourceTree = "<group>"; };
 		1D16222615EBC87200C0F3CC /* Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plugin.h; sourceTree = "<group>"; };
 		1D16222715EBC87200C0F3CC /* Plugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plugin.m; sourceTree = "<group>"; };
-		1D16222915EBCCFB00C0F3CC /* Line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Line.h; sourceTree = "<group>"; };
-		1D16222A15EBCCFB00C0F3CC /* Line.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Line.m; sourceTree = "<group>"; };
+		1D16222915EBCCFB00C0F3CC /* LineToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineToken.h; sourceTree = "<group>"; };
+		1D16222A15EBCCFB00C0F3CC /* LineToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineToken.m; sourceTree = "<group>"; };
 		1D16222C15EDBB8F00C0F3CC /* ShipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShipViewController.h; sourceTree = "<group>"; };
 		1D16222D15EDBB8F00C0F3CC /* ShipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipViewController.m; sourceTree = "<group>"; };
 		1D16222E15EDBB8F00C0F3CC /* ShipViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShipViewController.xib; sourceTree = "<group>"; };
@@ -91,12 +92,17 @@
 		1D56F41515FA377C0047042A /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		1D67802F15E431BC00A29C2C /* DropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropView.h; sourceTree = "<group>"; };
 		1D67803015E431BC00A29C2C /* DropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropView.m; sourceTree = "<group>"; };
+		1D682A2415FCD93E007C84CB /* ConfigurationParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationParser.h; sourceTree = "<group>"; };
+		1D682A2515FCD93E007C84CB /* ConfigurationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationParser.m; sourceTree = "<group>"; };
+		1D682A2715FCD9CC007C84CB /* ConfigurationTokenizerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationTokenizerDelegate.h; sourceTree = "<group>"; };
 		1D75BD6B15F79FA40037393E /* PersistenceFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistenceFile.h; sourceTree = "<group>"; };
 		1D75BD6C15F79FA40037393E /* PersistenceFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistenceFile.m; sourceTree = "<group>"; };
 		1D75BD6E15F7A6770037393E /* Crew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crew.h; sourceTree = "<group>"; };
 		1D75BD6F15F7A6770037393E /* Crew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Crew.m; sourceTree = "<group>"; };
 		1D82916315F7A90600463E99 /* Vessel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vessel.h; sourceTree = "<group>"; };
 		1D82916415F7A90600463E99 /* Vessel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vessel.m; sourceTree = "<group>"; };
+		1DB2E08A15FE2E3A00B1E0AF /* ParseContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseContext.h; sourceTree = "<group>"; };
+		1DB2E08B15FE2E3A00B1E0AF /* ParseContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseContext.m; sourceTree = "<group>"; };
 		1DB405B415DB3E230041807D /* KSPManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KSPManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DB405B815DB3E230041807D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		1DB405BB15DB3E230041807D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -124,8 +130,6 @@
 		1DB405F615DBFD060041807D /* KSP_Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSP_Constants.h; sourceTree = "<group>"; };
 		1DB405F715DBFF4C0041807D /* Part.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Part.h; sourceTree = "<group>"; };
 		1DB405F815DBFF4C0041807D /* Part.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Part.m; sourceTree = "<group>"; };
-		1DB5D91715DE889100E9438E /* ConfigFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigFile.h; sourceTree = "<group>"; };
-		1DB5D91815DE889100E9438E /* ConfigFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigFile.m; sourceTree = "<group>"; };
 		1DB7013415F12C90002EC18D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		1DB7013B15F2864F002EC18D /* pe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pe.h; sourceTree = "<group>"; };
 		1DB7013C15F2864F002EC18D /* msve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = msve.h; sourceTree = "<group>"; };
@@ -220,10 +224,8 @@
 			children = (
 				1D16222215EBC82900C0F3CC /* Asset.h */,
 				1D16222315EBC82900C0F3CC /* Asset.m */,
-				1DB405F715DBFF4C0041807D /* Part.h */,
-				1DB405F815DBFF4C0041807D /* Part.m */,
-				1D16222615EBC87200C0F3CC /* Plugin.h */,
-				1D16222715EBC87200C0F3CC /* Plugin.m */,
+				1D682A2215FCD8B8007C84CB /* Parts */,
+				1D682A2315FCD8C4007C84CB /* Plugins */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -254,6 +256,24 @@
 			name = Ships;
 			sourceTree = "<group>";
 		};
+		1D682A2215FCD8B8007C84CB /* Parts */ = {
+			isa = PBXGroup;
+			children = (
+				1DB405F715DBFF4C0041807D /* Part.h */,
+				1DB405F815DBFF4C0041807D /* Part.m */,
+			);
+			name = Parts;
+			sourceTree = "<group>";
+		};
+		1D682A2315FCD8C4007C84CB /* Plugins */ = {
+			isa = PBXGroup;
+			children = (
+				1D16222615EBC87200C0F3CC /* Plugin.h */,
+				1D16222715EBC87200C0F3CC /* Plugin.m */,
+			);
+			name = Plugins;
+			sourceTree = "<group>";
+		};
 		1D75BD6715F79F570037393E /* Mission */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,6 +291,20 @@
 				1DD06E9515F7FCC600202CB4 /* VesselPart.m */,
 			);
 			name = Mission;
+			sourceTree = "<group>";
+		};
+		1DB2E08815FE2DD500B1E0AF /* File Parsing */ = {
+			isa = PBXGroup;
+			children = (
+				1D16222915EBCCFB00C0F3CC /* LineToken.h */,
+				1D16222A15EBCCFB00C0F3CC /* LineToken.m */,
+				1D682A2415FCD93E007C84CB /* ConfigurationParser.h */,
+				1D682A2715FCD9CC007C84CB /* ConfigurationTokenizerDelegate.h */,
+				1D682A2515FCD93E007C84CB /* ConfigurationParser.m */,
+				1DB2E08A15FE2E3A00B1E0AF /* ParseContext.h */,
+				1DB2E08B15FE2E3A00B1E0AF /* ParseContext.m */,
+			);
+			name = "File Parsing";
 			sourceTree = "<group>";
 		};
 		1DB405A915DB3E230041807D = {
@@ -388,10 +422,7 @@
 			isa = PBXGroup;
 			children = (
 				1DB7013A15F193FF002EC18D /* Portable Executable */,
-				1DB5D91715DE889100E9438E /* ConfigFile.h */,
-				1DB5D91815DE889100E9438E /* ConfigFile.m */,
-				1D16222915EBCCFB00C0F3CC /* Line.h */,
-				1D16222A15EBCCFB00C0F3CC /* Line.m */,
+				1DB2E08815FE2DD500B1E0AF /* File Parsing */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -507,13 +538,12 @@
 				1DB405ED15DB45390041807D /* KSP.m in Sources */,
 				1DB405F415DB569E0041807D /* PluginViewController.m in Sources */,
 				1DB405F915DBFF4C0041807D /* Part.m in Sources */,
-				1DB5D91915DE889100E9438E /* ConfigFile.m in Sources */,
 				1D67803115E431BC00A29C2C /* DropView.m in Sources */,
 				1D2ED54215EB156900402EF1 /* InventoryViewController.m in Sources */,
 				1D16222115EB315500C0F3CC /* KSPViewController.m in Sources */,
 				1D16222415EBC82900C0F3CC /* Asset.m in Sources */,
 				1D16222815EBC87200C0F3CC /* Plugin.m in Sources */,
-				1D16222B15EBCCFB00C0F3CC /* Line.m in Sources */,
+				1D16222B15EBCCFB00C0F3CC /* LineToken.m in Sources */,
 				1D16222F15EDBB8F00C0F3CC /* ShipViewController.m in Sources */,
 				1D16223615EE721300C0F3CC /* PortableExecutableFormat.m in Sources */,
 				1D75BD6D15F79FA40037393E /* PersistenceFile.m in Sources */,
@@ -524,6 +554,8 @@
 				1DD06E9615F7FCC700202CB4 /* VesselPart.m in Sources */,
 				1DD06E9A15F93DC700202CB4 /* SavesViewController.m in Sources */,
 				1D03985515FA99EC00BA3D2F /* CrewViewController.m in Sources */,
+				1D682A2615FCD93E007C84CB /* ConfigurationParser.m in Sources */,
+				1DB2E08C15FE2E3A00B1E0AF /* ParseContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

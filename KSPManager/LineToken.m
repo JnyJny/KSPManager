@@ -1,14 +1,14 @@
 //
-//  Line.m
+//  LineToken.m
 //  KSPManager
 //
 //  Created by Erik O'Shaughnessy on 8/27/12.
 //  Copyright (c) 2012 Symbolic Armageddon. All rights reserved.
 //
 
-#import "Line.h"
+#import "LineToken.h"
 
-@implementation Line
+@implementation LineToken
 
 @synthesize commentToken = _commentToken;
 @synthesize assignmentToken = _assignmentToken;
@@ -402,15 +402,15 @@ doneParsing:
 #pragma mark -
 #pragma Class Methods
 
-+ (NSMutableArray *)linesFromURL:(NSURL *)url withEncoding:(NSStringEncoding *)encoding
++ (NSMutableArray *)linesFromURL:(NSURL *)url withEncoding:(NSStringEncoding *)encoding withOptions:(NSDictionary *)options
 {
     NSMutableArray *lines = [[NSMutableArray alloc] init];
     NSCharacterSet *newlines = [NSCharacterSet newlineCharacterSet];
     NSError *error = nil;
-
-
+    
+    
     NSString *fileText = [NSString stringWithContentsOfURL:url
-                                                usedEncoding:encoding
+                                              usedEncoding:encoding
                                                      error:&error];
     if( !fileText ) {
         *encoding = NSISOLatin1StringEncoding;
@@ -420,15 +420,20 @@ doneParsing:
     }
     
     NSArray *fileTextLines = [fileText componentsSeparatedByCharactersInSet:newlines];
-
+    
     
     for(NSString *fileTextLine in fileTextLines) {
-        Line *line = [[Line alloc] initWithString:fileTextLine withOptions:nil];
+        LineToken *line = [[LineToken alloc] initWithString:fileTextLine withOptions:options];
         line.lineNumber = [NSNumber numberWithUnsignedInteger:[fileTextLines indexOfObject:fileTextLine]];
         [lines addObject:line];
     }
     
     return lines;
+}
+
++ (NSMutableArray *)linesFromURL:(NSURL *)url withEncoding:(NSStringEncoding *)encoding
+{
+    return [LineToken linesFromURL:url withEncoding:encoding withOptions:nil];
 }
 
 @end

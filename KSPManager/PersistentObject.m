@@ -7,7 +7,7 @@
 //
 
 #import "PersistentObject.h"
-#import "Line.h"
+#import "LineToken.h"
 
 @implementation PersistentObject
 

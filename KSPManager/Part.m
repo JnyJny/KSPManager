@@ -7,7 +7,6 @@
 //
 
 #import "Part.h"
-#import "ConfigFile.h"
 
 @implementation Part
 
@@ -16,13 +15,9 @@
 
 @synthesize detail = _detail;
 @synthesize module = _module;
-@synthesize name = _name;
 @synthesize desc = _desc;
-@synthesize author = _author;
-@synthesize manufacturer = _manufacturer;
-@synthesize category = _category;
 @synthesize categoryName = _categoryName;
-@synthesize fuel = _fuel;
+
 
 
 - (id)initWithConfigurationFileURL:(NSURL *)cfgURL
@@ -32,9 +27,17 @@
     
     if( self = [super initWithURL:[cfgURL URLByDeletingLastPathComponent]] ) {
          self.configurationURL = cfgURL;
-        _category  = -1;
-        _fuel = -1;
+        NSStringEncoding encoding;
         
+        _globalContext = [[NSMutableDictionary alloc] init];
+        
+        NSArray *lines = [LineToken linesFromURL:self.configurationURL
+                                    withEncoding:&encoding
+                                     withOptions:@{ kLineOptionCommentTokenKey : @"//" }];
+        
+        _parser = [ConfigurationParser parserWithLineTokens:lines];
+        _parser.delegate = self;
+        [_parser beginParsing];
     }
     return self;
 }
@@ -59,119 +62,19 @@
         return ;
     
     _configurationURL = configurationURL;
-    
-    if( _configurationURL )
-        _configFile = [[ConfigFile alloc] initWithURL:_configurationURL
-                                         commentToken:kKSP_COMMENT_TOKEN
-                                      assignmentToken:kKSP_ASSIGNMENT_TOKEN];
-    else
-        _configFile = nil;
 }
 
-
-- (NSString *)description
-{
-    return [NSString stringWithFormat:@"name %@ file %@",self.name,self.baseURL.path];
-}
-
-
-- (id)configurationValueForKey:(NSString *)key
-{
-    if ( _configDict == nil ) {
-        _configDict = [NSMutableDictionary dictionaryWithDictionary:[_configFile parse]];
-    }
-    return [_configDict valueForKey:key];
-}
-
-- (NSString *)module
-{
-    if( _module == nil ) {
-        _module = [self configurationValueForKey:kPART_MODULE_KEY];
-    }
-    return _module;
-}
-
-
-- (NSString *)name
-{
-    if( _name == nil) {
-        
-        for(NSString *key in @[ kPART_TITLE_KEY,kPART_NAME_KEY]) {
-            _name = [self configurationValueForKey:key];
-            if( _name )
-                break;
-        }
-        
-        if( _name == nil )
-            _name = self.partDirectoryName;
-    }
-    return _name;
-}
-
-- (NSString *)desc
-{
-    if( _desc == nil ) {
-        _desc = [self configurationValueForKey:kPART_DESCRIPTION_KEY];
-    }
-    return _desc;
-}
-
-- (NSString *)author
-{
-    if( _author == nil ) {
-        _author = [self configurationValueForKey:kPART_AUTHOR_KEY];
-    }
-    return _author;
-}
-
-- (NSString *)manufacturer
-{
-    if( _manufacturer == nil ) {
-        _manufacturer = [self configurationValueForKey:kPART_MANUFACTURER_KEY];
-    }
-    return _manufacturer;
-}
-
-- (NSInteger)category
-{
-    if( _category == -1 ) {
-        _category = [(NSString *)[self configurationValueForKey:kPART_CATEGORY_KEY] integerValue];
-    }
-    return _category;
-}
-
-- (NSString *)categoryName
-{
-    if( _categoryName == nil ) {
-        _categoryName = [[Part categoryNames] objectAtIndex:self.category];
-    }
-    return _categoryName;
-}
-
-- (NSInteger)fuel
-{
-    if( _fuel == -1 ) {
-        // solid fuel parts have "internal fuel"
-        // tanks have "fuel"
-    }
-    return _fuel;
-}
-
-
-
-    
+ 
 - (NSString *)detail
 {
     if( _detail == nil ) {
-        _detail = [NSString stringWithFormat:@"\n%@\n\n",self.name];
-        for(NSString *key in @[kPART_MODULE_KEY, kPART_AUTHOR_KEY, kPART_MANUFACTURER_KEY] ) {
-            NSString *value = [_configDict valueForKey:key];
-            
-            if( value != nil )
-                _detail = [NSString stringWithFormat:@"%@%@:\t%@\n",_detail,key,value];
+        _detail = [NSString stringWithFormat:@"\n%@\n\n",[self valueForKey:kPartKeyName]];
+
+        for(NSString *key in _globalContext.allKeys ) {
+            id value = [_globalContext valueForKey:key];
+            _detail = [_detail stringByAppendingFormat:@"\t%@ -> %@\n",key,value];
         }
-        if( self.desc)
-            _detail  = [NSString stringWithFormat:@"%@\n%@",_detail,self.desc];
+        
     }
     return _detail;
 }
@@ -187,6 +90,7 @@
     
     return (range.location == NSNotFound);
 }
+
 
 #pragma mark -
 #pragma mark Instance Methods
@@ -236,6 +140,80 @@
     return YES;
 }
 
+- (void)addEntriesFromDictionary:(NSDictionary *)newEntries
+{
+    [_globalContext addEntriesFromDictionary:newEntries];
+}
+
+#pragma mark -
+#pragma mark Overridden Methods
+
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+    [_globalContext setValue:value forUndefinedKey:key];
+}
+
+- (id)valueForUndefinedKey:(NSString *)key
+{
+    return [_globalContext valueForKey:key];
+}
+
+#pragma mark -
+#pragma mark ConfigurationParserDelegate
+
+- (void)willBeginParsingWithConfiguration:(ConfigurationParser *)tokenizer
+{
+    NSLog(@"beginParse %ld lines for %@",tokenizer.lines.count,self.configurationURL.lastPathComponent);
+}
+
+- (BOOL)handleNewContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
+{
+    
+    if( tokenizer.isGlobal ) {
+    
+        return YES;
+    }
+    
+ 
+    return NO;
+}
+
+- (BOOL)handleBeginContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
+{
+    NSLog(@"handleBeginContext: %@",tokenizer.currentContext);
+    return NO;
+}
+
+
+- (BOOL)handleKeyValue:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
+{
+    NSLog(@"handleKeyValue: %@  %@ -> %@",tokenizer.currentContext,line.key,line.value);
+    
+    if( tokenizer.isGlobal ) {
+        [self addEntriesFromDictionary:line.keyValue];
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)handleEndContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
+{
+    NSLog(@"endContext: %@",tokenizer.currentContext);
+        
+    return NO;
+}
+
+- (BOOL)handleUnknownContent:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
+{
+    NSLog(@"UnknownContent: %@ %@",tokenizer.currentContext,line.content);
+    
+    return NO;
+}
+
+- (void)willEndParsingWithConfiguration:(ConfigurationParser *)tokenizer
+{
+    NSLog(@"endParsing %@",self.configurationURL.lastPathComponent);
+}
 
 
 #pragma mark -

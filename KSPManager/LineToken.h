@@ -1,5 +1,5 @@
 //
-//  Line.h
+//  LineToken.h
 //  KSPManager
 //
 //  Created by Erik O'Shaughnessy on 8/27/12.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Line : NSObject {
+@interface LineToken : NSObject {
     BOOL _isParsed;
     BOOL _brokenAssignment;
 }
@@ -56,6 +56,7 @@
 - (void)setOptions:(NSDictionary *)options;
 
 
++ (NSMutableArray *)linesFromURL:(NSURL *)url withEncoding:(NSStringEncoding *)encoding withOptions:(NSDictionary *)options;
 + (NSMutableArray *)linesFromURL:(NSURL *)url withEncoding:(NSStringEncoding *)encoding;
 
 

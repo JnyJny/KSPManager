@@ -1,5 +1,5 @@
 //
-//  Mission.m
+//  PersistenceFile.m
 //  KSPManager
 //
 //  Created by Erik O'Shaughnessy on 9/5/12.
@@ -8,11 +8,7 @@
 
 #import "PersistenceFile.h"
 #import "PersistentObject.h"
-#import "Line.h"
-#import "Crew.h"
-#import "Vessel.h"
 #import "Orbit.h"
-#import "VesselPart.h"
 
 @implementation PersistenceFile
 
@@ -22,21 +18,27 @@
 @synthesize vessels = _vessels;
 @synthesize encoding = _encoding;
 
+@synthesize currentCrew   = _currentCrew;
+@synthesize currentVessel = _currentVessel;
+@synthesize currentPart   = _currentPart;
+
+
 - (id)initWithURL:(NSURL *)url
 {
     if ( self = [super init]) {
         _url = url;
-
-        _lines = [NSMutableArray arrayWithArray:[Line linesFromURL:url withEncoding:&_encoding]];
         
-        [self parseLines];
+        _parser = [ConfigurationParser parserWithURL:_url];
+        
+        _parser.delegate = self;
+        
+        [_parser beginParsing];
     }
     return self;
 }
 
 #pragma mark -
 #pragma mark Properties
-
 - (NSMutableDictionary *)global
 {
     if( _global == nil ) {
@@ -62,160 +64,139 @@
 }
 
 #pragma mark -
-#pragma mark Overridden Properties
+#pragma mark ConfigurationTokenizerDelegate Methods
 
-- (NSString *)description
+- (void)willBeginParsingWithConfiguration:(ConfigurationParser *)tokenizer
 {
-    return _lines.description;
+    [self.vessels removeAllObjects];
+    [self.crew removeAllObjects];
+    [self.global removeAllObjects];
+    
+    self.currentCrew = nil;
+    self.currentVessel = nil;
+    self.currentPart = nil;
 }
+
+- (BOOL)handleEmptyContent:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
+{
+    return YES; // no further processing on empty lines or lines that are all comment
+}
+
+- (BOOL)handleNewContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
+{
+    //NSLog(@"NewContext: %@",tokenizer.currentContext);
+    
+    if( [Crew keywordMatch:tokenizer.currentContext] ) {
+        self.currentCrew = [[Crew alloc] init];
+        return YES;
+    }
+
+    if( [Vessel keywordMatch:tokenizer.currentContext] ) {
+        self.currentVessel = [[Vessel alloc] init];
+        return YES;
+    }
+
+    if( [Orbit keywordMatch:tokenizer.currentContext] ) {
+        self.currentVessel.orbit = [[Orbit alloc] init];
+        return YES;
+    }
+    
+    if( [VesselPart keywordMatch:tokenizer.currentContext] ) {
+        self.currentPart =[[VesselPart alloc] init];
+        return YES;
+    }
+
+    return NO;
+}
+
+- (BOOL)handleBeginContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
+{
+    
+    //NSLog(@"BeginContext: %@",tokenizer.currentContext);
+    return YES;
+}
+
+- (BOOL)handleKeyValue:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
+{
+
+    //NSLog(@"%@ keyValue: %@  - >  %@",tokenizer.currentContext,line.key,line.value);
+    
+    if( tokenizer.isGlobal ) {
+        [self.global addEntriesFromDictionary:line.keyValue];
+        return YES;
+    }
+    
+    if( [Crew keywordMatch:tokenizer.currentContext] ) {
+        [self.currentCrew setValue:line.value forKey:line.key];
+        return YES;
+    }
+    
+    if( [Vessel keywordMatch:tokenizer.currentContext] ) {
+        [self.currentVessel setValue:line.value forKey:line.key];
+        return YES;
+    }
+    
+    if( [Orbit keywordMatch:tokenizer.currentContext] ) {
+        [self.currentVessel.orbit setValue:line.value forKey:line.key];
+        return YES;
+    }
+    
+    if( [VesselPart keywordMatch:tokenizer.currentContext] ) {
+        [self.currentPart setValue:line.value forKey:line.key];
+        return YES;
+    }
+    
+    return YES;
+}
+
+- (BOOL)handleEndContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
+{
+    //NSLog(@"EndContext: %@",tokenizer.currentContext);
+    
+    if( [Crew keywordMatch:tokenizer.currentContext] ) {
+        [self.crew addObject:self.currentCrew];
+        self.currentCrew = nil;
+        return YES;
+    }
+    
+    if( [Vessel keywordMatch:tokenizer.currentContext] ) {
+        [self.vessels addObject:self.currentVessel];
+        self.currentVessel = nil;
+        return YES;
+    }
+    
+    if( [Orbit keywordMatch:tokenizer.currentContext] ) {
+        return YES;
+    }
+    
+    if( [VesselPart keywordMatch:tokenizer.currentContext] ) {
+        [self.currentVessel.parts addObject:self.currentPart];
+        self.currentPart = nil;
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (BOOL)handleUnknownContent:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
+{
+    NSLog(@"UnknownContent: line[%ld] %@",[tokenizer.lines indexOfObject:line],tokenizer.currentContext);
+    
+    return NO;
+}
+
+
 
 #pragma mark -
-#pragma mark Implemenation Private Instance Methods
+#pragma mark Overridden Properties
 
-#define kWorkingOnInvalid 0
-#define kWorkingOnGlobal  1
-#define kWorkingOnCrew    2
-#define kWorkingOnVessel  3
-#define kWorkingOnOrbit   4
-#define kWorkingOnPart    5
-
-
-- (void)parseLines
-{
-    PersistentObject *parent = nil;
-    PersistentObject *child = nil;
-    
-    int curState;
-    int lastState;
-
-    lastState = kWorkingOnInvalid;
-    
-    NSMutableArray *state = [[NSMutableArray alloc] init];
-
-    [state addObject:[NSNumber numberWithInt:kWorkingOnInvalid]];
-    
-    curState = kWorkingOnGlobal;
-    
-    parent = nil;
-    
-    for(Line *line in _lines){
-        //NSLog(@"line = %@",line);
-              
-              
-        if ( line.isEmpty || !line.hasContent )
-            continue ;
-        
-        if ( line.hasKeyword ) {
-
-            if( [Crew keywordMatch:line.keyword] ) {
-                [state addObject:[NSNumber numberWithInt:curState]];
-                curState = kWorkingOnCrew;
-                parent = [[Crew alloc] init];
-                continue;
-            }
-            
-            if( [Vessel keywordMatch:line.keyword] ) {
-                [state addObject:[NSNumber numberWithInt:curState]];
-                curState = kWorkingOnVessel;
-                parent = [[Vessel alloc] init];
-                continue;
-            }
-            
-            if( [Orbit keywordMatch:line.keyword] ) {
-                [state addObject:[NSNumber numberWithInt:curState]];
-                curState = kWorkingOnOrbit;
-                child = [[Orbit alloc] init];
-                continue;
-            }
-        
-            if( [VesselPart keywordMatch:line.keyword] ) {
-                [state addObject:[NSNumber numberWithInt:curState]];
-                curState = kWorkingOnPart;
-                child = [[VesselPart alloc] init];
-                continue;
-            }
-            NSLog(@"Unknown keyword: %@",line.keyword);
-            continue;
-        }
-        
-        if ( line.hasDictBegin ) {
-            continue;
-        }
-        
-        if( line.hasDictEnd ) {
-            
-            switch(curState) {
-                case kWorkingOnGlobal:
-                    // whut?
-                    break;
-                case kWorkingOnCrew:
-                    [self.crew addObject:parent];
-                    parent = nil;
-                    break;
-                case kWorkingOnVessel:
-                    [self.vessels addObject:parent];
-                    parent = nil;
-                    break;
-                case kWorkingOnOrbit:
-                    ((Vessel *)parent).orbit = (Orbit *)child;
-                    child = nil;
-                    break;
-                    
-                case kWorkingOnPart:
-                    [((Vessel *)parent).parts addObject:child];
-                    child = nil;
-                    break;
-                default:
-                    break;
-            }
-
-            NSNumber *n = [state lastObject];
-            curState = [n intValue];
-            [state removeLastObject];
-            continue;
-        }
-        
-        if ( line.hasKeyValue ) {
-            
-            switch(curState) {
-                case kWorkingOnGlobal:
-                    [self.global addEntriesFromDictionary:line.keyValue];
-                    break;
-                case kWorkingOnCrew:
-                case kWorkingOnVessel:
-                    [parent setValue:line.value forKey:line.key];
-                    break;
-                case kWorkingOnOrbit:
-                case kWorkingOnPart:
-                    [child setValue:line.value forKey:line.key];
-                    break;
-            }
-            
-            continue;
-        }
-        
-        //NSLog(@"unprocessed line: %@",line);
-    }
-}
 
 #pragma mark -
 #pragma mark Instance Methods
 
 - (BOOL)writeToURL:(NSURL *)url
 {
-    NSError *error = nil;
-    NSString *newContents = @"";
-    
-    for(Crew *crew in self.crew)
-        newContents = [newContents stringByAppendingString:crew.description];
-    
-    for(Vessel *vessel in self.vessels)
-        newContents = [newContents stringByAppendingString:vessel.description];
-    
-    [newContents writeToURL:url atomically:YES encoding:self.encoding error:&error];
-    
-    // write lines to url
-    
+
     return NO;
 }
 
