@@ -151,6 +151,8 @@
 #define kPartKeyUseAGL                     @"useAGL"
 #define kPartKeyVacIsp                     @"vacIsp"
 
+#define kPartKeyInternalContext            @"INTERNAL"
+#define kPartKeyModuleContext              @"MODULE"
 
 @interface Part : Asset <ConfigurationParserDelegate> {
     NSMutableDictionary *_globalContext;
@@ -162,15 +164,20 @@
 @property (strong, nonatomic, readonly) NSString  *partDirectoryName;
 
 @property (strong, nonatomic)           NSString  *detail;
-@property (strong, nonatomic)           NSString  *module;
 @property (strong, nonatomic)           NSString  *desc;
 @property (strong, nonatomic)           NSString  *categoryName;
+
+@property (strong, nonatomic) NSMutableDictionary *MODULE;
+@property (strong, nonatomic) NSMutableDictionary *INTERNAL;
 
 
 - (id)initWithConfigurationFileURL:(NSURL *)cfgURL;
 
 - (BOOL)movePartTo:(NSURL *)destinationDirectoryURL;
 - (BOOL)copyPartTo:(NSURL *)destinationDirectoryURL;
+- (void)addEntriesFromDictionary:(NSDictionary *)newEntries;
+
+- (NSArray *)allKeys;
 
 + (NSArray *)inventory:(NSURL *)baseURL;
 + (NSArray *)categoryNames;

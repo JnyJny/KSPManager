@@ -12,11 +12,11 @@
 
 @synthesize partDirectoryName = _partDirectoryName;
 @synthesize configurationURL = _configurationURL;
-
 @synthesize detail = _detail;
-@synthesize module = _module;
 @synthesize desc = _desc;
 @synthesize categoryName = _categoryName;
+@synthesize MODULE = _MODULE;
+@synthesize INTERNAL = _INTERNAL;
 
 
 
@@ -64,20 +64,50 @@
     _configurationURL = configurationURL;
 }
 
+- (NSMutableDictionary *)MODULE
+{
+    if( _MODULE == nil ) {
+        _MODULE = [[NSMutableDictionary alloc] initWithDictionary:@{ @"ContextName":kPartKeyModuleContext}];
+    }
+    return _MODULE;
+}
+
+- (NSMutableDictionary *)INTERNAL
+{
+    if( _INTERNAL == nil ) {
+        _INTERNAL = [[NSMutableDictionary alloc] initWithDictionary:@{ @"ContextName":kPartKeyInternalContext}];
+    }
+    return _INTERNAL;
+}
+
  
 - (NSString *)detail
 {
     if( _detail == nil ) {
-        _detail = [NSString stringWithFormat:@"\n%@\n\n",[self valueForKey:kPartKeyName]];
-
-        for(NSString *key in _globalContext.allKeys ) {
-            id value = [_globalContext valueForKey:key];
-            _detail = [_detail stringByAppendingFormat:@"\t%@ -> %@\n",key,value];
-        }
+        _detail = @"";
         
+        for(NSDictionary *ctx in @[ _globalContext, self.MODULE, self.INTERNAL ]) {
+         
+            for(NSString *key in [ctx.allKeys sortedArrayUsingSelector:@selector(localizedCompare:)]) {
+                
+                if( [key isEqualToString:@"ContextName"] )
+                    continue;
+                
+                NSString *prefix = @"";
+                
+                if( ctx != _globalContext )
+                    prefix = [NSString stringWithFormat:@"%@.",[ctx valueForKey:@"ContextName"]];
+                
+                _detail = [_detail stringByAppendingFormat:@"\t%@%@ -> %@\n",prefix,key,[ctx valueForKey:key]];
+
+            }
+            
+        }
+
     }
     return _detail;
 }
+
 
 #pragma mark -
 #pragma mark Overriden Properties
@@ -90,6 +120,7 @@
     
     return (range.location == NSNotFound);
 }
+
 
 
 #pragma mark -
@@ -145,18 +176,23 @@
     [_globalContext addEntriesFromDictionary:newEntries];
 }
 
+
 #pragma mark -
 #pragma mark Overridden Methods
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key
 {
-    [_globalContext setValue:value forUndefinedKey:key];
+    //    NSLog(@"setValue:%@ forUndefinedKey: %@",value,key);
+    [_globalContext setValue:value forUndefinedKey:key];  
 }
+
 
 - (id)valueForUndefinedKey:(NSString *)key
 {
     return [_globalContext valueForKey:key];
 }
+
+
 
 #pragma mark -
 #pragma mark ConfigurationParserDelegate
@@ -168,40 +204,30 @@
 
 - (BOOL)handleNewContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
 {
-    
-    if( tokenizer.isGlobal ) {
-    
-        return YES;
-    }
-    
- 
-    return NO;
+     return YES;
 }
-
-- (BOOL)handleBeginContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
-{
-    NSLog(@"handleBeginContext: %@",tokenizer.currentContext);
-    return NO;
-}
-
 
 - (BOOL)handleKeyValue:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
 {
-    NSLog(@"handleKeyValue: %@  %@ -> %@",tokenizer.currentContext,line.key,line.value);
     
     if( tokenizer.isGlobal ) {
         [self addEntriesFromDictionary:line.keyValue];
         return YES;
     }
+    
+    if( [tokenizer.currentContext isEqualToString:kPartKeyModuleContext] ) {
+        [self.MODULE addEntriesFromDictionary:line.keyValue];
+        return YES;
+    }
+    
+    if( [tokenizer.currentContext isEqualToString:kPartKeyInternalContext] ) {
+        [self.INTERNAL addEntriesFromDictionary:line.keyValue];
+        return YES;
+    }
+    
     return NO;
 }
 
-- (BOOL)handleEndContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
-{
-    NSLog(@"endContext: %@",tokenizer.currentContext);
-        
-    return NO;
-}
 
 - (BOOL)handleUnknownContent:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
 {
@@ -210,10 +236,6 @@
     return NO;
 }
 
-- (void)willEndParsingWithConfiguration:(ConfigurationParser *)tokenizer
-{
-    NSLog(@"endParsing %@",self.configurationURL.lastPathComponent);
-}
 
 
 #pragma mark -

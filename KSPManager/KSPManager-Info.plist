@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>KSPM</string>
 	<key>CFBundleVersion</key>
-	<string>929</string>
+	<string>1013</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
