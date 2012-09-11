@@ -164,7 +164,6 @@
 @property (strong, nonatomic, readonly) NSString  *partDirectoryName;
 
 @property (strong, nonatomic)           NSString  *detail;
-@property (strong, nonatomic)           NSString  *desc;
 @property (strong, nonatomic)           NSString  *categoryName;
 
 @property (strong, nonatomic) NSMutableDictionary *MODULE;
@@ -176,8 +175,6 @@
 - (BOOL)movePartTo:(NSURL *)destinationDirectoryURL;
 - (BOOL)copyPartTo:(NSURL *)destinationDirectoryURL;
 - (void)addEntriesFromDictionary:(NSDictionary *)newEntries;
-
-- (NSArray *)allKeys;
 
 + (NSArray *)inventory:(NSURL *)baseURL;
 + (NSArray *)categoryNames;

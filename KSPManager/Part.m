@@ -13,7 +13,6 @@
 @synthesize partDirectoryName = _partDirectoryName;
 @synthesize configurationURL = _configurationURL;
 @synthesize detail = _detail;
-@synthesize desc = _desc;
 @synthesize categoryName = _categoryName;
 @synthesize MODULE = _MODULE;
 @synthesize INTERNAL = _INTERNAL;

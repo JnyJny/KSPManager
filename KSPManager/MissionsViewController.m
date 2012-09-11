@@ -19,7 +19,8 @@
 @implementation MissionsViewController
 @synthesize vesselArrayController;
 @synthesize tableSwitchControl;
-@synthesize tableView;
+@synthesize missionTableView;
+@synthesize detailTableView;
 
 
 - (void)awakeFromNib
@@ -34,13 +35,11 @@
     // if there aren't enough tableColumns in the tableView, add enough to satisfy this pObject
     
     for(NSInteger i=0;i < v.columnInfo.count  ; i++ )
-        [self.tableView addTableColumn:[[NSTableColumn alloc] initWithIdentifier:[v keyForIndex:i]]];
+        [self.missionTableView addTableColumn:[[NSTableColumn alloc] initWithIdentifier:[v keyForIndex:i]]];
 
 
     // next, walk the tableColumns and
-    [self.tableView.tableColumns enumerateObjectsUsingBlock:^(NSTableColumn *c,NSUInteger idx,BOOL *stop) {
-
-        
+    [self.missionTableView.tableColumns enumerateObjectsUsingBlock:^(NSTableColumn *c,NSUInteger idx,BOOL *stop) {
         NSString *key = [v keyForIndex:idx];
         NSString *hdr = [v headerForIndex:idx];
         
@@ -59,7 +58,7 @@
 
 - (IBAction)switchTableContent:(NSSegmentedControl *)sender
 {
-    if( !self.tableView )
+    if( !self.missionTableView )
         return ;
     
     switch(sender.selectedSegment){

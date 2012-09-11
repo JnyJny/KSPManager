@@ -29,6 +29,7 @@
 		1D75BD6D15F79FA40037393E /* PersistenceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D75BD6C15F79FA40037393E /* PersistenceFile.m */; };
 		1D75BD7015F7A6770037393E /* Crew.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D75BD6F15F7A6770037393E /* Crew.m */; };
 		1D82916515F7A90600463E99 /* Vessel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D82916415F7A90600463E99 /* Vessel.m */; };
+		1DB2E08F15FE97B500B1E0AF /* Ship.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB2E08E15FE97B500B1E0AF /* Ship.m */; };
 		1DB405B915DB3E230041807D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DB405B815DB3E230041807D /* Cocoa.framework */; };
 		1DB405C315DB3E230041807D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1DB405C115DB3E230041807D /* InfoPlist.strings */; };
 		1DB405C515DB3E230041807D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB405C415DB3E230041807D /* main.m */; };
@@ -100,6 +101,8 @@
 		1D75BD6F15F7A6770037393E /* Crew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Crew.m; sourceTree = "<group>"; };
 		1D82916315F7A90600463E99 /* Vessel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vessel.h; sourceTree = "<group>"; };
 		1D82916415F7A90600463E99 /* Vessel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vessel.m; sourceTree = "<group>"; };
+		1DB2E08D15FE97B500B1E0AF /* Ship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ship.h; sourceTree = "<group>"; };
+		1DB2E08E15FE97B500B1E0AF /* Ship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ship.m; sourceTree = "<group>"; };
 		1DB405B415DB3E230041807D /* KSPManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KSPManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DB405B815DB3E230041807D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		1DB405BB15DB3E230041807D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -249,6 +252,8 @@
 		1D682A1A15FAD309007C84CB /* Ships */ = {
 			isa = PBXGroup;
 			children = (
+				1DB2E08D15FE97B500B1E0AF /* Ship.h */,
+				1DB2E08E15FE97B500B1E0AF /* Ship.m */,
 			);
 			name = Ships;
 			sourceTree = "<group>";
@@ -550,6 +555,7 @@
 				1DD06E9A15F93DC700202CB4 /* SavesViewController.m in Sources */,
 				1D03985515FA99EC00BA3D2F /* CrewViewController.m in Sources */,
 				1D682A2615FCD93E007C84CB /* ConfigurationParser.m in Sources */,
+				1DB2E08F15FE97B500B1E0AF /* Ship.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

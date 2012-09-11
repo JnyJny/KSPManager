@@ -9,5 +9,8 @@
 #import "KSPViewController.h"
 
 @interface ShipViewController : KSPViewController
+@property (strong) IBOutlet NSTableView *shipTableView;
+@property (strong) IBOutlet NSTableView *partTableView;
+@property (strong) IBOutlet NSArrayController *shipsArrayController;
 
 @end

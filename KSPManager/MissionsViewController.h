@@ -12,8 +12,10 @@
 @interface MissionsViewController : KSPViewController 
 @property (strong) IBOutlet NSArrayController *vesselArrayController;
 @property (strong) IBOutlet NSSegmentedControl *tableSwitchControl;
+@property (strong) IBOutlet NSTableView *missionTableView;
+@property (strong) IBOutlet NSScrollView *detailTableView;
 
-@property (weak) IBOutlet NSTableView *tableView;
+
 
 - (IBAction)didPushAdd:(id)sender;
 - (IBAction)didPushRemove:(id)sender;

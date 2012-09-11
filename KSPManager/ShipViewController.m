@@ -13,6 +13,9 @@
 @end
 
 @implementation ShipViewController
+@synthesize shipTableView;
+@synthesize partTableView;
+@synthesize shipsArrayController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
