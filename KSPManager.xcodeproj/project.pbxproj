@@ -108,6 +108,8 @@
 		1DB2E09015FFA7B900B1E0AF /* AddonsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddonsViewController.h; sourceTree = "<group>"; };
 		1DB2E09115FFA7B900B1E0AF /* AddonsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddonsViewController.m; sourceTree = "<group>"; };
 		1DB2E09215FFA7B900B1E0AF /* AddonsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddonsViewController.xib; sourceTree = "<group>"; };
+		1DB2E0961600CD5100B1E0AF /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
+		1DB2E0981600D45700B1E0AF /* BUGS */ = {isa = PBXFileReference; lastKnownFileType = text; path = BUGS; sourceTree = "<group>"; };
 		1DB405B415DB3E230041807D /* KSPManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KSPManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DB405B815DB3E230041807D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		1DB405BB15DB3E230041807D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -325,6 +327,8 @@
 		1DB405A915DB3E230041807D = {
 			isa = PBXGroup;
 			children = (
+				1DB2E0961600CD5100B1E0AF /* TODO */,
+				1DB2E0981600D45700B1E0AF /* BUGS */,
 				1DB405BE15DB3E230041807D /* KSPManager */,
 				1DB405B715DB3E230041807D /* Frameworks */,
 				1DB405B515DB3E230041807D /* Products */,

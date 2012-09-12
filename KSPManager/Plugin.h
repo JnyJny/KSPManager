@@ -8,23 +8,13 @@
 
 #import "Asset.h"
 
-@class PortableExecutableFormat;
-
-@interface Plugin : Asset {
-    PortableExecutableFormat *_pef;
-}
-
+@interface Plugin : Asset 
 
 @property (strong, nonatomic, readonly) NSString *installedFileName;
 @property (strong, nonatomic, readonly) NSString *availableFileName;
 @property (strong, nonatomic, readonly) NSString *version;
 @property (strong, nonatomic, readonly) NSString *productName;
 @property (strong, nonatomic, readonly) NSString *companyName;
-
-
-- (id)initWithPluginFileURL:(NSURL *)pluginFileURL;
-- (BOOL)movePluginTo:(NSURL *)destinationDirectoryURL;
-- (BOOL)copyPluginTo:(NSURL *)destinationDirectoryURL;
 
 + (NSArray *)inventory:(NSURL *)baseURL;
 

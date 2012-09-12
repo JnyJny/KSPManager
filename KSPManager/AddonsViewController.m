@@ -12,11 +12,12 @@
 #import "Ship.h"
 #import "DropView.h"
 
-@interface AddonsViewController ()
+#define kKeyContentArray    @"contentArray"
+#define kKeySortDescriptors @"sortDescriptors"
 
-@end
 
 @implementation AddonsViewController
+
 @synthesize installedArrayController;
 @synthesize availableArrayController;
 @synthesize installedDropView;
@@ -27,6 +28,11 @@
 @synthesize removeButton;
 @synthesize actionButton;
 @synthesize categoryControl;
+
+@synthesize partSortDescriptors = _partSortDescriptors;
+@synthesize pluginSortDescriptors = _pluginSortDescriptors;
+@synthesize shipSortDescriptors = _shipSortDescriptors;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,29 +46,118 @@
 
 - (void)awakeFromNib
 {
-    
-    NSSortDescriptor *titleSort = [NSSortDescriptor sortDescriptorWithKey:@"assetTitle" ascending:YES];
-    
-    NSSortDescriptor *categorySort = [NSSortDescriptor sortDescriptorWithKey:@"assetCategory" ascending:YES];
-    
-    NSPredicate *installedFilter = [NSPredicate predicateWithBlock:^BOOL(Asset * evaluatedObject, NSDictionary *bindings) {
+
+    self.installedArrayController.filterPredicate = [NSPredicate predicateWithBlock:^BOOL(Asset * evaluatedObject, NSDictionary *bindings) {
         return evaluatedObject.isInstalled;
     }];
     
-    NSPredicate *availableFilter = [NSPredicate predicateWithBlock:^BOOL(Asset *evaluatedObject, NSDictionary *bindings) {
-        return !evaluatedObject.isInstalled;
+    self.availableArrayController.filterPredicate = [NSPredicate predicateWithBlock:^BOOL(Asset *evaluatedObject, NSDictionary *bindings) {
+        return evaluatedObject.isAvailable;
     }];
     
-    [installedArrayController setFilterPredicate:installedFilter];
-    [installedArrayController setSortDescriptors:@[ titleSort, categorySort]];
-    
-    [availableArrayController setFilterPredicate:availableFilter];
-    [availableArrayController setSortDescriptors:@[ titleSort, categorySort]];
-
+    [self controlDidChange:self.categoryControl];
 }
 
 #pragma mark -
 #pragma mark Properties
+
+
+- (NSArray *)partSortDescriptors
+{
+    if( _partSortDescriptors == nil ) {
+        _partSortDescriptors = [NSArray arrayWithObjects:
+                                [NSSortDescriptor sortDescriptorWithKey:@"category"
+                                                              ascending:YES],
+
+                                [NSSortDescriptor sortDescriptorWithKey:@"assetTitle"
+                                                              ascending:YES],
+                                nil];
+        
+    }
+    return _partSortDescriptors;
+}
+
+- (NSArray *)pluginSortDescriptors
+{
+    if( _pluginSortDescriptors == nil ) {
+        _pluginSortDescriptors = [NSArray arrayWithObjects:
+                                  [NSSortDescriptor sortDescriptorWithKey:@"assetTitle"
+                                                                ascending:YES],
+                                  [NSSortDescriptor sortDescriptorWithKey:@"assetCategory"
+                                                                ascending:YES],
+                                  nil];
+
+    }
+    return _pluginSortDescriptors;
+}
+
+- (NSArray *)shipSortDescriptors
+{
+    if( _shipSortDescriptors == nil ) {
+        _shipSortDescriptors = [NSArray arrayWithObjects:
+                                    [NSSortDescriptor sortDescriptorWithKey:@"assetTitle"
+                                                                  ascending:YES],
+                                    [NSSortDescriptor sortDescriptorWithKey:@"assetCategory"
+                                                                  ascending:YES],
+                                    nil];
+    }
+    
+    return _shipSortDescriptors;
+}
+    
+
+#pragma mark -
+#pragma mark Private Instance Methods
+
+- (void)rebindArrayController:(NSArrayController *)arrayController key:(NSString *)key toNewKeypath:(NSString *)keypath
+{
+    [arrayController unbind:key];
+    
+    [arrayController bind:key
+                 toObject:self
+              withKeyPath:keypath
+                  options:nil];
+    [arrayController rearrangeObjects];
+}
+
+- (IBAction)moveSelectedToAvailable:(id)sender
+{
+    for(Asset *asset in self.installedArrayController.selectedObjects) {
+        if( [self.ksp uninstall:asset] == NO ){
+            // modal alert to tell user why the uninstall failed
+            NSAlert *alert = [NSAlert alertWithError:asset.error];
+            [alert beginSheetModalForWindow:self.view.window
+                              modalDelegate:self
+                             didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
+                                contextInfo:nil];
+        }
+    }
+    
+    [self.installedTableView deselectAll:self];
+    [self.availableTableView deselectAll:self];
+    [self.installedArrayController rearrangeObjects];
+    [self.availableArrayController rearrangeObjects];
+}
+
+- (IBAction)moveSelectedToInstalled:(id)sender
+{
+    for(Asset *asset in self.availableArrayController.selectedObjects) {
+        if( [self.ksp install:asset] == NO ){
+            // modal alert to tell user why the uninstall failed
+            NSAlert *alert = [NSAlert alertWithError:asset.error];
+            [alert beginSheetModalForWindow:self.view.window
+                              modalDelegate:self
+                             didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
+                                contextInfo:nil];
+        }
+    }
+    
+    [self.installedTableView deselectAll:self];
+    [self.availableTableView deselectAll:self];
+    [self.installedArrayController rearrangeObjects];
+    [self.availableArrayController rearrangeObjects];
+}
+
 
 #pragma mark -
 #pragma mark DropViewDelegate Methods
@@ -77,6 +172,7 @@
     
     [self.installedTableView deselectAll:self];
     [self.availableTableView deselectAll:self];
+    
     [self.installedArrayController rearrangeObjects];
     [self.availableArrayController rearrangeObjects];
 }
@@ -104,41 +200,41 @@
 - (IBAction)controlDidChange:(NSSegmentedControl *)sender
 {
  
-    NSLog(@"selected %ld",sender.selectedSegment);
-    NSString *keyPath = nil;
+    NSString *contentKeypath = nil;
+    NSString *sortKeypath = nil;
     
     switch (sender.selectedSegment) {
         case 0:
-            keyPath = @"ksp.parts";
+            contentKeypath = @"ksp.parts";
+            sortKeypath = @"partSortDescriptors";
             break;
         case 1:
-            keyPath = @"ksp.plugins";
+            contentKeypath = @"ksp.plugins";
+            sortKeypath = @"pluginSortDescriptors";
             break;
         case 2:
-            keyPath = @"ksp.ships";
+            contentKeypath = @"ksp.ships";
+            sortKeypath = @"shipSortDescriptors";
             break;
             
         default:
-            break;
+            NSLog(@"%@ unanticipated control value: %ld",self,sender.selectedSegment);
+            return ;
     }
+
+    [self rebindArrayController:self.availableArrayController
+                            key:kKeyContentArray
+                   toNewKeypath:contentKeypath];
+    [self rebindArrayController:self.availableArrayController
+                            key:kKeySortDescriptors
+                   toNewKeypath:sortKeypath];
     
-#define kKeyContentArray @"contentArray"
-    
-    [self.availableArrayController unbind:kKeyContentArray];
-    [self.installedArrayController unbind:kKeyContentArray];
-    
-    [self.availableArrayController bind:kKeyContentArray
-                               toObject:self
-                            withKeyPath:keyPath
-                                options:nil];
-    
-    [self.installedArrayController bind:kKeyContentArray
-                               toObject:self
-                            withKeyPath:keyPath
-                                options:nil];
-    
-    [self.availableArrayController rearrangeObjects];
-    [self.installedArrayController rearrangeObjects];
+    [self rebindArrayController:self.installedArrayController
+                            key:kKeyContentArray
+                   toNewKeypath:contentKeypath];
+    [self rebindArrayController:self.installedArrayController
+                            key:kKeySortDescriptors
+                   toNewKeypath:sortKeypath];
     
 }
 @end

@@ -113,7 +113,7 @@
         switch(returnCode){
             case NSAlertDefaultReturn:
                 for(Plugin *plugin in self.availablePluginController.selectedObjects){
-                    [self.ksp remove:plugin];
+                    [self.ksp unmanage:plugin];
                 }
                 [self.availableTableView deselectAll:self];
                 [self.availablePluginController rearrangeObjects];

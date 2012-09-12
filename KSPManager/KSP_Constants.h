@@ -48,24 +48,14 @@
 // Part constants
 #define kPART_CONFIG     @"part.cfg"
 #define kPART_PROPULSION @"Propulsion"
-#define kPART_COMMAND    @"Cmd & Ctrl"
+#define kPART_COMMAND    @"Command & Control"
 #define kPART_STRUCTURAL @"Structural"
 #define kPART_UTILITY    @"Utility"
 #define kPART_DECAL      @"Decal"
 #define kPART_CREW       @"Crew"
 
-#define kPART_NAME_KEY         @"name"
-#define kPART_TITLE_KEY        @"title"
-#define kPART_MODULE_KEY       @"module"
-#define kPART_AUTHOR_KEY       @"author"
-#define kPART_DESCRIPTION_KEY  @"description"
-#define kPART_CATEGORY_KEY     @"category"
-#define kPART_MANUFACTURER_KEY @"manufacturer"
-#define kPART_FUEL_KEY         @"fuel"
-#define kPART_INTERNALFUEL_KEY @"internal_fuel"
-
-#define kPLUGIN_EXT            @"dll"
-#define kCRAFT_EXT             @"craft"
+#define kPLUGIN_EXT      @"dll"
+#define kCRAFT_EXT       @"craft"
 
 // persistent.sfs parameter names
 

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PersistenceFile.h"
 
+@class Asset;
 
 @interface KSP : NSObject {
 
@@ -47,12 +48,11 @@
 
 - (id)initWithURL:(NSURL *)fileURL;
 
-- (BOOL)install:(id)object;
-- (BOOL)uninstall:(id)object;
+- (BOOL)install:(Asset *)object;
+- (BOOL)uninstall:(Asset *)object;
 
-- (BOOL)remove:(id)object;
-- (BOOL)add:(id)object;
-
+- (BOOL)manage:(Asset *)object installed:(BOOL)install;
+- (BOOL)unmanage:(Asset *)object;
 
 - (NSArray *)createAssetsWith:(NSURL *)fileURL install:(BOOL)install;
 

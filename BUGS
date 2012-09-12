@@ -1,0 +1,4 @@
+Not a complete list of bugs
+
+- Plugin name is sometimes empty
+- Manage dialog will quit on cancel unconditionally

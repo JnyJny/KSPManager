@@ -153,12 +153,11 @@
 
 #define kPartKeyInternalContext            @"INTERNAL"
 #define kPartKeyModuleContext              @"MODULE"
+#define kPartKeyPartContext                @"PART"
 
 @interface Part : Asset <ConfigurationParserDelegate> {
-    NSMutableDictionary *_globalContext;
     ConfigurationParser *_parser;
 }
-
 
 @property (strong, nonatomic)              NSURL  *configurationURL;
 @property (strong, nonatomic, readonly) NSString  *partDirectoryName;
@@ -168,13 +167,7 @@
 
 @property (strong, nonatomic) NSMutableDictionary *MODULE;
 @property (strong, nonatomic) NSMutableDictionary *INTERNAL;
-
-
-- (id)initWithConfigurationFileURL:(NSURL *)cfgURL;
-
-- (BOOL)movePartTo:(NSURL *)destinationDirectoryURL;
-- (BOOL)copyPartTo:(NSURL *)destinationDirectoryURL;
-- (void)addEntriesFromDictionary:(NSDictionary *)newEntries;
+@property (strong, nonatomic) NSMutableDictionary *PART;
 
 + (NSArray *)inventory:(NSURL *)baseURL;
 + (NSArray *)categoryNames;

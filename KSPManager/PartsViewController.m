@@ -135,7 +135,7 @@
             case NSAlertDefaultReturn:
                 selected = [self.availablePartsController selectedObjects];
                 for(Part *part in selected) {
-                    [self.ksp remove:part];
+                    [self.ksp unmanage:part];
                 }
                 [self.availablePartsController rearrangeObjects];
                 [self.availableTableView deselectAll:self];

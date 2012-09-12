@@ -314,66 +314,60 @@
 }
 
 
-- (BOOL)install:(id)object
+- (BOOL)install:(Asset *)object
 {
-
-    if( [[object class] isSubclassOfClass:[Part class]] == YES ) {
-        Part *part = (Part *)object;
-        [part movePartTo:self.partsURL];
-        return part.isInstalled;
-    }
     
-    if( [[object class] isSubclassOfClass:[Plugin class]] == YES ) {
-        Plugin *plugin = (Plugin *)object;
-        [plugin movePluginTo:self.pluginsURL];
-        return plugin.isInstalled;
-    }
+    if( [object isMemberOfClass:[Part class]] )
+        return [object moveTo:self.partsURL];
+
+    if( [object isMemberOfClass:[Plugin class]] )
+        return [object moveTo:self.pluginsURL];
+
+    if( [object isMemberOfClass:[Ship class]] )
+        return [object moveTo:self.shipsURL];
+
+    NSLog(@"KSP install:%@ unknown asset %@",object,object.class);
     
     return NO;
 }
 
-- (BOOL)uninstall:(id)object
+- (BOOL)uninstall:(Asset *)object
 {
-    if( [[object class] isSubclassOfClass:[Part class]] == YES ) {
-        Part *part = (Part *)object;
-        [part movePartTo:self.availablePartsURL];
-        return !part.isInstalled;
-    }
+    if( [object isMemberOfClass:[Part class]] )
+        return [object moveTo:self.availablePartsURL];
+
+    if( [object isMemberOfClass:[Plugin class]] )
+        return [object moveTo:self.availablePluginsURL];
+
+    if( [object isMemberOfClass:[Ship class]] )
+        return [object moveTo:self.availableShipsURL];
     
-    if( [[object class] isSubclassOfClass:[Plugin class]] == YES ) {
-        Plugin *plugin = (Plugin *)object;
-        [plugin movePluginTo:self.availablePluginsURL];
-        return !plugin.isInstalled;
-    }
-    
+    NSLog(@"KSP uninstall:%@ unknown asset %@",object,object.class);
+
     return NO;
 }
 
-- (BOOL)add:(id)object
+- (BOOL)manage:(Asset *)object installed:(BOOL)install
 {
     
-    if( [[object class] isSubclassOfClass:[Part class]] == YES) {
-        Part *part = (Part *)object;
-        
-        [part copyPartTo:self.availablePartsURL];
-        [self.parts addObject:part];
-        
-        return !part.isInstalled;
-    }
+    // XXX need to recognize and reject duplication?
     
-    if( [[object class] isSubclassOfClass:[Plugin class]] == YES ) {
-        Plugin *plugin = (Plugin *)object;
-        
-        [plugin copyPluginTo:self.availablePluginsURL];
-        [self.plugins addObject:plugin];
-        
-        return !plugin.isInstalled;
-    }
- 
-    return NO;
+    if( [object isMemberOfClass:[Part class]] )
+        [self.parts addObject:object];
+    
+    if( [object isMemberOfClass:[Plugin class]] )
+        [self.plugins addObject:object];
+    
+    if( [object isMemberOfClass:[Ship class]] )
+        [self.ships addObject:object];
+    
+    if (install)
+        return [self install:object];
+    
+    return [self uninstall:object];
 }
 
-- (BOOL)remove:(id)object
+- (BOOL)unmanage:(Asset *)object
 {
     if( [[object class] isSubclassOfClass:[Part class]] ) {
         Part *part = (Part *)object;
@@ -472,29 +466,16 @@
 - (NSArray *)createAssetsWith:(NSURL *)url install:(BOOL)install
 {
     NSMutableArray *assets = [[NSMutableArray alloc] init];
- 
-    // if the URL is a file
-    //   - can we unarchive/access it?
-    //     - locate temporary directory to store/unarchive into
-    //     - copy file to temporary directory
-    //     - unarchive
-    //     - create a new URL of the unarchived directory
-    //     - the URL is now a directory
-    //   - is it a bare DLL file?
-    //     - make a Plugin object and add it to the inventory
-    
-    // if the URL is a directory
-    //   - conduct a deep part inventory of directory
-    //        append results to assets
-    //   - conduct a deep plugin inventory
-    //        append results to assets
-    //   - unassociated game assets ( sounds destined for kKSP_SOUNDS, etc )
-    //   - other stuff to handle?
     
     NSError *error = nil;
     NSNumber *isDir;
         
     [url getResourceValue:&isDir forKey:NSURLIsDirectoryKey error:&error];
+    
+    if( error ) {
+        [[NSAlert alertWithError:error] runModal];
+        return assets;
+    }
     
     if( [isDir boolValue] == NO) {
         NSString *ext = url.lastPathComponent.pathExtension;
@@ -503,8 +484,8 @@
             url = [self inflateZipFile:url inDestination:nil];
         }
         
-        if( [ext caseInsensitiveCompare:@"dll"] == NSOrderedSame ){
-            [assets addObject:[[Plugin alloc]initWithPluginFileURL:url]];
+        if( [ext caseInsensitiveCompare:kPLUGIN_EXT] == NSOrderedSame ){
+            [assets addObject:[[Plugin alloc]initWithURL:url]];
             goto AddAndInstall;
         }
         
@@ -514,19 +495,27 @@
             return assets;
         }
         
+        if( [ext caseInsensitiveCompare:kCRAFT_EXT] == NSOrderedSame ) {
+            [assets addObject:[[Ship alloc] initWithURL:url]];
+            goto AddAndInstall;
+        }
+        
+        if( [ext caseInsensitiveCompare:@"sfs"] == NSOrderedSame ) {
+            // persistent file of some sort.. uh. punt
+            NSLog(@"adding .sfs files currently unsupported.");
+            return assets;
+        }
     }
     
     [assets addObjectsFromArray:[Part inventory:url]];
     [assets addObjectsFromArray:[Plugin inventory:url]];
+    [assets addObjectsFromArray:[Ship inventory:url]];
     
 AddAndInstall:
     
-    for (id asset in assets) {
-        [self add:asset];
-        if( install )
-            [self install:asset];
-    }
-    
+    for (Asset *asset in assets) 
+        [self manage:asset installed:install];
+
     return assets;
 }
 

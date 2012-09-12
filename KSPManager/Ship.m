@@ -10,7 +10,6 @@
 
 @implementation Ship
 
-@synthesize url = _url;
 @synthesize isInSpacePlaneHanger = _isInSpacePlaneHanger;
 @synthesize isInVehicleAssemblyBuilding = _isInVehicleAssemblyBuilding;
 
@@ -35,11 +34,15 @@
 #pragma mark -
 #pragma mark Overriden Properties
 
-#define kShipKeyShip @"ship"
+#define kShipKeyShipName @"ship"
+#define kShipFilenameAutoSaved @"Auto-Saved Ship"
 
 - (NSString *)assetTitle
 {
-    return [self valueForKey:kShipKeyShip];
+    if( [self.baseURL.lastPathComponent rangeOfString:kShipFilenameAutoSaved].location != NSNotFound    )
+        return [NSString stringWithFormat:@"Auto-Saved %@",[self valueForKey:kShipKeyShipName]];
+    
+    return [self valueForKey:kShipKeyShipName];
 }
 
 - (NSString *)assetCategory
@@ -49,7 +52,12 @@
 
 - (BOOL)isInstalled
 {
-    return [self.url.path rangeOfString:kKSP_MODS].location == NSNotFound;
+    return [self.baseURL.path rangeOfString:kKSP_MODS_SHIPS].location == NSNotFound;
+}
+
+- (BOOL)isAvailable
+{
+    return [self.baseURL.path rangeOfString:kKSP_MODS_SHIPS].location != NSNotFound;
 }
 
 #pragma mark -
@@ -57,17 +65,39 @@
 
 - (BOOL)isInVehicleAssemblyBuilding
 {
-    return [self.url.path rangeOfString:@"VAB"].location != NSNotFound;
+    return [self.baseURL.path rangeOfString:@"VAB"].location != NSNotFound;
 }
 
 - (BOOL)isInSpacePlaneHanger
 {
-    return [self.url.path rangeOfString:@"SPH"].location != NSNotFound;
+    return [self.baseURL.path rangeOfString:@"SPH"].location != NSNotFound;
 }
 
+- (NSString *)description
+{
+    return [self.baseURL.path stringByAppendingFormat:@": %@, %@",self.assetTitle,self.assetCategory];
+}
 
 #pragma mark -
 #pragma mark Instance Methods
+
+- (BOOL)moveTo:(NSURL *)destinationDirURL
+{
+    
+    return NO;
+}
+
+- (BOOL)copyTo:(NSURL *)destinationDirURL
+{
+    
+    return NO;
+}
+
+- (BOOL)remove
+{
+    
+    return NO;
+}
 
 #pragma mark -
 #pragma mark Class Methods
@@ -77,7 +107,7 @@
 
 - (void)willBeginParsingWithConfiguration:(ConfigurationParser *)tokenizer
 {
-    NSLog(@"beginParsing %@",self.url.lastPathComponent);
+    NSLog(@"beginParsing %@",self.baseURL);
 }
 
 - (BOOL)handleNewContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
@@ -136,7 +166,7 @@
 
 - (void)willEndParsingWithConfiguration:(ConfigurationParser *)tokenizer
 {
-    NSLog(@"endParsing %@",self.url.lastPathComponent);
+    NSLog(@"endParsing %@",self.baseURL.lastPathComponent);
 }
 
 #pragma mark -

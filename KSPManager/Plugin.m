@@ -9,12 +9,15 @@
 #import "Plugin.h"
 #import "PortableExecutableFormat.h"
 
+@interface Plugin () {
+    PortableExecutableFormat *_pef;
+}
+@end
+
 @implementation Plugin
 
 @synthesize installedFileName = _installedFileName;
 @synthesize availableFileName = _availableFileName;
-
-
 @synthesize version = _version;
 
 
@@ -42,7 +45,7 @@
 
 #define kKSP_PLUGIN_VERSEP @"-KSPMPV-"
 
-- (id)initWithPluginFileURL:(NSURL *)pluginFileURL
+- (id)initWithURL:(NSURL *)pluginFileURL
 {
 
     if( self = [super initWithURL:pluginFileURL] ) {
@@ -64,7 +67,7 @@
                 _availableFileName = fname;
                 break;
             default:
-                NSLog(@"Plugin:initWithPluginFileURL failed with weird name: %@",fname);
+                NSLog(@"Plugin:initWithURL failed with weird name: %@",fname);
                 self = nil;
         }
     }
@@ -75,15 +78,6 @@
 #pragma mark -
 #pragma mark Properties
 
-- (NSString *)assetTitle
-{
-    return self.productName;
-}
-
-- (NSString *)assetCategory
-{
-    return self.version;
-}
 
 - (NSString *)description
 {
@@ -105,13 +99,28 @@
     return _pef.companyName;
 }
 
+#pragma mark -
+#pragma mark Asset Overridden Methods
+
 - (BOOL)isInstalled
 {
-    NSRange range = [self.baseURL.path rangeOfString:kKSP_MODS_PLUGINS];
-    
-    return (range.location==NSNotFound)?YES:NO;
+    return [self.baseURL.path rangeOfString:kKSP_MODS_PLUGINS].location == NSNotFound;
 }
 
+- (BOOL)isAvailable
+{
+    return [self.baseURL.path rangeOfString:kKSP_MODS_PLUGINS].location != NSNotFound;
+}
+
+- (NSString *)assetTitle
+{
+    return self.productName;
+}
+
+- (NSString *)assetCategory
+{
+    return self.version;
+}
 
 #pragma mark -
 #pragma mark Instance Methods
@@ -126,13 +135,13 @@
     return self.availableFileName;
 }
 
-- (BOOL)movePluginTo:(NSURL *)destinationDirectoryURL
+- (BOOL)moveTo:(NSURL *)destinationDirURL
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error = nil;
     NSURL *targetURL;
     
-    targetURL = [destinationDirectoryURL URLByAppendingPathComponent:[self filenameForPath:destinationDirectoryURL.path]];
+    targetURL = [destinationDirURL URLByAppendingPathComponent:[self filenameForPath:destinationDirURL.path]];
     
     //xxx need to handle overwriting and file exists conditions
     
@@ -147,12 +156,12 @@
     return YES;
 }
 
-- (BOOL)copyPluginTo:(NSURL *)destinationDirectoryURL
+- (BOOL)copyTo:(NSURL *)destinationDirURL
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error = nil;
 
-    NSURL *targetURL = [destinationDirectoryURL URLByAppendingPathComponent:[self filenameForPath:destinationDirectoryURL.path]];
+    NSURL *targetURL = [destinationDirURL URLByAppendingPathComponent:[self filenameForPath:destinationDirURL.path]];
 
     //xxx need to handle overwriting and file exists conditions
     
@@ -182,7 +191,7 @@
     }];
                 
     for(NSString *path in paths){
-        Plugin *plugin = [[Plugin alloc] initWithPluginFileURL:[baseURL URLByAppendingPathComponent:path isDirectory:NO]];
+        Plugin *plugin = [[Plugin alloc] initWithURL:[baseURL URLByAppendingPathComponent:path isDirectory:NO]];
         
         if( plugin )
             [results addObject:plugin];

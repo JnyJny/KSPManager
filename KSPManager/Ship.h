@@ -14,7 +14,6 @@
     NSMutableDictionary *_currentPart;
 }
 
-@property (strong,nonatomic) NSURL *url;
 @property (strong,nonatomic, readonly) NSMutableArray *parts;
 @property (assign,nonatomic, readonly) BOOL isInSpacePlaneHanger;
 @property (assign,nonatomic, readonly) BOOL isInVehicleAssemblyBuilding;

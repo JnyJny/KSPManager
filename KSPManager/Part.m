@@ -16,19 +16,21 @@
 @synthesize categoryName = _categoryName;
 @synthesize MODULE = _MODULE;
 @synthesize INTERNAL = _INTERNAL;
+@synthesize PART = _PART;
 
 
 
-- (id)initWithConfigurationFileURL:(NSURL *)cfgURL
+- (id)initWithURL:(NSURL *)configurationFileURL
 {
-    if( [cfgURL checkResourceIsReachableAndReturnError:nil] == NO )
-        return nil;
     
-    if( self = [super initWithURL:[cfgURL URLByDeletingLastPathComponent]] ) {
-         self.configurationURL = cfgURL;
-        NSStringEncoding encoding;
+    if( self = [super initWithURL:[configurationFileURL URLByDeletingLastPathComponent]] ) {
         
-        _globalContext = [[NSMutableDictionary alloc] init];
+        if( [configurationFileURL checkResourceIsReachableAndReturnError:nil]   == NO )
+            return nil;
+        
+        self.configurationURL = configurationFileURL;
+
+        NSStringEncoding encoding;
         
         NSArray *lines = [LineToken linesFromURL:self.configurationURL
                                     withEncoding:&encoding
@@ -41,20 +43,9 @@
     return self;
 }
 
-
-
 #pragma mark -
 #pragma mark Properties
 
-- (NSString *)assetTitle
-{
-    return [self valueForKey:kPartKeyTitle];
-}
-
-- (NSString *)assetCategory
-{
-    return self.categoryName;
-}
 
 - (NSString *)partDirectoryName
 {
@@ -71,6 +62,8 @@
         return ;
     
     _configurationURL = configurationURL;
+    
+    self.baseURL = [_configurationURL URLByDeletingLastPathComponent];
 }
 
 - (NSMutableDictionary *)MODULE
@@ -89,13 +82,21 @@
     return _INTERNAL;
 }
 
+- (NSMutableDictionary *)PART
+{
+    if( _PART == nil ) {
+        _PART = [[NSMutableDictionary alloc] initWithDictionary:@{ @"ContextName":kPartKeyPartContext}];
+    }
+    return _PART;
+}
+
  
 - (NSString *)detail
 {
     if( _detail == nil ) {
         _detail = @"";
         
-        for(NSDictionary *ctx in @[ _globalContext, self.MODULE, self.INTERNAL ]) {
+        for(NSDictionary *ctx in @[ self.global, self.MODULE, self.INTERNAL ]) {
          
             for(NSString *key in [ctx.allKeys sortedArrayUsingSelector:@selector(localizedCompare:)]) {
                 
@@ -104,7 +105,7 @@
                 
                 NSString *prefix = @"";
                 
-                if( ctx != _globalContext )
+                if( ctx != self.global )
                     prefix = [NSString stringWithFormat:@"%@.",[ctx valueForKey:@"ContextName"]];
                 
                 _detail = [_detail stringByAppendingFormat:@"\t%@%@ -> %@\n",prefix,key,[ctx valueForKey:key]];
@@ -125,15 +126,26 @@
 
 
 #pragma mark -
-#pragma mark Overriden Properties
+#pragma mark Asset Overridden Properties
 
 - (BOOL)isInstalled
 {
-    NSRange range =[self.baseURL.path rangeOfString:kKSP_MODS];
-    
-    // if currentURL.path doesn't contain kKSP_MODS, installed == YES
-    
-    return (range.location == NSNotFound);
+    return [self.baseURL.path rangeOfString:kKSP_MODS_PARTS].location == NSNotFound;
+}
+
+- (BOOL)isAvailable
+{
+    return [self.baseURL.path rangeOfString:kKSP_MODS_PARTS].location != NSNotFound;
+}
+
+- (NSString *)assetTitle
+{
+    return [self valueForKey:kPartKeyTitle];
+}
+
+- (NSString *)assetCategory
+{
+    return self.categoryName;
 }
 
 
@@ -141,12 +153,11 @@
 #pragma mark -
 #pragma mark Instance Methods
 
-
-- (BOOL)movePartTo:(NSURL *)destinationDirectoryURL
+- (BOOL)moveTo:(NSURL *)destinationDirURL
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
-    NSURL *targetURL = [destinationDirectoryURL URLByAppendingPathComponent:self.partDirectoryName isDirectory:YES];
+    NSURL *targetURL = [destinationDirURL URLByAppendingPathComponent:self.partDirectoryName isDirectory:YES];
     
     NSError *error = nil;
     
@@ -158,17 +169,16 @@
     }
     
     self.baseURL = targetURL;
-
     self.error = nil;
-    
+
     return YES;
 }
 
-- (BOOL)copyPartTo:(NSURL *)destinationDirectoryURL
+- (BOOL)copyTo:(NSURL *)destinationDirURL
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
-    NSURL *targetURL = [destinationDirectoryURL URLByAppendingPathComponent:self.partDirectoryName isDirectory:YES];
+    NSURL *targetURL = [destinationDirURL URLByAppendingPathComponent:self.partDirectoryName isDirectory:YES];
     
     NSError *error = nil;
     
@@ -182,45 +192,35 @@
     self.baseURL = targetURL;
     
     self.error = nil;
-
+    
     return YES;
+    
 }
 
-- (void)addEntriesFromDictionary:(NSDictionary *)newEntries
+- (BOOL)remove
 {
-    [_globalContext addEntriesFromDictionary:newEntries];
+    NSLog(@"part remove unimplimented");
+    return NO;
 }
 
-
-#pragma mark -
-#pragma mark Overridden Methods
-
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key
-{
-    //    NSLog(@"setValue:%@ forUndefinedKey: %@",value,key);
-    [_globalContext setValue:value forUndefinedKey:key];  
-}
-
-
-- (id)valueForUndefinedKey:(NSString *)key
-{
-    return [_globalContext valueForKey:key];
-}
 
 
 
 #pragma mark -
 #pragma mark ConfigurationParserDelegate
 
+#if 0
 - (void)willBeginParsingWithConfiguration:(ConfigurationParser *)tokenizer
 {
     NSLog(@"beginParse %ld lines for %@",tokenizer.lines.count,self.configurationURL.lastPathComponent);
 }
 
+
 - (BOOL)handleNewContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
 {
      return YES;
 }
+#endif
 
 - (BOOL)handleKeyValue:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
 {
@@ -240,6 +240,12 @@
         return YES;
     }
     
+    if( [tokenizer.currentContext isEqualToString:kPartKeyPartContext] ) {
+        [self.PART addEntriesFromDictionary:line.keyValue];
+        return YES;
+    }
+
+    
     return NO;
 }
 
@@ -247,10 +253,8 @@
 - (BOOL)handleUnknownContent:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
 {
     NSLog(@"UnknownContent: %@ %@",tokenizer.currentContext,line.content);
-    
     return NO;
 }
-
 
 
 #pragma mark -
@@ -266,7 +270,7 @@
     }];
 
     for(NSString *cfgPath in partCfgPaths){
-        Part *part = [[Part alloc]initWithConfigurationFileURL:[baseURL URLByAppendingPathComponent:cfgPath]];
+        Part *part = [[Part alloc]initWithURL:[baseURL URLByAppendingPathComponent:cfgPath]];
         if( part )
             [results addObject:part];
     }
