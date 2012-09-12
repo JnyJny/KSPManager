@@ -19,6 +19,7 @@
     self = [super init];
     if (self) {
         _baseURL = baseURL;
+        _global = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -29,6 +30,25 @@
     return NO;
 }
 
+- (NSString *)assetTitle
+{
+    return @"assetTitle";
+}
+
+- (NSString *)assetCategory
+{
+    return @"assetCategory";
+}
+
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+    [_global setValue:value forKey:key];
+}
+
+- (id)valueForUndefinedKey:(NSString *)key
+{
+    return [_global valueForKey:key];
+}
 
 + (NSArray *)assetSearch:(NSURL *)baseURL usingBlock:(BOOL (^)(NSString *path))pathTest
 {

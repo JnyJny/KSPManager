@@ -10,22 +10,21 @@
 #import "KSP_Constants.h"
 
 @implementation AppDelegate
+
 @synthesize tabView;
-@synthesize partsViewController;
-@synthesize missionsViewController;
-@synthesize crewViewController;
-@synthesize pluginViewController;
-@synthesize inventoryViewController;
-@synthesize shipViewController;
-@synthesize savesViewController;
+@synthesize pathControl;
+
+@synthesize addonsViewController = _addonsViewController;
+@synthesize missionsViewController = _missionsViewController;
+@synthesize crewViewController = _crewViewController;
+@synthesize shipViewController = _shipViewController;
+@synthesize inventoryViewController = _inventoryViewController;
+@synthesize savesViewController = _savesViewController;
+
 @synthesize terminateKSPButton;
 @synthesize launchKSPButton;
 
-@synthesize pathControl;
-
-
 @synthesize ksp = _ksp;
-@synthesize viewControllers = _viewControllers;
 
 
 #pragma mark -
@@ -44,13 +43,10 @@
 {
     
     [self.tabView.tabViewItems enumerateObjectsUsingBlock:^(NSTabViewItem *item,NSUInteger idx,BOOL *stop ){
-        if( idx > self.viewControllers.count ) {
-            *stop = YES;
-            NSLog(@"setupTabControllers: more tabViewItems than viewControllers.");
-            return;
-        }
-        
-        item.view = [[self.viewControllers objectAtIndex:idx] view];
+
+        NSViewController *vc = [self valueForKey:item.identifier];
+        if( vc )
+            item.view = vc.view;
      }];
     
     [self.tabView selectFirstTabViewItem:nil];
@@ -128,9 +124,10 @@
     
     // the following walks the list of known viewControllers and uses Key/Value to set their ksp property
     
-    [self.viewControllers enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop ){
-            [object setValue:_ksp forKey:@"ksp"];
-        }];
+    for(KSPViewController *vc in @[self.addonsViewController, self.missionsViewController,
+        self.crewViewController, self.shipViewController, self.inventoryViewController,
+        self.savesViewController] )
+        [vc setValue:_ksp forKey:@"ksp"];
 
     
     // next, if _ksp is not nil, save it's baseURL.path to the persistent user defaults key store.
@@ -143,23 +140,6 @@
     [self.pathControl setURL:_ksp.baseURL];
 }
 
-- (NSArray *)viewControllers
-{
-    
-    // When adding view controllers for the TabController, add them to this list
-    
-    if( _viewControllers == nil ) {
-        _viewControllers = @[self.partsViewController,
-                            self.pluginViewController,
-                            self.missionsViewController,
-                            self.crewViewController,
-                            self.shipViewController,
-                            self.inventoryViewController,
-                            self.savesViewController];
-                            
-    }
-    return _viewControllers;
-}
 
 
 #pragma mark -

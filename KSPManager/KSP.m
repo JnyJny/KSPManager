@@ -11,6 +11,7 @@
 #import "PersistenceFile.h"
 #import "Part.h"
 #import "Plugin.h"
+#import "Ship.h"
 
 @implementation KSP
 
@@ -36,6 +37,7 @@
 
 @synthesize parts = _parts;
 @synthesize plugins = _plugins;
+@synthesize ships = _ships;
 
 @synthesize persistenceFile = _persistenceFile;
 @synthesize unzipURL = _unzipURL;
@@ -249,6 +251,16 @@
         [_plugins addObjectsFromArray:[Plugin inventory:self.availablePluginsURL]];
     }
     return _plugins;
+}
+
+- (NSMutableArray *)ships
+{
+    if( _ships == nil ) {
+        _ships = [[NSMutableArray alloc] init];
+        [_ships addObjectsFromArray:[Ship inventory:self.shipsURL]];
+        [_ships addObjectsFromArray:[Ship inventory:self.availableShipsURL]];
+    }
+    return _ships;
 }
 
 - (PersistenceFile *)persistenceFile

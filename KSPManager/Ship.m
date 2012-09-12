@@ -16,12 +16,11 @@
 
 - (id)initWithURL:(NSURL *)url
 {
-    self = [super init];
-    if (self) {
-        self.url = url;
+    if ( self = [super initWithURL:url] ) {
+        
         NSStringEncoding encoding;
         
-        NSArray *lines = [LineToken linesFromURL:self.url
+        NSArray *lines = [LineToken linesFromURL:self.baseURL
                                     withEncoding:&encoding
                                      withOptions:@{ kLineOptionCommentTokenKey : @"//" }];
         
@@ -34,8 +33,27 @@
 }
 
 #pragma mark -
-#pragma mark Properties
+#pragma mark Overriden Properties
 
+#define kShipKeyShip @"ship"
+
+- (NSString *)assetTitle
+{
+    return [self valueForKey:kShipKeyShip];
+}
+
+- (NSString *)assetCategory
+{
+    return self.isInSpacePlaneHanger?@"SPH":@"VAB";
+}
+
+- (BOOL)isInstalled
+{
+    return [self.url.path rangeOfString:kKSP_MODS].location == NSNotFound;
+}
+
+#pragma mark -
+#pragma mark Properties
 
 - (BOOL)isInVehicleAssemblyBuilding
 {
@@ -119,6 +137,28 @@
 - (void)willEndParsingWithConfiguration:(ConfigurationParser *)tokenizer
 {
     NSLog(@"endParsing %@",self.url.lastPathComponent);
+}
+
+#pragma mark -
+#pragma mark Class methods
+
+
+
++ (NSArray *)inventory:(NSURL *)baseUrl
+{
+    NSMutableArray *results = [[NSMutableArray alloc] init];
+    
+    NSArray *paths = [self assetSearch:baseUrl usingBlock:^BOOL(NSString *path) {
+        return [path.pathExtension caseInsensitiveCompare:kCRAFT_EXT] == NSOrderedSame;
+    }];
+    
+    for(NSString *path in paths) {
+        Ship *ship = [[Ship alloc] initWithURL:[baseUrl URLByAppendingPathComponent:path isDirectory:NO]];
+        if( ship )
+            [results addObject:ship];
+    }
+    
+    return results;
 }
 
 @end

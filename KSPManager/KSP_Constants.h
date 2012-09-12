@@ -65,6 +65,7 @@
 #define kPART_INTERNALFUEL_KEY @"internal_fuel"
 
 #define kPLUGIN_EXT            @"dll"
+#define kCRAFT_EXT             @"craft"
 
 // persistent.sfs parameter names
 

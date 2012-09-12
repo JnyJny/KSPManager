@@ -10,11 +10,17 @@
 
 #import "KSP_Constants.h"
 
-@interface Asset : NSObject
+@interface Asset : NSObject {
+    NSMutableDictionary *_global;
+}
 
 @property (strong, nonatomic) NSURL   *baseURL;
 @property (strong, nonatomic) NSError *error;
-@property (readonly)             BOOL  isInstalled;
+@property (assign, readonly)  BOOL isInstalled;
+@property (assign, readonly)  BOOL isAvailable;
+
+@property (strong, nonatomic) NSString *assetTitle;
+@property (strong, nonatomic) NSString *assetCategory;
 
 - (id)initWithURL:(NSURL *)baseURL;
 

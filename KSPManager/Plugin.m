@@ -75,6 +75,16 @@
 #pragma mark -
 #pragma mark Properties
 
+- (NSString *)assetTitle
+{
+    return self.productName;
+}
+
+- (NSString *)assetCategory
+{
+    return self.version;
+}
+
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"PLUGIN %@, %@ pef:%@",self.installedFileName,self.version,_pef];

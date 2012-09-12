@@ -36,6 +36,7 @@
 
 @property (strong, nonatomic, readonly) NSMutableArray *parts;
 @property (strong, nonatomic, readonly) NSMutableArray *plugins;
+@property (strong, nonatomic, readonly) NSMutableArray *ships;
 
 @property (strong, nonatomic, readonly) PersistenceFile *persistenceFile;
 

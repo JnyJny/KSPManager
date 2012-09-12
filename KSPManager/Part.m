@@ -46,6 +46,16 @@
 #pragma mark -
 #pragma mark Properties
 
+- (NSString *)assetTitle
+{
+    return [self valueForKey:kPartKeyTitle];
+}
+
+- (NSString *)assetCategory
+{
+    return self.categoryName;
+}
+
 - (NSString *)partDirectoryName
 {
     if( _partDirectoryName == nil ){

@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 Symbolic Armageddon. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "Asset.h"
 #import "ConfigurationParser.h"
 
-@interface Ship : NSObject <ConfigurationParserDelegate> {
+@interface Ship : Asset <ConfigurationParserDelegate> {
     ConfigurationParser *_parser;
     NSMutableDictionary *_currentPart;
 }
@@ -21,6 +21,7 @@
 
 - (id)initWithURL:(NSURL *)url;
 
++ (NSArray *)inventory:(NSURL *)url;
 
 
 @end

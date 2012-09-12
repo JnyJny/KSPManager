@@ -7,27 +7,27 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PartsViewController.h"
+
+#import "AddonsViewController.h"
 #import "MissionsViewController.h"
 #import "CrewViewController.h"
-#import "PluginViewController.h"
-#import "InventoryViewController.h"
 #import "ShipViewController.h"
+#import "InventoryViewController.h"
 #import "SavesViewController.h"
 #import "KSP.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
+
 @property (weak) IBOutlet NSTabView *tabView;
 @property (weak) IBOutlet NSPathControl *pathControl;
 
-@property (weak) IBOutlet PartsViewController *partsViewController;
+@property (weak) IBOutlet AddonsViewController *addonsViewController;
 @property (weak) IBOutlet MissionsViewController *missionsViewController;
-@property (unsafe_unretained) IBOutlet CrewViewController *crewViewController;
-@property (weak) IBOutlet PluginViewController *pluginViewController;
-@property (weak) IBOutlet InventoryViewController *inventoryViewController;
+@property (weak) IBOutlet CrewViewController *crewViewController;
 @property (weak) IBOutlet ShipViewController *shipViewController;
+@property (weak) IBOutlet InventoryViewController *inventoryViewController;
 @property (weak) IBOutlet SavesViewController *savesViewController;
 
 @property (weak) IBOutlet NSButton *terminateKSPButton;
@@ -35,7 +35,7 @@
 
 
 @property (strong, nonatomic) KSP *ksp;
-@property (strong, nonatomic) NSArray *viewControllers;
+
 
 - (IBAction)chooseInstallationDirectory:(id)sender;
 
