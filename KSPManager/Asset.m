@@ -22,9 +22,12 @@
     self = [super init];
     if (self) {
         _baseURL = baseURL;
+        _error = nil;
      }
     return self;
 }
+
+
 
 
 #pragma mark -
@@ -113,6 +116,15 @@
     assert(0);
     return NO;
 }
+
+- (BOOL)rename:(NSURL *)newName
+{
+    assert(0);
+    return NO;
+}
+
+
+
 
 #pragma mark -
 #pragma mark Class Methods

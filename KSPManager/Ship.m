@@ -31,6 +31,7 @@
     return self;
 }
 
+
 #pragma mark -
 #pragma mark Overriden Properties
 
@@ -96,6 +97,12 @@
 - (BOOL)remove
 {
     
+    return NO;
+}
+
+- (BOOL)rename:(NSURL *)newName
+{
+    NSLog(@"ship rename unimplimented");
     return NO;
 }
 

@@ -41,14 +41,14 @@
 
 - (void)setupTabControllers
 {
-    
+ 
     [self.tabView.tabViewItems enumerateObjectsUsingBlock:^(NSTabViewItem *item,NSUInteger idx,BOOL *stop ){
 
         NSViewController *vc = [self valueForKey:item.identifier];
         if( vc )
             item.view = vc.view;
      }];
-    
+
     [self.tabView selectFirstTabViewItem:nil];
     
 }

@@ -8,14 +8,10 @@
 
 #import "KSPViewController.h"
 
-#import "DropView.h"
-
-@interface AddonsViewController : KSPViewController <DropViewDelegate>
+@interface AddonsViewController : KSPViewController <NSTableViewDataSource>
 
 @property (strong) IBOutlet NSArrayController *installedArrayController;
 @property (strong) IBOutlet NSArrayController *availableArrayController;
-@property (strong) IBOutlet DropView *installedDropView;
-@property (strong) IBOutlet DropView *availableDropView;
 @property (strong) IBOutlet NSTableView *installedTableView;
 @property (strong) IBOutlet NSTableView *availableTableView;
 @property (strong) IBOutlet NSButton *addButton;
@@ -26,7 +22,6 @@
 @property (strong, nonatomic) NSArray *partSortDescriptors;
 @property (strong, nonatomic) NSArray *pluginSortDescriptors;
 @property (strong, nonatomic) NSArray *shipSortDescriptors;
-
 
 - (IBAction)didPushAddButton:(NSButton *)sender;
 - (IBAction)didPushRemoveButton:(NSButton *)sender;

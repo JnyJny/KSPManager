@@ -75,6 +75,8 @@
     return self;
 }
 
+
+
 #pragma mark -
 #pragma mark Properties
 
@@ -175,6 +177,20 @@
 
     return YES;
 }
+
+- (BOOL)remove
+{
+    NSLog(@"plugin remove unimplimented");
+    return NO;
+}
+
+
+- (BOOL)rename:(NSURL *)newName
+{
+    NSLog(@"plugin rename unimplimented");
+    return NO;
+}
+
 
 
 #pragma mark -

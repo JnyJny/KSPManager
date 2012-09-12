@@ -203,7 +203,11 @@
     return NO;
 }
 
-
+- (BOOL)rename:(NSURL *)newName
+{
+    NSLog(@"part rename unimplimented");
+    return NO;
+}
 
 
 #pragma mark -

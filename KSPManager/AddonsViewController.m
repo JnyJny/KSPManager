@@ -14,14 +14,12 @@
 
 #define kKeyContentArray    @"contentArray"
 #define kKeySortDescriptors @"sortDescriptors"
-
+#define kAssetDragData      @"AssetDragData"
 
 @implementation AddonsViewController
 
 @synthesize installedArrayController;
 @synthesize availableArrayController;
-@synthesize installedDropView;
-@synthesize availableDropView;
 @synthesize installedTableView;
 @synthesize availableTableView;
 @synthesize addButton;
@@ -44,9 +42,18 @@
     return self;
 }
 
+
+
 - (void)awakeFromNib
 {
-
+    NSArray *validDragTypes = @[ NSURLPboardType,kAssetDragData ];
+    
+    [self.installedTableView registerForDraggedTypes:validDragTypes];
+    [self.availableTableView registerForDraggedTypes:validDragTypes];
+    
+    [self.installedTableView setDraggingDestinationFeedbackStyle:NSTableViewDraggingDestinationFeedbackStyleNone];
+    [self.availableTableView setDraggingDestinationFeedbackStyle:NSTableViewDraggingDestinationFeedbackStyleNone];
+    
     self.installedArrayController.filterPredicate = [NSPredicate predicateWithBlock:^BOOL(Asset * evaluatedObject, NSDictionary *bindings) {
         return evaluatedObject.isInstalled;
     }];
@@ -57,6 +64,71 @@
     
     [self controlDidChange:self.categoryControl];
 }
+
+#pragma mark -
+#pragma mark Drag & Drop Support
+
+
+- (BOOL)tableView:(NSTableView *)aTableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard
+{
+    NSLog(@"dragging");
+    
+    [aTableView selectRowIndexes:rowIndexes byExtendingSelection:NO];
+    
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:rowIndexes];
+    [pboard clearContents];
+    [pboard setData:data forType:kAssetDragData];
+    
+    return YES;
+}
+
+- (NSDragOperation)tableView:(NSTableView *)tableView validateDrop:(id<NSDraggingInfo>)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)dropOperation
+{
+    
+    NSLog(@"validateDrag for row %ld",row);
+    
+    return NSDragOperationEvery;
+}
+
+
+- (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id <NSDraggingInfo>)info
+              row:(NSInteger)row dropOperation:(NSTableViewDropOperation)operation
+{
+    
+    NSLog(@"accept drop for row %ld",row);
+    
+    NSPasteboard *pboard = [info draggingPasteboard];
+    
+    if( [[pboard types] containsObject:NSURLPboardType] ) {
+
+        NSURL *url = [NSURL URLFromPasteboard:pboard];
+        NSLog(@"got a URL! %@",url);
+        
+        return YES;
+    }
+
+    
+    if( [[pboard types] containsObject:kAssetDragData] ) {
+
+        if( aTableView == self.installedTableView ) {
+            // moving from available to installed
+            [self moveSelectedToInstalled:aTableView];
+            return YES;
+        }
+        
+        if( aTableView == self.availableTableView ) {
+            // moving from installed to available
+            [self moveSelectedToAvailable:aTableView];
+            return YES;
+        }
+        
+    }
+    
+    
+    return NO;
+}
+
+
 
 #pragma mark -
 #pragma mark Properties
@@ -122,7 +194,13 @@
 
 - (IBAction)moveSelectedToAvailable:(id)sender
 {
+    
+    NSLog(@"moveSelectedToAvailable: %@",self.installedArrayController.selectedObjects );
+    
     for(Asset *asset in self.installedArrayController.selectedObjects) {
+        
+
+        
         if( [self.ksp uninstall:asset] == NO ){
             // modal alert to tell user why the uninstall failed
             NSAlert *alert = [NSAlert alertWithError:asset.error];
@@ -141,6 +219,8 @@
 
 - (IBAction)moveSelectedToInstalled:(id)sender
 {
+    NSLog(@"moveSelectedToInstalled: %@",self.availableArrayController.selectedObjects);
+    
     for(Asset *asset in self.availableArrayController.selectedObjects) {
         if( [self.ksp install:asset] == NO ){
             // modal alert to tell user why the uninstall failed
@@ -162,9 +242,9 @@
 #pragma mark -
 #pragma mark DropViewDelegate Methods
 
-- (void)handleURL:(NSURL *)url fromDropView:(DropView *)dropView
+- (void)handleURL:(NSURL *)url fromTableView:(NSTableView *)tableView
 {
-    BOOL install = (dropView == self.installedDropView );
+    BOOL install = (tableView == self.installedTableView );
 
     NSArray *assets = [self.ksp createAssetsWith:url install:install];
     

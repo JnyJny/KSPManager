@@ -33,5 +33,6 @@
 - (BOOL)moveTo:(NSURL *)destinationDirURL;
 - (BOOL)copyTo:(NSURL *)destinationDirURL;
 - (BOOL)remove;
+- (BOOL)rename:(NSURL *)newName;
 
 @end
