@@ -1,8 +1,8 @@
 This TODO list is for tracking feature ideas that come up but are not the current priority.
 
 - kerbel.net integration
-- add-on optimization driven by ship composition
-- user ship ratings ( give ships stars )
+- add-on optimization driven by ship composition (install only the parts required for a ship or set or ships )
+- user ship ratings ( give ships stars! )
 - instant orbit assistant
 - savefile editing and versioning
 - part editor modal dialog thingy
@@ -22,3 +22,11 @@ This TODO list is for tracking feature ideas that come up but are not the curren
 - ship inventory fuel / isp per stage / total mass / % mass per stage / deltaV per stage
 - rewrite persistent.sfs object heirarchy, try to share with Asset
 - refactor Asset -> Addon?  semantics
+- add licensing info to source files
+- scrub out SymArm?
+- preferences pane
+- menu bar options
+- action menus when right clicking on stuff
+- action menus when clicking action buttons
+- more tool tips
+- video demonstrating usage
