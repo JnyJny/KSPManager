@@ -32,18 +32,6 @@
 @synthesize shipSortDescriptors = _shipSortDescriptors;
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Initialization code here.
-    }
-
-    return self;
-}
-
-
-
 - (void)awakeFromNib
 {
     NSArray *validDragTypes = @[ NSURLPboardType,kAssetDragData ];
@@ -77,6 +65,8 @@
     [self.installedArrayController rearrangeObjects];
     [self.availableTableView deselectAll:self];
     [self.availableArrayController rearrangeObjects];
+    [self.removeButton setEnabled:NO];
+    [self.actionButton setEnabled:NO];
 }
 
 #pragma mark -
@@ -317,6 +307,24 @@
                    toNewKeypath:sortKeypath];
     
     [self refresh];
+    
+}
+
+- (IBAction)installedTableViewAction:(NSTableView *)sender
+{
+    [self.availableTableView deselectAll:self];
+    
+    [self.removeButton setEnabled:NO];
+    [self.actionButton setEnabled:self.installedArrayController.selectedObjects.count?YES:NO];
+    
+}
+
+- (IBAction)availableTableViewAction:(NSTableView *)sender
+{
+    [self.installedTableView deselectAll:self];
+    
+    [self.removeButton setEnabled:self.availableArrayController.selectedObjects.count?YES:NO];
+    [self.actionButton setEnabled:self.availableArrayController.selectedObjects.count?YES:NO];
     
 }
 @end

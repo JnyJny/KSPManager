@@ -27,5 +27,7 @@
 - (IBAction)didPushRemoveButton:(NSButton *)sender;
 - (IBAction)didPushActionButton:(NSButton *)sender;
 - (IBAction)controlDidChange:(NSSegmentedControl *)sender;
+- (IBAction)installedTableViewAction:(NSTableView *)sender;
+- (IBAction)availableTableViewAction:(NSTableView *)sender;
 
 @end
