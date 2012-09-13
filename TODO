@@ -5,10 +5,20 @@ This TODO list is for tracking feature ideas that come up but are not the curren
 - user ship ratings ( give ships stars )
 - instant orbit assistant
 - savefile editing and versioning
-- part editor
-- ship editor
-- crew editor
+- part editor modal dialog thingy
+- ship editor "
+- crew editor "
 - .mu access for part thumbnails
 - ship thumbnails would be awesome
 - automated addon refresh from kerbel.net, some or all
 - look into kspmm://
+- re-write using FileWrappers
+- make sure manual file additions and deletions are automatically noticed
+- add badges to tabs to indicate items added from zip/dir/pkg 
+- modal dialog showing manifest of items discovered to augment badges
+- undo/redo manager
+- build full blown NSDocument? fragile, will break the minute Squad changes something
+- ship inventory part count
+- ship inventory fuel / isp per stage / total mass / % mass per stage / deltaV per stage
+- rewrite persistent.sfs object heirarchy, try to share with Asset
+- refactor Asset -> Addon?  semantics

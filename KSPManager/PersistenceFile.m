@@ -180,7 +180,7 @@
 
 - (BOOL)handleUnknownContent:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
 {
-    NSLog(@"UnknownContent: line[%ld] %@",[tokenizer.lines indexOfObject:line],tokenizer.currentContext);
+    NSLog(@"UnknownContent: %@ %@ %@",self.url,tokenizer.currentContext,line);
     
     return NO;
 }

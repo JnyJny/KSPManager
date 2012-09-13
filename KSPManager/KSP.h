@@ -27,8 +27,7 @@
 @property (strong, nonatomic, readonly) NSURL *soundsURL;
 @property (strong, nonatomic, readonly) NSURL *settingsURL;
 @property (strong, nonatomic, readonly) NSURL *shipsURL;
-@property (strong, nonatomic, readonly) NSURL *vabURL;
-@property (strong, nonatomic, readonly) NSURL *sphURL;
+
 @property (strong, nonatomic, readonly) NSURL *availablePartsURL;
 @property (strong, nonatomic, readonly) NSURL *availablePluginsURL;
 @property (strong, nonatomic, readonly) NSURL *availableShipsURL;

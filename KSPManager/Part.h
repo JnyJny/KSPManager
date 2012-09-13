@@ -165,10 +165,6 @@
 @property (strong, nonatomic)           NSString  *detail;
 @property (strong, nonatomic)           NSString  *categoryName;
 
-@property (strong, nonatomic) NSMutableDictionary *MODULE;
-@property (strong, nonatomic) NSMutableDictionary *INTERNAL;
-@property (strong, nonatomic) NSMutableDictionary *PART;
-
 + (NSArray *)inventory:(NSURL *)baseURL;
 + (NSArray *)categoryNames;
 

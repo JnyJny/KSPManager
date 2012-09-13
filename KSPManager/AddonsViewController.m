@@ -51,6 +51,12 @@
     [self.installedTableView registerForDraggedTypes:validDragTypes];
     [self.availableTableView registerForDraggedTypes:validDragTypes];
     
+    [self.installedTableView setDoubleAction:@selector(moveSelectedToAvailable:)];
+    [self.installedTableView setTarget:self];
+
+    [self.availableTableView setDoubleAction:@selector(moveSelectedToInstalled:)];
+    [self.availableTableView setTarget:self];
+    
     [self.installedTableView setDraggingDestinationFeedbackStyle:NSTableViewDraggingDestinationFeedbackStyleNone];
     [self.availableTableView setDraggingDestinationFeedbackStyle:NSTableViewDraggingDestinationFeedbackStyleNone];
     
@@ -65,17 +71,28 @@
     [self controlDidChange:self.categoryControl];
 }
 
+- (void)refresh
+{
+    [self.installedTableView deselectAll:self];
+    [self.installedArrayController rearrangeObjects];
+    [self.availableTableView deselectAll:self];
+    [self.availableArrayController rearrangeObjects];
+}
+
 #pragma mark -
 #pragma mark Drag & Drop Support
 
 
 - (BOOL)tableView:(NSTableView *)aTableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard
 {
-    NSLog(@"dragging");
-    
+    // it's possible to drag without causing a selection
+    // because we are using the selectedObjects property
+    // we need to make sure the drag targets are selected
     [aTableView selectRowIndexes:rowIndexes byExtendingSelection:NO];
     
+    // this data is ignored by the drop site, but we need to send something
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:rowIndexes];
+    
     [pboard clearContents];
     [pboard setData:data forType:kAssetDragData];
     
@@ -84,9 +101,6 @@
 
 - (NSDragOperation)tableView:(NSTableView *)tableView validateDrop:(id<NSDraggingInfo>)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)dropOperation
 {
-    
-    NSLog(@"validateDrag for row %ld",row);
-    
     return NSDragOperationEvery;
 }
 
@@ -94,22 +108,17 @@
 - (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id <NSDraggingInfo>)info
               row:(NSInteger)row dropOperation:(NSTableViewDropOperation)operation
 {
-    
-    NSLog(@"accept drop for row %ld",row);
-    
     NSPasteboard *pboard = [info draggingPasteboard];
     
     if( [[pboard types] containsObject:NSURLPboardType] ) {
-
         NSURL *url = [NSURL URLFromPasteboard:pboard];
-        NSLog(@"got a URL! %@",url);
-        
+        [self.ksp createAssetsWith:url install:(aTableView==self.installedTableView)];
+        [self refresh];
         return YES;
     }
-
     
     if( [[pboard types] containsObject:kAssetDragData] ) {
-
+        // the data isn't important, so we ignore it
         if( aTableView == self.installedTableView ) {
             // moving from available to installed
             [self moveSelectedToInstalled:aTableView];
@@ -121,9 +130,7 @@
             [self moveSelectedToAvailable:aTableView];
             return YES;
         }
-        
     }
-    
     
     return NO;
 }
@@ -181,6 +188,32 @@
 #pragma mark -
 #pragma mark Private Instance Methods
 
+- (void) alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{
+    
+    if( (__bridge NSButton *)contextInfo == self.removeButton){
+
+        NSArray *selected;
+        
+        switch (returnCode) {
+            case NSAlertDefaultReturn:
+                selected = [self.availableArrayController selectedObjects];
+                for(Part *part in selected) {
+                    [self.ksp unmanage:part];
+                }
+                [self.availableArrayController rearrangeObjects];
+                [self.availableTableView deselectAll:self];
+                break;
+                
+            case NSAlertAlternateReturn:
+            default:
+                break;
+        }
+    }
+    
+    return ;
+}
+
 - (void)rebindArrayController:(NSArrayController *)arrayController key:(NSString *)key toNewKeypath:(NSString *)keypath
 {
     [arrayController unbind:key];
@@ -189,17 +222,11 @@
                  toObject:self
               withKeyPath:keypath
                   options:nil];
-    [arrayController rearrangeObjects];
 }
 
 - (IBAction)moveSelectedToAvailable:(id)sender
 {
-    
-    NSLog(@"moveSelectedToAvailable: %@",self.installedArrayController.selectedObjects );
-    
     for(Asset *asset in self.installedArrayController.selectedObjects) {
-        
-
         
         if( [self.ksp uninstall:asset] == NO ){
             // modal alert to tell user why the uninstall failed
@@ -210,17 +237,11 @@
                                 contextInfo:nil];
         }
     }
-    
-    [self.installedTableView deselectAll:self];
-    [self.availableTableView deselectAll:self];
-    [self.installedArrayController rearrangeObjects];
-    [self.availableArrayController rearrangeObjects];
+    [self refresh];
 }
 
 - (IBAction)moveSelectedToInstalled:(id)sender
 {
-    NSLog(@"moveSelectedToInstalled: %@",self.availableArrayController.selectedObjects);
-    
     for(Asset *asset in self.availableArrayController.selectedObjects) {
         if( [self.ksp install:asset] == NO ){
             // modal alert to tell user why the uninstall failed
@@ -231,30 +252,7 @@
                                 contextInfo:nil];
         }
     }
-    
-    [self.installedTableView deselectAll:self];
-    [self.availableTableView deselectAll:self];
-    [self.installedArrayController rearrangeObjects];
-    [self.availableArrayController rearrangeObjects];
-}
-
-
-#pragma mark -
-#pragma mark DropViewDelegate Methods
-
-- (void)handleURL:(NSURL *)url fromTableView:(NSTableView *)tableView
-{
-    BOOL install = (tableView == self.installedTableView );
-
-    NSArray *assets = [self.ksp createAssetsWith:url install:install];
-    
-    NSLog(@"assets = %@",assets);
-    
-    [self.installedTableView deselectAll:self];
-    [self.availableTableView deselectAll:self];
-    
-    [self.installedArrayController rearrangeObjects];
-    [self.availableArrayController rearrangeObjects];
+    [self refresh];
 }
 
 
@@ -305,6 +303,7 @@
     [self rebindArrayController:self.availableArrayController
                             key:kKeyContentArray
                    toNewKeypath:contentKeypath];
+    
     [self rebindArrayController:self.availableArrayController
                             key:kKeySortDescriptors
                    toNewKeypath:sortKeypath];
@@ -312,9 +311,12 @@
     [self rebindArrayController:self.installedArrayController
                             key:kKeyContentArray
                    toNewKeypath:contentKeypath];
+    
     [self rebindArrayController:self.installedArrayController
                             key:kKeySortDescriptors
                    toNewKeypath:sortKeypath];
+    
+    [self refresh];
     
 }
 @end

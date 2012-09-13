@@ -29,8 +29,7 @@
 @synthesize soundsURL = _soundsURL;
 @synthesize settingsURL = _settingsURL;
 @synthesize shipsURL = _shipsURL;
-@synthesize vabURL = _vabURL;
-@synthesize sphURL = _sphURL;
+
 @synthesize availablePartsURL = _availablePartsURL;
 @synthesize availablePluginsURL = _availablePluginsURL;
 @synthesize availableShipsURL = _availableShipsURL;
@@ -193,22 +192,6 @@
     return _shipsURL;
 }
 
-- (NSURL *)vabURL
-{
-    if( _vabURL == nil ) {
-        _vabURL = [self buildValidRelativeFileURL:kKSP_VAB];
-    }
-    return _vabURL;
-}
-
-- (NSURL *)sphURL
-{
-    if( _sphURL == nil ) {
-        _sphURL = [self buildValidRelativeFileURL:kKSP_SPH];
-    }
-    return _sphURL;
-}
-
 - (NSURL *)availablePartsURL
 {
     if( _availablePartsURL == nil ) {
@@ -323,8 +306,10 @@
     if( [object isMemberOfClass:[Plugin class]] )
         return [object moveTo:self.pluginsURL];
 
-    if( [object isMemberOfClass:[Ship class]] )
-        return [object moveTo:self.shipsURL];
+    if( [object isMemberOfClass:[Ship class]] ) {
+        Ship *ship = (Ship *)object;
+        return [object moveTo:[self.shipsURL URLByAppendingPathComponent:ship.hanger]];
+    }
 
     NSLog(@"KSP install:%@ unknown asset %@",object,object.class);
     
@@ -339,8 +324,11 @@
     if( [object isMemberOfClass:[Plugin class]] )
         return [object moveTo:self.availablePluginsURL];
 
-    if( [object isMemberOfClass:[Ship class]] )
-        return [object moveTo:self.availableShipsURL];
+    if( [object isMemberOfClass:[Ship class]] ) {
+        Ship *ship = (Ship *)object;
+        
+        return [object moveTo:[self.availableShipsURL URLByAppendingPathComponent:ship.hanger]];
+    }
     
     NSLog(@"KSP uninstall:%@ unknown asset %@",object,object.class);
 

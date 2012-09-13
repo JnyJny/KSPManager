@@ -19,10 +19,13 @@
 
 @property (strong, readonly) NSMutableDictionary *global;
 @property (strong, readonly) NSMutableArray      *contexts;
-
+@property (strong, nonatomic,readonly) NSFileManager *fileManager;
 
 @property (strong, nonatomic) NSString *assetTitle;
 @property (strong, nonatomic) NSString *assetCategory;
+
+
+
 
 - (id)initWithURL:(NSURL *)baseURL;
 - (void)addEntriesFromDictionary:(NSDictionary *)newEntries;

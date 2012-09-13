@@ -8,16 +8,18 @@
 
 #import "Part.h"
 
+@interface Part () {
+    NSMutableDictionary *_curCtx;
+}
+
+@end
+
 @implementation Part
 
 @synthesize partDirectoryName = _partDirectoryName;
 @synthesize configurationURL = _configurationURL;
 @synthesize detail = _detail;
 @synthesize categoryName = _categoryName;
-@synthesize MODULE = _MODULE;
-@synthesize INTERNAL = _INTERNAL;
-@synthesize PART = _PART;
-
 
 
 - (id)initWithURL:(NSURL *)configurationFileURL
@@ -66,37 +68,14 @@
     self.baseURL = [_configurationURL URLByDeletingLastPathComponent];
 }
 
-- (NSMutableDictionary *)MODULE
-{
-    if( _MODULE == nil ) {
-        _MODULE = [[NSMutableDictionary alloc] initWithDictionary:@{ @"ContextName":kPartKeyModuleContext}];
-    }
-    return _MODULE;
-}
 
-- (NSMutableDictionary *)INTERNAL
-{
-    if( _INTERNAL == nil ) {
-        _INTERNAL = [[NSMutableDictionary alloc] initWithDictionary:@{ @"ContextName":kPartKeyInternalContext}];
-    }
-    return _INTERNAL;
-}
 
-- (NSMutableDictionary *)PART
-{
-    if( _PART == nil ) {
-        _PART = [[NSMutableDictionary alloc] initWithDictionary:@{ @"ContextName":kPartKeyPartContext}];
-    }
-    return _PART;
-}
-
- 
 - (NSString *)detail
 {
     if( _detail == nil ) {
         _detail = @"";
         
-        for(NSDictionary *ctx in @[ self.global, self.MODULE, self.INTERNAL ]) {
+        for(NSDictionary *ctx in [self.contexts arrayByAddingObject:self.global] ) {
          
             for(NSString *key in [ctx.allKeys sortedArrayUsingSelector:@selector(localizedCompare:)]) {
                 
@@ -155,13 +134,13 @@
 
 - (BOOL)moveTo:(NSURL *)destinationDirURL
 {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
+
     
     NSURL *targetURL = [destinationDirURL URLByAppendingPathComponent:self.partDirectoryName isDirectory:YES];
     
     NSError *error = nil;
     
-    [fileManager moveItemAtURL:self.baseURL toURL:targetURL error:&error];
+    [self.fileManager moveItemAtURL:self.baseURL toURL:targetURL error:&error];
     
     if( error ){
         self.error = error;
@@ -176,13 +155,12 @@
 
 - (BOOL)copyTo:(NSURL *)destinationDirURL
 {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
     
     NSURL *targetURL = [destinationDirURL URLByAppendingPathComponent:self.partDirectoryName isDirectory:YES];
     
     NSError *error = nil;
     
-    [fileManager copyItemAtURL:self.baseURL toURL:targetURL error:&error];
+    [self.fileManager copyItemAtURL:self.baseURL toURL:targetURL error:&error];
     
     if( error ) {
         self.error = error;
@@ -218,45 +196,53 @@
 {
     NSLog(@"beginParse %ld lines for %@",tokenizer.lines.count,self.configurationURL.lastPathComponent);
 }
-
+#endif
 
 - (BOOL)handleNewContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
 {
-     return YES;
+    
+    if( !tokenizer.isGlobal ) {
+        _curCtx = [[NSMutableDictionary alloc] initWithDictionary:@{ @"ContextName" : tokenizer.currentContext }];
+        return YES;
+    }
+    
+    return NO;
 }
-#endif
 
-- (BOOL)handleKeyValue:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
+- (BOOL)handleBeginContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
 {
-    
-    if( tokenizer.isGlobal ) {
-        [self addEntriesFromDictionary:line.keyValue];
-        return YES;
-    }
-    
-    if( [tokenizer.currentContext isEqualToString:kPartKeyModuleContext] ) {
-        [self.MODULE addEntriesFromDictionary:line.keyValue];
-        return YES;
-    }
-    
-    if( [tokenizer.currentContext isEqualToString:kPartKeyInternalContext] ) {
-        [self.INTERNAL addEntriesFromDictionary:line.keyValue];
-        return YES;
-    }
-    
-    if( [tokenizer.currentContext isEqualToString:kPartKeyPartContext] ) {
-        [self.PART addEntriesFromDictionary:line.keyValue];
-        return YES;
-    }
+    return YES;
+}
 
+- (BOOL)handleEndContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
+{
+    if( !tokenizer.isGlobal ) {
+        [self.contexts addObject:_curCtx];
+        _curCtx = nil;
+        return YES;
+    }
     
     return NO;
 }
 
 
+- (BOOL)handleKeyValue:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
+{
+
+    if( tokenizer.isGlobal ) {
+        [self addEntriesFromDictionary:line.keyValue];
+        return YES;
+    }
+    
+    [_curCtx addEntriesFromDictionary:line.keyValue];
+
+    return YES;
+}
+
+
 - (BOOL)handleUnknownContent:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
 {
-    NSLog(@"UnknownContent: %@ %@",tokenizer.currentContext,line.content);
+    NSLog(@"UnknownContent:%@ %@ %@",self.baseURL.lastPathComponent, tokenizer.currentContext,line);
     return NO;
 }
 

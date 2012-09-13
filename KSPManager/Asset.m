@@ -12,6 +12,7 @@
 
 @synthesize global = _global;
 @synthesize contexts = _contexts;
+@synthesize fileManager = _fileManager;
 @synthesize baseURL = _baseURL;
 @synthesize error = _error;
 
@@ -26,9 +27,6 @@
      }
     return self;
 }
-
-
-
 
 #pragma mark -
 #pragma mark Properties
@@ -48,6 +46,15 @@
     }
     return _contexts;
 }
+
+- (NSFileManager *)fileManager
+{
+    if( _fileManager == nil ) {
+        _fileManager = [NSFileManager defaultManager];
+    }
+    return _fileManager;
+}
+
 
 - (BOOL)isInstalled
 {

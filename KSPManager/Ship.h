@@ -15,6 +15,7 @@
 }
 
 @property (strong,nonatomic, readonly) NSMutableArray *parts;
+@property (strong,nonatomic) NSString *hanger;
 @property (assign,nonatomic, readonly) BOOL isInSpacePlaneHanger;
 @property (assign,nonatomic, readonly) BOOL isInVehicleAssemblyBuilding;
 

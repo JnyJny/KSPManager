@@ -139,7 +139,6 @@
 
 - (BOOL)moveTo:(NSURL *)destinationDirURL
 {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error = nil;
     NSURL *targetURL;
     
@@ -147,7 +146,7 @@
     
     //xxx need to handle overwriting and file exists conditions
     
-    [fileManager moveItemAtURL:self.baseURL toURL:targetURL error:&error];
+    [self.fileManager moveItemAtURL:self.baseURL toURL:targetURL error:&error];
     
     self.error = error;
     if( error )
@@ -160,14 +159,13 @@
 
 - (BOOL)copyTo:(NSURL *)destinationDirURL
 {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error = nil;
 
     NSURL *targetURL = [destinationDirURL URLByAppendingPathComponent:[self filenameForPath:destinationDirURL.path]];
 
     //xxx need to handle overwriting and file exists conditions
     
-    [fileManager copyItemAtURL:self.baseURL toURL:targetURL error:&error];
+    [self.fileManager copyItemAtURL:self.baseURL toURL:targetURL error:&error];
     
     self.error = error;
     if( error )

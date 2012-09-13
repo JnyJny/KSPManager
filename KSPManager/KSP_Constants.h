@@ -33,8 +33,8 @@
 #define kKSP_PERSISTENT  @"saves/default/persistent.sfs"
 #define kKSP_SETTINGS    @"settings.cfg"
 #define kKSP_SHIPS       @"Ships"
-#define kKSP_VAB         @"Ships/VAB"
-#define kKSP_SPH         @"Ships/SPH"
+#define kKSP_VAB         @"VAB"
+#define kKSP_SPH         @"SPH"
 
 #define kKSP_MODS         @"Mods"
 #define kKSP_MODS_PARTS   @"Mods/Parts"

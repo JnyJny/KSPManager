@@ -10,6 +10,7 @@
 
 @implementation Ship
 
+@synthesize hanger = _hanger;
 @synthesize isInSpacePlaneHanger = _isInSpacePlaneHanger;
 @synthesize isInVehicleAssemblyBuilding = _isInVehicleAssemblyBuilding;
 
@@ -48,7 +49,7 @@
 
 - (NSString *)assetCategory
 {
-    return self.isInSpacePlaneHanger?@"SPH":@"VAB";
+    return self.hanger;
 }
 
 - (BOOL)isInstalled
@@ -64,14 +65,36 @@
 #pragma mark -
 #pragma mark Properties
 
+- (NSString *)hanger
+{
+    if( _hanger == nil ){
+        _hanger = kKSP_VAB; // Default to being in the VAB
+        if( self.isInSpacePlaneHanger )
+            _hanger = kKSP_SPH;
+    }
+    return _hanger;
+}
+
+- (void)setHanger:(NSString *)hanger
+{
+    if( [_hanger isEqualToString:hanger] )
+        return ;
+    
+    _hanger = hanger;
+    
+    NSURL *url = [[[self.baseURL URLByDeletingLastPathComponent] URLByDeletingLastPathComponent] URLByAppendingPathComponent:_hanger];;
+    
+    [self moveTo:url];
+}
+
 - (BOOL)isInVehicleAssemblyBuilding
 {
-    return [self.baseURL.path rangeOfString:@"VAB"].location != NSNotFound;
+    return [self.baseURL.path rangeOfString:kKSP_VAB].location != NSNotFound;
 }
 
 - (BOOL)isInSpacePlaneHanger
 {
-    return [self.baseURL.path rangeOfString:@"SPH"].location != NSNotFound;
+    return [self.baseURL.path rangeOfString:kKSP_SPH].location != NSNotFound;
 }
 
 - (NSString *)description
@@ -82,16 +105,54 @@
 #pragma mark -
 #pragma mark Instance Methods
 
+
+
 - (BOOL)moveTo:(NSURL *)destinationDirURL
 {
+    NSError *error = nil;
+    NSURL *targetURL = nil;
     
-    return NO;
+    [self.fileManager createDirectoryAtURL:destinationDirURL
+               withIntermediateDirectories:YES
+                                attributes:nil
+                                     error:&error];
+    
+    self.error = error;
+    
+    if( error )
+        return NO;
+    
+    error = nil;
+    
+    targetURL = [destinationDirURL URLByAppendingPathComponent:self.baseURL.lastPathComponent];
+
+    [self.fileManager moveItemAtURL:self.baseURL toURL:targetURL error:&error];
+    
+    self.error = error;
+    
+    if( self.error )
+        return NO;
+    
+    self.baseURL = targetURL;
+    
+    return YES;
 }
 
 - (BOOL)copyTo:(NSURL *)destinationDirURL
 {
+    NSError *error = nil;
     
-    return NO;
+    NSURL *targetURL = [destinationDirURL URLByAppendingPathComponent:self.baseURL.lastPathComponent];
+    
+    [self.fileManager copyItemAtURL:self.baseURL toURL:targetURL error:&error];
+    
+    self.error = error;
+    if( self.error )
+        return NO;
+
+    self.baseURL = targetURL;
+    
+    return YES;
 }
 
 - (BOOL)remove
@@ -166,7 +227,7 @@
 - (BOOL)handleUnknownContent:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
 {
     
-    NSLog(@"unknownContent: %@ %@",tokenizer.currentContext,line);
+    NSLog(@"unknownContent: %@ %@ %@",self.baseURL.lastPathComponent,tokenizer.currentContext,line);
     
     return YES;
 }
