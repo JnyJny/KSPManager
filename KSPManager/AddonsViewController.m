@@ -10,7 +10,7 @@
 #import "Part.h"
 #import "Plugin.h"
 #import "Ship.h"
-#import "DropView.h"
+
 
 #define kKeyContentArray    @"contentArray"
 #define kKeySortDescriptors @"sortDescriptors"

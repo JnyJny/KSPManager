@@ -24,7 +24,6 @@
 		1D2ED54315EB156900402EF1 /* InventoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D2ED54115EB156900402EF1 /* InventoryViewController.xib */; };
 		1D3746AC15F7F23F00F858B3 /* PersistentObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3746AB15F7F23F00F858B3 /* PersistentObject.m */; };
 		1D56F41615FA377C0047042A /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1D56F41515FA377C0047042A /* dsa_pub.pem */; };
-		1D67803115E431BC00A29C2C /* DropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D67803015E431BC00A29C2C /* DropView.m */; };
 		1D682A2615FCD93E007C84CB /* ConfigurationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D682A2515FCD93E007C84CB /* ConfigurationParser.m */; };
 		1D75BD6D15F79FA40037393E /* PersistenceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D75BD6C15F79FA40037393E /* PersistenceFile.m */; };
 		1D75BD7015F7A6770037393E /* Crew.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D75BD6F15F7A6770037393E /* Crew.m */; };
@@ -38,13 +37,9 @@
 		1DB405C915DB3E230041807D /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1DB405C715DB3E230041807D /* Credits.rtf */; };
 		1DB405CC15DB3E230041807D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB405CB15DB3E230041807D /* AppDelegate.m */; };
 		1DB405CF15DB3E230041807D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DB405CD15DB3E230041807D /* MainMenu.xib */; };
-		1DB405DF15DB3F2F0041807D /* PartsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB405DD15DB3F2F0041807D /* PartsViewController.m */; };
-		1DB405E015DB3F2F0041807D /* PartsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DB405DE15DB3F2F0041807D /* PartsViewController.xib */; };
 		1DB405E415DB3F3D0041807D /* MissionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB405E215DB3F3D0041807D /* MissionsViewController.m */; };
 		1DB405E515DB3F3D0041807D /* MissionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DB405E315DB3F3D0041807D /* MissionsViewController.xib */; };
 		1DB405ED15DB45390041807D /* KSP.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB405EC15DB45390041807D /* KSP.m */; };
-		1DB405F415DB569E0041807D /* PluginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB405F215DB569E0041807D /* PluginViewController.m */; };
-		1DB405F515DB569E0041807D /* PluginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DB405F315DB569E0041807D /* PluginViewController.xib */; };
 		1DB405F915DBFF4C0041807D /* Part.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB405F815DBFF4C0041807D /* Part.m */; };
 		1DB7013515F12C90002EC18D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1DB7013415F12C90002EC18D /* README.md */; };
 		1DD06E9215F7FCB100202CB4 /* Orbit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD06E9115F7FCB100202CB4 /* Orbit.m */; };
@@ -92,8 +87,6 @@
 		1D3746AA15F7F23F00F858B3 /* PersistentObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistentObject.h; sourceTree = "<group>"; };
 		1D3746AB15F7F23F00F858B3 /* PersistentObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistentObject.m; sourceTree = "<group>"; };
 		1D56F41515FA377C0047042A /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
-		1D67802F15E431BC00A29C2C /* DropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropView.h; sourceTree = "<group>"; };
-		1D67803015E431BC00A29C2C /* DropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropView.m; sourceTree = "<group>"; };
 		1D682A2415FCD93E007C84CB /* ConfigurationParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationParser.h; sourceTree = "<group>"; };
 		1D682A2515FCD93E007C84CB /* ConfigurationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationParser.m; sourceTree = "<group>"; };
 		1D682A2715FCD9CC007C84CB /* ConfigurationTokenizerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationTokenizerDelegate.h; sourceTree = "<group>"; };
@@ -123,17 +116,11 @@
 		1DB405CA15DB3E230041807D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1DB405CB15DB3E230041807D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1DB405CE15DB3E230041807D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		1DB405DC15DB3F2F0041807D /* PartsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartsViewController.h; sourceTree = "<group>"; };
-		1DB405DD15DB3F2F0041807D /* PartsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartsViewController.m; sourceTree = "<group>"; };
-		1DB405DE15DB3F2F0041807D /* PartsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PartsViewController.xib; sourceTree = "<group>"; };
 		1DB405E115DB3F3D0041807D /* MissionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissionsViewController.h; sourceTree = "<group>"; };
 		1DB405E215DB3F3D0041807D /* MissionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionsViewController.m; sourceTree = "<group>"; };
 		1DB405E315DB3F3D0041807D /* MissionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MissionsViewController.xib; sourceTree = "<group>"; };
 		1DB405EB15DB45390041807D /* KSP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSP.h; sourceTree = "<group>"; };
 		1DB405EC15DB45390041807D /* KSP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSP.m; sourceTree = "<group>"; };
-		1DB405F115DB569E0041807D /* PluginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginViewController.h; sourceTree = "<group>"; };
-		1DB405F215DB569E0041807D /* PluginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginViewController.m; sourceTree = "<group>"; };
-		1DB405F315DB569E0041807D /* PluginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PluginViewController.xib; sourceTree = "<group>"; };
 		1DB405F615DBFD060041807D /* KSP_Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSP_Constants.h; sourceTree = "<group>"; };
 		1DB405F715DBFF4C0041807D /* Part.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Part.h; sourceTree = "<group>"; };
 		1DB405F815DBFF4C0041807D /* Part.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Part.m; sourceTree = "<group>"; };
@@ -147,7 +134,6 @@
 		1DD06E9715F93DC700202CB4 /* SavesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavesViewController.h; sourceTree = "<group>"; };
 		1DD06E9815F93DC700202CB4 /* SavesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavesViewController.m; sourceTree = "<group>"; };
 		1DD06E9915F93DC700202CB4 /* SavesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SavesViewController.xib; sourceTree = "<group>"; };
-		1DF455EB15EA7050001CD433 /* DropViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DropViewDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,15 +149,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1D03984915FA8DDD00BA3D2F /* Parts Tab */ = {
-			isa = PBXGroup;
-			children = (
-				1DB405DC15DB3F2F0041807D /* PartsViewController.h */,
-				1DB405DD15DB3F2F0041807D /* PartsViewController.m */,
-			);
-			name = "Parts Tab";
-			sourceTree = "<group>";
-		};
 		1D03984A15FA8DFA00BA3D2F /* Missions Tab */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,15 +156,6 @@
 				1DB405E215DB3F3D0041807D /* MissionsViewController.m */,
 			);
 			name = "Missions Tab";
-			sourceTree = "<group>";
-		};
-		1D03984B15FA8E0500BA3D2F /* Plugin Tab */ = {
-			isa = PBXGroup;
-			children = (
-				1DB405F115DB569E0041807D /* PluginViewController.h */,
-				1DB405F215DB569E0041807D /* PluginViewController.m */,
-			);
-			name = "Plugin Tab";
 			sourceTree = "<group>";
 		};
 		1D03984C15FA8E1200BA3D2F /* Inventory Tab */ = {
@@ -245,16 +213,6 @@
 				1DB7013415F12C90002EC18D /* README.md */,
 			);
 			name = Documentation;
-			sourceTree = "<group>";
-		};
-		1D67802D15E4319200A29C2C /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				1D67802F15E431BC00A29C2C /* DropView.h */,
-				1DF455EB15EA7050001CD433 /* DropViewDelegate.h */,
-				1D67803015E431BC00A29C2C /* DropView.m */,
-			);
-			name = Views;
 			sourceTree = "<group>";
 		};
 		1D682A1A15FAD309007C84CB /* Ships */ = {
@@ -370,7 +328,6 @@
 				1DB405CA15DB3E230041807D /* AppDelegate.h */,
 				1DB405CB15DB3E230041807D /* AppDelegate.m */,
 				1DB405E615DB3F450041807D /* Model */,
-				1D67802D15E4319200A29C2C /* Views */,
 				1DB405D615DB3E7A0041807D /* View Controllers */,
 				1DB405D515DB3E670041807D /* NIBs */,
 				1DB405BF15DB3E230041807D /* Supporting Files */,
@@ -397,8 +354,6 @@
 			children = (
 				1DB405CD15DB3E230041807D /* MainMenu.xib */,
 				1DB2E09215FFA7B900B1E0AF /* AddonsViewController.xib */,
-				1DB405DE15DB3F2F0041807D /* PartsViewController.xib */,
-				1DB405F315DB569E0041807D /* PluginViewController.xib */,
 				1DB405E315DB3F3D0041807D /* MissionsViewController.xib */,
 				1D03985415FA99EC00BA3D2F /* CrewViewController.xib */,
 				1D2ED54115EB156900402EF1 /* InventoryViewController.xib */,
@@ -414,10 +369,8 @@
 				1D16221F15EB315500C0F3CC /* KSPViewController.h */,
 				1D16222015EB315500C0F3CC /* KSPViewController.m */,
 				1DB2E09515FFA7C300B1E0AF /* Addons Tab */,
-				1D03984915FA8DDD00BA3D2F /* Parts Tab */,
 				1D03984A15FA8DFA00BA3D2F /* Missions Tab */,
 				1D03985115FA99D100BA3D2F /* Crew Tab */,
-				1D03984B15FA8E0500BA3D2F /* Plugin Tab */,
 				1D03984C15FA8E1200BA3D2F /* Inventory Tab */,
 				1D03984D15FA8E1D00BA3D2F /* Ship Tab */,
 				1D03984E15FA8E3000BA3D2F /* Saves Tab */,
@@ -514,9 +467,7 @@
 				1DB405C315DB3E230041807D /* InfoPlist.strings in Resources */,
 				1DB405C915DB3E230041807D /* Credits.rtf in Resources */,
 				1DB405CF15DB3E230041807D /* MainMenu.xib in Resources */,
-				1DB405E015DB3F2F0041807D /* PartsViewController.xib in Resources */,
 				1DB405E515DB3F3D0041807D /* MissionsViewController.xib in Resources */,
-				1DB405F515DB569E0041807D /* PluginViewController.xib in Resources */,
 				1D2ED54315EB156900402EF1 /* InventoryViewController.xib in Resources */,
 				1D16223015EDBB8F00C0F3CC /* ShipViewController.xib in Resources */,
 				1D16223815EE97D800C0F3CC /* KSPM-Icon.icns in Resources */,
@@ -554,12 +505,9 @@
 			files = (
 				1DB405C515DB3E230041807D /* main.m in Sources */,
 				1DB405CC15DB3E230041807D /* AppDelegate.m in Sources */,
-				1DB405DF15DB3F2F0041807D /* PartsViewController.m in Sources */,
 				1DB405E415DB3F3D0041807D /* MissionsViewController.m in Sources */,
 				1DB405ED15DB45390041807D /* KSP.m in Sources */,
-				1DB405F415DB569E0041807D /* PluginViewController.m in Sources */,
 				1DB405F915DBFF4C0041807D /* Part.m in Sources */,
-				1D67803115E431BC00A29C2C /* DropView.m in Sources */,
 				1D2ED54215EB156900402EF1 /* InventoryViewController.m in Sources */,
 				1D16222115EB315500C0F3CC /* KSPViewController.m in Sources */,
 				1D16222415EBC82900C0F3CC /* Asset.m in Sources */,
