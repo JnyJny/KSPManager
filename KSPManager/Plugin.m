@@ -116,7 +116,10 @@
 
 - (NSString *)assetTitle
 {
-    return self.productName;
+    if( self.productName.length > 0 )
+        return self.productName;
+    
+    return self.installedFileName;
 }
 
 - (NSString *)assetCategory
@@ -178,8 +181,16 @@
 
 - (BOOL)remove
 {
-    NSLog(@"plugin remove unimplimented");
-    return NO;
+    NSError *error = nil;
+    
+    [self.fileManager removeItemAtURL:self.baseURL error:&error];
+    
+    self.error = error;
+    
+    if( error )
+        return NO;
+    
+    return YES;
 }
 
 

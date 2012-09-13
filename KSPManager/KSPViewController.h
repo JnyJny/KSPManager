@@ -13,5 +13,6 @@
 @interface KSPViewController : NSViewController
 
 @property (strong, nonatomic) KSP *ksp;
+@property (strong, nonatomic) NSImage *redBadge;
 
 @end

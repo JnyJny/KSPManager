@@ -28,6 +28,12 @@
 		1D75BD6D15F79FA40037393E /* PersistenceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D75BD6C15F79FA40037393E /* PersistenceFile.m */; };
 		1D75BD7015F7A6770037393E /* Crew.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D75BD6F15F7A6770037393E /* Crew.m */; };
 		1D82916515F7A90600463E99 /* Vessel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D82916415F7A90600463E99 /* Vessel.m */; };
+		1D9C8D6D16021576001C095F /* BadgeTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9C8D6C16021576001C095F /* BadgeTabView.m */; };
+		1D9C8D7216021861001C095F /* badge-24x24.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D9C8D6F16021861001C095F /* badge-24x24.png */; };
+		1D9C8D7316021861001C095F /* badge-36x36.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D9C8D7016021861001C095F /* badge-36x36.png */; };
+		1D9C8D7416021861001C095F /* badge-48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D9C8D7116021861001C095F /* badge-48x48.png */; };
+		1D9C8D7616021914001C095F /* badge-red-24x24.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D9C8D7516021914001C095F /* badge-red-24x24.png */; };
+		1D9C8D791602193E001C095F /* BadgeTabViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9C8D781602193E001C095F /* BadgeTabViewItem.m */; };
 		1DB2E08F15FE97B500B1E0AF /* Ship.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB2E08E15FE97B500B1E0AF /* Ship.m */; };
 		1DB2E09315FFA7B900B1E0AF /* AddonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB2E09115FFA7B900B1E0AF /* AddonsViewController.m */; };
 		1DB2E09415FFA7B900B1E0AF /* AddonsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DB2E09215FFA7B900B1E0AF /* AddonsViewController.xib */; };
@@ -96,6 +102,14 @@
 		1D75BD6F15F7A6770037393E /* Crew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Crew.m; sourceTree = "<group>"; };
 		1D82916315F7A90600463E99 /* Vessel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vessel.h; sourceTree = "<group>"; };
 		1D82916415F7A90600463E99 /* Vessel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vessel.m; sourceTree = "<group>"; };
+		1D9C8D6B16021576001C095F /* BadgeTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgeTabView.h; sourceTree = "<group>"; };
+		1D9C8D6C16021576001C095F /* BadgeTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgeTabView.m; sourceTree = "<group>"; };
+		1D9C8D6F16021861001C095F /* badge-24x24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badge-24x24.png"; sourceTree = "<group>"; };
+		1D9C8D7016021861001C095F /* badge-36x36.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badge-36x36.png"; sourceTree = "<group>"; };
+		1D9C8D7116021861001C095F /* badge-48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badge-48x48.png"; sourceTree = "<group>"; };
+		1D9C8D7516021914001C095F /* badge-red-24x24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badge-red-24x24.png"; sourceTree = "<group>"; };
+		1D9C8D771602193E001C095F /* BadgeTabViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgeTabViewItem.h; sourceTree = "<group>"; };
+		1D9C8D781602193E001C095F /* BadgeTabViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgeTabViewItem.m; sourceTree = "<group>"; };
 		1DB2E08D15FE97B500B1E0AF /* Ship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ship.h; sourceTree = "<group>"; };
 		1DB2E08E15FE97B500B1E0AF /* Ship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ship.m; sourceTree = "<group>"; };
 		1DB2E09015FFA7B900B1E0AF /* AddonsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddonsViewController.h; sourceTree = "<group>"; };
@@ -261,6 +275,29 @@
 			name = Mission;
 			sourceTree = "<group>";
 		};
+		1D9C8D6A16021548001C095F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1D9C8D6B16021576001C095F /* BadgeTabView.h */,
+				1D9C8D6C16021576001C095F /* BadgeTabView.m */,
+				1D9C8D771602193E001C095F /* BadgeTabViewItem.h */,
+				1D9C8D781602193E001C095F /* BadgeTabViewItem.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		1D9C8D6E16021842001C095F /* Art */ = {
+			isa = PBXGroup;
+			children = (
+				1D9C8D7516021914001C095F /* badge-red-24x24.png */,
+				1D9C8D6F16021861001C095F /* badge-24x24.png */,
+				1D9C8D7016021861001C095F /* badge-36x36.png */,
+				1D9C8D7116021861001C095F /* badge-48x48.png */,
+				1D16223715EE97D800C0F3CC /* KSPM-Icon.icns */,
+			);
+			name = Art;
+			sourceTree = "<group>";
+		};
 		1DB2E08815FE2DD500B1E0AF /* File Parsing */ = {
 			isa = PBXGroup;
 			children = (
@@ -328,6 +365,7 @@
 				1DB405CA15DB3E230041807D /* AppDelegate.h */,
 				1DB405CB15DB3E230041807D /* AppDelegate.m */,
 				1DB405E615DB3F450041807D /* Model */,
+				1D9C8D6A16021548001C095F /* Views */,
 				1DB405D615DB3E7A0041807D /* View Controllers */,
 				1DB405D515DB3E670041807D /* NIBs */,
 				1DB405BF15DB3E230041807D /* Supporting Files */,
@@ -338,8 +376,8 @@
 		1DB405BF15DB3E230041807D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1D9C8D6E16021842001C095F /* Art */,
 				1D56F41515FA377C0047042A /* dsa_pub.pem */,
-				1D16223715EE97D800C0F3CC /* KSPM-Icon.icns */,
 				1DB405C015DB3E230041807D /* KSPManager-Info.plist */,
 				1DB405C115DB3E230041807D /* InfoPlist.strings */,
 				1DB405C415DB3E230041807D /* main.m */,
@@ -477,6 +515,10 @@
 				1D56F41615FA377C0047042A /* dsa_pub.pem in Resources */,
 				1D03985615FA99EC00BA3D2F /* CrewViewController.xib in Resources */,
 				1DB2E09415FFA7B900B1E0AF /* AddonsViewController.xib in Resources */,
+				1D9C8D7216021861001C095F /* badge-24x24.png in Resources */,
+				1D9C8D7316021861001C095F /* badge-36x36.png in Resources */,
+				1D9C8D7416021861001C095F /* badge-48x48.png in Resources */,
+				1D9C8D7616021914001C095F /* badge-red-24x24.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,6 +568,8 @@
 				1D682A2615FCD93E007C84CB /* ConfigurationParser.m in Sources */,
 				1DB2E08F15FE97B500B1E0AF /* Ship.m in Sources */,
 				1DB2E09315FFA7B900B1E0AF /* AddonsViewController.m in Sources */,
+				1D9C8D6D16021576001C095F /* BadgeTabView.m in Sources */,
+				1D9C8D791602193E001C095F /* BadgeTabViewItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

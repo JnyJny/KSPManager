@@ -157,8 +157,16 @@
 
 - (BOOL)remove
 {
+    NSError *error = nil;
     
-    return NO;
+    [self.fileManager removeItemAtURL:self.baseURL error:&error];
+    
+    self.error = error;
+    
+    if( error )
+        return NO;
+    
+    return YES;
 }
 
 - (BOOL)rename:(NSURL *)newName

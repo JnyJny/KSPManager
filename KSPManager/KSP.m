@@ -357,42 +357,24 @@
 
 - (BOOL)unmanage:(Asset *)object
 {
-    if( [[object class] isSubclassOfClass:[Part class]] ) {
-        Part *part = (Part *)object;
-        
-        [self.parts removeObject:part];
-        
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        NSError *error = nil;
-        
-        [fileManager removeItemAtURL:part.baseURL error:&error];
-        
-        if( error ) {
-            [[NSAlert alertWithError:error] runModal];
-            return NO;
-        }
-        return YES;
-    }
- 
-    if( [[object class] isSubclassOfClass:[Plugin class]] == YES ){
-        
-        Plugin *plugin = (Plugin *)object;
 
-        [self.plugins removeObject:plugin];
-        
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        NSError *error = nil;
-        
-        [fileManager removeItemAtURL:plugin.baseURL error:&error];
-        
-        if( error ) {
-            [[NSAlert alertWithError:error] runModal];
-            return NO;
-        }
-        return YES;
-    }
+    if( [object remove] == NO )
+        return NO;
+
     
-    return NO;
+    if( [self.parts containsObject:object] )
+        [self.parts removeObject:object];
+    
+    if( [self.plugins containsObject:object] )
+        [self.plugins removeObject:object];
+
+    
+    if( [self.ships containsObject:object] )
+        [self.ships removeObject:object];
+
+    object = nil;
+    
+    return YES;
 }
 
 - (NSURL *)inflateZipFile:(NSURL *)fileURL inDestination:(NSURL *)dstURL

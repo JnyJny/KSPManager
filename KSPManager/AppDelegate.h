@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "BadgeTabView.h"
 #import "AddonsViewController.h"
 #import "MissionsViewController.h"
 #import "CrewViewController.h"
@@ -20,7 +21,7 @@
 
 @property (assign) IBOutlet NSWindow *window;
 
-@property (weak) IBOutlet NSTabView *tabView;
+@property (weak) IBOutlet BadgeTabView *tabView;
 @property (weak) IBOutlet NSPathControl *pathControl;
 
 @property (weak) IBOutlet AddonsViewController *addonsViewController;

@@ -69,6 +69,42 @@
     [self.actionButton setEnabled:NO];
 }
 
+- (void)setBadgesForAssets:(NSArray *)assets
+{
+    NSInteger partCount = 0;
+    NSInteger pluginCount = 0;
+    NSInteger shipCount = 0;
+    
+    for(Asset *asset in assets) {
+     
+        if( [asset isMemberOfClass:[Part class]] ) {
+            partCount ++;
+            continue;
+        }
+        
+        if( [asset isMemberOfClass:[Plugin class]] ) {
+            pluginCount ++;
+            continue;
+        }
+            
+        if( [asset isMemberOfClass:[Ship class]] ) {
+            shipCount ++;
+            continue;
+        }
+    }
+    
+    if( partCount )
+        [self.categoryControl setImage:self.redBadge forSegment:0];
+    
+    if( pluginCount )
+        [self.categoryControl setImage:self.redBadge forSegment:1];
+
+    if( shipCount )
+        [self.categoryControl setImage:self.redBadge forSegment:2];
+
+}
+
+
 #pragma mark -
 #pragma mark Drag & Drop Support
 
@@ -102,7 +138,8 @@
     
     if( [[pboard types] containsObject:NSURLPboardType] ) {
         NSURL *url = [NSURL URLFromPasteboard:pboard];
-        [self.ksp createAssetsWith:url install:(aTableView==self.installedTableView)];
+        NSArray *assets = [self.ksp createAssetsWith:url install:(aTableView==self.installedTableView)];
+        [self setBadgesForAssets:assets];
         [self refresh];
         return YES;
     }
@@ -199,6 +236,7 @@
             default:
                 break;
         }
+        [self refresh];
     }
     
     return ;
@@ -257,6 +295,21 @@
 
 - (IBAction)didPushRemoveButton:(NSButton *)sender
 {
+    NSAlert *alert = [NSAlert alertWithMessageText:@"Delete Item"
+                                     defaultButton:@"Remove"
+                                   alternateButton:@"Cancel"
+                                       otherButton:nil
+                         informativeTextWithFormat:@"Removing this item will delete it permanently from the system. Cancel will abort."];
+    
+    if( self.availableArrayController.selectedObjects.count > 1 )
+                      [alert setInformativeText:@"Removing these items will delete them permanently from the system. Cancel will abort."];
+    
+    
+    [alert beginSheetModalForWindow:self.view.window
+                      modalDelegate:self
+                     didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
+                        contextInfo:(__bridge void *)(sender)];
+    
     
 }
 
@@ -270,11 +323,12 @@
  
     NSString *contentKeypath = nil;
     NSString *sortKeypath = nil;
-    
+
     switch (sender.selectedSegment) {
         case 0:
             contentKeypath = @"ksp.parts";
             sortKeypath = @"partSortDescriptors";
+
             break;
         case 1:
             contentKeypath = @"ksp.plugins";
@@ -289,6 +343,8 @@
             NSLog(@"%@ unanticipated control value: %ld",self,sender.selectedSegment);
             return ;
     }
+    
+    [sender setImage:nil forSegment:sender.selectedSegment];
 
     [self rebindArrayController:self.availableArrayController
                             key:kKeyContentArray

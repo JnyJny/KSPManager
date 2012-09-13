@@ -1,4 +1,10 @@
 Not a complete list of bugs
 
+Outstanding:
+
 - Plugin name is sometimes empty
+
+
+Fixed:
+
 - Manage dialog will quit on cancel unconditionally
