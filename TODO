@@ -1,6 +1,6 @@
 This TODO list is for tracking feature ideas that come up but are not the current priority.
 
-- kerbel.net integration
+- kerbel.net integration ( readonly! )
 - add-on optimization driven by ship composition (install only the parts required for a ship or set or ships )
 - user ship ratings ( give ships stars! )
 - instant orbit assistant
@@ -33,3 +33,5 @@ This TODO list is for tracking feature ideas that come up but are not the curren
 - change color scheme away from grey, grey on light blue? black bg?
 - clean out cached unzipped distributions [done]
 - keep dates for freshness checking
+- go to '~/Library/Preferences/unity.Squad.Kerbal Space Program.plist', go into Root and add a child called 'UnityGraphicsQuality' and set its class to 'number' and set the value to 3.
+
