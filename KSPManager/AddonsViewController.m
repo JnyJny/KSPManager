@@ -10,11 +10,17 @@
 #import "Part.h"
 #import "Plugin.h"
 #import "Ship.h"
+#import "KerbalNet.h"
 
 
 #define kKeyContentArray    @"contentArray"
 #define kKeySortDescriptors @"sortDescriptors"
 #define kAssetDragData      @"AssetDragData"
+
+#define kKSP_APP_ID @"000000000004"
+#define kKSP_APP_TK @"BB1044ULL1O0NUN7TR"
+
+
 
 @implementation AddonsViewController
 
@@ -30,11 +36,12 @@
 @synthesize partSortDescriptors = _partSortDescriptors;
 @synthesize pluginSortDescriptors = _pluginSortDescriptors;
 @synthesize shipSortDescriptors = _shipSortDescriptors;
+@synthesize kerbalNet = _kerbalNet;
 
 
 - (void)awakeFromNib
 {
-    NSArray *validDragTypes = @[ NSURLPboardType,kAssetDragData ];
+    NSArray *validDragTypes = @[ NSURLPboardType,NSFilenamesPboardType,kAssetDragData ];
     
     [self.installedTableView registerForDraggedTypes:validDragTypes];
     [self.availableTableView registerForDraggedTypes:validDragTypes];
@@ -56,10 +63,11 @@
         return evaluatedObject.isAvailable;
     }];
     
+
     [self controlDidChange:self.categoryControl];
 }
 
-- (void)refresh
+- (void)refresh:(BOOL)reset
 {
     [self.installedTableView deselectAll:self];
     [self.installedArrayController rearrangeObjects];
@@ -67,14 +75,22 @@
     [self.availableArrayController rearrangeObjects];
     [self.removeButton setEnabled:NO];
     [self.actionButton setEnabled:NO];
+
+    if( reset == YES ) {
+        [self.categoryControl setLabel:@"Parts" forSegment:0];
+        [self.categoryControl setLabel:@"Plugins" forSegment:1];
+        [self.categoryControl setLabel:@"Ships" forSegment:2];
+    }
 }
+
+
 
 - (void)setBadgesForAssets:(NSArray *)assets
 {
     NSInteger partCount = 0;
     NSInteger pluginCount = 0;
     NSInteger shipCount = 0;
-    
+
     for(Asset *asset in assets) {
      
         if( [asset isMemberOfClass:[Part class]] ) {
@@ -94,13 +110,14 @@
     }
     
     if( partCount )
-        [self.categoryControl setImage:self.redBadge forSegment:0];
+        [self.categoryControl setLabel:[@"Parts" stringByAppendingFormat:@" (%ld)",partCount] forSegment:0];
     
     if( pluginCount )
-        [self.categoryControl setImage:self.redBadge forSegment:1];
+        [self.categoryControl setLabel:[@"Plugins" stringByAppendingFormat:@" (%ld)",pluginCount] forSegment:1];
 
     if( shipCount )
-        [self.categoryControl setImage:self.redBadge forSegment:2];
+        [self.categoryControl setLabel:[@"Ships" stringByAppendingFormat:@" (%ld)",shipCount] forSegment:2];
+
 
 }
 
@@ -136,13 +153,29 @@
 {
     NSPasteboard *pboard = [info draggingPasteboard];
     
+
+    
     if( [[pboard types] containsObject:NSURLPboardType] ) {
         NSURL *url = [NSURL URLFromPasteboard:pboard];
         NSArray *assets = [self.ksp createAssetsWith:url install:(aTableView==self.installedTableView)];
         [self setBadgesForAssets:assets];
-        [self refresh];
+        [self refresh:NO];
         return YES;
     }
+    
+#if 0
+    if( [[pboard types] containsObject:NSFilenamesPboardType]){
+        NSArray *filenames = [pboard propertyListForType:NSFilenamesPboardType];
+        for(NSString *filename in filenames) {
+            NSURL *url = [NSURL fileURLWithPath:filename];
+            NSLog(@"filename %@ url %@",filename,url);
+            NSArray *assets = [self.ksp createAssetsWith:url install:(aTableView==self.installedTableView)];
+            [self setBadgesForAssets:assets];
+        }
+        [self refresh:NO];
+        return YES;
+    }
+#endif
     
     if( [[pboard types] containsObject:kAssetDragData] ) {
         // the data isn't important, so we ignore it
@@ -210,7 +243,14 @@
     
     return _shipSortDescriptors;
 }
-    
+
+- (KerbalNet *)kerbalNet
+{
+    if( _kerbalNet == nil ) {
+        _kerbalNet = [[KerbalNet alloc] initWithApplicationID:kKSP_APP_ID andApplicationToken:kKSP_APP_TK];
+    }
+    return _kerbalNet;
+}
 
 #pragma mark -
 #pragma mark Private Instance Methods
@@ -236,7 +276,7 @@
             default:
                 break;
         }
-        [self refresh];
+        [self refresh:YES];
     }
     
     return ;
@@ -265,7 +305,7 @@
                                 contextInfo:nil];
         }
     }
-    [self refresh];
+    [self refresh:YES];
 }
 
 - (IBAction)moveSelectedToInstalled:(id)sender
@@ -280,7 +320,7 @@
                                 contextInfo:nil];
         }
     }
-    [self refresh];
+    [self refresh:YES];
 }
 
 
@@ -339,6 +379,11 @@
             sortKeypath = @"shipSortDescriptors";
             break;
             
+        case 3:
+            contentKeypath = @"kerbalNet.remoteAssets";
+            sortKeypath = @"pluginShortDescriptors";
+            break;
+            
         default:
             NSLog(@"%@ unanticipated control value: %ld",self,sender.selectedSegment);
             return ;
@@ -354,6 +399,7 @@
                             key:kKeySortDescriptors
                    toNewKeypath:sortKeypath];
     
+
     [self rebindArrayController:self.installedArrayController
                             key:kKeyContentArray
                    toNewKeypath:contentKeypath];
@@ -362,8 +408,7 @@
                             key:kKeySortDescriptors
                    toNewKeypath:sortKeypath];
     
-    [self refresh];
-    
+    [self refresh:YES];
 }
 
 - (IBAction)installedTableViewAction:(NSTableView *)sender

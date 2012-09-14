@@ -25,8 +25,6 @@
 @property (strong, nonatomic) NSString *assetCategory;
 
 
-
-
 - (id)initWithURL:(NSURL *)baseURL;
 - (void)addEntriesFromDictionary:(NSDictionary *)newEntries;
 

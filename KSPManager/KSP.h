@@ -57,6 +57,8 @@
 
 - (BOOL)launchKSP;
 
+- (void)cleanUp;
+
 + (NSArray *)locateInstallationDirectories;
 + (BOOL)terminateRunningKSP;
 

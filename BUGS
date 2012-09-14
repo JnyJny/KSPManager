@@ -2,9 +2,8 @@ Not a complete list of bugs
 
 Outstanding:
 
-- Plugin name is sometimes empty
-
 
 Fixed:
 
 - Manage dialog will quit on cancel unconditionally
+- Plugin name is sometimes empty - now shows installed name if product name is empty

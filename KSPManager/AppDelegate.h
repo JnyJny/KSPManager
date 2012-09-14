@@ -8,7 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "BadgeTabView.h"
 #import "AddonsViewController.h"
 #import "MissionsViewController.h"
 #import "CrewViewController.h"
@@ -21,18 +20,18 @@
 
 @property (assign) IBOutlet NSWindow *window;
 
-@property (weak) IBOutlet BadgeTabView *tabView;
-@property (weak) IBOutlet NSPathControl *pathControl;
+@property (strong) IBOutlet NSTabView *tabView;
+@property (strong) IBOutlet NSPathControl *pathControl;
 
-@property (weak) IBOutlet AddonsViewController *addonsViewController;
-@property (weak) IBOutlet MissionsViewController *missionsViewController;
-@property (weak) IBOutlet CrewViewController *crewViewController;
-@property (weak) IBOutlet ShipViewController *shipViewController;
-@property (weak) IBOutlet InventoryViewController *inventoryViewController;
-@property (weak) IBOutlet SavesViewController *savesViewController;
+@property (strong) IBOutlet AddonsViewController *addonsViewController;
+@property (strong) IBOutlet MissionsViewController *missionsViewController;
+@property (strong) IBOutlet CrewViewController *crewViewController;
+@property (strong) IBOutlet ShipViewController *shipViewController;
+@property (strong) IBOutlet InventoryViewController *inventoryViewController;
+@property (strong) IBOutlet SavesViewController *savesViewController;
 
-@property (weak) IBOutlet NSButton *terminateKSPButton;
-@property (weak) IBOutlet NSButton *launchKSPButton;
+@property (strong) IBOutlet NSButton *terminateKSPButton;
+@property (strong) IBOutlet NSButton *launchKSPButton;
 
 
 @property (strong, nonatomic) KSP *ksp;

@@ -377,6 +377,19 @@
     return YES;
 }
 
+- (void)cleanUp
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    NSURL *caches = [[fileManager URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
+    
+    caches = [caches URLByAppendingPathComponent:[NSString pathWithComponents:@[[NSBundle mainBundle].bundleIdentifier,kKSP_TEMP_ASSETS]]
+                                     isDirectory:YES];
+    
+    [fileManager removeItemAtURL:caches  error:nil];
+    
+}
+
 - (NSURL *)inflateZipFile:(NSURL *)fileURL inDestination:(NSURL *)dstURL
 {
 
@@ -396,6 +409,8 @@
     
     if( [tmpURL checkResourceIsReachableAndReturnError:&error] == YES )
         [fileManager removeItemAtURL:tmpURL error:&error];
+    
+    NSLog(@"removeItemAtURL:%@ %@",tmpURL,error);
 
     // tmpURL is NOT reachable, for sure.
     
@@ -439,8 +454,12 @@
     
     NSError *error = nil;
     NSNumber *isDir;
-        
+    
+
+    
     [url getResourceValue:&isDir forKey:NSURLIsDirectoryKey error:&error];
+    
+    NSLog(@"createAssetsWith:%@ install:%d isDir: %@",url,install,isDir);
     
     if( error ) {
         [[NSAlert alertWithError:error] runModal];
@@ -452,6 +471,7 @@
         
         if( [ext caseInsensitiveCompare:@"zip"] == NSOrderedSame ){
             url = [self inflateZipFile:url inDestination:nil];
+            goto AddAndInstall;
         }
         
         if( [ext caseInsensitiveCompare:kPLUGIN_EXT] == NSOrderedSame ){
@@ -476,12 +496,28 @@
             return assets;
         }
     }
-    
-    [assets addObjectsFromArray:[Part inventory:url]];
-    [assets addObjectsFromArray:[Plugin inventory:url]];
-    [assets addObjectsFromArray:[Ship inventory:url]];
-    
+
 AddAndInstall:
+    
+    NSLog(@"here");
+    NSArray *results = [Part inventory:url];
+    NSLog(@"results = %@",results);
+    
+    if( results )
+        [assets addObjectsFromArray:results];
+    NSLog(@"assets count after part: %ld",assets.count);
+    
+    results = [Plugin inventory:url];
+    if(results)
+        [assets addObjectsFromArray:results];
+    NSLog(@"assets count after plugin: %ld",assets.count);
+    
+    results = [Ship inventory:url];
+    if( results )
+        [assets addObjectsFromArray:results];
+    NSLog(@"assets count after ship: %ld",assets.count);
+    
+
     
     for (Asset *asset in assets) 
         [self manage:asset installed:install];

@@ -24,16 +24,16 @@
 		1D2ED54315EB156900402EF1 /* InventoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D2ED54115EB156900402EF1 /* InventoryViewController.xib */; };
 		1D3746AC15F7F23F00F858B3 /* PersistentObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3746AB15F7F23F00F858B3 /* PersistentObject.m */; };
 		1D56F41615FA377C0047042A /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1D56F41515FA377C0047042A /* dsa_pub.pem */; };
+		1D572152160274DB00D2427C /* KerbalNet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D572151160274DA00D2427C /* KerbalNet.m */; };
+		1D57215716028B5400D2427C /* Remote.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D57215616028B5400D2427C /* Remote.m */; };
 		1D682A2615FCD93E007C84CB /* ConfigurationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D682A2515FCD93E007C84CB /* ConfigurationParser.m */; };
 		1D75BD6D15F79FA40037393E /* PersistenceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D75BD6C15F79FA40037393E /* PersistenceFile.m */; };
 		1D75BD7015F7A6770037393E /* Crew.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D75BD6F15F7A6770037393E /* Crew.m */; };
 		1D82916515F7A90600463E99 /* Vessel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D82916415F7A90600463E99 /* Vessel.m */; };
-		1D9C8D6D16021576001C095F /* BadgeTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9C8D6C16021576001C095F /* BadgeTabView.m */; };
 		1D9C8D7216021861001C095F /* badge-24x24.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D9C8D6F16021861001C095F /* badge-24x24.png */; };
 		1D9C8D7316021861001C095F /* badge-36x36.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D9C8D7016021861001C095F /* badge-36x36.png */; };
 		1D9C8D7416021861001C095F /* badge-48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D9C8D7116021861001C095F /* badge-48x48.png */; };
 		1D9C8D7616021914001C095F /* badge-red-24x24.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D9C8D7516021914001C095F /* badge-red-24x24.png */; };
-		1D9C8D791602193E001C095F /* BadgeTabViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9C8D781602193E001C095F /* BadgeTabViewItem.m */; };
 		1DB2E08F15FE97B500B1E0AF /* Ship.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB2E08E15FE97B500B1E0AF /* Ship.m */; };
 		1DB2E09315FFA7B900B1E0AF /* AddonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB2E09115FFA7B900B1E0AF /* AddonsViewController.m */; };
 		1DB2E09415FFA7B900B1E0AF /* AddonsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DB2E09215FFA7B900B1E0AF /* AddonsViewController.xib */; };
@@ -93,6 +93,10 @@
 		1D3746AA15F7F23F00F858B3 /* PersistentObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistentObject.h; sourceTree = "<group>"; };
 		1D3746AB15F7F23F00F858B3 /* PersistentObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistentObject.m; sourceTree = "<group>"; };
 		1D56F41515FA377C0047042A /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		1D572150160274DA00D2427C /* KerbalNet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KerbalNet.h; sourceTree = "<group>"; };
+		1D572151160274DA00D2427C /* KerbalNet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KerbalNet.m; sourceTree = "<group>"; };
+		1D57215516028B5400D2427C /* Remote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Remote.h; sourceTree = "<group>"; };
+		1D57215616028B5400D2427C /* Remote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Remote.m; sourceTree = "<group>"; };
 		1D682A2415FCD93E007C84CB /* ConfigurationParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationParser.h; sourceTree = "<group>"; };
 		1D682A2515FCD93E007C84CB /* ConfigurationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationParser.m; sourceTree = "<group>"; };
 		1D682A2715FCD9CC007C84CB /* ConfigurationTokenizerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationTokenizerDelegate.h; sourceTree = "<group>"; };
@@ -102,14 +106,10 @@
 		1D75BD6F15F7A6770037393E /* Crew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Crew.m; sourceTree = "<group>"; };
 		1D82916315F7A90600463E99 /* Vessel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vessel.h; sourceTree = "<group>"; };
 		1D82916415F7A90600463E99 /* Vessel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vessel.m; sourceTree = "<group>"; };
-		1D9C8D6B16021576001C095F /* BadgeTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgeTabView.h; sourceTree = "<group>"; };
-		1D9C8D6C16021576001C095F /* BadgeTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgeTabView.m; sourceTree = "<group>"; };
 		1D9C8D6F16021861001C095F /* badge-24x24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badge-24x24.png"; sourceTree = "<group>"; };
 		1D9C8D7016021861001C095F /* badge-36x36.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badge-36x36.png"; sourceTree = "<group>"; };
 		1D9C8D7116021861001C095F /* badge-48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badge-48x48.png"; sourceTree = "<group>"; };
 		1D9C8D7516021914001C095F /* badge-red-24x24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badge-red-24x24.png"; sourceTree = "<group>"; };
-		1D9C8D771602193E001C095F /* BadgeTabViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgeTabViewItem.h; sourceTree = "<group>"; };
-		1D9C8D781602193E001C095F /* BadgeTabViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgeTabViewItem.m; sourceTree = "<group>"; };
 		1DB2E08D15FE97B500B1E0AF /* Ship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ship.h; sourceTree = "<group>"; };
 		1DB2E08E15FE97B500B1E0AF /* Ship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ship.m; sourceTree = "<group>"; };
 		1DB2E09015FFA7B900B1E0AF /* AddonsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddonsViewController.h; sourceTree = "<group>"; };
@@ -216,6 +216,7 @@
 				1D682A2215FCD8B8007C84CB /* Parts */,
 				1D682A2315FCD8C4007C84CB /* Plugins */,
 				1D682A1A15FAD309007C84CB /* Ships */,
+				1D57215416028B3600D2427C /* Remote */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -227,6 +228,15 @@
 				1DB7013415F12C90002EC18D /* README.md */,
 			);
 			name = Documentation;
+			sourceTree = "<group>";
+		};
+		1D57215416028B3600D2427C /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				1D57215516028B5400D2427C /* Remote.h */,
+				1D57215616028B5400D2427C /* Remote.m */,
+			);
+			name = Remote;
 			sourceTree = "<group>";
 		};
 		1D682A1A15FAD309007C84CB /* Ships */ = {
@@ -278,10 +288,6 @@
 		1D9C8D6A16021548001C095F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1D9C8D6B16021576001C095F /* BadgeTabView.h */,
-				1D9C8D6C16021576001C095F /* BadgeTabView.m */,
-				1D9C8D771602193E001C095F /* BadgeTabViewItem.h */,
-				1D9C8D781602193E001C095F /* BadgeTabViewItem.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -423,6 +429,8 @@
 				1DB405FD15DC4E010041807D /* Utility */,
 				1DB405EB15DB45390041807D /* KSP.h */,
 				1DB405EC15DB45390041807D /* KSP.m */,
+				1D572150160274DA00D2427C /* KerbalNet.h */,
+				1D572151160274DA00D2427C /* KerbalNet.m */,
 				1D16222515EBC83800C0F3CC /* Assets */,
 				1D75BD6715F79F570037393E /* Mission */,
 			);
@@ -568,8 +576,8 @@
 				1D682A2615FCD93E007C84CB /* ConfigurationParser.m in Sources */,
 				1DB2E08F15FE97B500B1E0AF /* Ship.m in Sources */,
 				1DB2E09315FFA7B900B1E0AF /* AddonsViewController.m in Sources */,
-				1D9C8D6D16021576001C095F /* BadgeTabView.m in Sources */,
-				1D9C8D791602193E001C095F /* BadgeTabViewItem.m in Sources */,
+				1D572152160274DB00D2427C /* KerbalNet.m in Sources */,
+				1D57215716028B5400D2427C /* Remote.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,9 +633,9 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.7;
 			};
 			name = Debug;
 		};
@@ -647,8 +655,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				SDKROOT = macosx;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx10.7;
 			};
 			name = Release;
 		};

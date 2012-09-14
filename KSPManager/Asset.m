@@ -16,6 +16,8 @@
 @synthesize baseURL = _baseURL;
 @synthesize error = _error;
 
+@synthesize assetTitle = _assetTitle;
+@synthesize assetCategory = _assetCategory;
 
 
 - (id)initWithURL:(NSURL *)baseURL
@@ -80,6 +82,7 @@
     return @"assetCategory";
 }
 
+
 #pragma mark -
 #pragma mark Instance Private Methods
 
@@ -95,7 +98,9 @@
 
 - (void)addEntriesFromDictionary:(NSDictionary *)newEntries
 {
+    
     [self.global addEntriesFromDictionary:newEntries];
+    
 }
 
 - (NSMutableDictionary *)contextNamed:(NSString *)name withIdentifer:(NSString *)identifier

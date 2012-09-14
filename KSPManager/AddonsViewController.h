@@ -8,6 +8,8 @@
 
 #import "KSPViewController.h"
 
+@class KerbalNet;
+
 @interface AddonsViewController : KSPViewController <NSTableViewDataSource>
 
 @property (strong) IBOutlet NSArrayController *installedArrayController;
@@ -22,6 +24,8 @@
 @property (strong, nonatomic) NSArray *partSortDescriptors;
 @property (strong, nonatomic) NSArray *pluginSortDescriptors;
 @property (strong, nonatomic) NSArray *shipSortDescriptors;
+
+@property (strong, nonatomic, readonly) KerbalNet *kerbalNet;
 
 - (IBAction)didPushAddButton:(NSButton *)sender;
 - (IBAction)didPushRemoveButton:(NSButton *)sender;

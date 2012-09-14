@@ -24,8 +24,9 @@
 - (NSImage *)redBadge
 {
     if( _redBadge == nil ) {
-        
-        _redBadge = [[NSImage alloc] initWithContentsOfURL:[[NSBundle mainBundle] URLForImageResource:@"badge-red-24x42"]];
+        NSSize sz = {12,12};
+        _redBadge = [NSImage imageNamed:@"badge-red-24x24"];
+        [_redBadge setSize:sz];
         
     }
     return _redBadge;

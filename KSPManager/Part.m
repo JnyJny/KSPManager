@@ -37,11 +37,12 @@
         NSArray *lines = [LineToken linesFromURL:self.configurationURL
                                     withEncoding:&encoding
                                      withOptions:@{ kLineOptionCommentTokenKey : @"//" }];
-        
+
         _parser = [ConfigurationParser parserWithLineTokens:lines];
         _parser.delegate = self;
         [_parser beginParsing];
     }
+
     return self;
 }
 
@@ -225,7 +226,8 @@
 - (BOOL)handleEndContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
 {
     if( !tokenizer.isGlobal ) {
-        [self.contexts addObject:_curCtx];
+        if( _curCtx)
+            [self.contexts addObject:_curCtx];
         _curCtx = nil;
         return YES;
     }
@@ -272,7 +274,7 @@
         if( part )
             [results addObject:part];
     }
-    
+
     return results;
 }
 

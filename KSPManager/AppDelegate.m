@@ -9,20 +9,20 @@
 #import "AppDelegate.h"
 #import "KSP_Constants.h"
 
+
 @implementation AppDelegate
 
 @synthesize tabView;
 @synthesize pathControl;
-
-@synthesize addonsViewController = _addonsViewController;
-@synthesize missionsViewController = _missionsViewController;
-@synthesize crewViewController = _crewViewController;
-@synthesize shipViewController = _shipViewController;
-@synthesize inventoryViewController = _inventoryViewController;
-@synthesize savesViewController = _savesViewController;
-
+@synthesize addonsViewController;
+@synthesize missionsViewController;
+@synthesize crewViewController;
+@synthesize shipViewController;
+@synthesize inventoryViewController;
+@synthesize savesViewController;
 @synthesize terminateKSPButton;
 @synthesize launchKSPButton;
+
 
 @synthesize ksp = _ksp;
 
@@ -95,7 +95,6 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    
     [self chooseAnInstallation];
     
     [self setupPathControl];
@@ -103,12 +102,18 @@
     [self setupTabControllers];
     
     [self setupToolTips];
-
+    
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
 {
     return YES;
+}
+
+- (void)applicationWillTerminate:(NSNotification *)notification
+{
+    [self.ksp cleanUp];
+    
 }
 
 #pragma mark -
