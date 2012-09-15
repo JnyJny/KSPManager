@@ -19,6 +19,10 @@
 @synthesize ksp = _ksp;
 
 
+- (void)refresh
+{
+    NSLog(@"%@ refresh",[self class]);
+}
 
 - (IBAction)addAction:(id)sender
 {

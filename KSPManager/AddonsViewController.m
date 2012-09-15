@@ -60,8 +60,15 @@
         return evaluatedObject.isAvailable;
     }];
     
-
+    [self.addButton setToolTip:@"Locate new Addons and make them Available"];
+    [self.removeButton setToolTip:@"Remove Addons from the Available list"];
+    [self.actionButton setToolTip:@"It's an ACTION button, no action yet"];
     [self controlDidChange:self.categoryControl];
+}
+
+- (void)refresh
+{
+    [self refresh:NO];
 }
 
 - (void)refresh:(BOOL)reset

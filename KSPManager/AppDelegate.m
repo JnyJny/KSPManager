@@ -218,11 +218,8 @@
 
 - (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
 {
-    if( [tabViewItem.identifier isEqualTo:@"kerbalNetViewController"] ) {
-        if ( [self.kerbalNetViewController.kerbalNetArrayController.arrangedObjects count] == 0 )
-            [self.kerbalNetViewController actionAction:self];
-    }
-    
+    KSPViewController *kvc = [self valueForKey:tabViewItem.identifier];
+    [kvc refresh];
 }
 
 @end

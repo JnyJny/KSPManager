@@ -25,8 +25,11 @@
 
 - (void)awakeFromNib
 {
-    
     self.kerbalNet.delegate = self;
+    
+    [self.addButton setToolTip:@"Download & Add to Available List"];
+    [self.removeButton setToolTip:@"Removing is unavailable"];
+    [self.actionButton setToolTip:@"Refresh list from Kerbal.Net"];
 }
 
 #pragma mark -
@@ -67,6 +70,14 @@
 #pragma mark -
 #pragma mark Instance Methods
 
+- (void)refresh
+{
+    if( [self.kerbalNetArrayController.arrangedObjects count] == 0 ) {
+        [self actionAction:self];
+    }
+    
+}
+
 - (IBAction)actionAction:(id)sender
 {
     [self.actionButton setEnabled:NO];
@@ -85,11 +96,8 @@
             NSLog(@"downloadTo:%@ failed %@",localURL,remote.error);
             continue;
         }
-        NSArray *assets = [self.ksp createAssetsWith:localURL install:NO];
-        NSLog(@"created assets %@",assets);
+        [self.ksp createAssetsWith:localURL install:NO];
     }
-    [self.kerbalNetArrayController rearrangeObjects];
-
 }
 
 

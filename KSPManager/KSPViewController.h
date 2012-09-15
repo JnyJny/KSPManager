@@ -19,6 +19,8 @@
 
 @property (strong, nonatomic) KSP *ksp;
 
+- (void)refresh;
+
 
 - (IBAction)addAction:(id)sender;
 - (IBAction)removeAction:(id)sender;
