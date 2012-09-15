@@ -11,6 +11,8 @@
 
 @implementation Remote
 
+@synthesize url = _url;
+
 - (id)initWithOptions:(NSDictionary *)options
 {
     
@@ -64,5 +66,52 @@
     return NO;
 }
 
+- (NSURL *)url
+{
+    if( _url == nil ) {
+    
+        NSString *directDL = [self valueForKey:kKerbalNetKeyModDirect_download];
+    
+        // XXX move error generation into valueForKey, fix error domain here
+        if( directDL == nil ) {
+            self.error = [NSError errorWithDomain:kKerbalNetErrorDomain
+                                             code:kKerbalNetErrorCodeMissingDirectDownloadKey
+                                         userInfo:@{NSLocalizedDescriptionKey : @"Kerbal.Net api_lookup_mod data did not contain mod_direct_download key."}];
+            return nil;
+        }
+    
+        _url = [NSURL URLWithString:[@"http://" stringByAppendingString:directDL]];
+    }
+    return _url;
+}
+
+- (BOOL)downloadTo:(NSURL *)localURL
+{
+    NSError *error = nil;
+    
+    NSLog(@"%@ downloadTo:%@ toLocalURL: %@",self.class,self.url,localURL);
+    
+    NSData *modFile = [NSData dataWithContentsOfURL:self.url
+                                            options:0
+                                              error:&error];
+    
+    self.error = error;
+    
+    if( error )
+        return NO;
+    
+    if( modFile ) {
+        
+        [modFile writeToURL:localURL
+                    options:0
+                      error:&error];
+        self.error = error;
+        if( error )
+            return NO;
+    }
+    
+    return YES;
+    
+}
 
 @end

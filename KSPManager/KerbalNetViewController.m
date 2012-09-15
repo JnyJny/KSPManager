@@ -79,18 +79,17 @@
 {
     for( Remote *remote in self.kerbalNetArrayController.selectedObjects ) {
         
-        //        NSLog(@"direct download %@",[remote valueForKey:kKerbalNetKeyModDirect_download]);
-        
-        NSURL *rURL = [NSURL URLWithString:[@"http://" stringByAppendingString:[remote valueForKey:kKerbalNetKeyModDirect_download]]];
-
-        NSLog(@"ksp = %@",self.ksp);
-        
-        NSArray *assets = [self.ksp createAssetsWith:rURL install:NO];
-        
+        NSURL *localURL = [self.ksp cacheURLforPath:remote.url.lastPathComponent];
+            
+        if( [remote downloadTo:localURL] == NO ) {
+            NSLog(@"downloadTo:%@ failed %@",localURL,remote.error);
+            continue;
+        }
+        NSArray *assets = [self.ksp createAssetsWith:localURL install:NO];
         NSLog(@"created assets %@",assets);
-        
-        [self.kerbalNetArrayController rearrangeObjects];
     }
+    [self.kerbalNetArrayController rearrangeObjects];
+
 }
 
 

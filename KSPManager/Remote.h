@@ -10,5 +10,10 @@
 
 @interface Remote : Asset
 
+
+@property (strong, nonatomic, readonly) NSURL *url;
+
 - (id)initWithOptions:(NSDictionary *)options;
+
+- (BOOL)downloadTo:(NSURL *)localURL;
 @end

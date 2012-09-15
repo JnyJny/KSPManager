@@ -37,9 +37,12 @@
 #define kKerbalNetAPIFunctionModLookup       @"api_mod_lookup"
 #define kKerbalNetAPIArgumentModId           @"api_mod_id"
 
-#define kKerbalNetErrorDomain                @"Kerbal.Net"
-#define kKerbalNetErrorCodeModLookupFailed   0x0001
-#define kKerbalNetErrorCodeMissingIdKey      0x0002
+#define kKerbalNetErrorDomain                            @"Kerbal.Net"
+#define kKerbalNetErrorCodeModLookupFailed               1
+#define kKerbalNetErrorCodeMissingIdKey                  2
+#define kKerbalNetErrorCodeMissingDirectDownloadKey      3
+
+@class Remote;
 
 @interface KerbalNet : NSObject
 
@@ -56,5 +59,6 @@
 - (id)initWithApplicationID:(NSString *)appID andApplicationToken:(NSString *)appToken;
 
 - (BOOL)refresh;
+
 
 @end

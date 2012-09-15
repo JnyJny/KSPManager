@@ -393,62 +393,52 @@
 - (NSURL *)cacheURLforPath:(NSString *)path
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    
+    NSURL *cacheURL;
+    NSError *error = nil;
+
     NSURL *caches = [[fileManager URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
     
-    if( path )
-        return [caches URLByAppendingPathComponent:[NSString pathWithComponents:@[[NSBundle mainBundle].bundleIdentifier,kKSP_TEMP_ASSETS,path]]
-                                       isDirectory:NO];
+    cacheURL = [caches URLByAppendingPathComponent:[NSString pathWithComponents:@[[NSBundle mainBundle].bundleIdentifier,kKSP_TEMP_ASSETS]]
+                                       isDirectory:YES];
+    
+    [fileManager createDirectoryAtURL:cacheURL
+          withIntermediateDirectories:YES
+                           attributes:nil
+                                error:&error];
+    
 
-    return [caches URLByAppendingPathComponent:[NSString pathWithComponents:@[[NSBundle mainBundle].bundleIdentifier,kKSP_TEMP_ASSETS]]
-                                   isDirectory:YES];
+    cacheURL = [cacheURL URLByAppendingPathComponent:path];
+    
+    if( [cacheURL checkResourceIsReachableAndReturnError:&error] == YES )
+        [fileManager removeItemAtURL:cacheURL error:&error];
+    
+    return cacheURL;
 }
 
 - (NSURL *)inflateZipFile:(NSURL *)fileURL inDestination:(NSURL *)dstURL
 {
 
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    
-    if ( dstURL == nil ) {
-        dstURL = [self cacheURLforPath:nil];
-    }
-    
     NSError *error = nil;
 
-    NSString *fname = [fileURL lastPathComponent].stringByDeletingLastPathComponent;
+    NSURL *copyURL;
     
-    NSURL *tmpURL = [dstURL URLByAppendingPathComponent:fname];
-    
-    if( [tmpURL checkResourceIsReachableAndReturnError:&error] == YES )
-        [fileManager removeItemAtURL:tmpURL error:&error];
-    
-    NSLog(@"removeItemAtURL:%@ %@",tmpURL,error);
+    if( dstURL != nil ) {
 
-    // tmpURL is NOT reachable, for sure.
-    
-    error = nil;
-    [fileManager createDirectoryAtURL:tmpURL withIntermediateDirectories:YES attributes:nil error:&error];
-    
-    if( error ){
-        NSLog(@"createDirectory: %@",error);
-        return nil;
-    }
-    
-    NSURL *copyURL = [tmpURL URLByAppendingPathComponent:fname];
-    
-    error = nil;
-    [fileManager copyItemAtURL:fileURL toURL:copyURL error:&error];
+        [fileManager copyItemAtURL:fileURL toURL:dstURL error:&error];
 
-    if( error ) {
-        NSLog(@"copy %@ to %@: %@",fileURL,copyURL,error);
-        return nil;
+        if( error ) {
+            NSLog(@"copy %@ to %@: %@",fileURL,dstURL,error);
+            return nil;
+        }
+        fileURL = copyURL;
     }
     
     NSTask *task = [[NSTask alloc] init];
     
-    [task setCurrentDirectoryPath:tmpURL.path];
+    [task setCurrentDirectoryPath:[fileURL URLByDeletingLastPathComponent].path];
     [task setLaunchPath:self.unzipURL.path];
-    [task setArguments:@[ fileURL.lastPathComponent]];
+    [task setArguments:@[fileURL.lastPathComponent]];
     
     [task launch];
     [task waitUntilExit];
@@ -456,7 +446,7 @@
     if([task terminationStatus] != 0)
         return nil;
     
-    return tmpURL;
+    return [fileURL URLByDeletingLastPathComponent];
 }
 
 
@@ -475,33 +465,18 @@
         [[NSAlert alertWithError:error] runModal];
         return assets;
     }
-    NSLog(@"scheme %@",url.scheme);
-    
-    if( [url.scheme isEqualToString:@"http"] ) {
-        // download that sumbitch
-
-        NSURLDownload *download = [[NSURLDownload alloc] initWithRequest:[NSURLRequest requestWithURL:url] delegate:self];
-        
-        if( !download ) {
-            NSLog(@"download %@ -> %@",download,url);
-            return assets;
-        }
-            
-        NSURL *dest = [self cacheURLforPath:url.lastPathComponent];
-            
-        [download setDeletesFileUponFailure:YES];
-        [download setDestination:dest.path allowOverwrite:YES];
-        url = dest;
-        isDir = [NSNumber numberWithBool:NO];
-    }
-    
     
     if( [isDir boolValue] == NO) {
         
         NSString *ext = url.lastPathComponent.pathExtension;
         
         if( [ext caseInsensitiveCompare:@"zip"] == NSOrderedSame ){
-            url = [self inflateZipFile:url inDestination:nil];
+            NSURL *dst = nil;
+            if( [url.path rangeOfString:kKSP_TEMP_ASSETS].location == NSNotFound )
+                dst =[self cacheURLforPath:url.lastPathComponent];
+            
+            url = [self inflateZipFile:url inDestination:dst];
+            
             goto AddAndInstall;
         }
         

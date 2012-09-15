@@ -263,30 +263,6 @@
     
     return YES;
 }
-    
-- (BOOL)downloadFileAtURL:(NSURL *)remoteURL toLocalURL:(NSURL *)localURL
-{
-    NSError *error = nil;
-    
-    NSData *modFile = [NSData dataWithContentsOfURL:remoteURL
-                                            options:0
-                                              error:&error];
-    
-    self.error = error;
-    
-    if( error )
-        return NO;
-    
-    if( modFile ) {
-        
-        [modFile writeToURL:localURL
-                    options:0
-                      error:&error];
-        self.error = error;
-        if( error )
-            return NO;
-    }
-    
-    return YES;
-}
+
+
 @end

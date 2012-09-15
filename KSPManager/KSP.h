@@ -11,7 +11,7 @@
 
 @class Asset;
 
-@interface KSP : NSObject <NSURLDownloadDelegate> {
+@interface KSP : NSObject {
 
 }
 @property (strong, nonatomic, readonly) NSURL *baseURL;
@@ -43,8 +43,6 @@
 @property (strong, nonatomic, readonly) NSURL *unzipURL;
 @property (strong, nonatomic, readonly) NSURL *unrarURL;
 
-
-
 - (id)initWithURL:(NSURL *)fileURL;
 
 - (BOOL)install:(Asset *)object;
@@ -54,6 +52,8 @@
 - (BOOL)unmanage:(Asset *)object;
 
 - (NSArray *)createAssetsWith:(NSURL *)fileURL install:(BOOL)install;
+
+- (NSURL *)cacheURLforPath:(NSString *)path;
 
 - (BOOL)launchKSP;
 
