@@ -390,22 +390,34 @@
     
 }
 
+- (NSURL *)cacheURLforPath:(NSString *)path
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    NSURL *caches = [[fileManager URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
+    
+    if( path )
+        return [caches URLByAppendingPathComponent:[NSString pathWithComponents:@[[NSBundle mainBundle].bundleIdentifier,kKSP_TEMP_ASSETS,path]]
+                                       isDirectory:NO];
+
+    return [caches URLByAppendingPathComponent:[NSString pathWithComponents:@[[NSBundle mainBundle].bundleIdentifier,kKSP_TEMP_ASSETS]]
+                                   isDirectory:YES];
+}
+
 - (NSURL *)inflateZipFile:(NSURL *)fileURL inDestination:(NSURL *)dstURL
 {
 
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
     if ( dstURL == nil ) {
-        NSURL *caches = [[fileManager URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
-        dstURL = [caches URLByAppendingPathComponent:[NSString pathWithComponents:@[[NSBundle mainBundle].bundleIdentifier,kKSP_TEMP_ASSETS]]
-                                         isDirectory:YES];
+        dstURL = [self cacheURLforPath:nil];
     }
     
     NSError *error = nil;
 
-    NSString *fname = [fileURL lastPathComponent];
+    NSString *fname = [fileURL lastPathComponent].stringByDeletingLastPathComponent;
     
-    NSURL *tmpURL = [dstURL URLByAppendingPathComponent:[fname stringByDeletingPathExtension]];
+    NSURL *tmpURL = [dstURL URLByAppendingPathComponent:fname];
     
     if( [tmpURL checkResourceIsReachableAndReturnError:&error] == YES )
         [fileManager removeItemAtURL:tmpURL error:&error];
@@ -455,8 +467,6 @@
     NSError *error = nil;
     NSNumber *isDir;
     
-
-    
     [url getResourceValue:&isDir forKey:NSURLIsDirectoryKey error:&error];
     
     NSLog(@"createAssetsWith:%@ install:%d isDir: %@",url,install,isDir);
@@ -465,8 +475,29 @@
         [[NSAlert alertWithError:error] runModal];
         return assets;
     }
+    NSLog(@"scheme %@",url.scheme);
+    
+    if( [url.scheme isEqualToString:@"http"] ) {
+        // download that sumbitch
+
+        NSURLDownload *download = [[NSURLDownload alloc] initWithRequest:[NSURLRequest requestWithURL:url] delegate:self];
+        
+        if( !download ) {
+            NSLog(@"download %@ -> %@",download,url);
+            return assets;
+        }
+            
+        NSURL *dest = [self cacheURLforPath:url.lastPathComponent];
+            
+        [download setDeletesFileUponFailure:YES];
+        [download setDestination:dest.path allowOverwrite:YES];
+        url = dest;
+        isDir = [NSNumber numberWithBool:NO];
+    }
+    
     
     if( [isDir boolValue] == NO) {
+        
         NSString *ext = url.lastPathComponent.pathExtension;
         
         if( [ext caseInsensitiveCompare:@"zip"] == NSOrderedSame ){

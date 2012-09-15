@@ -20,6 +20,7 @@
 @synthesize shipViewController;
 @synthesize inventoryViewController;
 @synthesize savesViewController;
+@synthesize kerbalNetViewController;
 @synthesize terminateKSPButton;
 @synthesize launchKSPButton;
 
@@ -44,11 +45,12 @@
  
     [self.tabView.tabViewItems enumerateObjectsUsingBlock:^(NSTabViewItem *item,NSUInteger idx,BOOL *stop ){
         NSViewController *vc = [self valueForKey:item.identifier];
-        if( vc )
+        if( vc ) 
             item.view = vc.view;
      }];
 
     [self.tabView selectFirstTabViewItem:nil];
+    self.tabView.delegate = self;
     
 }
 
@@ -128,11 +130,10 @@
     
     // the following walks the list of known viewControllers and uses Key/Value to set their ksp property
     
-    for(KSPViewController *vc in @[self.addonsViewController, self.missionsViewController,
-        self.crewViewController, self.shipViewController, self.inventoryViewController,
-        self.savesViewController] )
-        [vc setValue:_ksp forKey:@"ksp"];
-
+    [self.tabView.tabViewItems enumerateObjectsUsingBlock:^(NSTabViewItem *item, NSUInteger idx, BOOL *stop) {
+        KSPViewController *kvc = [self valueForKey:item.identifier];
+        kvc.ksp = _ksp;
+    }];
     
     // next, if _ksp is not nil, save it's baseURL.path to the persistent user defaults key store.
     // on next start, this ksp installation will be chosen first if it exists. 
@@ -212,6 +213,16 @@
 }
 
 
+#pragma mark -
+#pragma mark NSTabViewDelegate Methods
 
+- (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
+{
+    if( [tabViewItem.identifier isEqualTo:@"kerbalNetViewController"] ) {
+        if ( [self.kerbalNetViewController.kerbalNetArrayController.arrangedObjects count] == 0 )
+            [self.kerbalNetViewController actionAction:self];
+    }
+    
+}
 
 @end

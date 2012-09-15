@@ -11,15 +11,18 @@
 
 @interface KerbalNet () {
     NSString *_baseURLString;
+    NSOperationQueue *_operationQueue;
 }
 @end
 
 @implementation KerbalNet
 
+@synthesize delegate;
 @synthesize applicationId = _applicationId;
 @synthesize applicationToken = _applicationToken;
 @synthesize username = _username;
 @synthesize password = _password;
+@synthesize error = _error;
 
 @synthesize remoteAssets = _remoteAssets;
 
@@ -32,109 +35,158 @@
         self.applicationId = identifier;
         self.applicationToken = token;
         _baseURLString = [kKerbalNetURL stringByAppendingFormat:kKerbalNetAppFormat,self.applicationId,self.applicationToken];
+        self.error = nil;
+        _operationQueue = [[NSOperationQueue alloc] init];
     }
     return self;
 }
+
 
 #pragma mark -
 #pragma mark Properties
 
 
-- (NSArray *)remoteAssets
+- (NSMutableArray *)remoteAssets
 {
 
     if( _remoteAssets == nil ) {
-        
-        NSMutableArray *tmp = [[NSMutableArray alloc] init];
-        
-        for(NSDictionary *shortInfo in [self completeModListing] ) {
-            NSString *idStr = [shortInfo valueForKey:kKerbalNetKeyModId];
-    
-            NSDictionary *longInfo = [self modLookupById:idStr.integerValue];
-            
-            if( longInfo == nil ) {
-                NSLog(@"modLookupById:%@ failed",idStr);
-                continue;
-            }
-
-            Remote *remote = [[Remote alloc] initWithOptions:longInfo];
-            if( remote )
-                [tmp addObject:remote];
-        
-        }
-        _remoteAssets = tmp;
+        _remoteAssets = [[NSMutableArray alloc] init];
     }
     return _remoteAssets;
 }
 
-#define kKerbalNetAPIModListing @"api_mod_listing"
-#define kKerbalNetAPIModLookup  @"api_mod_lookup"
-#define kKerbalNetAPIModId      @"api_mod_id"
 
 #pragma mark -
 #pragma mark Private Instance Methods
 
-- (NSURL *)api_function:(NSString *)fname
+
+/*
+ * api_function methods build URLs encoding the requestion Kerbal.Net
+ * API function and optional arguments string.
+ */
+
+- (NSURL *)api_function:(NSString *)fname withArgument:(NSString *)arguments
 {
-    return [NSURL URLWithString:[_baseURLString stringByAppendingFormat:@"&landing=%@",fname]];
+    NSString *urlString = [_baseURLString stringByAppendingFormat:@"&landing=%@",fname];
+    
+    if( arguments )
+        urlString = [urlString stringByAppendingFormat:@"&%@",arguments];
+    
+    return [NSURL URLWithString:urlString];
 }
 
-- (NSURL *)api_function:(NSString *)fname withArgument:(NSString *)argument
+- (NSURL *)api_function:(NSString *)fname
 {
-    return [NSURL URLWithString:[_baseURLString stringByAppendingFormat:@"&landing=%@&%@",fname,argument]];
+    return [self api_function:fname withArgument:nil];
 }
+
+
+/*
+ * Methods with the URL prefix return a URL ready to use for
+ * a specific Kerbal.Net API function.
+ */
 
 - (NSURL *)URLcompleteList
 {
-    return [self api_function:kKerbalNetAPIModListing];
+    return [self api_function:kKerbalNetAPIFunctionModListing];
 }
 
-- (NSURL *)URLlookupModByIdentifier:(NSInteger)identifier
+- (NSURL *)URLlookUpModByIdentifier:(NSInteger)identifier
 {
-    return [self api_function:kKerbalNetAPIModLookup withArgument:[kKerbalNetAPIModId stringByAppendingFormat:@"=%ld",identifier]];
+    return [self api_function:kKerbalNetAPIFunctionModLookup withArgument:[kKerbalNetAPIArgumentModId stringByAppendingFormat:@"=%ld",identifier]];
 }
 
 - (NSURL *)URLloginWithUsername:(NSString *)username andPassword:(NSString *)password
 {
+    NSLog(@"%@ URLLoginWithUserName:%@ andPassword: unimplimented",self.class,username);
     return nil;
 }
 
 - (NSURL *)URLuserDataWithUsername:(NSString *)username andSession:(NSString *)session
 {
+    
+    NSLog(@"%@ URLuserDataWithUsername:%@ andSession:%@ unimplemented",self.class,username,session);
+    
     return nil;
 }
 
-- (NSArray *)completeModListing
+#pragma mark -
+#pragma mark KerbalNetDelegate Methods
+
+- (void)informDelegateWillAccessURL:(NSURL *)url
+{
+    if( self.delegate && [self.delegate respondsToSelector:@selector(willBeginNetworkOperationWith:)] ) {
+        [self.delegate performSelector:@selector(willBeginNetworkOperationWith:) withObject:url];
+    }
+}
+
+- (void)informDelegateDidAccessURL:(NSURL *)url withError:(NSError *)error
+{
+    if( self.delegate && [self.delegate respondsToSelector:@selector(didFinishNetworkOperaitonWIth:andError:)]) {
+        [self.delegate performSelector:@selector(didFinishNetworkOperaitonWIth:andError:) withObject:url withObject:error];
+    }
+}
+
+
+
+- (NSArray *)completeListing
 {
     NSError *error = nil;
     NSURL *url = [self URLcompleteList];
     NSStringEncoding encoding;
     NSString *s;
+    NSArray *results;
+    
+    [self informDelegateWillAccessURL:url];
     
     s = [NSString stringWithContentsOfURL:url
                              usedEncoding:&encoding
                                     error:&error];
     
+    [self informDelegateDidAccessURL:url withError:error];
+    
+    self.error = error;
+    
+    if( error )
+        return nil;
+    
     NSData *data = [s dataUsingEncoding:encoding];
     
-    return [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+    error = nil;
+    
+    results = [NSJSONSerialization JSONObjectWithData:data
+                                              options:0
+                                                error:&error];
+    
+    self.error = error;
+    
+    if( error )
+        return nil;
+    
+    return results;
 }
 
-- (NSDictionary *)modLookupById:(NSInteger)identifer
+- (NSDictionary *)lookUpModById:(NSInteger)identifer
 {
     NSStringEncoding encoding;
-    NSError *error;
+    NSError *error = nil;
     
-    NSURL *url = [self URLlookupModByIdentifier:identifer];
+    NSURL *url = [self URLlookUpModByIdentifier:identifer];
+
     
-    NSString *s = [NSString stringWithContentsOfURL:url usedEncoding:&encoding error:&error];
+    [self informDelegateWillAccessURL:url];
+    NSString *s = [NSString stringWithContentsOfURL:url
+                                       usedEncoding:&encoding
+                                              error:&error];
     
-    if(error) {
-        NSLog(@"stringWithContentsOfURL:%@ failed %@",url,error);
+    [self informDelegateDidAccessURL:url withError:error];
+    
+    
+    self.error = error;
+    
+    if(error)
         return nil;
-    }
-    
-    NSLog(@"S = %@",s);
+
     
     NSData *data = [s dataUsingEncoding:encoding];
     
@@ -144,15 +196,97 @@
                                                        options:0
                                                          error:&error];
     
-    if( error ) {
-        NSLog(@"NSJSONSerialization failed %@",error);
+    self.error = error;
+    
+    if( error )
         return nil;
+
+    if ( results.count == 1 )
+        return results.lastObject;
+    
+    for(NSDictionary *d in results){
+        NSString *idString = [d valueForKey:kKerbalNetKeyModId];
+        if (idString.integerValue == identifer ) {
+            return d;
+        }
     }
     
-    return results.lastObject;
+    self.error  = [NSError errorWithDomain:kKerbalNetErrorDomain
+                                      code:kKerbalNetErrorCodeModLookupFailed
+                                  userInfo:@{ NSLocalizedDescriptionKey : [@"Kerbal.Net was unable to locate mod with ID %ld" stringByAppendingFormat:@"%ld",identifer]}];
+                   
+    
+    return nil;
 }
 
+#pragma mark -
+#pragma mark Instance Methods
 
+- (BOOL)refresh
+{
     
+    [_operationQueue addOperationWithBlock:^{
+        
+        if( self.delegate && [self.delegate respondsToSelector:@selector(willBeginRefresh)])
+            [self.delegate performSelector:@selector(willBeginRefresh)];
+        
+        [self.remoteAssets removeAllObjects];
+    
+        for(NSDictionary *shortInfo in [self completeListing] ) {
+        
+            NSString *idStr = [shortInfo valueForKey:kKerbalNetKeyModId];
+        
+            if( idStr == nil ){
+            
+            
+                self.error = [NSError errorWithDomain:kKerbalNetErrorDomain
+                                                 code:kKerbalNetErrorCodeMissingIdKey
+                                             userInfo:@{NSLocalizedDescriptionKey : @"Kerbal.Net api_lookup_mod data did not contain mod_id key."}];
+                return;
+            }
+        
+            NSDictionary *longInfo = [self lookUpModById:idStr.integerValue];
+        
+            if( longInfo == nil ) {
+                NSLog(@"%@ lookUpModById:%@ failed: %@",self.class,idStr,self.error);
+                continue;
+            }
+        
+            Remote *remote = [[Remote alloc] initWithOptions:longInfo];
+            if( remote )
+                [self.remoteAssets addObject:remote];
+        }
+        if( self.delegate && [self.delegate respondsToSelector:@selector(didEndRefresh)] )
+            [self.delegate performSelector:@selector(didEndRefresh)];
 
+    }];
+    
+    return YES;
+}
+    
+- (BOOL)downloadFileAtURL:(NSURL *)remoteURL toLocalURL:(NSURL *)localURL
+{
+    NSError *error = nil;
+    
+    NSData *modFile = [NSData dataWithContentsOfURL:remoteURL
+                                            options:0
+                                              error:&error];
+    
+    self.error = error;
+    
+    if( error )
+        return NO;
+    
+    if( modFile ) {
+        
+        [modFile writeToURL:localURL
+                    options:0
+                      error:&error];
+        self.error = error;
+        if( error )
+            return NO;
+    }
+    
+    return YES;
+}
 @end

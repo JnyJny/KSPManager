@@ -16,20 +16,13 @@
 @property (strong) IBOutlet NSArrayController *availableArrayController;
 @property (strong) IBOutlet NSTableView *installedTableView;
 @property (strong) IBOutlet NSTableView *availableTableView;
-@property (strong) IBOutlet NSButton *addButton;
-@property (strong) IBOutlet NSButton *removeButton;
-@property (strong) IBOutlet NSButton *actionButton;
 @property (strong) IBOutlet NSSegmentedControl *categoryControl;
 
 @property (strong, nonatomic) NSArray *partSortDescriptors;
 @property (strong, nonatomic) NSArray *pluginSortDescriptors;
 @property (strong, nonatomic) NSArray *shipSortDescriptors;
 
-@property (strong, nonatomic, readonly) KerbalNet *kerbalNet;
 
-- (IBAction)didPushAddButton:(NSButton *)sender;
-- (IBAction)didPushRemoveButton:(NSButton *)sender;
-- (IBAction)didPushActionButton:(NSButton *)sender;
 - (IBAction)controlDidChange:(NSSegmentedControl *)sender;
 - (IBAction)installedTableViewAction:(NSTableView *)sender;
 - (IBAction)availableTableViewAction:(NSTableView *)sender;

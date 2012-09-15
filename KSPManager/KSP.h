@@ -11,7 +11,7 @@
 
 @class Asset;
 
-@interface KSP : NSObject {
+@interface KSP : NSObject <NSURLDownloadDelegate> {
 
 }
 @property (strong, nonatomic, readonly) NSURL *baseURL;

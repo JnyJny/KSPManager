@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "KerbalNetDelegate.h"
 
 #define kKerbalNetKeyModNameperma            @"mod_nameperma"
 #define kKerbalNetKeyModAuthor               @"mod_author"
@@ -33,16 +33,28 @@
 #define kKerbalNetKeyModThumbs_down          @"mod_thumbs_down"
 #define kKerbalNetKeyModPageviews            @"mod_pageviews"
 
+#define kKerbalNetAPIFunctionModListing      @"api_mod_listing"
+#define kKerbalNetAPIFunctionModLookup       @"api_mod_lookup"
+#define kKerbalNetAPIArgumentModId           @"api_mod_id"
+
+#define kKerbalNetErrorDomain                @"Kerbal.Net"
+#define kKerbalNetErrorCodeModLookupFailed   0x0001
+#define kKerbalNetErrorCodeMissingIdKey      0x0002
+
 @interface KerbalNet : NSObject
+
+@property (strong, nonatomic) id <KerbalNetDelegate> delegate;
 
 @property (strong, nonatomic) NSString *applicationId;
 @property (strong, nonatomic) NSString *applicationToken;
 @property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) NSString *password;
+@property (strong, nonatomic) NSError  *error;
 
-@property (strong, nonatomic, readonly) NSArray *remoteAssets;
+@property (strong, nonatomic, readonly) NSMutableArray *remoteAssets;
 
 - (id)initWithApplicationID:(NSString *)appID andApplicationToken:(NSString *)appToken;
 
+- (BOOL)refresh;
 
 @end

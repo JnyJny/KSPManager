@@ -31,7 +31,15 @@ This TODO list is for tracking feature ideas that come up but are not the curren
 - more tool tips
 - video demonstrating usage
 - change color scheme away from grey, grey on light blue? black bg?
-- clean out cached unzipped distributions [done]
 - keep dates for freshness checking
 - go to '~/Library/Preferences/unity.Squad.Kerbal Space Program.plist', go into Root and add a child called 'UnityGraphicsQuality' and set its class to 'number' and set the value to 3.
+- .craft -> JSON -> .craft filter
+- .sfs -> JSON -> .sfs filter
+- part.cfg -> JSON -> part.cfg filter
+
+DONE
+
+- clean out cached unzipped distributions
+
+
 

@@ -15,21 +15,29 @@
 
 @implementation KSPViewController
 
-
-
+@synthesize mainMenu = _mainMenu;
 @synthesize ksp = _ksp;
-@synthesize redBadge = _redBadge;
 
 
-- (NSImage *)redBadge
+
+- (IBAction)addAction:(id)sender
 {
-    if( _redBadge == nil ) {
-        NSSize sz = {12,12};
-        _redBadge = [NSImage imageNamed:@"badge-red-24x24"];
-        [_redBadge setSize:sz];
-        
-    }
-    return _redBadge;
+    NSLog(@"%@ addAction:%@",[self class], [sender class]);
+}
+
+- (IBAction)removeAction:(id)sender
+{
+    NSLog(@"%@ removeAction:%@",[self class], [sender class]);
+}
+
+- (IBAction)actionAction:(id)sender
+{
+    NSLog(@"%@ actionAction:%@",[self class], [sender class]);
+}
+
+- (IBAction)saveAction:(id)sender
+{
+    NSLog(@"%@ saveAction:%@",[self class], [sender class]);
 }
 
 @end

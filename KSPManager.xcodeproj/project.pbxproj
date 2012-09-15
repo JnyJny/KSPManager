@@ -26,6 +26,8 @@
 		1D56F41615FA377C0047042A /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1D56F41515FA377C0047042A /* dsa_pub.pem */; };
 		1D572152160274DB00D2427C /* KerbalNet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D572151160274DA00D2427C /* KerbalNet.m */; };
 		1D57215716028B5400D2427C /* Remote.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D57215616028B5400D2427C /* Remote.m */; };
+		1D57215C1603737900D2427C /* KerbalNetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D57215A1603737900D2427C /* KerbalNetViewController.m */; };
+		1D57215D1603737900D2427C /* KerbalNetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D57215B1603737900D2427C /* KerbalNetViewController.xib */; };
 		1D682A2615FCD93E007C84CB /* ConfigurationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D682A2515FCD93E007C84CB /* ConfigurationParser.m */; };
 		1D75BD6D15F79FA40037393E /* PersistenceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D75BD6C15F79FA40037393E /* PersistenceFile.m */; };
 		1D75BD7015F7A6770037393E /* Crew.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D75BD6F15F7A6770037393E /* Crew.m */; };
@@ -97,6 +99,10 @@
 		1D572151160274DA00D2427C /* KerbalNet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KerbalNet.m; sourceTree = "<group>"; };
 		1D57215516028B5400D2427C /* Remote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Remote.h; sourceTree = "<group>"; };
 		1D57215616028B5400D2427C /* Remote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Remote.m; sourceTree = "<group>"; };
+		1D5721591603737900D2427C /* KerbalNetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KerbalNetViewController.h; sourceTree = "<group>"; };
+		1D57215A1603737900D2427C /* KerbalNetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KerbalNetViewController.m; sourceTree = "<group>"; };
+		1D57215B1603737900D2427C /* KerbalNetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KerbalNetViewController.xib; sourceTree = "<group>"; };
+		1D57216A1604292F00D2427C /* KerbalNetDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KerbalNetDelegate.h; sourceTree = "<group>"; };
 		1D682A2415FCD93E007C84CB /* ConfigurationParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationParser.h; sourceTree = "<group>"; };
 		1D682A2515FCD93E007C84CB /* ConfigurationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationParser.m; sourceTree = "<group>"; };
 		1D682A2715FCD9CC007C84CB /* ConfigurationTokenizerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationTokenizerDelegate.h; sourceTree = "<group>"; };
@@ -237,6 +243,62 @@
 				1D57215616028B5400D2427C /* Remote.m */,
 			);
 			name = Remote;
+			sourceTree = "<group>";
+		};
+		1D5721581603735B00D2427C /* KerbalNet */ = {
+			isa = PBXGroup;
+			children = (
+				1D5721591603737900D2427C /* KerbalNetViewController.h */,
+				1D57215A1603737900D2427C /* KerbalNetViewController.m */,
+			);
+			name = KerbalNet;
+			sourceTree = "<group>";
+		};
+		1D57215E1603739000D2427C /* KerbalNet */ = {
+			isa = PBXGroup;
+			children = (
+				1D572150160274DA00D2427C /* KerbalNet.h */,
+				1D572151160274DA00D2427C /* KerbalNet.m */,
+				1D57216A1604292F00D2427C /* KerbalNetDelegate.h */,
+			);
+			name = KerbalNet;
+			sourceTree = "<group>";
+		};
+		1D57215F16037AF100D2427C /* Preference Pane */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Preference Pane";
+			sourceTree = "<group>";
+		};
+		1D57216516037B3000D2427C /* Main Window */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Main Window";
+			sourceTree = "<group>";
+		};
+		1D57216616037B4500D2427C /* Preference Pane */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Preference Pane";
+			sourceTree = "<group>";
+		};
+		1D57216816037C3000D2427C /* Main Window */ = {
+			isa = PBXGroup;
+			children = (
+				1D16221F15EB315500C0F3CC /* KSPViewController.h */,
+				1D16222015EB315500C0F3CC /* KSPViewController.m */,
+				1DB2E09515FFA7C300B1E0AF /* Addons Tab */,
+				1D03984A15FA8DFA00BA3D2F /* Missions Tab */,
+				1D03985115FA99D100BA3D2F /* Crew Tab */,
+				1D03984C15FA8E1200BA3D2F /* Inventory Tab */,
+				1D03984D15FA8E1D00BA3D2F /* Ship Tab */,
+				1D03984E15FA8E3000BA3D2F /* Saves Tab */,
+				1D5721581603735B00D2427C /* KerbalNet */,
+			);
+			name = "Main Window";
 			sourceTree = "<group>";
 		};
 		1D682A1A15FAD309007C84CB /* Ships */ = {
@@ -396,6 +458,8 @@
 		1DB405D515DB3E670041807D /* NIBs */ = {
 			isa = PBXGroup;
 			children = (
+				1D57216616037B4500D2427C /* Preference Pane */,
+				1D57216516037B3000D2427C /* Main Window */,
 				1DB405CD15DB3E230041807D /* MainMenu.xib */,
 				1DB2E09215FFA7B900B1E0AF /* AddonsViewController.xib */,
 				1DB405E315DB3F3D0041807D /* MissionsViewController.xib */,
@@ -403,6 +467,7 @@
 				1D2ED54115EB156900402EF1 /* InventoryViewController.xib */,
 				1D16222E15EDBB8F00C0F3CC /* ShipViewController.xib */,
 				1DD06E9915F93DC700202CB4 /* SavesViewController.xib */,
+				1D57215B1603737900D2427C /* KerbalNetViewController.xib */,
 			);
 			name = NIBs;
 			sourceTree = "<group>";
@@ -410,14 +475,8 @@
 		1DB405D615DB3E7A0041807D /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				1D16221F15EB315500C0F3CC /* KSPViewController.h */,
-				1D16222015EB315500C0F3CC /* KSPViewController.m */,
-				1DB2E09515FFA7C300B1E0AF /* Addons Tab */,
-				1D03984A15FA8DFA00BA3D2F /* Missions Tab */,
-				1D03985115FA99D100BA3D2F /* Crew Tab */,
-				1D03984C15FA8E1200BA3D2F /* Inventory Tab */,
-				1D03984D15FA8E1D00BA3D2F /* Ship Tab */,
-				1D03984E15FA8E3000BA3D2F /* Saves Tab */,
+				1D57216816037C3000D2427C /* Main Window */,
+				1D57215F16037AF100D2427C /* Preference Pane */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -429,8 +488,7 @@
 				1DB405FD15DC4E010041807D /* Utility */,
 				1DB405EB15DB45390041807D /* KSP.h */,
 				1DB405EC15DB45390041807D /* KSP.m */,
-				1D572150160274DA00D2427C /* KerbalNet.h */,
-				1D572151160274DA00D2427C /* KerbalNet.m */,
+				1D57215E1603739000D2427C /* KerbalNet */,
 				1D16222515EBC83800C0F3CC /* Assets */,
 				1D75BD6715F79F570037393E /* Mission */,
 			);
@@ -527,6 +585,7 @@
 				1D9C8D7316021861001C095F /* badge-36x36.png in Resources */,
 				1D9C8D7416021861001C095F /* badge-48x48.png in Resources */,
 				1D9C8D7616021914001C095F /* badge-red-24x24.png in Resources */,
+				1D57215D1603737900D2427C /* KerbalNetViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,6 +637,7 @@
 				1DB2E09315FFA7B900B1E0AF /* AddonsViewController.m in Sources */,
 				1D572152160274DB00D2427C /* KerbalNet.m in Sources */,
 				1D57215716028B5400D2427C /* Remote.m in Sources */,
+				1D57215C1603737900D2427C /* KerbalNetViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

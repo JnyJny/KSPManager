@@ -165,4 +165,15 @@ enum {
 #define kVesselPartKeySymmetry    @"sym"
 #define kVesselPartKeyCData       @"cData"
 
+// KSP Manager Kerbal.Net 
+
+#define kKSPManagerApplicationID    @"000000000004"
+#define kKSPManagerApplicationToken @"BB1044ULL1O0NUN7TR"
+
+// KSP Manager Error Domain & Codes
+
+#define kKSPManagerErrorDomain @"KSP Manager"
+#define kKSPManagerErrorCode 
+
+
 #endif

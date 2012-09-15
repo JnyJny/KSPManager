@@ -14,24 +14,26 @@
 #import "ShipViewController.h"
 #import "InventoryViewController.h"
 #import "SavesViewController.h"
+#import "KerbalNetViewController.h"
 #import "KSP.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate, NSTabViewDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
 
-@property (strong) IBOutlet NSTabView *tabView;
-@property (strong) IBOutlet NSPathControl *pathControl;
+@property (unsafe_unretained) IBOutlet NSTabView *tabView;
+@property (unsafe_unretained) IBOutlet NSPathControl *pathControl;
 
-@property (strong) IBOutlet AddonsViewController *addonsViewController;
-@property (strong) IBOutlet MissionsViewController *missionsViewController;
-@property (strong) IBOutlet CrewViewController *crewViewController;
-@property (strong) IBOutlet ShipViewController *shipViewController;
-@property (strong) IBOutlet InventoryViewController *inventoryViewController;
-@property (strong) IBOutlet SavesViewController *savesViewController;
+@property (unsafe_unretained) IBOutlet AddonsViewController *addonsViewController;
+@property (unsafe_unretained) IBOutlet MissionsViewController *missionsViewController;
+@property (unsafe_unretained) IBOutlet CrewViewController *crewViewController;
+@property (unsafe_unretained) IBOutlet ShipViewController *shipViewController;
+@property (unsafe_unretained) IBOutlet InventoryViewController *inventoryViewController;
+@property (unsafe_unretained) IBOutlet SavesViewController *savesViewController;
+@property (unsafe_unretained) IBOutlet KerbalNetViewController *kerbalNetViewController;
 
-@property (strong) IBOutlet NSButton *terminateKSPButton;
-@property (strong) IBOutlet NSButton *launchKSPButton;
+@property (unsafe_unretained) IBOutlet NSButton *terminateKSPButton;
+@property (unsafe_unretained) IBOutlet NSButton *launchKSPButton;
 
 
 @property (strong, nonatomic) KSP *ksp;

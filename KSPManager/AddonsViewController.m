@@ -10,15 +10,12 @@
 #import "Part.h"
 #import "Plugin.h"
 #import "Ship.h"
-#import "KerbalNet.h"
-
 
 #define kKeyContentArray    @"contentArray"
 #define kKeySortDescriptors @"sortDescriptors"
 #define kAssetDragData      @"AssetDragData"
 
-#define kKSP_APP_ID @"000000000004"
-#define kKSP_APP_TK @"BB1044ULL1O0NUN7TR"
+
 
 
 
@@ -36,7 +33,7 @@
 @synthesize partSortDescriptors = _partSortDescriptors;
 @synthesize pluginSortDescriptors = _pluginSortDescriptors;
 @synthesize shipSortDescriptors = _shipSortDescriptors;
-@synthesize kerbalNet = _kerbalNet;
+
 
 
 - (void)awakeFromNib
@@ -244,13 +241,7 @@
     return _shipSortDescriptors;
 }
 
-- (KerbalNet *)kerbalNet
-{
-    if( _kerbalNet == nil ) {
-        _kerbalNet = [[KerbalNet alloc] initWithApplicationID:kKSP_APP_ID andApplicationToken:kKSP_APP_TK];
-    }
-    return _kerbalNet;
-}
+
 
 #pragma mark -
 #pragma mark Private Instance Methods
@@ -328,12 +319,12 @@
 #pragma mark -
 #pragma mark Actions
 
-- (IBAction)didPushAddButton:(NSButton *)sender
+- (IBAction)addAction:(id)sender
 {
     
 }
 
-- (IBAction)didPushRemoveButton:(NSButton *)sender
+- (IBAction)removeAction:(id)sender
 {
     NSAlert *alert = [NSAlert alertWithMessageText:@"Delete Item"
                                      defaultButton:@"Remove"
@@ -353,7 +344,7 @@
     
 }
 
-- (IBAction)didPushActionButton:(NSButton *)sender
+- (IBAction)actionAction:(id)sender
 {
     
 }
@@ -377,11 +368,6 @@
         case 2:
             contentKeypath = @"ksp.ships";
             sortKeypath = @"shipSortDescriptors";
-            break;
-            
-        case 3:
-            contentKeypath = @"kerbalNet.remoteAssets";
-            sortKeypath = @"pluginShortDescriptors";
             break;
             
         default:

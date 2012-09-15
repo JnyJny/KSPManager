@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1080</int>
+		<int key="IBDocument.SystemTarget">1070</int>
 		<string key="IBDocument.SystemVersion">12B19</string>
 		<string key="IBDocument.InterfaceBuilderVersion">2549</string>
 		<string key="IBDocument.AppKitVersion">1187</string>
@@ -750,18 +750,15 @@
 							<string key="NSFrame">{{13, 10}, {921, 619}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="755969487"/>
+							<reference key="NSNextKeyView" ref="588730583"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<array class="NSMutableArray" key="NSTabViewItems">
 								<object class="NSTabViewItem" id="1062185358">
 									<string key="NSIdentifier">addonsViewController</string>
 									<object class="NSView" key="NSView" id="755969487">
-										<reference key="NSNextResponder" ref="899860836"/>
+										<nil key="NSNextResponder"/>
 										<int key="NSvFlags">256</int>
 										<string key="NSFrame">{{10, 33}, {901, 573}}</string>
-										<reference key="NSSuperview" ref="899860836"/>
-										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView"/>
 									</object>
 									<string key="NSLabel">Addons</string>
 									<object class="NSColor" key="NSColor" id="979994694">
@@ -831,8 +828,22 @@
 									<reference key="NSColor" ref="979994694"/>
 									<reference key="NSTabView" ref="899860836"/>
 								</object>
+								<object class="NSTabViewItem" id="468730538">
+									<string key="NSIdentifier">kerbalNetViewController</string>
+									<object class="NSView" key="NSView" id="588730583">
+										<reference key="NSNextResponder" ref="899860836"/>
+										<int key="NSvFlags">256</int>
+										<string key="NSFrame">{{10, 33}, {901, 573}}</string>
+										<reference key="NSSuperview" ref="899860836"/>
+										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView"/>
+									</object>
+									<string key="NSLabel">Kerbal.Net</string>
+									<reference key="NSColor" ref="979994694"/>
+									<reference key="NSTabView" ref="899860836"/>
+								</object>
 							</array>
-							<reference key="NSSelectedTabViewItem" ref="1062185358"/>
+							<reference key="NSSelectedTabViewItem" ref="468730538"/>
 							<object class="NSFont" key="NSFont">
 								<string key="NSName">LucidaGrande-Bold</string>
 								<double key="NSSize">13</double>
@@ -840,7 +851,7 @@
 							</object>
 							<int key="NSTvFlags">0</int>
 							<array class="NSMutableArray" key="NSSubviews">
-								<reference ref="755969487"/>
+								<reference ref="588730583"/>
 							</array>
 						</object>
 						<object class="NSPathControl" id="1052576584">
@@ -1002,6 +1013,9 @@
 			</object>
 			<object class="NSViewController" id="550691458">
 				<string key="NSNibName">SavesViewController</string>
+			</object>
+			<object class="NSViewController" id="842693444">
+				<string key="NSNibName">KerbalNetViewController</string>
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -1456,11 +1470,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">baseView</string>
+						<string key="label">kerbalNetViewController</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="439893737"/>
+						<reference key="destination" ref="842693444"/>
 					</object>
-					<int key="connectionID">795</int>
+					<int key="connectionID">799</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">mainMenu</string>
+						<reference key="source" ref="17346583"/>
+						<reference key="destination" ref="649796088"/>
+					</object>
+					<int key="connectionID">800</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -2217,6 +2239,7 @@
 							<reference ref="389359178"/>
 							<reference ref="99670365"/>
 							<reference ref="1062185358"/>
+							<reference ref="468730538"/>
 						</array>
 						<reference key="parent" ref="439893737"/>
 					</object>
@@ -2480,6 +2503,25 @@
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Missions View Controller</string>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">796</int>
+						<reference key="object" ref="468730538"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="588730583"/>
+						</array>
+						<reference key="parent" ref="899860836"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">797</int>
+						<reference key="object" ref="588730583"/>
+						<reference key="parent" ref="468730538"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">798</int>
+						<reference key="object" ref="842693444"/>
+						<reference key="parent" ref="0"/>
+						<string key="objectName">Kerbal.Net View Controller</string>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -2634,6 +2676,10 @@
 				<string key="784.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="785.CustomClassName">MissionsViewController</string>
 				<string key="785.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="796.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="797.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="798.CustomClassName">KerbalNetViewController</string>
+				<string key="798.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="81.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="82.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="83.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2643,7 +2689,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">795</int>
+			<int key="maxID">800</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2762,15 +2808,15 @@
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="addonsViewController">AddonsViewController</string>
-						<string key="baseView">NSView</string>
 						<string key="crewViewController">CrewViewController</string>
 						<string key="inventoryViewController">InventoryViewController</string>
+						<string key="kerbalNetViewController">KerbalNetViewController</string>
 						<string key="launchKSPButton">NSButton</string>
 						<string key="missionsViewController">MissionsViewController</string>
 						<string key="pathControl">NSPathControl</string>
 						<string key="savesViewController">SavesViewController</string>
 						<string key="shipViewController">ShipViewController</string>
-						<string key="tabView">BadgeTabView</string>
+						<string key="tabView">NSTabView</string>
 						<string key="terminateKSPButton">NSButton</string>
 						<string key="window">NSWindow</string>
 					</dictionary>
@@ -2779,10 +2825,6 @@
 							<string key="name">addonsViewController</string>
 							<string key="candidateClassName">AddonsViewController</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="baseView">
-							<string key="name">baseView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="crewViewController">
 							<string key="name">crewViewController</string>
 							<string key="candidateClassName">CrewViewController</string>
@@ -2790,6 +2832,10 @@
 						<object class="IBToOneOutletInfo" key="inventoryViewController">
 							<string key="name">inventoryViewController</string>
 							<string key="candidateClassName">InventoryViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="kerbalNetViewController">
+							<string key="name">kerbalNetViewController</string>
+							<string key="candidateClassName">KerbalNetViewController</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="launchKSPButton">
 							<string key="name">launchKSPButton</string>
@@ -2813,7 +2859,7 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="tabView">
 							<string key="name">tabView</string>
-							<string key="candidateClassName">BadgeTabView</string>
+							<string key="candidateClassName">NSTabView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="terminateKSPButton">
 							<string key="name">terminateKSPButton</string>
@@ -2827,14 +2873,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/AppDelegate.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">BadgeTabView</string>
-					<string key="superclassName">NSTabView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/BadgeTabView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -2884,9 +2922,66 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">KSPViewController</string>
 					<string key="superclassName">NSViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="actionAction:">id</string>
+						<string key="addAction:">id</string>
+						<string key="removeAction:">id</string>
+						<string key="saveAction:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="actionAction:">
+							<string key="name">actionAction:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="addAction:">
+							<string key="name">addAction:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="removeAction:">
+							<string key="name">removeAction:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="saveAction:">
+							<string key="name">saveAction:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">mainMenu</string>
+						<string key="NS.object.0">NSMenu</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">mainMenu</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">mainMenu</string>
+							<string key="candidateClassName">NSMenu</string>
+						</object>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/KSPViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">KerbalNetViewController</string>
+					<string key="superclassName">KSPViewController</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="kerbalNetArrayController">NSArrayController</string>
+						<string key="tableView">NSTableView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="kerbalNetArrayController">
+							<string key="name">kerbalNetArrayController</string>
+							<string key="candidateClassName">NSArrayController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tableView">
+							<string key="name">tableView</string>
+							<string key="candidateClassName">NSTableView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/KerbalNetViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -3022,6 +3117,10 @@
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
+		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
+			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
+			<real value="1070" key="NS.object.0"/>
+		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">

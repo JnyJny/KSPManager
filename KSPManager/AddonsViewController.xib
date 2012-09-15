@@ -51,7 +51,7 @@
 					<object class="NSSegmentedControl" id="286895422">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{235, 769}, {331, 23}}</string>
+						<string key="NSFrame">{{278, 769}, {244, 23}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="996879750"/>
@@ -83,10 +83,6 @@
 								<object class="NSSegmentItem">
 									<double key="NSSegmentItemWidth">80</double>
 									<string key="NSSegmentItemLabel">Ships</string>
-									<int key="NSSegmentItemImageScaling">0</int>
-								</object>
-								<object class="NSSegmentItem">
-									<string key="NSSegmentItemLabel">Kerbal.Net</string>
 									<int key="NSSegmentItemImageScaling">0</int>
 								</object>
 							</array>
@@ -211,14 +207,16 @@
 													<string key="NSFrameSize">{363, 17}</string>
 													<reference key="NSSuperview" ref="142119262"/>
 													<reference key="NSWindow"/>
-													<reference key="NSNextKeyView" ref="54683672"/>
+													<reference key="NSNextKeyView" ref="382811226"/>
 													<string key="NSReuseIdentifierKey">_NS:16</string>
 													<reference key="NSTableView" ref="20060744"/>
 												</object>
-												<object class="_NSCornerView" key="NSCornerView">
-													<nil key="NSNextResponder"/>
+												<object class="_NSCornerView" key="NSCornerView" id="382811226">
+													<reference key="NSNextResponder" ref="538779593"/>
 													<int key="NSvFlags">-2147483392</int>
 													<string key="NSFrame">{{224, 0}, {16, 17}}</string>
+													<reference key="NSSuperview" ref="538779593"/>
+													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="54683672"/>
 													<string key="NSReuseIdentifierKey">_NS:19</string>
 												</object>
@@ -389,6 +387,7 @@
 										<reference key="NSBGColor" ref="245925473"/>
 										<int key="NScvFlags">4</int>
 									</object>
+									<reference ref="382811226"/>
 								</array>
 								<string key="NSFrameSize">{365, 692}</string>
 								<reference key="NSSuperview" ref="996879750"/>
@@ -400,6 +399,7 @@
 								<reference key="NSHScroller" ref="85425171"/>
 								<reference key="NSContentView" ref="54683672"/>
 								<reference key="NSHeaderClipView" ref="142119262"/>
+								<reference key="NSCornerView" ref="382811226"/>
 								<bytes key="NSScrollAmts">QSAAAEEgAABBmAAAQZgAAA</bytes>
 								<double key="NSMinMagnification">0.25</double>
 								<double key="NSMaxMagnification">4</double>
@@ -440,14 +440,16 @@
 													<string key="NSFrameSize">{361, 17}</string>
 													<reference key="NSSuperview" ref="824190135"/>
 													<reference key="NSWindow"/>
-													<reference key="NSNextKeyView" ref="879936280"/>
+													<reference key="NSNextKeyView" ref="805085254"/>
 													<string key="NSReuseIdentifierKey">_NS:16</string>
 													<reference key="NSTableView" ref="127001279"/>
 												</object>
-												<object class="_NSCornerView" key="NSCornerView">
-													<nil key="NSNextResponder"/>
+												<object class="_NSCornerView" key="NSCornerView" id="805085254">
+													<reference key="NSNextResponder" ref="53111390"/>
 													<int key="NSvFlags">-2147483392</int>
 													<string key="NSFrame">{{224, 0}, {16, 17}}</string>
+													<reference key="NSSuperview" ref="53111390"/>
+													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="879936280"/>
 													<string key="NSReuseIdentifierKey">_NS:19</string>
 												</object>
@@ -574,6 +576,7 @@
 										<reference key="NSBGColor" ref="245925473"/>
 										<int key="NScvFlags">4</int>
 									</object>
+									<reference ref="805085254"/>
 								</array>
 								<string key="NSFrame">{{397, 0}, {363, 692}}</string>
 								<reference key="NSSuperview" ref="996879750"/>
@@ -585,6 +588,7 @@
 								<reference key="NSHScroller" ref="329834771"/>
 								<reference key="NSContentView" ref="879936280"/>
 								<reference key="NSHeaderClipView" ref="824190135"/>
+								<reference key="NSCornerView" ref="805085254"/>
 								<bytes key="NSScrollAmts">QSAAAEEgAABBmAAAQZgAAA</bytes>
 								<double key="NSMinMagnification">0.25</double>
 								<double key="NSMaxMagnification">4</double>
@@ -685,30 +689,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">didPushAddButton:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="823459884"/>
-					</object>
-					<int key="connectionID">94</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">didPushRemoveButton:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="669091150"/>
-					</object>
-					<int key="connectionID">95</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">didPushActionButton:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="165092732"/>
-					</object>
-					<int key="connectionID">96</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">controlDidChange:</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="286895422"/>
@@ -754,6 +734,30 @@
 						<reference key="destination" ref="20060744"/>
 					</object>
 					<int key="connectionID">162</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">addAction:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="823459884"/>
+					</object>
+					<int key="connectionID">180</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">removeAction:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="669091150"/>
+					</object>
+					<int key="connectionID">181</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">actionAction:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="165092732"/>
+					</object>
+					<int key="connectionID">182</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -1190,6 +1194,7 @@
 							<reference ref="388974958"/>
 						</array>
 						<reference key="parent" ref="1005"/>
+						<string key="objectName">Add Button</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">14</int>
@@ -1214,6 +1219,7 @@
 							</object>
 						</array>
 						<reference key="parent" ref="1005"/>
+						<string key="objectName">Remove Button</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">15</int>
@@ -1238,6 +1244,7 @@
 							<reference ref="935049166"/>
 						</array>
 						<reference key="parent" ref="1005"/>
+						<string key="objectName">Action Button</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">16</int>
@@ -1609,7 +1616,7 @@
 				<string key="7.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="NO" key="73.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<integer value="3" key="74.IBNSSegmentedControlInspectorSelectedSegmentMetadataKey"/>
+				<integer value="2" key="74.IBNSSegmentedControlInspectorSelectedSegmentMetadataKey"/>
 				<string key="74.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="75.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="76.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1622,7 +1629,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">179</int>
+			<int key="maxID">182</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1632,11 +1639,7 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="availableTableViewAction:">NSTableView</string>
 						<string key="controlDidChange:">NSSegmentedControl</string>
-						<string key="didPushActionButton:">NSButton</string>
-						<string key="didPushAddButton:">NSButton</string>
-						<string key="didPushRemoveButton:">NSButton</string>
 						<string key="installedTableViewAction:">NSTableView</string>
-						<string key="moveSelectedToInstalled:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="availableTableViewAction:">
@@ -1647,46 +1650,19 @@
 							<string key="name">controlDidChange:</string>
 							<string key="candidateClassName">NSSegmentedControl</string>
 						</object>
-						<object class="IBActionInfo" key="didPushActionButton:">
-							<string key="name">didPushActionButton:</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBActionInfo" key="didPushAddButton:">
-							<string key="name">didPushAddButton:</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBActionInfo" key="didPushRemoveButton:">
-							<string key="name">didPushRemoveButton:</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
 						<object class="IBActionInfo" key="installedTableViewAction:">
 							<string key="name">installedTableViewAction:</string>
 							<string key="candidateClassName">NSTableView</string>
 						</object>
-						<object class="IBActionInfo" key="moveSelectedToInstalled:">
-							<string key="name">moveSelectedToInstalled:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="actionButton">NSButton</string>
-						<string key="addButton">NSButton</string>
 						<string key="availableArrayController">NSArrayController</string>
 						<string key="availableTableView">NSTableView</string>
 						<string key="categoryControl">NSSegmentedControl</string>
 						<string key="installedArrayController">NSArrayController</string>
 						<string key="installedTableView">NSTableView</string>
-						<string key="removeButton">NSButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="actionButton">
-							<string key="name">actionButton</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="addButton">
-							<string key="name">addButton</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="availableArrayController">
 							<string key="name">availableArrayController</string>
 							<string key="candidateClassName">NSArrayController</string>
@@ -1707,10 +1683,6 @@
 							<string key="name">installedTableView</string>
 							<string key="candidateClassName">NSTableView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="removeButton">
-							<string key="name">removeButton</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
@@ -1720,6 +1692,54 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">KSPViewController</string>
 					<string key="superclassName">NSViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="actionAction:">id</string>
+						<string key="addAction:">id</string>
+						<string key="removeAction:">id</string>
+						<string key="saveAction:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="actionAction:">
+							<string key="name">actionAction:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="addAction:">
+							<string key="name">addAction:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="removeAction:">
+							<string key="name">removeAction:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="saveAction:">
+							<string key="name">saveAction:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="actionButton">NSButton</string>
+						<string key="addButton">NSButton</string>
+						<string key="mainMenu">NSMenu</string>
+						<string key="removeButton">NSButton</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="actionButton">
+							<string key="name">actionButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="addButton">
+							<string key="name">addButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="mainMenu">
+							<string key="name">mainMenu</string>
+							<string key="candidateClassName">NSMenu</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="removeButton">
+							<string key="name">removeButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/KSPViewController.h</string>
@@ -1740,6 +1760,10 @@
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
 			<integer value="1070" key="NS.object.0"/>
+		</object>
+		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
+			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
+			<real value="1070" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
