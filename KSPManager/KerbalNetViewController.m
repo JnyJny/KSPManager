@@ -90,7 +90,8 @@
 {
     for( Remote *remote in self.kerbalNetArrayController.selectedObjects ) {
         
-        NSURL *localURL = [self.ksp cacheURLforPath:remote.url.lastPathComponent];
+        NSURL *localURL = [self.ksp downloadCacheURLforPath:remote.url.lastPathComponent];
+
             
         if( [remote downloadTo:localURL] == NO ) {
             NSLog(@"downloadTo:%@ failed %@",localURL,remote.error);

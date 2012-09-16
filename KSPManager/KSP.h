@@ -53,6 +53,7 @@
 
 - (NSArray *)createAssetsWith:(NSURL *)fileURL install:(BOOL)install;
 
+- (NSURL *)downloadCacheURLforPath:(NSString *)path;
 - (NSURL *)cacheURLforPath:(NSString *)path;
 
 - (BOOL)launchKSP;
@@ -61,7 +62,7 @@
 
 + (NSArray *)locateInstallationDirectories;
 + (BOOL)terminateRunningKSP;
-
++ (BOOL)setGraphicsQuality:(NSInteger)quality inPlist:(NSURL *)plistURL;
 
 
 

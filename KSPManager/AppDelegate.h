@@ -37,6 +37,7 @@
 
 
 @property (strong, nonatomic) KSP *ksp;
+@property (strong, nonatomic) NSFileManager *fileManager;
 
 
 - (IBAction)chooseInstallationDirectory:(id)sender;

@@ -23,9 +23,8 @@
 @synthesize kerbalNetViewController;
 @synthesize terminateKSPButton;
 @synthesize launchKSPButton;
-
-
 @synthesize ksp = _ksp;
+@synthesize fileManager = _fileManager;
 
 
 #pragma mark -
@@ -94,6 +93,14 @@
 }
 
 
+- (void)setGraphicsQuality:(NSNumber *)quality
+{
+
+    NSString *plist = [[@"~/Library/Preferences/" stringByAppendingString:kKSPPreferencesPlistName] stringByExpandingTildeInPath];
+    NSURL *url = [NSURL URLWithString:plist];
+    
+    [KSP setGraphicsQuality:quality.integerValue inPlist:url];
+}
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
@@ -104,6 +111,8 @@
     [self setupTabControllers];
     
     [self setupToolTips];
+    
+    [self setGraphicsQuality:[NSNumber numberWithInteger:5]];
     
 }
 
@@ -145,7 +154,13 @@
     [self.pathControl setURL:_ksp.baseURL];
 }
 
-
+- (NSFileManager *)fileManager
+{
+    if( _fileManager == nil ) {
+        _fileManager = [NSFileManager defaultManager];
+    }
+    return _fileManager;
+}
 
 #pragma mark -
 #pragma mark Instance Methods

@@ -264,16 +264,24 @@
 			name = KerbalNet;
 			sourceTree = "<group>";
 		};
-		1D57215F16037AF100D2427C /* Preference Pane */ = {
+		1D57215F16037AF100D2427C /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = "Preference Pane";
+			name = Preferences;
 			sourceTree = "<group>";
 		};
 		1D57216516037B3000D2427C /* Main Window */ = {
 			isa = PBXGroup;
 			children = (
+				1DB405CD15DB3E230041807D /* MainMenu.xib */,
+				1DB2E09215FFA7B900B1E0AF /* AddonsViewController.xib */,
+				1DB405E315DB3F3D0041807D /* MissionsViewController.xib */,
+				1D03985415FA99EC00BA3D2F /* CrewViewController.xib */,
+				1D2ED54115EB156900402EF1 /* InventoryViewController.xib */,
+				1D16222E15EDBB8F00C0F3CC /* ShipViewController.xib */,
+				1DD06E9915F93DC700202CB4 /* SavesViewController.xib */,
+				1D57215B1603737900D2427C /* KerbalNetViewController.xib */,
 			);
 			name = "Main Window";
 			sourceTree = "<group>";
@@ -460,14 +468,6 @@
 			children = (
 				1D57216616037B4500D2427C /* Preference Pane */,
 				1D57216516037B3000D2427C /* Main Window */,
-				1DB405CD15DB3E230041807D /* MainMenu.xib */,
-				1DB2E09215FFA7B900B1E0AF /* AddonsViewController.xib */,
-				1DB405E315DB3F3D0041807D /* MissionsViewController.xib */,
-				1D03985415FA99EC00BA3D2F /* CrewViewController.xib */,
-				1D2ED54115EB156900402EF1 /* InventoryViewController.xib */,
-				1D16222E15EDBB8F00C0F3CC /* ShipViewController.xib */,
-				1DD06E9915F93DC700202CB4 /* SavesViewController.xib */,
-				1D57215B1603737900D2427C /* KerbalNetViewController.xib */,
 			);
 			name = NIBs;
 			sourceTree = "<group>";
@@ -476,7 +476,7 @@
 			isa = PBXGroup;
 			children = (
 				1D57216816037C3000D2427C /* Main Window */,
-				1D57215F16037AF100D2427C /* Preference Pane */,
+				1D57215F16037AF100D2427C /* Preferences */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";

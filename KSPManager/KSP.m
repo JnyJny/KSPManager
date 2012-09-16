@@ -390,6 +390,11 @@
     
 }
 
+- (NSURL *)downloadCacheURLforPath:(NSString *)path
+{
+    return [self cacheURLforPath:[@"Downloads" stringByAppendingString:path]];
+}
+
 - (NSURL *)cacheURLforPath:(NSString *)path
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -458,8 +463,6 @@
     NSNumber *isDir;
     
     [url getResourceValue:&isDir forKey:NSURLIsDirectoryKey error:&error];
-    
-    NSLog(@"createAssetsWith:%@ install:%d isDir: %@",url,install,isDir);
     
     if( error ) {
         [[NSAlert alertWithError:error] runModal];
@@ -628,6 +631,22 @@ AddAndInstall:
     result = YES;
     
     return result;
+}
+
+
+
++ (BOOL)setGraphicsQuality:(NSInteger)quality inPlist:(NSURL *)plistURL
+{
+    NSMutableDictionary *plist = [NSMutableDictionary dictionaryWithContentsOfURL:plistURL];
+    
+    if( plist == nil )
+        return NO;
+    
+    [plist addEntriesFromDictionary:@{ kUnityKeyGraphicsQuality:[NSNumber numberWithInteger:quality] }];
+    
+    [plist writeToURL:plistURL atomically:YES];
+    
+    return YES;
 }
 
 

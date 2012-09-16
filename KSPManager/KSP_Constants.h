@@ -175,5 +175,10 @@ enum {
 #define kKSPManagerErrorDomain @"KSP Manager"
 #define kKSPManagerErrorCode 
 
+// Preference Hacking
+//
+#define kKSPPreferencesPlistName @"unity.Squad.Kerbal Space Program.plist"
+#define kUnityKeyGraphicsQuality @"UnityGraphicsQuality"
+
 
 #endif
