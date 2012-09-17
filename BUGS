@@ -1,7 +1,8 @@
 Not a complete list of bugs
 
 Outstanding:
-
+- possible to download a zip file and have unzip get stuck due to replacing previous downloaded file
+  unzip force command line option?
 
 Fixed:
 

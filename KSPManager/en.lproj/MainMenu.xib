@@ -752,7 +752,7 @@
 							<string key="NSFrame">{{13, 10}, {967, 619}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="588730583"/>
+							<reference key="NSNextKeyView" ref="788245704"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<array class="NSMutableArray" key="NSTabViewItems">
 								<object class="NSTabViewItem" id="1062185358">
@@ -761,6 +761,7 @@
 										<nil key="NSNextResponder"/>
 										<int key="NSvFlags">256</int>
 										<string key="NSFrame">{{10, 33}, {947, 573}}</string>
+										<reference key="NSNextKeyView" ref="899860836"/>
 									</object>
 									<string key="NSLabel">Addons</string>
 									<object class="NSColor" key="NSColor" id="979994694">
@@ -833,6 +834,18 @@
 								<object class="NSTabViewItem" id="468730538">
 									<string key="NSIdentifier">kerbalNetViewController</string>
 									<object class="NSView" key="NSView" id="588730583">
+										<nil key="NSNextResponder"/>
+										<int key="NSvFlags">256</int>
+										<string key="NSFrame">{{10, 33}, {947, 573}}</string>
+										<reference key="NSNextKeyView"/>
+									</object>
+									<string key="NSLabel">Kerbal.Net</string>
+									<reference key="NSColor" ref="979994694"/>
+									<reference key="NSTabView" ref="899860836"/>
+								</object>
+								<object class="NSTabViewItem" id="180559918">
+									<string key="NSIdentifier">utilityViewController</string>
+									<object class="NSView" key="NSView" id="788245704">
 										<reference key="NSNextResponder" ref="899860836"/>
 										<int key="NSvFlags">256</int>
 										<string key="NSFrame">{{10, 33}, {947, 573}}</string>
@@ -840,12 +853,12 @@
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView"/>
 									</object>
-									<string key="NSLabel">Kerbal.Net</string>
+									<string key="NSLabel">Utility</string>
 									<reference key="NSColor" ref="979994694"/>
 									<reference key="NSTabView" ref="899860836"/>
 								</object>
 							</array>
-							<reference key="NSSelectedTabViewItem" ref="468730538"/>
+							<reference key="NSSelectedTabViewItem" ref="180559918"/>
 							<object class="NSFont" key="NSFont">
 								<string key="NSName">LucidaGrande-Bold</string>
 								<double key="NSSize">13</double>
@@ -853,7 +866,7 @@
 							</object>
 							<int key="NSTvFlags">0</int>
 							<array class="NSMutableArray" key="NSSubviews">
-								<reference ref="588730583"/>
+								<reference ref="788245704"/>
 							</array>
 						</object>
 						<object class="NSPathControl" id="1052576584">
@@ -1019,27 +1032,30 @@
 			<object class="NSViewController" id="842693444">
 				<string key="NSNibName">KerbalNetViewController</string>
 			</object>
-			<object class="NSPopUpButton" id="256839874">
+			<object class="NSViewController" id="778840012">
+				<string key="NSNibName">UtilityViewController</string>
+			</object>
+			<object class="NSPopUpButton" id="692600523">
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">268</int>
 				<string key="NSFrameSize">{100, 26}</string>
 				<reference key="NSSuperview"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<bool key="NSEnabled">YES</bool>
-				<object class="NSPopUpButtonCell" key="NSCell" id="1025753538">
+				<object class="NSPopUpButtonCell" key="NSCell" id="133939971">
 					<int key="NSCellFlags">-2076180416</int>
 					<int key="NSCellFlags2">2048</int>
 					<reference key="NSSupport" ref="19120441"/>
 					<string key="NSCellIdentifier">_NS:9</string>
-					<reference key="NSControlView" ref="256839874"/>
+					<reference key="NSControlView" ref="692600523"/>
 					<int key="NSButtonFlags">109199360</int>
 					<int key="NSButtonFlags2">129</int>
 					<string key="NSAlternateContents"/>
 					<string key="NSKeyEquivalent"/>
 					<int key="NSPeriodicDelay">400</int>
 					<int key="NSPeriodicInterval">75</int>
-					<object class="NSMenuItem" key="NSMenuItem" id="890383098">
-						<reference key="NSMenu" ref="222514784"/>
+					<object class="NSMenuItem" key="NSMenuItem" id="245827749">
+						<reference key="NSMenu" ref="294316031"/>
 						<string key="NSTitle">Item 1</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSKeyEquivModMask">1048576</int>
@@ -1048,15 +1064,15 @@
 						<reference key="NSOnImage" ref="35465992"/>
 						<reference key="NSMixedImage" ref="502551668"/>
 						<string key="NSAction">_popUpItemAction:</string>
-						<reference key="NSTarget" ref="1025753538"/>
+						<reference key="NSTarget" ref="133939971"/>
 					</object>
 					<bool key="NSMenuItemRespectAlignment">YES</bool>
-					<object class="NSMenu" key="NSMenu" id="222514784">
+					<object class="NSMenu" key="NSMenu" id="294316031">
 						<string key="NSTitle">OtherViews</string>
 						<array class="NSMutableArray" key="NSMenuItems">
-							<reference ref="890383098"/>
-							<object class="NSMenuItem" id="426097733">
-								<reference key="NSMenu" ref="222514784"/>
+							<reference ref="245827749"/>
+							<object class="NSMenuItem" id="1048144340">
+								<reference key="NSMenu" ref="294316031"/>
 								<string key="NSTitle">Item 2</string>
 								<string key="NSKeyEquiv"/>
 								<int key="NSKeyEquivModMask">1048576</int>
@@ -1064,10 +1080,10 @@
 								<reference key="NSOnImage" ref="35465992"/>
 								<reference key="NSMixedImage" ref="502551668"/>
 								<string key="NSAction">_popUpItemAction:</string>
-								<reference key="NSTarget" ref="1025753538"/>
+								<reference key="NSTarget" ref="133939971"/>
 							</object>
-							<object class="NSMenuItem" id="738801959">
-								<reference key="NSMenu" ref="222514784"/>
+							<object class="NSMenuItem" id="721962666">
+								<reference key="NSMenu" ref="294316031"/>
 								<string key="NSTitle">Item 3</string>
 								<string key="NSKeyEquiv"/>
 								<int key="NSKeyEquivModMask">1048576</int>
@@ -1075,7 +1091,7 @@
 								<reference key="NSOnImage" ref="35465992"/>
 								<reference key="NSMixedImage" ref="502551668"/>
 								<string key="NSAction">_popUpItemAction:</string>
-								<reference key="NSTarget" ref="1025753538"/>
+								<reference key="NSTarget" ref="133939971"/>
 							</object>
 						</array>
 						<reference key="NSMenuFont" ref="19120441"/>
@@ -1545,6 +1561,14 @@
 						<reference key="destination" ref="842693444"/>
 					</object>
 					<int key="connectionID">799</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">utilityViewController</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="778840012"/>
+					</object>
+					<int key="connectionID">816</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -2310,6 +2334,7 @@
 							<reference ref="99670365"/>
 							<reference ref="1062185358"/>
 							<reference ref="468730538"/>
+							<reference ref="180559918"/>
 						</array>
 						<reference key="parent" ref="439893737"/>
 					</object>
@@ -2594,44 +2619,63 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">804</int>
-						<reference key="object" ref="256839874"/>
+						<reference key="object" ref="692600523"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="1025753538"/>
+							<reference ref="133939971"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">805</int>
-						<reference key="object" ref="1025753538"/>
+						<reference key="object" ref="133939971"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="222514784"/>
+							<reference ref="294316031"/>
 						</array>
-						<reference key="parent" ref="256839874"/>
+						<reference key="parent" ref="692600523"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">806</int>
-						<reference key="object" ref="222514784"/>
+						<reference key="object" ref="294316031"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="738801959"/>
-							<reference ref="426097733"/>
-							<reference ref="890383098"/>
+							<reference ref="721962666"/>
+							<reference ref="1048144340"/>
+							<reference ref="245827749"/>
 						</array>
-						<reference key="parent" ref="1025753538"/>
+						<reference key="parent" ref="133939971"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">809</int>
-						<reference key="object" ref="738801959"/>
-						<reference key="parent" ref="222514784"/>
+						<reference key="object" ref="721962666"/>
+						<reference key="parent" ref="294316031"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">808</int>
-						<reference key="object" ref="426097733"/>
-						<reference key="parent" ref="222514784"/>
+						<reference key="object" ref="1048144340"/>
+						<reference key="parent" ref="294316031"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">807</int>
-						<reference key="object" ref="890383098"/>
-						<reference key="parent" ref="222514784"/>
+						<reference key="object" ref="245827749"/>
+						<reference key="parent" ref="294316031"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">813</int>
+						<reference key="object" ref="180559918"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="788245704"/>
+						</array>
+						<reference key="parent" ref="899860836"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">814</int>
+						<reference key="object" ref="788245704"/>
+						<reference key="parent" ref="180559918"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">815</int>
+						<reference key="object" ref="778840012"/>
+						<reference key="parent" ref="0"/>
+						<string key="objectName">Utility View Controller</string>
 					</object>
 				</array>
 			</object>
@@ -2798,6 +2842,10 @@
 				<string key="808.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="809.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="81.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="813.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="814.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="815.CustomClassName">UtilityViewController</string>
+				<string key="815.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="82.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="83.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="92.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2806,7 +2854,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">812</int>
+			<int key="maxID">816</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2905,6 +2953,7 @@
 						<string key="shipViewController">ShipViewController</string>
 						<string key="tabView">NSTabView</string>
 						<string key="terminateKSPButton">NSButton</string>
+						<string key="utilityViewController">UtilityViewController</string>
 						<string key="window">NSWindow</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -2951,6 +3000,10 @@
 						<object class="IBToOneOutletInfo" key="terminateKSPButton">
 							<string key="name">terminateKSPButton</string>
 							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="utilityViewController">
+							<string key="name">utilityViewController</string>
+							<string key="candidateClassName">UtilityViewController</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="window">
 							<string key="name">window</string>
@@ -3065,20 +3118,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">KerbalNetViewController</string>
 					<string key="superclassName">KSPViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="actionAction:">id</string>
-						<string key="addAction:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="actionAction:">
-							<string key="name">actionAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="addAction:">
-							<string key="name">addAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="kerbalNetArrayController">NSArrayController</string>
 						<string key="progressIndicator">NSProgressIndicator</string>
@@ -3230,6 +3269,14 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/ShipViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UtilityViewController</string>
+					<string key="superclassName">KSPViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/UtilityViewController.h</string>
 					</object>
 				</object>
 			</array>

@@ -177,8 +177,12 @@ enum {
 
 // Preference Hacking
 //
-#define kKSPPreferencesPlistName @"unity.Squad.Kerbal Space Program.plist"
-#define kUnityKeyGraphicsQuality @"UnityGraphicsQuality"
+#define kKSPPreferencesPlistPath @"~/Library/Preferences/unity.Squad.Kerbal Space Program.plist"
+
+#define kKSPPreferencesKeyIsFullscreenMode  @"Screenmanager Is Fullscreen mode"
+#define kKSPPreferencesKeyResolutionHeight  @"Screenmanager Resolution Height"
+#define kKSPPerferencesKeyResolutionWidth   @"Screenmanager Resolution Width"
+#define kKSPPreferencesKeyGraphicsQuality   @"UnityGraphicsQuality"
 
 
 #endif

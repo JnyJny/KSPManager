@@ -1,6 +1,8 @@
 This TODO list is for tracking feature ideas that come up but are not the current priority.
 
-- kerbel.net integration ( readonly! )
+- perferences window
+- part information
+- kerbel.net integration cleanup
 - add-on optimization driven by ship composition (install only the parts required for a ship or set or ships )
 - user ship ratings ( give ships stars! )
 - instant orbit assistant
@@ -40,6 +42,6 @@ This TODO list is for tracking feature ideas that come up but are not the curren
 DONE
 
 - clean out cached unzipped distributions
-
+- plist UnityGraphicsQuality combo-box or something
 
 

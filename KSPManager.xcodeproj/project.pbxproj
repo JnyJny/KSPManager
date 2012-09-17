@@ -20,6 +20,8 @@
 		1D16223615EE721300C0F3CC /* PortableExecutableFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D16223515EE721300C0F3CC /* PortableExecutableFormat.m */; };
 		1D16223815EE97D800C0F3CC /* KSPM-Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1D16223715EE97D800C0F3CC /* KSPM-Icon.icns */; };
 		1D16223C15EE9F2B00C0F3CC /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 1D16223A15EE9F2B00C0F3CC /* LICENSE */; };
+		1D28B8B2160622C6009C7FD0 /* UtilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D28B8B0160622C6009C7FD0 /* UtilityViewController.m */; };
+		1D28B8B3160622C6009C7FD0 /* UtilityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D28B8B1160622C6009C7FD0 /* UtilityViewController.xib */; };
 		1D2ED54215EB156900402EF1 /* InventoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D2ED54015EB156900402EF1 /* InventoryViewController.m */; };
 		1D2ED54315EB156900402EF1 /* InventoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D2ED54115EB156900402EF1 /* InventoryViewController.xib */; };
 		1D3746AC15F7F23F00F858B3 /* PersistentObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3746AB15F7F23F00F858B3 /* PersistentObject.m */; };
@@ -89,6 +91,9 @@
 		1D16223515EE721300C0F3CC /* PortableExecutableFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PortableExecutableFormat.m; sourceTree = "<group>"; };
 		1D16223715EE97D800C0F3CC /* KSPM-Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "KSPM-Icon.icns"; sourceTree = "<group>"; };
 		1D16223A15EE9F2B00C0F3CC /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
+		1D28B8AF160622C6009C7FD0 /* UtilityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityViewController.h; sourceTree = "<group>"; };
+		1D28B8B0160622C6009C7FD0 /* UtilityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityViewController.m; sourceTree = "<group>"; };
+		1D28B8B1160622C6009C7FD0 /* UtilityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UtilityViewController.xib; sourceTree = "<group>"; };
 		1D2ED53F15EB156900402EF1 /* InventoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryViewController.h; sourceTree = "<group>"; };
 		1D2ED54015EB156900402EF1 /* InventoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryViewController.m; sourceTree = "<group>"; };
 		1D2ED54115EB156900402EF1 /* InventoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InventoryViewController.xib; sourceTree = "<group>"; };
@@ -236,6 +241,15 @@
 			name = Documentation;
 			sourceTree = "<group>";
 		};
+		1D28B8B4160622D2009C7FD0 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				1D28B8AF160622C6009C7FD0 /* UtilityViewController.h */,
+				1D28B8B0160622C6009C7FD0 /* UtilityViewController.m */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
 		1D57215416028B3600D2427C /* Remote */ = {
 			isa = PBXGroup;
 			children = (
@@ -282,6 +296,7 @@
 				1D16222E15EDBB8F00C0F3CC /* ShipViewController.xib */,
 				1DD06E9915F93DC700202CB4 /* SavesViewController.xib */,
 				1D57215B1603737900D2427C /* KerbalNetViewController.xib */,
+				1D28B8B1160622C6009C7FD0 /* UtilityViewController.xib */,
 			);
 			name = "Main Window";
 			sourceTree = "<group>";
@@ -305,6 +320,7 @@
 				1D03984D15FA8E1D00BA3D2F /* Ship Tab */,
 				1D03984E15FA8E3000BA3D2F /* Saves Tab */,
 				1D5721581603735B00D2427C /* KerbalNet */,
+				1D28B8B4160622D2009C7FD0 /* Utility */,
 			);
 			name = "Main Window";
 			sourceTree = "<group>";
@@ -586,6 +602,7 @@
 				1D9C8D7416021861001C095F /* badge-48x48.png in Resources */,
 				1D9C8D7616021914001C095F /* badge-red-24x24.png in Resources */,
 				1D57215D1603737900D2427C /* KerbalNetViewController.xib in Resources */,
+				1D28B8B3160622C6009C7FD0 /* UtilityViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -638,6 +655,7 @@
 				1D572152160274DB00D2427C /* KerbalNet.m in Sources */,
 				1D57215716028B5400D2427C /* Remote.m in Sources */,
 				1D57215C1603737900D2427C /* KerbalNetViewController.m in Sources */,
+				1D28B8B2160622C6009C7FD0 /* UtilityViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

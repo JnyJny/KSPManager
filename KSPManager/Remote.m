@@ -89,6 +89,8 @@
 {
     NSError *error = nil;
     
+    // XXX needs a protocol and an operation queue so this can't hang the
+    //     main thread.
     NSLog(@"%@ downloadTo:%@ toLocalURL: %@",self.class,self.url,localURL);
     
     NSData *modFile = [NSData dataWithContentsOfURL:self.url

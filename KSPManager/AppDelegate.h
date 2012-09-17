@@ -15,6 +15,7 @@
 #import "InventoryViewController.h"
 #import "SavesViewController.h"
 #import "KerbalNetViewController.h"
+#import "UtilityViewController.h"
 #import "KSP.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSTabViewDelegate>
@@ -31,13 +32,13 @@
 @property (unsafe_unretained) IBOutlet InventoryViewController *inventoryViewController;
 @property (unsafe_unretained) IBOutlet SavesViewController *savesViewController;
 @property (unsafe_unretained) IBOutlet KerbalNetViewController *kerbalNetViewController;
+@property (unsafe_unretained) IBOutlet UtilityViewController *utilityViewController;
 
 @property (unsafe_unretained) IBOutlet NSButton *terminateKSPButton;
 @property (unsafe_unretained) IBOutlet NSButton *launchKSPButton;
 
 
 @property (strong, nonatomic) KSP *ksp;
-@property (strong, nonatomic) NSFileManager *fileManager;
 
 
 - (IBAction)chooseInstallationDirectory:(id)sender;

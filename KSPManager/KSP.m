@@ -41,8 +41,11 @@
 @synthesize persistenceFile = _persistenceFile;
 @synthesize unzipURL = _unzipURL;
 @synthesize unrarURL = _unrarURL;
+@synthesize userPreferencesPlist = _userPreferencesPlist;
 
 @synthesize validInstallation = _validInstallation;
+
+
 
 
 
@@ -268,7 +271,14 @@
         _unrarURL = nil;
     }
     return _unrarURL;
-    
+}
+
+- (NSURL *)userPreferencesPlist
+{
+    if( _userPreferencesPlist == nil ) {
+        _userPreferencesPlist = [NSURL fileURLWithPath:[kKSPPreferencesPlistPath stringByExpandingTildeInPath]];
+    }
+    return _userPreferencesPlist;
 }
 
 #pragma mark -
@@ -635,19 +645,7 @@ AddAndInstall:
 
 
 
-+ (BOOL)setGraphicsQuality:(NSInteger)quality inPlist:(NSURL *)plistURL
-{
-    NSMutableDictionary *plist = [NSMutableDictionary dictionaryWithContentsOfURL:plistURL];
-    
-    if( plist == nil )
-        return NO;
-    
-    [plist addEntriesFromDictionary:@{ kUnityKeyGraphicsQuality:[NSNumber numberWithInteger:quality] }];
-    
-    [plist writeToURL:plistURL atomically:YES];
-    
-    return YES;
-}
+
 
 
 

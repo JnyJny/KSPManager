@@ -105,8 +105,7 @@
     
     if( val.integerValue >= [Part categoryNames].count)
         return [@"Unknown: " stringByAppendingString:val];
-    
-    NSLog(@"%@ part cat = %@",self.assetTitle,val);
+
     return [[Part categoryNames] objectAtIndex:val.integerValue];
 }
 

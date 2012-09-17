@@ -42,6 +42,8 @@
 
 @property (strong, nonatomic, readonly) NSURL *unzipURL;
 @property (strong, nonatomic, readonly) NSURL *unrarURL;
+@property (strong, nonatomic, readonly) NSURL *userPreferencesPlist;
+
 
 - (id)initWithURL:(NSURL *)fileURL;
 
@@ -62,7 +64,7 @@
 
 + (NSArray *)locateInstallationDirectories;
 + (BOOL)terminateRunningKSP;
-+ (BOOL)setGraphicsQuality:(NSInteger)quality inPlist:(NSURL *)plistURL;
+
 
 
 
