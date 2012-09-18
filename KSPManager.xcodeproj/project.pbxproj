@@ -30,6 +30,8 @@
 		1D57215716028B5400D2427C /* Remote.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D57215616028B5400D2427C /* Remote.m */; };
 		1D57215C1603737900D2427C /* KerbalNetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D57215A1603737900D2427C /* KerbalNetViewController.m */; };
 		1D57215D1603737900D2427C /* KerbalNetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D57215B1603737900D2427C /* KerbalNetViewController.xib */; };
+		1D58B0FB1607B77E0072A9D0 /* Prop.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D58B0FA1607B77E0072A9D0 /* Prop.m */; };
+		1D58B0FF1607B7980072A9D0 /* Space.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D58B0FE1607B7980072A9D0 /* Space.m */; };
 		1D682A2615FCD93E007C84CB /* ConfigurationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D682A2515FCD93E007C84CB /* ConfigurationParser.m */; };
 		1D75BD6D15F79FA40037393E /* PersistenceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D75BD6C15F79FA40037393E /* PersistenceFile.m */; };
 		1D75BD7015F7A6770037393E /* Crew.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D75BD6F15F7A6770037393E /* Crew.m */; };
@@ -108,6 +110,10 @@
 		1D57215A1603737900D2427C /* KerbalNetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KerbalNetViewController.m; sourceTree = "<group>"; };
 		1D57215B1603737900D2427C /* KerbalNetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KerbalNetViewController.xib; sourceTree = "<group>"; };
 		1D57216A1604292F00D2427C /* KerbalNetDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KerbalNetDelegate.h; sourceTree = "<group>"; };
+		1D58B0F91607B77E0072A9D0 /* Prop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prop.h; sourceTree = "<group>"; };
+		1D58B0FA1607B77E0072A9D0 /* Prop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Prop.m; sourceTree = "<group>"; };
+		1D58B0FD1607B7980072A9D0 /* Space.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Space.h; sourceTree = "<group>"; };
+		1D58B0FE1607B7980072A9D0 /* Space.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Space.m; sourceTree = "<group>"; };
 		1D682A2415FCD93E007C84CB /* ConfigurationParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationParser.h; sourceTree = "<group>"; };
 		1D682A2515FCD93E007C84CB /* ConfigurationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationParser.m; sourceTree = "<group>"; };
 		1D682A2715FCD9CC007C84CB /* ConfigurationTokenizerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationTokenizerDelegate.h; sourceTree = "<group>"; };
@@ -228,6 +234,8 @@
 				1D682A2315FCD8C4007C84CB /* Plugins */,
 				1D682A1A15FAD309007C84CB /* Ships */,
 				1D57215416028B3600D2427C /* Remote */,
+				1D58B0FC1607B7840072A9D0 /* Internal/Prop */,
+				1D58B1001607B79F0072A9D0 /* Internal/Space */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -323,6 +331,24 @@
 				1D28B8B4160622D2009C7FD0 /* Utility */,
 			);
 			name = "Main Window";
+			sourceTree = "<group>";
+		};
+		1D58B0FC1607B7840072A9D0 /* Internal/Prop */ = {
+			isa = PBXGroup;
+			children = (
+				1D58B0F91607B77E0072A9D0 /* Prop.h */,
+				1D58B0FA1607B77E0072A9D0 /* Prop.m */,
+			);
+			name = Internal/Prop;
+			sourceTree = "<group>";
+		};
+		1D58B1001607B79F0072A9D0 /* Internal/Space */ = {
+			isa = PBXGroup;
+			children = (
+				1D58B0FD1607B7980072A9D0 /* Space.h */,
+				1D58B0FE1607B7980072A9D0 /* Space.m */,
+			);
+			name = Internal/Space;
 			sourceTree = "<group>";
 		};
 		1D682A1A15FAD309007C84CB /* Ships */ = {
@@ -656,6 +682,8 @@
 				1D57215716028B5400D2427C /* Remote.m in Sources */,
 				1D57215C1603737900D2427C /* KerbalNetViewController.m in Sources */,
 				1D28B8B2160622C6009C7FD0 /* UtilityViewController.m in Sources */,
+				1D58B0FB1607B77E0072A9D0 /* Prop.m in Sources */,
+				1D58B0FF1607B7980072A9D0 /* Space.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -125,7 +125,15 @@
 
 - (NSString *)assetTitle
 {
-    return [self valueForKey:kPartKeyTitle];
+    NSString *title =  [self valueForKey:kPartKeyTitle];
+    
+    if( title == nil )
+        title = [self valueForKey:kPartKeyName];
+    
+    if( title == nil )
+        title = self.baseURL.lastPathComponent;
+    
+    return title;
 }
 
 - (NSString *)assetCategory

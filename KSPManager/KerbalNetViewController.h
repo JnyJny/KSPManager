@@ -15,8 +15,12 @@
 @property (strong) IBOutlet NSTableView *tableView;
 @property (strong) IBOutlet NSArrayController *kerbalNetArrayController;
 @property (strong) IBOutlet NSProgressIndicator *progressIndicator;
+@property (strong) IBOutlet NSButton *overwriteCheckBox;
+@property (strong) IBOutlet NSButton *installCheckBox;
 
 @property (strong, nonatomic) KerbalNet *kerbalNet;
 
+- (IBAction)installCheckBoxDidChange:(NSButton *)sender;
+- (IBAction)overwriteCheckBoxDidChange:(NSButton *)sender;
 
 @end

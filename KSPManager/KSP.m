@@ -12,13 +12,16 @@
 #import "Part.h"
 #import "Plugin.h"
 #import "Ship.h"
+#import "Prop.h"
+#import "Space.h"
 
 @implementation KSP
 
 @synthesize baseURL = _baseURL;
 
 @synthesize bundleURL = _appURL;
-@synthesize internalsURL = _internalsURL;
+@synthesize propsURL = _propsURL;
+@synthesize spacesURL = _spacesURL;
 @synthesize partsURL = _partsURL;
 @synthesize pluginsURL = _pluginsURL;
 @synthesize pluginDataURL = _pluginDataURL;
@@ -33,10 +36,14 @@
 @synthesize availablePartsURL = _availablePartsURL;
 @synthesize availablePluginsURL = _availablePluginsURL;
 @synthesize availableShipsURL = _availableShipsURL;
+@synthesize availablePropsURL = _availablePropsURL;
+@synthesize availableSpacesURL = _availableSpacesURL;
 
 @synthesize parts = _parts;
 @synthesize plugins = _plugins;
 @synthesize ships = _ships;
+@synthesize props = _props;
+@synthesize spaces = _spaces;
 
 @synthesize persistenceFile = _persistenceFile;
 @synthesize unzipURL = _unzipURL;
@@ -44,8 +51,6 @@
 @synthesize userPreferencesPlist = _userPreferencesPlist;
 
 @synthesize validInstallation = _validInstallation;
-
-
 
 
 
@@ -105,12 +110,20 @@
     return _appURL;
 }
 
-- (NSURL *)internalsURL
+- (NSURL *)propsURL
 {
-    if( _internalsURL == nil ) {
-        _internalsURL = [self buildValidRelativeFileURL:kKSP_INTERNALS];
+    if( _propsURL == nil ) {
+        _propsURL = [self buildValidRelativeFileURL:kKSP_PROPS];
     }
-    return _internalsURL;
+    return _propsURL;
+}
+
+- (NSURL *)spacesURL
+{
+    if( _spacesURL == nil ) {
+        _spacesURL = [self buildValidRelativeFileURL:kKSP_SPACES];
+    }
+    return _spacesURL;
 }
 
 - (NSURL *)partsURL
@@ -219,6 +232,23 @@
     return _availableShipsURL;
 }
 
+- (NSURL *)availablePropsURL
+{
+    if( _availablePropsURL == nil ) {
+        _availablePropsURL = [self buildRelativeFileURL:kKSP_MODS_PROPS];
+    }
+    return _availablePropsURL;
+}
+
+- (NSURL *)availableSpacesURL
+{
+    if( _availableSpacesURL == nil ) {
+        _availableSpacesURL = [self buildRelativeFileURL:kKSP_MODS_SPACES];
+    }
+    return _availableSpacesURL;
+}
+
+
 - (NSMutableArray *)parts
 {
     if( _parts == nil) {
@@ -248,6 +278,29 @@
     }
     return _ships;
 }
+
+- (NSMutableArray *)props
+{
+    if( _props == nil ) {
+        _props = [[NSMutableArray alloc] init];
+        
+        [_props addObjectsFromArray:[Prop inventory:self.propsURL]];
+        [_props addObjectsFromArray:[Prop inventory:self.availablePropsURL]];
+    }
+    return _props;
+}
+
+- (NSMutableArray *)spaces
+{
+    if( _spaces == nil ) {
+        _spaces = [[NSMutableArray alloc] init];
+        [_spaces addObjectsFromArray:[Space inventory:self.spacesURL]];
+        [_spaces addObjectsFromArray:[Space inventory:self.availableSpacesURL]];
+    }
+    return _spaces;
+}
+
+
 
 - (PersistenceFile *)persistenceFile
 {
@@ -296,7 +349,8 @@
 - (BOOL)isValidInstallation
 {
     _validInstallation = ( (self.bundleURL != nil) &&
-                          (self.internalsURL != nil) &&
+                          (self.propsURL != nil) &&
+                          (self.spacesURL != nil) &&
                           (self.partsURL != nil) &&
                           (self.pluginsURL != nil) &&
                           (self.screenshotsURL != nil) &&
@@ -320,6 +374,12 @@
         Ship *ship = (Ship *)object;
         return [object moveTo:[self.shipsURL URLByAppendingPathComponent:ship.hanger]];
     }
+    
+    if( [object isMemberOfClass:[Prop class]] )
+        return [object moveTo:self.propsURL];
+    
+    if( [object isMemberOfClass:[Space class]] )
+        return [object moveTo:self.spacesURL];
 
     NSLog(@"KSP install:%@ unknown asset %@",object,object.class);
     
@@ -340,6 +400,13 @@
         return [object moveTo:[self.availableShipsURL URLByAppendingPathComponent:ship.hanger]];
     }
     
+    if( [object isMemberOfClass:[Prop class]] ) {
+        return [object moveTo:self.availablePropsURL];
+    }
+    
+    if( [object isMemberOfClass:[Space class]] )
+        return [object moveTo:self.availableSpacesURL];
+    
     NSLog(@"KSP uninstall:%@ unknown asset %@",object,object.class);
 
     return NO;
@@ -359,6 +426,12 @@
     if( [object isMemberOfClass:[Ship class]] )
         [self.ships addObject:object];
     
+    if( [object isMemberOfClass:[Prop class]] )
+        [self.props addObject:object];
+    
+    if( [object isMemberOfClass:[Space class]] )
+        [self.spaces addObject:object];
+    
     if (install)
         return [self install:object];
     
@@ -370,7 +443,6 @@
 
     if( [object remove] == NO )
         return NO;
-
     
     if( [self.parts containsObject:object] )
         [self.parts removeObject:object];
@@ -381,6 +453,12 @@
     
     if( [self.ships containsObject:object] )
         [self.ships removeObject:object];
+    
+    if( [self.props containsObject:object] )
+        [self.props removeObject:object];
+    
+    if( [self.spaces containsObject:object] )
+        [self.spaces removeObject:object];
 
     object = nil;
     
@@ -468,7 +546,7 @@
 - (NSArray *)createAssetsWith:(NSURL *)url install:(BOOL)install
 {
     NSMutableArray *assets = [[NSMutableArray alloc] init];
-    
+    NSArray *results;
     NSError *error = nil;
     NSNumber *isDir;
     
@@ -518,25 +596,26 @@
 
 AddAndInstall:
     
-    NSLog(@"here");
-    NSArray *results = [Part inventory:url];
-    NSLog(@"results = %@",results);
+    results = [Part inventory:url];
     
     if( results )
         [assets addObjectsFromArray:results];
-    NSLog(@"assets count after part: %ld",assets.count);
     
     results = [Plugin inventory:url];
     if(results)
         [assets addObjectsFromArray:results];
-    NSLog(@"assets count after plugin: %ld",assets.count);
     
     results = [Ship inventory:url];
     if( results )
         [assets addObjectsFromArray:results];
-    NSLog(@"assets count after ship: %ld",assets.count);
-    
 
+    results = [Prop inventory:url];
+    if( results )
+        [assets addObjectsFromArray:results];
+    
+    results = [Space inventory:url];
+    if( results )
+        [assets addObjectsFromArray:results];
     
     for (Asset *asset in assets) 
         [self manage:asset installed:install];

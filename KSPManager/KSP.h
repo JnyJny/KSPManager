@@ -16,7 +16,8 @@
 }
 @property (strong, nonatomic, readonly) NSURL *baseURL;
 @property (strong, nonatomic, readonly) NSURL *bundleURL;
-@property (strong, nonatomic, readonly) NSURL *internalsURL;
+@property (strong, nonatomic, readonly) NSURL *propsURL;
+@property (strong, nonatomic, readonly) NSURL *spacesURL;
 @property (strong, nonatomic, readonly) NSURL *partsURL;
 @property (strong, nonatomic, readonly) NSURL *pluginsURL;
 @property (strong, nonatomic, readonly) NSURL *pluginDataURL;
@@ -31,12 +32,17 @@
 @property (strong, nonatomic, readonly) NSURL *availablePartsURL;
 @property (strong, nonatomic, readonly) NSURL *availablePluginsURL;
 @property (strong, nonatomic, readonly) NSURL *availableShipsURL;
+@property (strong, nonatomic, readonly) NSURL *availablePropsURL;
+@property (strong, nonatomic, readonly) NSURL *availableSpacesURL;
 
 @property (readonly, nonatomic,getter = isValidInstallation) BOOL validInstallation;
 
 @property (strong, nonatomic, readonly) NSMutableArray *parts;
 @property (strong, nonatomic, readonly) NSMutableArray *plugins;
 @property (strong, nonatomic, readonly) NSMutableArray *ships;
+@property (strong, nonatomic, readonly) NSMutableArray *props;
+@property (strong, nonatomic, readonly) NSMutableArray *spaces;
+
 
 @property (strong, nonatomic, readonly) PersistenceFile *persistenceFile;
 

@@ -17,12 +17,15 @@
 #define kKSP_SHORT @"KSP"
 #define kKSP_LONG  @"Kerbal Space Program"
 
+
 #define kKSP_DEFAULT_UNZIP_PATH @"/usr/bin/unzip"
 
 #define kKSP_TEMP_ASSETS @"KSPTempAssets"
 
-#define kKSP_INTERNALS   @"Internals"
 #define kKSP_APP         @"KSP.app"
+#define kKSP_INTERNALS   @"Internals"
+#define kKSP_PROPS       @"Internals/Props"
+#define kKSP_SPACES      @"Internals/Spaces"
 #define kKSP_PARTS       @"Parts"
 #define kKSP_PLUGINS     @"Plugins"
 #define kKSP_PLUGINDATA  @"PluginData"
@@ -36,11 +39,13 @@
 #define kKSP_VAB         @"VAB"
 #define kKSP_SPH         @"SPH"
 
-#define kKSP_MODS         @"Mods"
-#define kKSP_MODS_PARTS   @"Mods/Parts"
-#define kKSP_MODS_PLUGINS @"Mods/Plugins"
-#define kKSP_MODS_SHIPS   @"Mods/Ships"
-
+#define kKSP_MODS          @"Mods"
+#define kKSP_MODS_PARTS    @"Mods/Parts"
+#define kKSP_MODS_PLUGINS  @"Mods/Plugins"
+#define kKSP_MODS_SHIPS    @"Mods/Ships"
+#define kKSP_MODS_PROPS    @"Mods/Props"
+#define kKSP_MODS_SPACES   @"Mods/Spaces"
+#define kKSP_MODS_SAVES    @"Mods/Saves"
 
 #define kKSP_COMMENT_TOKEN    @"//"
 #define kKSP_ASSIGNMENT_TOKEN @"="
@@ -55,7 +60,13 @@
 #define kPART_CREW       @"Crew"
 
 #define kPLUGIN_EXT      @"dll"
+
+#define kCONFIG_EXT      @"cfg"
 #define kCRAFT_EXT       @"craft"
+#define kSFS_EXT         @"sfs"
+
+#define kINTERNAL_CONFG  @"internal.cfg"
+#define kPROP_CONFIG     @"prop.cfg"
 
 // persistent.sfs parameter names
 
@@ -173,7 +184,7 @@ enum {
 // KSP Manager Error Domain & Codes
 
 #define kKSPManagerErrorDomain @"KSP Manager"
-#define kKSPManagerErrorCode 
+//#define kKSPManagerErrorCode
 
 // Preference Hacking
 //

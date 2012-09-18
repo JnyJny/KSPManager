@@ -51,7 +51,7 @@
 					<object class="NSSegmentedControl" id="286895422">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{278, 769}, {244, 23}}</string>
+						<string key="NSFrame">{{197, 769}, {406, 23}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="996879750"/>
@@ -83,6 +83,16 @@
 								<object class="NSSegmentItem">
 									<double key="NSSegmentItemWidth">80</double>
 									<string key="NSSegmentItemLabel">Ships</string>
+									<int key="NSSegmentItemImageScaling">0</int>
+								</object>
+								<object class="NSSegmentItem">
+									<double key="NSSegmentItemWidth">80</double>
+									<string key="NSSegmentItemLabel">Spaces</string>
+									<int key="NSSegmentItemImageScaling">0</int>
+								</object>
+								<object class="NSSegmentItem">
+									<double key="NSSegmentItemWidth">80</double>
+									<string key="NSSegmentItemLabel">Props</string>
 									<int key="NSSegmentItemImageScaling">0</int>
 								</object>
 							</array>
@@ -207,16 +217,14 @@
 													<string key="NSFrameSize">{363, 17}</string>
 													<reference key="NSSuperview" ref="142119262"/>
 													<reference key="NSWindow"/>
-													<reference key="NSNextKeyView" ref="382811226"/>
+													<reference key="NSNextKeyView" ref="54683672"/>
 													<string key="NSReuseIdentifierKey">_NS:16</string>
 													<reference key="NSTableView" ref="20060744"/>
 												</object>
-												<object class="_NSCornerView" key="NSCornerView" id="382811226">
-													<reference key="NSNextResponder" ref="538779593"/>
+												<object class="_NSCornerView" key="NSCornerView">
+													<nil key="NSNextResponder"/>
 													<int key="NSvFlags">-2147483392</int>
 													<string key="NSFrame">{{224, 0}, {16, 17}}</string>
-													<reference key="NSSuperview" ref="538779593"/>
-													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="54683672"/>
 													<string key="NSReuseIdentifierKey">_NS:19</string>
 												</object>
@@ -387,7 +395,6 @@
 										<reference key="NSBGColor" ref="245925473"/>
 										<int key="NScvFlags">4</int>
 									</object>
-									<reference ref="382811226"/>
 								</array>
 								<string key="NSFrameSize">{365, 692}</string>
 								<reference key="NSSuperview" ref="996879750"/>
@@ -399,7 +406,6 @@
 								<reference key="NSHScroller" ref="85425171"/>
 								<reference key="NSContentView" ref="54683672"/>
 								<reference key="NSHeaderClipView" ref="142119262"/>
-								<reference key="NSCornerView" ref="382811226"/>
 								<bytes key="NSScrollAmts">QSAAAEEgAABBmAAAQZgAAA</bytes>
 								<double key="NSMinMagnification">0.25</double>
 								<double key="NSMaxMagnification">4</double>
@@ -440,16 +446,14 @@
 													<string key="NSFrameSize">{361, 17}</string>
 													<reference key="NSSuperview" ref="824190135"/>
 													<reference key="NSWindow"/>
-													<reference key="NSNextKeyView" ref="805085254"/>
+													<reference key="NSNextKeyView" ref="879936280"/>
 													<string key="NSReuseIdentifierKey">_NS:16</string>
 													<reference key="NSTableView" ref="127001279"/>
 												</object>
-												<object class="_NSCornerView" key="NSCornerView" id="805085254">
-													<reference key="NSNextResponder" ref="53111390"/>
+												<object class="_NSCornerView" key="NSCornerView">
+													<nil key="NSNextResponder"/>
 													<int key="NSvFlags">-2147483392</int>
 													<string key="NSFrame">{{224, 0}, {16, 17}}</string>
-													<reference key="NSSuperview" ref="53111390"/>
-													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="879936280"/>
 													<string key="NSReuseIdentifierKey">_NS:19</string>
 												</object>
@@ -576,7 +580,6 @@
 										<reference key="NSBGColor" ref="245925473"/>
 										<int key="NScvFlags">4</int>
 									</object>
-									<reference ref="805085254"/>
 								</array>
 								<string key="NSFrame">{{397, 0}, {363, 692}}</string>
 								<reference key="NSSuperview" ref="996879750"/>
@@ -588,7 +591,6 @@
 								<reference key="NSHScroller" ref="329834771"/>
 								<reference key="NSContentView" ref="879936280"/>
 								<reference key="NSHeaderClipView" ref="824190135"/>
-								<reference key="NSCornerView" ref="805085254"/>
 								<bytes key="NSScrollAmts">QSAAAEEgAABBmAAAQZgAAA</bytes>
 								<double key="NSMinMagnification">0.25</double>
 								<double key="NSMaxMagnification">4</double>
@@ -1616,7 +1618,7 @@
 				<string key="7.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="NO" key="73.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<integer value="2" key="74.IBNSSegmentedControlInspectorSelectedSegmentMetadataKey"/>
+				<integer value="4" key="74.IBNSSegmentedControlInspectorSelectedSegmentMetadataKey"/>
 				<string key="74.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="75.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="76.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>

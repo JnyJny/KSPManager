@@ -20,6 +20,8 @@
 @synthesize tableView;
 @synthesize kerbalNetArrayController;
 @synthesize progressIndicator;
+@synthesize overwriteCheckBox;
+@synthesize installCheckBox;
 
 @synthesize kerbalNet = _kerbalNet;
 
@@ -44,6 +46,16 @@
         
     }
     return _kerbalNet;
+}
+
+- (IBAction)installCheckBoxDidChange:(NSButton *)sender
+{
+    
+}
+
+- (IBAction)overwriteCheckBoxDidChange:(NSButton *)sender
+{
+    
 }
 
 #pragma mark -

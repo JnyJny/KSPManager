@@ -10,6 +10,8 @@
 #import "Part.h"
 #import "Plugin.h"
 #import "Ship.h"
+#import "Prop.h"
+#import "Space.h"
 
 #define kKeyContentArray    @"contentArray"
 #define kKeySortDescriptors @"sortDescriptors"
@@ -84,6 +86,8 @@
         [self.categoryControl setLabel:@"Parts" forSegment:0];
         [self.categoryControl setLabel:@"Plugins" forSegment:1];
         [self.categoryControl setLabel:@"Ships" forSegment:2];
+        [self.categoryControl setLabel:@"Props" forSegment:3];
+        [self.categoryControl setLabel:@"Spaces" forSegment:4];
     }
 }
 
@@ -94,6 +98,8 @@
     NSInteger partCount = 0;
     NSInteger pluginCount = 0;
     NSInteger shipCount = 0;
+    NSInteger propCount = 0;
+    NSInteger spaceCount = 0;
 
     for(Asset *asset in assets) {
      
@@ -111,6 +117,17 @@
             shipCount ++;
             continue;
         }
+
+        if( [asset isMemberOfClass:[Prop class]] ) {
+            propCount ++;
+            continue;
+        }
+        
+        if( [asset isMemberOfClass:[Space class]] ) {
+            spaceCount ++;
+            continue;
+        }
+
     }
     
     if( partCount )
@@ -121,6 +138,12 @@
 
     if( shipCount )
         [self.categoryControl setLabel:[@"Ships" stringByAppendingFormat:@" (%ld)",shipCount] forSegment:2];
+    
+    if( propCount )
+        [self.categoryControl setLabel:[@"Props" stringByAppendingFormat:@" (%ld)",propCount] forSegment:3];
+
+    if( spaceCount )
+        [self.categoryControl setLabel:[@"Spaces" stringByAppendingFormat:@" (%ld)",spaceCount] forSegment:4];
 
 
 }
@@ -377,12 +400,22 @@
             sortKeypath = @"shipSortDescriptors";
             break;
             
+        case 3:
+            contentKeypath = @"ksp.props";
+            sortKeypath = @"partSortDescriptors";
+            break;
+            
+        case 4:
+            contentKeypath = @"ksp.spaces";
+            sortKeypath = @"partSortDescriptors";
+            break;
+            
         default:
             NSLog(@"%@ unanticipated control value: %ld",self,sender.selectedSegment);
             return ;
     }
     
-    [sender setImage:nil forSegment:sender.selectedSegment];
+    //    [sender setImage:nil forSegment:sender.selectedSegment];
 
     [self rebindArrayController:self.availableArrayController
                             key:kKeyContentArray
