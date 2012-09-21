@@ -480,7 +480,12 @@
 
 - (NSURL *)downloadCacheURLforPath:(NSString *)path
 {
-    return [self cacheURLforPath:[@"Downloads" stringByAppendingString:path]];
+   [[NSFileManager defaultManager] createDirectoryAtURL:[self cacheURLforPath:@"Downloads"]
+                            withIntermediateDirectories:YES
+                                             attributes:nil
+                                                  error:nil];
+    
+    return [self cacheURLforPath:[@"Downloads" stringByAppendingPathComponent:path]];
 }
 
 - (NSURL *)cacheURLforPath:(NSString *)path
@@ -531,7 +536,7 @@
     
     [task setCurrentDirectoryPath:[fileURL URLByDeletingLastPathComponent].path];
     [task setLaunchPath:self.unzipURL.path];
-    [task setArguments:@[fileURL.lastPathComponent]];
+    [task setArguments:@[@"-o",fileURL.lastPathComponent]];
     
     [task launch];
     [task waitUntilExit];

@@ -48,7 +48,6 @@
 {
     if( object == self.userPrefs ) {
         [self.userPrefs writeToURL:self.ksp.userPreferencesPlist atomically:YES];
-        NSLog(@"userPrefs = %@",self.userPrefs);
         return ;
     }
     
@@ -58,7 +57,6 @@
 {
     if( _userPrefs == nil ) {
         _userPrefs = [NSMutableDictionary dictionaryWithContentsOfURL:self.ksp.userPreferencesPlist];
-        NSLog(@"userPrefs = %@",_userPrefs);
     }
     return _userPrefs;
 }

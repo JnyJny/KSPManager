@@ -11,4 +11,6 @@
 @interface Crew : PersistentObject
 @property (strong, nonatomic) NSString *firstName;
 @property (strong, nonatomic) NSString *lastName;
+
++ (NSArray *)crewStatus;
 @end

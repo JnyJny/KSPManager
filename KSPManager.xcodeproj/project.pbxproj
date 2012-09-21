@@ -32,6 +32,8 @@
 		1D57215D1603737900D2427C /* KerbalNetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D57215B1603737900D2427C /* KerbalNetViewController.xib */; };
 		1D58B0FB1607B77E0072A9D0 /* Prop.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D58B0FA1607B77E0072A9D0 /* Prop.m */; };
 		1D58B0FF1607B7980072A9D0 /* Space.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D58B0FE1607B7980072A9D0 /* Space.m */; };
+		1D58B1051608C29E0072A9D0 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 1D58B1041608C29E0072A9D0 /* Credits.html */; };
+		1D58B10B1609031B0072A9D0 /* RealizedPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D58B10A1609031B0072A9D0 /* RealizedPart.m */; };
 		1D682A2615FCD93E007C84CB /* ConfigurationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D682A2515FCD93E007C84CB /* ConfigurationParser.m */; };
 		1D75BD6D15F79FA40037393E /* PersistenceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D75BD6C15F79FA40037393E /* PersistenceFile.m */; };
 		1D75BD7015F7A6770037393E /* Crew.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D75BD6F15F7A6770037393E /* Crew.m */; };
@@ -114,6 +116,9 @@
 		1D58B0FA1607B77E0072A9D0 /* Prop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Prop.m; sourceTree = "<group>"; };
 		1D58B0FD1607B7980072A9D0 /* Space.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Space.h; sourceTree = "<group>"; };
 		1D58B0FE1607B7980072A9D0 /* Space.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Space.m; sourceTree = "<group>"; };
+		1D58B1041608C29E0072A9D0 /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
+		1D58B1091609031B0072A9D0 /* RealizedPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealizedPart.h; sourceTree = "<group>"; };
+		1D58B10A1609031B0072A9D0 /* RealizedPart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealizedPart.m; sourceTree = "<group>"; };
 		1D682A2415FCD93E007C84CB /* ConfigurationParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationParser.h; sourceTree = "<group>"; };
 		1D682A2515FCD93E007C84CB /* ConfigurationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationParser.m; sourceTree = "<group>"; };
 		1D682A2715FCD9CC007C84CB /* ConfigurationTokenizerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationTokenizerDelegate.h; sourceTree = "<group>"; };
@@ -356,6 +361,8 @@
 			children = (
 				1DB2E08D15FE97B500B1E0AF /* Ship.h */,
 				1DB2E08E15FE97B500B1E0AF /* Ship.m */,
+				1D58B1091609031B0072A9D0 /* RealizedPart.h */,
+				1D58B10A1609031B0072A9D0 /* RealizedPart.m */,
 			);
 			name = Ships;
 			sourceTree = "<group>";
@@ -501,6 +508,7 @@
 				1DB405C415DB3E230041807D /* main.m */,
 				1DB405C615DB3E230041807D /* KSPManager-Prefix.pch */,
 				1DB405C715DB3E230041807D /* Credits.rtf */,
+				1D58B1041608C29E0072A9D0 /* Credits.html */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -629,6 +637,7 @@
 				1D9C8D7616021914001C095F /* badge-red-24x24.png in Resources */,
 				1D57215D1603737900D2427C /* KerbalNetViewController.xib in Resources */,
 				1D28B8B3160622C6009C7FD0 /* UtilityViewController.xib in Resources */,
+				1D58B1051608C29E0072A9D0 /* Credits.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -684,6 +693,7 @@
 				1D28B8B2160622C6009C7FD0 /* UtilityViewController.m in Sources */,
 				1D58B0FB1607B77E0072A9D0 /* Prop.m in Sources */,
 				1D58B0FF1607B7980072A9D0 /* Space.m in Sources */,
+				1D58B10B1609031B0072A9D0 /* RealizedPart.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

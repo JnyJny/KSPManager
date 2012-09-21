@@ -1,49 +1,63 @@
 This TODO list is for tracking feature ideas that come up but are not the current priority.
 
-- Internals and Props need to be unpacked and managed. Dang it. 
-- perferences window
+
+- make ship and part inventory tabs work
 - part information
-- kerbel.net integration cleanup
-- add-on optimization driven by ship composition (install only the parts required for a ship or set or ships )
-- user ship ratings ( give ships stars! )
-- instant orbit assistant
-- savefile editing and versioning
-- part editor modal dialog thingy
-- ship editor "
-- crew editor "
-- .mu access for part thumbnails
-- ship thumbnails would be awesome
-- automated addon refresh from kerbel.net, some or all
-- look into kspmm://
-- re-write using FileWrappers
-- make sure manual file additions and deletions are automatically noticed
+- kerbel.net integration cleanup, beautification
+- make sure manual file additions and deletions thru Finder are automatically noticed
 - add badges to tabs to indicate items added from zip/dir/pkg 
 - modal dialog showing manifest of items discovered to augment badges
-- undo/redo manager
-- build full blown NSDocument? fragile, will break the minute Squad changes something
+- downloads on seperate operations queue to free up main thread
+- download progress meter ( kerbal.net needs to publish zip file size )
+
 - ship inventory part count
 - ship inventory fuel / isp per stage / total mass / % mass per stage / deltaV per stage
-- rewrite persistent.sfs object heirarchy, try to share with Asset
-- refactor Asset -> Addon?  semantics
 - add licensing info to source files
-- scrub out SymArm?
 - preferences pane
 - menu bar options
 - action menus when right clicking on stuff
 - action menus when clicking action buttons
 - more tool tips
-- video demonstrating usage
-- change color scheme away from grey, grey on light blue? black bg?
 - keep dates for freshness checking
-- go to '~/Library/Preferences/unity.Squad.Kerbal Space Program.plist', go into Root and add a child called 'UnityGraphicsQuality' and set its class to 'number' and set the value to 3.
 - .craft -> JSON -> .craft filter
 - .sfs -> JSON -> .sfs filter
 - part.cfg -> JSON -> part.cfg filter
-- kerbal.net download path is wrong ( download is being appended to the zip file name instead of being a directory )
+
+Version 2
+- re-write using FileWrappers
+- re-write Assets and KSP objects to manage Manifests, first write Manifests
+- perferences window
+- add-on optimization driven by ship composition (install only the parts required for a ship or set or ships )
+- instant orbit assistant
+- savefile editing and versioning
+- part editor modal dialog thingy
+- ship editor "
+- crew editor "
+
+Nice To Have, Not Holding My Breath
+- .mu access for part thumbnails
+- ship thumbnails would be awesome
+- scrub out SymArm, cats out of the bag.
+- undo/redo manager
+
+BUG
+
 
 DONE
-
 - clean out cached unzipped distributions
 - plist UnityGraphicsQuality combo-box or something
+- go to '~/Library/Preferences/unity.Squad.Kerbal Space Program.plist', go into Root and add a child called 'UnityGraphicsQuality' and set its class to 'number' and set the value to 3.
+- Internals and Props need to be unpacked and managed. Dang it.
+- kerbal.net download path is wrong ( download is being appended to the zip file name instead of being a directory )
 
+GOOD Idea, Not Gonna Do It For V1
+- video demonstrating usage
+- refactor Asset -> Addon?  semantics
+- user ship ratings ( give ships stars! )
+- rewrite persistent.sfs object heirarchy, try to share with Asset
+- look into kspmm://
+- automated addon refresh from kerbel.net, some or all
 
+Not Gonna Do It
+- change color scheme away from grey, grey on light blue? black bg?
+- build full blown NSDocument? fragile, will break the minute Squad changes something

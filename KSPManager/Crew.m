@@ -57,12 +57,12 @@
 {
     NSString *v = [self valueForKey:kCrewKeyState];
     
-    return [[Crew crewStatus] valueForKey:v];
+    return [[Crew crewStatus] objectAtIndex:v.integerValue];
 }
 
-+ (NSDictionary *)crewStatus
++ (NSArray *)crewStatus
 {
-    return @{ @"0":@"Available",@"1":@"Assigned",@"2":@"Dead",@"3":@"Respawning" };
+    return @[ @"Available",@"Assigned",@"Dead",@"Respawning" ];
 }
 
 

@@ -18,6 +18,9 @@
 {
     if ( self = [super initWithURL:url] ) {
         
+        if( [url.pathExtension isNotEqualTo:kCRAFT_EXT])
+            return nil;
+        
         NSStringEncoding encoding;
         
         NSArray *lines = [LineToken linesFromURL:self.baseURL
@@ -189,7 +192,6 @@
 - (BOOL)handleNewContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
 {
 #define kShipPartContext @"PART"
-
     if( [tokenizer.currentContext isEqualToString:kShipPartContext] ) {
         
         _currentPart = [[NSMutableDictionary alloc] init];
@@ -202,8 +204,7 @@
 
 - (BOOL)handleBeginContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
 {
-    
-    return NO;
+    return YES;
 }
 
 - (BOOL)handleKeyValue:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
@@ -218,7 +219,6 @@
         return YES;
     }
     
-    
     return NO;
 }
 
@@ -227,6 +227,7 @@
     if( [tokenizer.currentContext isEqualToString:kShipPartContext] ) {
         [self.parts addObject:_currentPart];
         _currentPart = nil;
+        return YES;
     }
     
     return NO;

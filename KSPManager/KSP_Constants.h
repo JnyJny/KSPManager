@@ -81,11 +81,12 @@
 
 typedef enum {
     kCrewStateAvailable,
-    kCrewStateAssigned,
+    kCrewStateAssignedToFlight,
     kCrewStateDead,
-    kCrewStateRewspawning
+    kCrewStateRespawning
 } CrewState;
 
+// if ToD < UT, crew will respawn
 
 // Vessel
 #define kVesselKeyPid                @"pid"
