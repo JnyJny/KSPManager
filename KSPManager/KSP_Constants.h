@@ -33,11 +33,17 @@
 #define kKSP_SCREENSHOTS @"Screenshots"
 #define kKSP_SOUNDS      @"sounds"
 #define kKSP_SAVES       @"saves"
-#define kKSP_PERSISTENT  @"saves/default/persistent.sfs"
+
+#define kKSP_SCENARIOS   @"saves/scenarios"
+#define kKSP_TRAINING    @"saves/training"
+
+#define kKSP_PERSISTENT  @"persistent.sfs"
 #define kKSP_SETTINGS    @"settings.cfg"
 #define kKSP_SHIPS       @"Ships"
 #define kKSP_VAB         @"VAB"
 #define kKSP_SPH         @"SPH"
+
+
 
 #define kKSP_MODS          @"Mods"
 #define kKSP_MODS_PARTS    @"Mods/Parts"

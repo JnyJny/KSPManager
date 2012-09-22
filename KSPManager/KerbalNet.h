@@ -61,5 +61,6 @@
 
 - (BOOL)refresh;
 
+- (BOOL)downloadRemoteAsset:(Remote *)remote toDestination:(NSURL *)destinationURL;
 
 @end

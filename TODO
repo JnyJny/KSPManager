@@ -3,25 +3,21 @@ This TODO list is for tracking feature ideas that come up but are not the curren
 
 - make ship and part inventory tabs work
 - part information
-- kerbel.net integration cleanup, beautification
 - make sure manual file additions and deletions thru Finder are automatically noticed
-- add badges to tabs to indicate items added from zip/dir/pkg 
-- modal dialog showing manifest of items discovered to augment badges
-- downloads on seperate operations queue to free up main thread
-- download progress meter ( kerbal.net needs to publish zip file size )
-
 - ship inventory part count
 - ship inventory fuel / isp per stage / total mass / % mass per stage / deltaV per stage
 - add licensing info to source files
 - preferences pane
-- menu bar options
 - action menus when right clicking on stuff
 - action menus when clicking action buttons
 - more tool tips
 - keep dates for freshness checking
-- .craft -> JSON -> .craft filter
-- .sfs -> JSON -> .sfs filter
-- part.cfg -> JSON -> part.cfg filter
+
+Fix For .17
+- Ship heirarchy is weird now
+- Plugins directory was missing in stock distribution.. weird
+- Screenshot directory was missing in stock distribution, no bigs
+- 
 
 Version 2
 - re-write using FileWrappers
@@ -39,6 +35,9 @@ Nice To Have, Not Holding My Breath
 - ship thumbnails would be awesome
 - scrub out SymArm, cats out of the bag.
 - undo/redo manager
+- modal dialog showing manifest of items discovered to augment badges
+- add badges to tabs to indicate items added from zip/dir/pkg 
+- download progress meter ( kerbal.net needs to publish zip file size )
 
 BUG
 
@@ -49,6 +48,8 @@ DONE
 - go to '~/Library/Preferences/unity.Squad.Kerbal Space Program.plist', go into Root and add a child called 'UnityGraphicsQuality' and set its class to 'number' and set the value to 3.
 - Internals and Props need to be unpacked and managed. Dang it.
 - kerbal.net download path is wrong ( download is being appended to the zip file name instead of being a directory )
+- kerbel.net integration cleanup, beautification
+- downloads on seperate operations queue to free up main thread
 
 GOOD Idea, Not Gonna Do It For V1
 - video demonstrating usage
@@ -57,6 +58,10 @@ GOOD Idea, Not Gonna Do It For V1
 - rewrite persistent.sfs object heirarchy, try to share with Asset
 - look into kspmm://
 - automated addon refresh from kerbel.net, some or all
+- .craft -> JSON -> .craft filter
+- .sfs -> JSON -> .sfs filter
+- part.cfg -> JSON -> part.cfg filter
+
 
 Not Gonna Do It
 - change color scheme away from grey, grey on light blue? black bg?

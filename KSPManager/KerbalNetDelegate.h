@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class Remote;
+
 @protocol KerbalNetDelegate <NSObject>
 
 @optional
 
-- (void)willBeginNetworkOperationWith:(NSURL *)url;
-- (void)didFinishNetworkOperaitonWIth:(NSURL *)url andError:(NSError *)error;
+- (void)willBeginNetworkOperationForRemoteAsset:(Remote *)remote;
+- (void)didFinishNetworkOperationForRemoteAsset:(Remote *)remote;
 
 - (void)willBeginRefresh;
 - (void)didEndRefresh;

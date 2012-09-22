@@ -48,7 +48,6 @@
 
 - (NSMutableArray *)remoteAssets
 {
-
     if( _remoteAssets == nil ) {
         _remoteAssets = [[NSMutableArray alloc] init];
     }
@@ -227,8 +226,9 @@
     
     [_operationQueue addOperationWithBlock:^{
         
-        if( self.delegate && [self.delegate respondsToSelector:@selector(willBeginRefresh)])
-            [self.delegate performSelector:@selector(willBeginRefresh)];
+        if( self.delegate && [self.delegate respondsToSelector:@selector(willBeginRefresh)]) {
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(willBeginRefresh) withObject:nil waitUntilDone:NO];
+        }
         
         [self.remoteAssets removeAllObjects];
     
@@ -256,9 +256,31 @@
             if( remote )
                 [self.remoteAssets addObject:remote];
         }
-        if( self.delegate && [self.delegate respondsToSelector:@selector(didEndRefresh)] )
-            [self.delegate performSelector:@selector(didEndRefresh)];
+        
+        if( self.delegate && [self.delegate respondsToSelector:@selector(didEndRefresh)] ) {
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(didEndRefresh) withObject:nil waitUntilDone:NO];
+        }
 
+    }];
+    
+    return YES;
+}
+
+- (BOOL)downloadRemoteAsset:(Remote *)remote toDestination:(NSURL *)destinationURL
+{
+
+    // check remote is in self.remoteAssets?
+    
+    [_operationQueue addOperationWithBlock:^{
+        
+        [ (NSObject *)self.delegate performSelectorOnMainThread:@selector(willBeginNetworkOperationForRemoteAsset:)
+                                                     withObject:remote
+                                                  waitUntilDone:NO];
+        [remote downloadTo:destinationURL];
+
+        [ (NSObject *)self.delegate performSelectorOnMainThread:@selector(didFinishNetworkOperationForRemoteAsset:)
+                                                     withObject:remote
+                                                  waitUntilDone:NO];
     }];
     
     return YES;

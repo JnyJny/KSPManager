@@ -16,6 +16,8 @@
 @property (strong) IBOutlet NSButton *linkCheckBox;
 @property (strong) IBOutlet NSButton *deletePrefsButton;
 @property (strong) IBOutlet NSButton *yesIUnderstandButton;
+@property (strong) IBOutlet NSButton *deleteSavedStateButton;
+@property (strong) IBOutlet NSButton *secondYesIUnderstandButton;
 
 @property (strong, nonatomic,readonly) NSMutableDictionary *userPrefs;
 
@@ -33,7 +35,7 @@
 - (IBAction)graphicsQualityDidChange:(NSLevelIndicator *)sender;
 - (IBAction)deletePrefsButtonPushed:(NSButton *)sender;
 - (IBAction)yesIUnderstandChanged:(NSButtonCell *)sender;
-
+- (IBAction)deleteSavedStateButtonPushed:(NSButton *)sender;
 
 
 

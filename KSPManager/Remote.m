@@ -9,9 +9,19 @@
 #import "Remote.h"
 #import "KerbalNet.h"
 
+@interface Remote ()
+
+@property (strong, nonatomic, readwrite) NSURL *localURL;
+@property (assign, nonatomic, readwrite) BOOL isDownloaded;
+@property (strong, nonatomic, readwrite) NSString *cleanDescription;
+
+@end
+
 @implementation Remote
 
 @synthesize url = _url;
+@synthesize localURL = _localURL;
+@synthesize cleanDescription = _cleanDescription;
 
 - (id)initWithOptions:(NSDictionary *)options
 {
@@ -21,6 +31,9 @@
     if( self = [super initWithURL:url] ) {
         [self addEntriesFromDictionary:options];
     }
+    
+    self.isDownloaded = NO;
+    
     return self;
 }
 
@@ -32,6 +45,16 @@
 - (NSString *)assetCategory
 {
     return [self valueForKey:@"mod_latestversion"];
+}
+
+- (NSString *)cleanDescription
+{
+    if ( _cleanDescription == nil ) {
+        _cleanDescription = [[self valueForKey:kKerbalNetKeyModDescription] stringByReplacingOccurrencesOfString:@"rn" withString:@" "];
+        //        _cleanDescription = [_cleanDescription stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+        
+    }
+    return _cleanDescription;
 }
 
 - (BOOL)isInstalled
@@ -89,6 +112,9 @@
 {
     NSError *error = nil;
     
+    self.localURL = nil;
+    self.isDownloaded = NO;
+    
     // XXX needs a protocol and an operation queue so this can't hang the
     //     main thread.
     NSLog(@"%@ downloadTo:%@ toLocalURL: %@",self.class,self.url,localURL);
@@ -99,18 +125,23 @@
     
     self.error = error;
     
-    if( error )
+    if( error ) {
         return NO;
-    
-    if( modFile ) {
-        
-        [modFile writeToURL:localURL
-                    options:0
-                      error:&error];
-        self.error = error;
-        if( error )
-            return NO;
     }
+    
+    
+    [modFile writeToURL:localURL
+                options:0
+                  error:&error];
+    
+    self.error = error;
+    if( error ) {
+        return NO;
+    }
+    
+    self.localURL = localURL;
+
+    self.isDownloaded = YES;
     
     return YES;
     

@@ -20,6 +20,9 @@
 		1D16223615EE721300C0F3CC /* PortableExecutableFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D16223515EE721300C0F3CC /* PortableExecutableFormat.m */; };
 		1D16223815EE97D800C0F3CC /* KSPM-Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1D16223715EE97D800C0F3CC /* KSPM-Icon.icns */; };
 		1D16223C15EE9F2B00C0F3CC /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 1D16223A15EE9F2B00C0F3CC /* LICENSE */; };
+		1D261D89160E731500AE02F6 /* Training.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D261D88160E731500AE02F6 /* Training.m */; };
+		1D261D8D160E733500AE02F6 /* Scenario.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D261D8C160E733500AE02F6 /* Scenario.m */; };
+		1D261D91160E736F00AE02F6 /* Sandbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D261D90160E736F00AE02F6 /* Sandbox.m */; };
 		1D28B8B2160622C6009C7FD0 /* UtilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D28B8B0160622C6009C7FD0 /* UtilityViewController.m */; };
 		1D28B8B3160622C6009C7FD0 /* UtilityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D28B8B1160622C6009C7FD0 /* UtilityViewController.xib */; };
 		1D2ED54215EB156900402EF1 /* InventoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D2ED54015EB156900402EF1 /* InventoryViewController.m */; };
@@ -95,6 +98,12 @@
 		1D16223515EE721300C0F3CC /* PortableExecutableFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PortableExecutableFormat.m; sourceTree = "<group>"; };
 		1D16223715EE97D800C0F3CC /* KSPM-Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "KSPM-Icon.icns"; sourceTree = "<group>"; };
 		1D16223A15EE9F2B00C0F3CC /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
+		1D261D87160E731500AE02F6 /* Training.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Training.h; sourceTree = "<group>"; };
+		1D261D88160E731500AE02F6 /* Training.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Training.m; sourceTree = "<group>"; };
+		1D261D8B160E733500AE02F6 /* Scenario.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scenario.h; sourceTree = "<group>"; };
+		1D261D8C160E733500AE02F6 /* Scenario.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scenario.m; sourceTree = "<group>"; };
+		1D261D8F160E736F00AE02F6 /* Sandbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sandbox.h; sourceTree = "<group>"; };
+		1D261D90160E736F00AE02F6 /* Sandbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sandbox.m; sourceTree = "<group>"; };
 		1D28B8AF160622C6009C7FD0 /* UtilityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityViewController.h; sourceTree = "<group>"; };
 		1D28B8B0160622C6009C7FD0 /* UtilityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityViewController.m; sourceTree = "<group>"; };
 		1D28B8B1160622C6009C7FD0 /* UtilityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UtilityViewController.xib; sourceTree = "<group>"; };
@@ -241,6 +250,9 @@
 				1D57215416028B3600D2427C /* Remote */,
 				1D58B0FC1607B7840072A9D0 /* Internal/Prop */,
 				1D58B1001607B79F0072A9D0 /* Internal/Space */,
+				1D261D8A160E731A00AE02F6 /* Training */,
+				1D261D8E160E733B00AE02F6 /* Scenario */,
+				1D261D92160E737400AE02F6 /* Sandbox */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -252,6 +264,33 @@
 				1DB7013415F12C90002EC18D /* README.md */,
 			);
 			name = Documentation;
+			sourceTree = "<group>";
+		};
+		1D261D8A160E731A00AE02F6 /* Training */ = {
+			isa = PBXGroup;
+			children = (
+				1D261D87160E731500AE02F6 /* Training.h */,
+				1D261D88160E731500AE02F6 /* Training.m */,
+			);
+			name = Training;
+			sourceTree = "<group>";
+		};
+		1D261D8E160E733B00AE02F6 /* Scenario */ = {
+			isa = PBXGroup;
+			children = (
+				1D261D8B160E733500AE02F6 /* Scenario.h */,
+				1D261D8C160E733500AE02F6 /* Scenario.m */,
+			);
+			name = Scenario;
+			sourceTree = "<group>";
+		};
+		1D261D92160E737400AE02F6 /* Sandbox */ = {
+			isa = PBXGroup;
+			children = (
+				1D261D8F160E736F00AE02F6 /* Sandbox.h */,
+				1D261D90160E736F00AE02F6 /* Sandbox.m */,
+			);
+			name = Sandbox;
 			sourceTree = "<group>";
 		};
 		1D28B8B4160622D2009C7FD0 /* Utility */ = {
@@ -404,13 +443,6 @@
 			name = Mission;
 			sourceTree = "<group>";
 		};
-		1D9C8D6A16021548001C095F /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
 		1D9C8D6E16021842001C095F /* Art */ = {
 			isa = PBXGroup;
 			children = (
@@ -490,7 +522,6 @@
 				1DB405CA15DB3E230041807D /* AppDelegate.h */,
 				1DB405CB15DB3E230041807D /* AppDelegate.m */,
 				1DB405E615DB3F450041807D /* Model */,
-				1D9C8D6A16021548001C095F /* Views */,
 				1DB405D615DB3E7A0041807D /* View Controllers */,
 				1DB405D515DB3E670041807D /* NIBs */,
 				1DB405BF15DB3E230041807D /* Supporting Files */,
@@ -694,6 +725,9 @@
 				1D58B0FB1607B77E0072A9D0 /* Prop.m in Sources */,
 				1D58B0FF1607B7980072A9D0 /* Space.m in Sources */,
 				1D58B10B1609031B0072A9D0 /* RealizedPart.m in Sources */,
+				1D261D89160E731500AE02F6 /* Training.m in Sources */,
+				1D261D8D160E733500AE02F6 /* Scenario.m in Sources */,
+				1D261D91160E736F00AE02F6 /* Sandbox.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

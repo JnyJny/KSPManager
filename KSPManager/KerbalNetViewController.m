@@ -29,9 +29,11 @@
 {
     self.kerbalNet.delegate = self;
     
-    [self.addButton setToolTip:@"Download & Add to Available List"];
-    [self.removeButton setToolTip:@"Removing is unavailable"];
-    [self.actionButton setToolTip:@"Refresh list from Kerbal.Net"];
+    [self.addButton setToolTip:@"Download & Add Selections to the Available List"];
+    [self.removeButton setToolTip:@"This Button Does Nothing"];
+    [self.actionButton setToolTip:@"Refresh list of addons available from Kerbal.Net"];
+    
+    [self.kerbalNetArrayController setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:kKerbalNetKeyModName ascending:YES]]];
 }
 
 #pragma mark -
@@ -75,6 +77,22 @@
     [self.actionButton setEnabled:YES];
 }
 
+- (void)willBeginNetworkOperationForRemoteAsset:(Remote *)remote
+{
+    [self.progressIndicator startAnimation:self];
+    
+}
+
+- (void)didFinishNetworkOperationForRemoteAsset:(Remote *)remote
+{
+    [self.progressIndicator stopAnimation:self];
+    
+    if( remote.error == nil ) {
+        [self.ksp createAssetsWith:remote.localURL install:NO];
+        [self.kerbalNetArrayController rearrangeObjects];
+    }
+}
+
 
 #pragma mark -
 #pragma mark Private Instance Methods
@@ -104,12 +122,9 @@
         
         NSURL *localURL = [self.ksp downloadCacheURLforPath:remote.url.lastPathComponent];
 
+        [self.kerbalNet downloadRemoteAsset:remote toDestination:localURL];
             
-        if( [remote downloadTo:localURL] == NO ) {
-            NSLog(@"downloadTo:%@ failed %@",localURL,remote.error);
-            continue;
-        }
-        [self.ksp createAssetsWith:localURL install:NO];
+
     }
 }
 

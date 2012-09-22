@@ -21,7 +21,7 @@
 
 - (void)refresh
 {
-    NSLog(@"%@ refresh",[self class]);
+    //    NSLog(@"%@ refresh",[self class]);
 }
 
 - (IBAction)addAction:(id)sender

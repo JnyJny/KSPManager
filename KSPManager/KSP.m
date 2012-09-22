@@ -72,7 +72,7 @@
     
     NSURL *url = [self.baseURL URLByAppendingPathComponent:path];
     
-    [[NSFileManager defaultManager] createDirectoryAtURL:url
+    [[NSFileManager defaultManager] createDirectoryAtURL:[url URLByDeletingLastPathComponent]
                              withIntermediateDirectories:YES
                                               attributes:nil
                                                    error:&error];
