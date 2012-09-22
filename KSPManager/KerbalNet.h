@@ -32,6 +32,7 @@
 #define kKerbalNetKeyModDownloads            @"mod_downloads"
 #define kKerbalNetKeyModThumbs_down          @"mod_thumbs_down"
 #define kKerbalNetKeyModPageviews            @"mod_pageviews"
+#define kKerbalNetKeyModFilesizeBytes        @"mod_filesize_bytes"
 
 #define kKerbalNetAPIFunctionModListing      @"api_mod_listing"
 #define kKerbalNetAPIFunctionModLookup       @"api_mod_lookup"

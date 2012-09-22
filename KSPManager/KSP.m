@@ -85,27 +85,12 @@
     return url;
 }
 
-- (NSURL *)buildValidRelativeFileURL:(NSString *)path
-{
-    
-    NSURL *url = [self.baseURL URLByAppendingPathComponent:path];
-    NSError *error = nil;
-    
-    if( [url checkResourceIsReachableAndReturnError:&error ] == NO)
-        url = nil;
-    
-    if( error ){
-        NSLog(@"buildValidRelativeFileURL:%@ failed: %@",path,error);
-        return nil;
-    }
-    
-    return url;
-}
+
 
 - (NSURL *)bundleURL
 {
     if( _appURL == nil ) {
-        _appURL = [self buildValidRelativeFileURL:kKSP_APP];
+        _appURL = [self buildRelativeFileURL:kKSP_APP];
     }
     return _appURL;
 }
@@ -113,7 +98,7 @@
 - (NSURL *)propsURL
 {
     if( _propsURL == nil ) {
-        _propsURL = [self buildValidRelativeFileURL:kKSP_PROPS];
+        _propsURL = [self buildRelativeFileURL:kKSP_PROPS];
     }
     return _propsURL;
 }
@@ -121,7 +106,7 @@
 - (NSURL *)spacesURL
 {
     if( _spacesURL == nil ) {
-        _spacesURL = [self buildValidRelativeFileURL:kKSP_SPACES];
+        _spacesURL = [self buildRelativeFileURL:kKSP_SPACES];
     }
     return _spacesURL;
 }
@@ -129,7 +114,7 @@
 - (NSURL *)partsURL
 {
     if( _partsURL == nil ) {
-        _partsURL = [self buildValidRelativeFileURL:kKSP_PARTS];
+        _partsURL = [self buildRelativeFileURL:kKSP_PARTS];
     }
     return _partsURL;
 }
@@ -137,7 +122,7 @@
 - (NSURL *)pluginsURL
 {
     if( _pluginsURL == nil ) {
-        _pluginsURL =[self buildValidRelativeFileURL:kKSP_PLUGINS];
+        _pluginsURL =[self buildRelativeFileURL:kKSP_PLUGINS];
 
     }
     return _pluginsURL;
@@ -146,7 +131,7 @@
 - (NSURL *)pluginDataURL
 {
     if( _pluginDataURL == nil ) {
-        _pluginDataURL =[self buildValidRelativeFileURL:kKSP_PLUGINDATA];
+        _pluginDataURL =[self buildRelativeFileURL:kKSP_PLUGINDATA];
         
     }
     return _pluginDataURL;
@@ -155,7 +140,7 @@
 - (NSURL *)resourcesURL
 {
     if( _resourcesURL == nil ) {
-        _resourcesURL = [self buildValidRelativeFileURL:kKSP_RESOURCES];
+        _resourcesURL = [self buildRelativeFileURL:kKSP_RESOURCES];
     }
     return _resourcesURL;
 }
@@ -163,7 +148,7 @@
 - (NSURL *)persistentURL
 {
     if( _persistentURL == nil ){
-        _persistentURL = [self buildValidRelativeFileURL:kKSP_PERSISTENT];
+        _persistentURL = [self buildRelativeFileURL:kKSP_PERSISTENT];
     }
     return _persistentURL;
 }
@@ -171,7 +156,7 @@
 - (NSURL *)savesURL
 {
     if( _savesURL == nil ) {
-        _savesURL = [self buildValidRelativeFileURL:kKSP_SAVES];
+        _savesURL = [self buildRelativeFileURL:kKSP_SAVES];
     }
     return _savesURL;
 }
@@ -179,7 +164,7 @@
 - (NSURL *)screenshotsURL
 {
     if( _screenshotsURL == nil ) {
-        _screenshotsURL = [self buildValidRelativeFileURL:kKSP_SCREENSHOTS];
+        _screenshotsURL = [self buildRelativeFileURL:kKSP_SCREENSHOTS];
     }
     return _screenshotsURL;
 }
@@ -187,7 +172,7 @@
 - (NSURL *)soundsURL
 {
     if( _soundsURL == nil ) {
-        _soundsURL = [self buildValidRelativeFileURL:kKSP_SOUNDS];
+        _soundsURL = [self buildRelativeFileURL:kKSP_SOUNDS];
     }
     return _soundsURL;
 }
@@ -195,7 +180,7 @@
 - (NSURL *)settingsURL
 {
     if( _settingsURL == nil ) {
-        _settingsURL = [self buildValidRelativeFileURL:kKSP_SETTINGS];
+        _settingsURL = [self buildRelativeFileURL:kKSP_SETTINGS];
     }
     return _settingsURL;
 }
@@ -203,7 +188,7 @@
 - (NSURL *)shipsURL
 {
     if( _shipsURL == nil ) {
-        _shipsURL = [self buildValidRelativeFileURL:kKSP_SHIPS];
+        _shipsURL = [self buildRelativeFileURL:kKSP_SHIPS];
     }
     return _shipsURL;
 }
@@ -348,16 +333,12 @@
 
 - (BOOL)isValidInstallation
 {
-    _validInstallation = ( (self.bundleURL != nil) &&
-                          (self.propsURL != nil) &&
-                          (self.spacesURL != nil) &&
-                          (self.partsURL != nil) &&
-                          (self.pluginsURL != nil) &&
-                          (self.screenshotsURL != nil) &&
-                          (self.shipsURL != nil ) &&
-                          (self.soundsURL != nil)) ;
+    NSBundle *kspBundle = [NSBundle bundleWithURL:self.bundleURL];
     
-    return _validInstallation;
+    if( kspBundle == nil )
+        return NO;
+    
+    return [[kspBundle bundleIdentifier] isEqualToString:kKSP_BUNDLE_ID];
 }
 
 

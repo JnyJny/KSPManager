@@ -237,7 +237,7 @@
             NSString *idStr = [shortInfo valueForKey:kKerbalNetKeyModId];
         
             if( idStr == nil ){
-            
+
             
                 self.error = [NSError errorWithDomain:kKerbalNetErrorDomain
                                                  code:kKerbalNetErrorCodeMissingIdKey
