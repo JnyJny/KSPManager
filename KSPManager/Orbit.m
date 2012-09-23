@@ -44,7 +44,11 @@
 {
     NSString *val = [self valueForKey:kOrbitKeyReferenceBody];
     
-    return [[Orbit referenceBodies] valueForKey:val];
+    if( (val.integerValue > [Orbit referenceBodies].count ) ||
+       (val.integerValue < 0) )
+        return [@"Unknown Body:" stringByAppendingString:val];
+    
+    return [[Orbit referenceBodies] objectAtIndex:val.integerValue];
 }
 
 - (BOOL)isPilotable
@@ -70,9 +74,10 @@
 }
 
 
-+ (NSDictionary *)referenceBodies
++ (NSArray *)referenceBodies
 {
-    return @{ @"0":@"Kerbol", @"1":@"Kerbin", @"2":@"Mün", @"3":@"Minmus" };
+    return @[ @"Kerbol",@"Kerbin",@"Mün",@"Minmus", @"Moho", @"Eve", @"Duna", @"Ike", @"Jool", @"Laythe",@"Vall",@"Bop", @"Tylo", @"Gilly" ];
+
 }
 
 

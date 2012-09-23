@@ -59,6 +59,7 @@
 										<string key="NSFrame">{{115, 47}, {132, 18}}</string>
 										<reference key="NSSuperview" ref="667617560"/>
 										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSButtonCell" key="NSCell" id="190025695">
@@ -153,6 +154,25 @@
 										<reference key="NSSuperview" ref="667617560"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="11997255"/>
+										<bool key="NSViewIsLayerTreeHost">YES</bool>
+										<array key="NSViewContentFilters">
+											<object class="CIColorControls">
+												<real value="1" key="CI_inputSaturation"/>
+												<real value="0.0" key="CI_inputBrightness"/>
+												<integer value="1" key="CI_inputContrast"/>
+												<bool key="CIEnabled">YES</bool>
+											</object>
+											<object class="CIColorMonochrome">
+												<object class="CIColor" key="CI_inputColor">
+													<float key="red">1</float>
+													<float key="green">0.40000000596046448</float>
+													<float key="blue">0.40000000596046448</float>
+													<float key="alpha">1</float>
+												</object>
+												<real value="1" key="CI_inputIntensity"/>
+												<bool key="CIEnabled">YES</bool>
+											</object>
+										</array>
 										<string key="NSReuseIdentifierKey">_NS:22</string>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSButtonCell" key="NSCell" id="283941984">
@@ -183,6 +203,25 @@
 										<reference key="NSSuperview" ref="667617560"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="55815373"/>
+										<bool key="NSViewIsLayerTreeHost">YES</bool>
+										<array key="NSViewContentFilters">
+											<object class="CIColorControls">
+												<real value="1" key="CI_inputSaturation"/>
+												<real value="0.0" key="CI_inputBrightness"/>
+												<real value="1" key="CI_inputContrast"/>
+												<bool key="CIEnabled">YES</bool>
+											</object>
+											<object class="CIColorMonochrome">
+												<object class="CIColor" key="CI_inputColor">
+													<float key="red">1</float>
+													<float key="green">0.40000000596046448</float>
+													<float key="blue">0.40000000596046448</float>
+													<float key="alpha">1</float>
+												</object>
+												<real value="1" key="CI_inputIntensity"/>
+												<bool key="CIEnabled">YES</bool>
+											</object>
+										</array>
 										<string key="NSReuseIdentifierKey">_NS:22</string>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSButtonCell" key="NSCell" id="427949209">

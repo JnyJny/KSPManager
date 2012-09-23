@@ -14,6 +14,6 @@
 @property (assign, nonatomic,getter = isPilotable) BOOL pilotable;
 @property (assign, nonatomic,getter = isDebris) BOOL debris;
 
-+ (NSDictionary *)referenceBodies;
++ (NSArray *)referenceBodies;
 
 @end

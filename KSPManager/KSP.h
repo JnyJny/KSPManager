@@ -22,8 +22,12 @@
 @property (strong, nonatomic, readonly) NSURL *pluginsURL;
 @property (strong, nonatomic, readonly) NSURL *pluginDataURL;
 @property (strong, nonatomic, readonly) NSURL *resourcesURL;
-@property (strong, nonatomic, readonly) NSURL *persistentURL;
-@property (strong, nonatomic, readonly) NSURL *savesURL;
+
+//@property (strong, nonatomic, readonly) NSURL *savesURL;
+@property (strong, nonatomic, readonly) NSURL *trainingURL;
+@property (strong, nonatomic, readonly) NSURL *scenariosURL;
+@property (strong, nonatomic, readonly) NSURL *sandboxesURL;
+
 @property (strong, nonatomic, readonly) NSURL *screenshotsURL;
 @property (strong, nonatomic, readonly) NSURL *soundsURL;
 @property (strong, nonatomic, readonly) NSURL *settingsURL;
@@ -34,6 +38,9 @@
 @property (strong, nonatomic, readonly) NSURL *availableShipsURL;
 @property (strong, nonatomic, readonly) NSURL *availablePropsURL;
 @property (strong, nonatomic, readonly) NSURL *availableSpacesURL;
+@property (strong, nonatomic, readonly) NSURL *availableTrainingURL;
+@property (strong, nonatomic, readonly) NSURL *availableScenariosURL;
+@property (strong, nonatomic, readonly) NSURL *availableSandboxesURL;
 
 @property (readonly, nonatomic,getter = isValidInstallation) BOOL validInstallation;
 
@@ -42,13 +49,14 @@
 @property (strong, nonatomic, readonly) NSMutableArray *ships;
 @property (strong, nonatomic, readonly) NSMutableArray *props;
 @property (strong, nonatomic, readonly) NSMutableArray *spaces;
-
-
-@property (strong, nonatomic, readonly) PersistenceFile *persistenceFile;
+@property (strong, nonatomic, readonly) NSMutableArray *training;
+@property (strong, nonatomic, readonly) NSMutableArray *scenarios;
+@property (strong, nonatomic, readonly) NSMutableArray *sandboxes;
 
 @property (strong, nonatomic, readonly) NSURL *unzipURL;
 @property (strong, nonatomic, readonly) NSURL *unrarURL;
 @property (strong, nonatomic, readonly) NSURL *userPreferencesPlist;
+@property (strong, nonatomic, readonly) NSURL *savedApplicationStateURL;
 
 
 - (id)initWithURL:(NSURL *)fileURL;

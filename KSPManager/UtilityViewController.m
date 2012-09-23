@@ -145,13 +145,11 @@
 - (IBAction)deletePrefsButtonPushed:(NSButton *)sender
 {
 
-#if 0
     _userPrefs = nil;
     NSError *error = nil;
     [[NSFileManager defaultManager] removeItemAtURL:self.ksp.userPreferencesPlist
                                               error:&error];
-#endif
-    NSLog(@"deleting %@",self.ksp.userPreferencesPlist);
+    //    NSLog(@"deleting %@",self.ksp.userPreferencesPlist);
     
     [sender setEnabled:NO];
     [self.yesIUnderstandButton setIntValue:NO];
@@ -159,7 +157,12 @@
 
 - (IBAction)deleteSavedStateButtonPushed:(NSButton *)sender
 {
-    NSLog(@"deleting savedState");
+    NSError *error = nil;
+    
+    [[NSFileManager defaultManager] removeItemAtURL:self.ksp.savedApplicationStateURL
+                                              error:&error];
+    
+    
     
     [sender setEnabled:NO];
     [self.yesIUnderstandButton setIntValue:NO];

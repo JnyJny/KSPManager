@@ -12,6 +12,8 @@
 #import "Ship.h"
 #import "Prop.h"
 #import "Space.h"
+#import "Training.h"
+#import "Scenario.h"
 
 #define kKeyContentArray    @"contentArray"
 #define kKeySortDescriptors @"sortDescriptors"
@@ -88,6 +90,8 @@
         [self.categoryControl setLabel:@"Ships" forSegment:2];
         [self.categoryControl setLabel:@"Props" forSegment:3];
         [self.categoryControl setLabel:@"Spaces" forSegment:4];
+        [self.categoryControl setLabel:@"Training" forSegment:5];
+        [self.categoryControl setLabel:@"Scenarios" forSegment:6];
     }
 }
 
@@ -100,6 +104,8 @@
     NSInteger shipCount = 0;
     NSInteger propCount = 0;
     NSInteger spaceCount = 0;
+    NSInteger trainingCount = 0;
+    NSInteger scenarioCount = 0;
 
     for(Asset *asset in assets) {
      
@@ -127,6 +133,17 @@
             spaceCount ++;
             continue;
         }
+        
+        if( [asset isMemberOfClass:[Training class]] ) {
+            trainingCount ++;
+            continue;
+        }
+        
+        if( [asset isMemberOfClass:[Scenario class]] ) {
+            scenarioCount ++;
+            continue;
+        }
+        
 
     }
     
@@ -145,6 +162,11 @@
     if( spaceCount )
         [self.categoryControl setLabel:[@"Spaces" stringByAppendingFormat:@" (%ld)",spaceCount] forSegment:4];
 
+    if( trainingCount )
+        [self.categoryControl setLabel:[@"Training" stringByAppendingFormat:@" (%ld)",trainingCount] forSegment:5];
+
+    if( scenarioCount )
+        [self.categoryControl setLabel:[@"Scenarios" stringByAppendingFormat:@" (%ld)",scenarioCount] forSegment:6];
 
 }
 
@@ -407,6 +429,16 @@
             
         case 4:
             contentKeypath = @"ksp.spaces";
+            sortKeypath = @"partSortDescriptors";
+            break;
+            
+        case 5:
+            contentKeypath = @"ksp.training";
+            sortKeypath = @"partSortDescriptors";
+            break;
+            
+        case 6:
+            contentKeypath = @"ksp.scenarios";
             sortKeypath = @"partSortDescriptors";
             break;
             

@@ -14,6 +14,9 @@
 #import "Ship.h"
 #import "Prop.h"
 #import "Space.h"
+#import "Training.h"
+#import "Scenario.h"
+#import "Sandbox.h"
 
 @implementation KSP
 
@@ -26,8 +29,12 @@
 @synthesize pluginsURL = _pluginsURL;
 @synthesize pluginDataURL = _pluginDataURL;
 @synthesize resourcesURL = _resourcesURL;
-@synthesize persistentURL = _persistentURL;
-@synthesize savesURL = _savesURL;
+
+//@synthesize savesURL = _savesURL;
+@synthesize trainingURL = _trainingURL;
+@synthesize scenariosURL = _scenariosURL;
+@synthesize sandboxesURL = _sandboxesURL;
+
 @synthesize screenshotsURL = _screenshotsURL;
 @synthesize soundsURL = _soundsURL;
 @synthesize settingsURL = _settingsURL;
@@ -38,20 +45,27 @@
 @synthesize availableShipsURL = _availableShipsURL;
 @synthesize availablePropsURL = _availablePropsURL;
 @synthesize availableSpacesURL = _availableSpacesURL;
+@synthesize availableTrainingURL = _availableTrainingURL;
+@synthesize availableScenariosURL = _availableScenariosURL;
+@synthesize availableSandboxesURL = _availableSandboxesURL;
+
+@synthesize validInstallation = _validInstallation;
+
+// asset lists
 
 @synthesize parts = _parts;
 @synthesize plugins = _plugins;
 @synthesize ships = _ships;
 @synthesize props = _props;
 @synthesize spaces = _spaces;
+@synthesize training = _training;
+@synthesize scenarios = _scenarios;
+@synthesize sandboxes = _sandboxes;
 
-@synthesize persistenceFile = _persistenceFile;
 @synthesize unzipURL = _unzipURL;
 @synthesize unrarURL = _unrarURL;
 @synthesize userPreferencesPlist = _userPreferencesPlist;
-
-@synthesize validInstallation = _validInstallation;
-
+@synthesize savedApplicationStateURL = _savedApplicationStateURL;
 
 
 - (id)initWithURL:(NSURL *)fileURL
@@ -59,27 +73,72 @@
     self = [super init];
     if (self) {
         _baseURL = fileURL;
+        [self migrate];
     }
     return self;
+}
+
+
+- (void)migrate
+{
+    NSError *error = nil;
+    
+    NSURL *modURL = [self buildRelativeFileURL:kKSP_MODS createIntermediates:NO];
+    NSURL *managedURL = [self buildRelativeFileURL:kKSPManagedRoot createIntermediates:NO];
+    
+    BOOL modExists;
+    BOOL managedExists;
+    
+    modExists = [modURL checkResourceIsReachableAndReturnError:nil];
+    managedExists = [managedURL checkResourceIsReachableAndReturnError:nil];
+    
+
+    if( (!modExists && managedExists) ||
+        ( modExists && managedExists) )
+        return ;
+    
+    
+    if( modExists && !managedExists ) {
+     
+        [[NSFileManager defaultManager] moveItemAtURL:modURL toURL:managedURL error:&error];
+        
+        if( error ) {
+            [[NSAlert alertWithError:error] runModal];
+        }
+        NSLog(@"successfully migrated from %@ to %@",modURL,managedURL);
+        return;
+    }
+    
+    // what did we miss?  !modExists and !managedExists, meaning the
+    // KSP installation has never been managed.  No problem.
+
+    return;
 }
 
 #pragma mark -
 #pragma mark Readonly Properties
 
+
 - (NSURL *)buildRelativeFileURL:(NSString *)path
+{
+    return [self buildRelativeFileURL:path createIntermediates:NO];
+}
+
+- (NSURL *)buildRelativeFileURL:(NSString *)path createIntermediates:(BOOL)create
 {
     NSError *error = nil;
     
     NSURL *url = [self.baseURL URLByAppendingPathComponent:path];
     
-    [[NSFileManager defaultManager] createDirectoryAtURL:[url URLByDeletingLastPathComponent]
-                             withIntermediateDirectories:YES
-                                              attributes:nil
-                                                   error:&error];
-    
-    if( error ){
-        NSLog(@"buildRelativeFileURL:%@ failed: %@",path,error);
-        return nil;
+    if( create ) {
+        [[NSFileManager defaultManager] createDirectoryAtURL:[url URLByDeletingLastPathComponent]
+                                 withIntermediateDirectories:YES
+                                                  attributes:nil
+                                                       error:&error];
+        if( error ){
+            NSLog(@"buildRelativeFileURL:%@ failed: %@",path,error);
+            return nil;
+        }
     }
 
     return url;
@@ -145,20 +204,28 @@
     return _resourcesURL;
 }
 
-- (NSURL *)persistentURL
+- (NSURL *)trainingURL
 {
-    if( _persistentURL == nil ){
-        _persistentURL = [self buildRelativeFileURL:kKSP_PERSISTENT];
+    if ( _trainingURL == nil ) {
+        _trainingURL = [self buildRelativeFileURL:kKSP_TRAINING];
     }
-    return _persistentURL;
+    return _trainingURL;
 }
 
-- (NSURL *)savesURL
+- (NSURL *)scenariosURL
 {
-    if( _savesURL == nil ) {
-        _savesURL = [self buildRelativeFileURL:kKSP_SAVES];
+    if( _scenariosURL == nil ) {
+        _scenariosURL = [self buildRelativeFileURL:kKSP_SCENARIOS];
     }
-    return _savesURL;
+    return _scenariosURL;
+}
+
+- (NSURL *)sandboxesURL
+{
+    if( _sandboxesURL == nil ) {
+        _sandboxesURL = [self buildRelativeFileURL:kKSP_SANDBOXES];
+    }
+    return _sandboxesURL;
 }
 
 - (NSURL *)screenshotsURL
@@ -196,7 +263,7 @@
 - (NSURL *)availablePartsURL
 {
     if( _availablePartsURL == nil ) {
-        _availablePartsURL = [self buildRelativeFileURL:kKSP_MODS_PARTS];
+        _availablePartsURL = [self buildRelativeFileURL:kKSPManagedParts createIntermediates:YES];
     }
     return _availablePartsURL;
 }
@@ -204,7 +271,7 @@
 - (NSURL *)availablePluginsURL
 {
     if( _availablePluginsURL == nil ) {
-        _availablePluginsURL = [self buildRelativeFileURL:kKSP_MODS_PLUGINS];
+        _availablePluginsURL = [self buildRelativeFileURL:kKSPManagedPlugins createIntermediates:YES];
     }
     return _availablePluginsURL;
 }
@@ -212,7 +279,7 @@
 - (NSURL *)availableShipsURL
 {
     if( _availableShipsURL == nil ) {
-        _availableShipsURL = [self buildRelativeFileURL:kKSP_MODS_SHIPS];
+        _availableShipsURL = [self buildRelativeFileURL:kKSPManagedShips createIntermediates:YES];
     }
     return _availableShipsURL;
 }
@@ -220,7 +287,7 @@
 - (NSURL *)availablePropsURL
 {
     if( _availablePropsURL == nil ) {
-        _availablePropsURL = [self buildRelativeFileURL:kKSP_MODS_PROPS];
+        _availablePropsURL = [self buildRelativeFileURL:kKSPManagedProps createIntermediates:YES];
     }
     return _availablePropsURL;
 }
@@ -228,9 +295,33 @@
 - (NSURL *)availableSpacesURL
 {
     if( _availableSpacesURL == nil ) {
-        _availableSpacesURL = [self buildRelativeFileURL:kKSP_MODS_SPACES];
+        _availableSpacesURL = [self buildRelativeFileURL:kKSPManagedSpaces createIntermediates:YES];
     }
     return _availableSpacesURL;
+}
+
+- (NSURL *)availableTrainingURL
+{
+    if( _availableTrainingURL == nil ) {
+        _availableTrainingURL = [self buildRelativeFileURL:kKSPManagedScenarios createIntermediates:YES];
+    }
+    return _availableTrainingURL;
+}
+
+- (NSURL *)availableScenariosURL
+{
+    if( _availableScenariosURL == nil ) {
+        _availableScenariosURL = [self buildRelativeFileURL:kKSPManagedScenarios createIntermediates:YES];
+    }
+    return _availableScenariosURL;
+}
+
+- (NSURL *)availableSandboxesURL
+{
+    if( _availableSandboxesURL == nil ) {
+        _availableSandboxesURL = [self buildRelativeFileURL:kKSPManagedSandboxes createIntermediates:YES];
+    }
+    return _availableSandboxesURL;
 }
 
 
@@ -285,14 +376,28 @@
     return _spaces;
 }
 
-
-
-- (PersistenceFile *)persistenceFile
+- (NSMutableArray *)training
 {
-    if( _persistenceFile == nil ){
-        _persistenceFile = [[PersistenceFile alloc] initWithURL:self.persistentURL];
+    if( _training == nil ) {
+        _training = [[NSMutableArray alloc] init];
     }
-    return _persistenceFile;
+    return _training;
+}
+
+- (NSMutableArray *)scenarios
+{
+    if( _scenarios == nil ) {
+        _scenarios = [[NSMutableArray alloc] init];
+    }
+    return _scenarios;
+}
+
+- (NSMutableArray *)sandboxes
+{
+    if( _sandboxes == nil ) {
+        _sandboxes = [[NSMutableArray alloc] init];
+    }
+    return _sandboxes;
 }
 
 - (NSURL *)unzipURL
@@ -317,6 +422,15 @@
         _userPreferencesPlist = [NSURL fileURLWithPath:[kKSPPreferencesPlistPath stringByExpandingTildeInPath]];
     }
     return _userPreferencesPlist;
+}
+
+#define kKSPSavedApplicationStatePath @"~/Library/Saved Application State/unity.Squad.Kerbal Space Program.savedState/"
+- (NSURL *)savedApplicationStateURL
+{
+    if( _savedApplicationStateURL == nil ) {
+        _savedApplicationStateURL = [NSURL fileURLWithPath:[kKSPSavedApplicationStatePath stringByExpandingTildeInPath]];
+    }
+    return _savedApplicationStateURL;
 }
 
 #pragma mark -

@@ -32,18 +32,26 @@
 #define kKSP_RESOURCES   @"Resources"
 #define kKSP_SCREENSHOTS @"Screenshots"
 #define kKSP_SOUNDS      @"sounds"
-#define kKSP_SAVES       @"saves"
-
+#define kKSP_SANDBOXES   @"saves"
 #define kKSP_SCENARIOS   @"saves/scenarios"
 #define kKSP_TRAINING    @"saves/training"
 
 #define kKSP_PERSISTENT  @"persistent.sfs"
+#define kKSP_AUTOSAVE    @"autosave.sfs"
 #define kKSP_SETTINGS    @"settings.cfg"
 #define kKSP_SHIPS       @"Ships"
 #define kKSP_VAB         @"VAB"
 #define kKSP_SPH         @"SPH"
 
-
+#define kKSPManagedRoot      @"Managed"
+#define kKSPManagedParts     @"Managed/Parts"
+#define kKSPManagedPlugins   @"Managed/Plugins"
+#define kKSPManagedShips     @"Managed/Ships"
+#define kKSPManagedProps     @"Managed/Props"
+#define kKSPManagedSpaces    @"Managed/Spaces"
+#define kKSPManagedTraining  @"Managed/Training"
+#define kKSPManagedScenarios @"Managed/Scenarios"
+#define kKSPManagedSandboxes @"Managed/Sandboxes"
 
 #define kKSP_MODS          @"Mods"
 #define kKSP_MODS_PARTS    @"Mods/Parts"
@@ -127,6 +135,7 @@ typedef enum {
 #define kOrbitKeyReferenceBody            @"REF"
 #define kOrbitKeyObjectType               @"OBJ"
 
+#if 0
 enum {
     kReferenceBodyKerbol,
     kReferenceBodyKerbin,
@@ -135,6 +144,7 @@ enum {
     // add more reference bodies before here
     kReferenceBodyCount
 } ;
+#endif
 
 enum {
     kOrbitObjectTypePilotable,
@@ -152,6 +162,23 @@ enum {
 #define kVesselOrbitKeyReferenceBody            @"orbit." kOrbitKeyReferenceBody
 #define kVesselOrbitKeyReferenceBodyName        @"orbit.referenceBodyName"
 #define kVesselOrbitKeyObjectType               @"orbit." kOrbitKeyObjectType
+
+enum {
+    kKSPReferenceBodyKerbol,
+    kKSPReferenceBodyKerbin,
+    kKSPReferenceBodyMun,
+    kKSPReferenceBodyMinmus,
+    kKSPReferenceBodyMoho,
+    kKSPReferenceBodyEve,
+    kKSPReferenceBodyDuna,
+    kKSPReferenceBodyIke,
+    kKSPReferenceBodyJool,
+    kKSPReferenceBodyLaythe,
+    kKSPReferenceBodyVall,
+    kKSPReferenceBodyBop,
+    kKSPReferenceBodyTylo,
+    kKSPReferenceBodyGilly
+};
 
 // VesselPart Keypaths
 //

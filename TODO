@@ -1,5 +1,4 @@
-This TODO list is for tracking feature ideas that come up but are not the current priority.
-
+This TODO list is for tracking feature ideas/snafus
 
 - make ship and part inventory tabs work
 - part information
@@ -11,24 +10,27 @@ This TODO list is for tracking feature ideas that come up but are not the curren
 - action menus when right clicking on stuff
 - action menus when clicking action buttons
 - more tool tips
-- keep dates for freshness checking
+
 
 Fix For .17
 - Ship heirarchy is weird now
+-   one big pot of available ships, seperate VAB, SPH and Sandbox (VAB|SPH) destinations ugh
+- fix Crew tab
 - Plugins directory was missing in stock distribution.. weird
 - Screenshot directory was missing in stock distribution, no bigs
-- 
+
 
 Version 2
-- re-write using FileWrappers
+- re-write using FileWrappers ( managed by Manifests )
 - re-write Assets and KSP objects to manage Manifests, first write Manifests
 - perferences window
 - add-on optimization driven by ship composition (install only the parts required for a ship or set or ships )
-- instant orbit assistant
 - savefile editing and versioning
-- part editor modal dialog thingy
-- ship editor "
-- crew editor "
+- mission editor
+-   instant orbit assistant
+- part editor
+- ship editor
+- crew editor
 
 Nice To Have, Not Holding My Breath
 - .mu access for part thumbnails
@@ -38,6 +40,7 @@ Nice To Have, Not Holding My Breath
 - modal dialog showing manifest of items discovered to augment badges
 - add badges to tabs to indicate items added from zip/dir/pkg 
 - download progress meter ( kerbal.net needs to publish zip file size )
+
 
 BUG
 
@@ -50,19 +53,22 @@ DONE
 - kerbal.net download path is wrong ( download is being appended to the zip file name instead of being a directory )
 - kerbel.net integration cleanup, beautification
 - downloads on seperate operations queue to free up main thread
+- change from "Mod" subdirectory within KSP ROOT to "Managed"
+- migrate process for "Mod" to "Managed" change
 
 GOOD Idea, Not Gonna Do It For V1
 - video demonstrating usage
 - refactor Asset -> Addon?  semantics
 - user ship ratings ( give ships stars! )
 - rewrite persistent.sfs object heirarchy, try to share with Asset
-- look into kspmm://
+- look into kspmm://, it's a centralized redirector
 - automated addon refresh from kerbel.net, some or all
 - .craft -> JSON -> .craft filter
 - .sfs -> JSON -> .sfs filter
 - part.cfg -> JSON -> part.cfg filter
+- keep dates for freshness checking, possible but dont want to deal with it
 
 
 Not Gonna Do It
-- change color scheme away from grey, grey on light blue? black bg?
+- change color scheme away from grey, grey on light blue? black bg? - actually ...
 - build full blown NSDocument? fragile, will break the minute Squad changes something
