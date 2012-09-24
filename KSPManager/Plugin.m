@@ -106,12 +106,12 @@
 
 - (BOOL)isInstalled
 {
-    return [self.baseURL.path rangeOfString:kKSP_MODS_PLUGINS].location == NSNotFound;
+    return [self.baseURL.path rangeOfString:kKSPManagedPlugins].location == NSNotFound;
 }
 
 - (BOOL)isAvailable
 {
-    return [self.baseURL.path rangeOfString:kKSP_MODS_PLUGINS].location != NSNotFound;
+    return [self.baseURL.path rangeOfString:kKSPManagedPlugins].location != NSNotFound;
 }
 
 - (NSString *)assetTitle

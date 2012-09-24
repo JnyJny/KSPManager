@@ -223,6 +223,7 @@ enum {
 // Preference Hacking
 //
 #define kKSPPreferencesPlistPath @"~/Library/Preferences/unity.Squad.Kerbal Space Program.plist"
+#define kKSPSavedApplicationStatePath @"~/Library/Saved Application State/unity.Squad.Kerbal Space Program.savedState/"
 
 #define kKSPPreferencesKeyIsFullscreenMode  @"Screenmanager Is Fullscreen mode"
 #define kKSPPreferencesKeyResolutionHeight  @"Screenmanager Resolution Height"

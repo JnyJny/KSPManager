@@ -10,4 +10,7 @@
 
 @interface Sandbox : Asset
 
+
++ (NSArray *)inventory:(NSURL *)url;
+
 @end

@@ -45,7 +45,7 @@
 
 - (BOOL)isAvailable
 {
-    return [self.baseURL.path rangeOfString:kKSP_MODS_PROPS].location != NSNotFound;
+    return [self.baseURL.path rangeOfString:kKSPManagedProps].location != NSNotFound;
 }
 
 #pragma mark -

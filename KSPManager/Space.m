@@ -42,7 +42,7 @@
 
 - (BOOL)isAvailable
 {
-    return [self.baseURL.path rangeOfString:kKSP_MODS_SPACES].location != NSNotFound;
+    return [self.baseURL.path rangeOfString:kKSPManagedSpaces].location != NSNotFound;
 }
 
 

@@ -37,6 +37,6 @@
 
 - (BOOL)handleUnknownContent:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer;
 
-- (void)willEndParsingWithConfiguration:(ConfigurationParser *)tokenizer;
+- (void)didEndParsingWithConfiguration:(ConfigurationParser *)tokenizer;
 
 @end

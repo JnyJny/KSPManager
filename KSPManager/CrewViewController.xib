@@ -59,7 +59,7 @@
 										<string key="NSFrameSize">{238, 675}</string>
 										<reference key="NSSuperview" ref="977938537"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="829824898"/>
+										<reference key="NSNextKeyView" ref="167976081"/>
 										<string key="NSReuseIdentifierKey">_NS:13</string>
 										<bool key="NSEnabled">YES</bool>
 										<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -226,7 +226,7 @@
 						<string key="NSFrame">{{20, 67}, {240, 693}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="167976081"/>
+						<reference key="NSNextKeyView" ref="977938537"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<int key="NSsFlags">133682</int>
 						<reference key="NSVScroller" ref="829824898"/>
@@ -253,7 +253,7 @@
 										<string key="NSFrameSize">{498, 675}</string>
 										<reference key="NSSuperview" ref="254570569"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="344266923"/>
+										<reference key="NSNextKeyView" ref="652076456"/>
 										<string key="NSReuseIdentifierKey">_NS:13</string>
 										<bool key="NSEnabled">YES</bool>
 										<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -323,7 +323,6 @@
 								<string key="NSFrame">{{1, 236}, {1000, 16}}</string>
 								<reference key="NSSuperview" ref="547733884"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:60</string>
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 								<int key="NSsFlags">1</int>
@@ -351,7 +350,7 @@
 						<string key="NSFrame">{{280, 67}, {500, 693}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="652076456"/>
+						<reference key="NSNextKeyView" ref="254570569"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<int key="NSsFlags">133682</int>
 						<reference key="NSVScroller" ref="344266923"/>
@@ -765,7 +764,7 @@
 							<object class="IBNSLayoutConstraint" id="488926311">
 								<reference key="firstItem" ref="1005"/>
 								<int key="firstAttribute">2</int>
-								<int key="relation">0</int>
+								<int key="relation">1</int>
 								<reference key="secondItem" ref="938708414"/>
 								<int key="secondAttribute">2</int>
 								<float key="multiplier">1</float>
@@ -1100,7 +1099,7 @@
 				<string key="-1.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="-3.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<array class="NSMutableArray" key="1.IBNSViewMetadataConstraints">
+				<array key="1.IBNSViewMetadataConstraints">
 					<reference ref="488926311"/>
 					<reference ref="200486194"/>
 					<reference ref="536196223"/>

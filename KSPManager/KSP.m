@@ -30,7 +30,6 @@
 @synthesize pluginDataURL = _pluginDataURL;
 @synthesize resourcesURL = _resourcesURL;
 
-//@synthesize savesURL = _savesURL;
 @synthesize trainingURL = _trainingURL;
 @synthesize scenariosURL = _scenariosURL;
 @synthesize sandboxesURL = _sandboxesURL;
@@ -61,6 +60,8 @@
 @synthesize training = _training;
 @synthesize scenarios = _scenarios;
 @synthesize sandboxes = _sandboxes;
+
+@synthesize managedAssets = _managedAssets;
 
 @synthesize unzipURL = _unzipURL;
 @synthesize unrarURL = _unrarURL;
@@ -116,7 +117,7 @@
 }
 
 #pragma mark -
-#pragma mark Readonly Properties
+#pragma mark URL Properties
 
 
 - (NSURL *)buildRelativeFileURL:(NSString *)path
@@ -143,8 +144,6 @@
 
     return url;
 }
-
-
 
 - (NSURL *)bundleURL
 {
@@ -324,6 +323,8 @@
     return _availableSandboxesURL;
 }
 
+#pragma mark -
+#pragma mark Managed Asset Arrays
 
 - (NSMutableArray *)parts
 {
@@ -380,6 +381,8 @@
 {
     if( _training == nil ) {
         _training = [[NSMutableArray alloc] init];
+        [_training addObjectsFromArray:[Training inventory:self.trainingURL]];
+        [_training addObjectsFromArray:[Training inventory:self.availableTrainingURL]];
     }
     return _training;
 }
@@ -388,6 +391,8 @@
 {
     if( _scenarios == nil ) {
         _scenarios = [[NSMutableArray alloc] init];
+        [_scenarios addObjectsFromArray:[Scenario inventory:self.scenariosURL]];
+        [_scenarios addObjectsFromArray:[Scenario inventory:self.availableScenariosURL]];
     }
     return _scenarios;
 }
@@ -396,9 +401,32 @@
 {
     if( _sandboxes == nil ) {
         _sandboxes = [[NSMutableArray alloc] init];
+        [_sandboxes addObjectsFromArray:[Sandbox inventory:self.sandboxesURL]];
+        [_sandboxes addObjectsFromArray:[Sandbox inventory:self.availableSandboxesURL]];
     }
     return _sandboxes;
 }
+
+- (NSDictionary *)managedAssets
+{
+    if( _managedAssets == nil ) {
+        NSMutableDictionary *tmp = [[NSMutableDictionary alloc] init];
+        [tmp addEntriesFromDictionary:@{ [Part class].description:self.parts}];
+        [tmp addEntriesFromDictionary:@{ [Plugin class].description:self.plugins}];
+        [tmp addEntriesFromDictionary:@{ [Ship class].description:self.ships}];
+        [tmp addEntriesFromDictionary:@{ [Prop class].description:self.props}];
+        [tmp addEntriesFromDictionary:@{ [Space class].description:self.spaces}];
+        [tmp addEntriesFromDictionary:@{ [Training class].description:self.training}];
+        [tmp addEntriesFromDictionary:@{ [Scenario class].description:self.scenarios}];
+        [tmp addEntriesFromDictionary:@{ [Sandbox class].description:self.sandboxes}];
+
+        _managedAssets = [NSDictionary dictionaryWithDictionary:tmp];
+    }
+    return _managedAssets;
+}
+
+#pragma mark -
+#pragma mark Utility Properties
 
 - (NSURL *)unzipURL
 {
@@ -416,7 +444,7 @@
     return _unrarURL;
 }
 
-- (NSURL *)userPreferencesPlist
+- (NSURL *)userPreferencesPlistURL
 {
     if( _userPreferencesPlist == nil ) {
         _userPreferencesPlist = [NSURL fileURLWithPath:[kKSPPreferencesPlistPath stringByExpandingTildeInPath]];
@@ -424,7 +452,7 @@
     return _userPreferencesPlist;
 }
 
-#define kKSPSavedApplicationStatePath @"~/Library/Saved Application State/unity.Squad.Kerbal Space Program.savedState/"
+
 - (NSURL *)savedApplicationStateURL
 {
     if( _savedApplicationStateURL == nil ) {
@@ -445,15 +473,6 @@
 #pragma mark -
 #pragma mark Instance Methods
 
-- (BOOL)isValidInstallation
-{
-    NSBundle *kspBundle = [NSBundle bundleWithURL:self.bundleURL];
-    
-    if( kspBundle == nil )
-        return NO;
-    
-    return [[kspBundle bundleIdentifier] isEqualToString:kKSP_BUNDLE_ID];
-}
 
 
 - (BOOL)install:(Asset *)object
@@ -475,7 +494,16 @@
     
     if( [object isMemberOfClass:[Space class]] )
         return [object moveTo:self.spacesURL];
-
+    
+    if( [object isMemberOfClass:[Training class]] )
+        return [object moveTo:self.trainingURL];
+    
+    if( [object isMemberOfClass:[Scenario class]] )
+        return [object moveTo:self.scenariosURL];
+    
+    if( [object isMemberOfClass:[Sandbox class]] )
+        return [object moveTo:self.sandboxesURL];
+    
     NSLog(@"KSP install:%@ unknown asset %@",object,object.class);
     
     return NO;
@@ -491,7 +519,6 @@
 
     if( [object isMemberOfClass:[Ship class]] ) {
         Ship *ship = (Ship *)object;
-        
         return [object moveTo:[self.availableShipsURL URLByAppendingPathComponent:ship.hanger]];
     }
     
@@ -502,63 +529,172 @@
     if( [object isMemberOfClass:[Space class]] )
         return [object moveTo:self.availableSpacesURL];
     
+    if( [object isMemberOfClass:[Training class]] )
+        return [object moveTo:self.availableTrainingURL];
+    
+    if( [object isMemberOfClass:[Scenario class]] )
+        return [object moveTo:self.availableScenariosURL];
+    
+    if( [object isMemberOfClass:[Sandbox class]] )
+        return [object moveTo:self.availableSandboxesURL];
+    
     NSLog(@"KSP uninstall:%@ unknown asset %@",object,object.class);
 
     return NO;
 }
 
+// manage - move asset from wherever it is now in the file system heirarchy
+//          to KSP_ROOT/<wherever it should go>
+//
+//          if install is YES: put it in KSP_ROOT/<asset dir>
+//          if install is NO: put it in KSP_ROOT/Managed/<asset dir>
+//
+
 - (BOOL)manage:(Asset *)object installed:(BOOL)install
 {
     
-    // XXX need to recognize and reject duplication?
+
+    NSMutableArray *collection = [self.managedAssets valueForKey:object.class.description];
     
-    if( [object isMemberOfClass:[Part class]] )
-        [self.parts addObject:object];
+    if( collection == nil  )
+        return NO;
     
-    if( [object isMemberOfClass:[Plugin class]] )
-        [self.plugins addObject:object];
-    
-    if( [object isMemberOfClass:[Ship class]] )
-        [self.ships addObject:object];
-    
-    if( [object isMemberOfClass:[Prop class]] )
-        [self.props addObject:object];
-    
-    if( [object isMemberOfClass:[Space class]] )
-        [self.spaces addObject:object];
-    
+    [collection addObject:object];
+
+
     if (install)
         return [self install:object];
     
     return [self uninstall:object];
 }
 
+// unmange - alittle more involved
+//
+//           remove the asset from it's managed array
+//           ask the asset to remove it's managed file(s)
+//           nil out the object
+
+
 - (BOOL)unmanage:(Asset *)object
 {
 
-    if( [object remove] == NO )
+    NSMutableArray *collection = [self.managedAssets valueForKey:object.class.description];
+    
+    if( collection == nil )
         return NO;
     
-    if( [self.parts containsObject:object] )
-        [self.parts removeObject:object];
+    [collection removeObject:object];
     
-    if( [self.plugins containsObject:object] )
-        [self.plugins removeObject:object];
-
-    
-    if( [self.ships containsObject:object] )
-        [self.ships removeObject:object];
-    
-    if( [self.props containsObject:object] )
-        [self.props removeObject:object];
-    
-    if( [self.spaces containsObject:object] )
-        [self.spaces removeObject:object];
+    if( [object remove] == NO ) {
+        // add the object back if the remove fails
+        [collection addObject:object];
+        return NO;
+    }
 
     object = nil;
     
     return YES;
 }
+
+// createAssetsWith:install:
+//
+// This is how new assets are added
+//
+
+- (NSArray *)createAssetsWith:(NSURL *)url install:(BOOL)install
+{
+    NSMutableArray *assets = [[NSMutableArray alloc] init];
+    NSArray *results;
+    NSError *error = nil;
+    NSNumber *isDir;
+    
+    [url getResourceValue:&isDir forKey:NSURLIsDirectoryKey error:&error];
+    
+    if( error ) {
+        [[NSAlert alertWithError:error] runModal];
+        return assets;
+    }
+    
+    if( [isDir boolValue] == NO) {
+        
+        NSString *ext = url.lastPathComponent.pathExtension;
+        
+        if( [ext caseInsensitiveCompare:@"zip"] == NSOrderedSame ){
+            NSURL *dst = nil;
+            if( [url.path rangeOfString:kKSP_TEMP_ASSETS].location == NSNotFound )
+                dst =[self cacheURLforPath:url.lastPathComponent];
+            
+            url = [self inflateZipFile:url inDestination:dst];
+            
+            goto AddAndInstall;
+        }
+        
+        if( [ext caseInsensitiveCompare:kPLUGIN_EXT] == NSOrderedSame ){
+            [assets addObject:[[Plugin alloc]initWithURL:url]];
+            goto AddAndInstall;
+        }
+        
+        if( [ext caseInsensitiveCompare:@"rar"] == NSOrderedSame ){
+            // it's a RAR which needs a third-party helper to unarchive
+            // XXX throw an error
+            NSLog(@"rar archives are currently unsupported.");
+            return assets;
+        }
+        
+        if( [ext caseInsensitiveCompare:kCRAFT_EXT] == NSOrderedSame ) {
+            [assets addObject:[[Ship alloc] initWithURL:url]];
+            goto AddAndInstall;
+        }
+        
+        if( [ext caseInsensitiveCompare:kSFS_EXT] == NSOrderedSame ) {
+#if 0
+            // persistent file of some sort.. uh. punt
+            // XXX throw an error
+            NSLog(@"adding .sfs files currently unsupported.");
+#endif
+            // wrong, we support them now.  strip the lastPathComponent from url
+            // and continue.  I think this should work.  Lots of things have .sfs extensions
+            // ( training, scenario, sandbox.. the inventories should be able to sort it all
+            // out.  It's a good theory.
+            url = [url URLByDeletingLastPathComponent];
+            goto AddAndInstall;
+        }
+    }
+    
+AddAndInstall:
+    
+    if( (results = [Part inventory:url]) )
+        [assets addObjectsFromArray:results];
+    
+    if( (results = [Plugin inventory:url]) )
+        [assets addObjectsFromArray:results];
+    
+    if( (results = [Ship inventory:url]) )
+        [assets addObjectsFromArray:results];
+    
+    if( (results = [Prop inventory:url]) )
+        [assets addObjectsFromArray:results];
+    
+    if( (results = [Space inventory:url]) )
+        [assets addObjectsFromArray:results];
+    
+    if( (results = [Training inventory:url]) )
+        [assets addObjectsFromArray:results];
+    
+    if( (results = [Scenario inventory:url]) )
+        [assets addObjectsFromArray:results];
+    
+    if( (results = [Sandbox inventory:url]) )
+        [assets addObjectsFromArray:results];
+    
+    for (Asset *asset in assets)
+        [self manage:asset installed:install];
+    
+    return assets;
+}
+
+#pragma mark -
+#pragma mark Utility Methods
 
 - (void)cleanUp
 {
@@ -643,85 +779,20 @@
 }
 
 
-- (NSArray *)createAssetsWith:(NSURL *)url install:(BOOL)install
+#pragma mark -
+
+
+
+- (BOOL)isValidInstallation
 {
-    NSMutableArray *assets = [[NSMutableArray alloc] init];
-    NSArray *results;
-    NSError *error = nil;
-    NSNumber *isDir;
+    NSBundle *kspBundle = [NSBundle bundleWithURL:self.bundleURL];
     
-    [url getResourceValue:&isDir forKey:NSURLIsDirectoryKey error:&error];
+    if( kspBundle == nil )
+        return NO;
     
-    if( error ) {
-        [[NSAlert alertWithError:error] runModal];
-        return assets;
-    }
-    
-    if( [isDir boolValue] == NO) {
-        
-        NSString *ext = url.lastPathComponent.pathExtension;
-        
-        if( [ext caseInsensitiveCompare:@"zip"] == NSOrderedSame ){
-            NSURL *dst = nil;
-            if( [url.path rangeOfString:kKSP_TEMP_ASSETS].location == NSNotFound )
-                dst =[self cacheURLforPath:url.lastPathComponent];
-            
-            url = [self inflateZipFile:url inDestination:dst];
-            
-            goto AddAndInstall;
-        }
-        
-        if( [ext caseInsensitiveCompare:kPLUGIN_EXT] == NSOrderedSame ){
-            [assets addObject:[[Plugin alloc]initWithURL:url]];
-            goto AddAndInstall;
-        }
-        
-        if( [ext caseInsensitiveCompare:@"rar"] == NSOrderedSame ){
-            // it's a RAR which needs a third-party helper to unarchive
-            NSLog(@"rar archives are currently unsupported.");
-            return assets;
-        }
-        
-        if( [ext caseInsensitiveCompare:kCRAFT_EXT] == NSOrderedSame ) {
-            [assets addObject:[[Ship alloc] initWithURL:url]];
-            goto AddAndInstall;
-        }
-        
-        if( [ext caseInsensitiveCompare:@"sfs"] == NSOrderedSame ) {
-            // persistent file of some sort.. uh. punt
-            NSLog(@"adding .sfs files currently unsupported.");
-            return assets;
-        }
-    }
-
-AddAndInstall:
-    
-    results = [Part inventory:url];
-    
-    if( results )
-        [assets addObjectsFromArray:results];
-    
-    results = [Plugin inventory:url];
-    if(results)
-        [assets addObjectsFromArray:results];
-    
-    results = [Ship inventory:url];
-    if( results )
-        [assets addObjectsFromArray:results];
-
-    results = [Prop inventory:url];
-    if( results )
-        [assets addObjectsFromArray:results];
-    
-    results = [Space inventory:url];
-    if( results )
-        [assets addObjectsFromArray:results];
-    
-    for (Asset *asset in assets) 
-        [self manage:asset installed:install];
-
-    return assets;
+    return [[kspBundle bundleIdentifier] isEqualToString:kKSP_BUNDLE_ID];
 }
+
 
 - (BOOL)launchKSP
 {
@@ -737,15 +808,9 @@ AddAndInstall:
 #pragma mark -
 #pragma mark Class Methods
 
-
-
-
 + (NSArray *)locateInstallationDirectories
 {
-    
-    
     NSMutableArray *searchURLS = [[NSMutableArray alloc] init];
-    
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSMutableArray *results = [[NSMutableArray alloc] init];
     NSSearchPathDomainMask domains = NSUserDomainMask;
@@ -804,8 +869,6 @@ AddAndInstall:
             }
         }
     }
-    
-
     return results;
 }
 

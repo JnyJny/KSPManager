@@ -115,12 +115,12 @@
 
 - (BOOL)isInstalled
 {
-    return [self.baseURL.path rangeOfString:kKSP_MODS_PARTS].location == NSNotFound;
+    return [self.baseURL.path rangeOfString:kKSPManagedParts].location == NSNotFound;
 }
 
 - (BOOL)isAvailable
 {
-    return [self.baseURL.path rangeOfString:kKSP_MODS_PARTS].location != NSNotFound;
+    return [self.baseURL.path rangeOfString:kKSPManagedParts].location != NSNotFound;
 }
 
 - (NSString *)assetTitle
@@ -284,8 +284,10 @@
 
     for(NSString *cfgPath in partCfgPaths){
         Part *part = [[Part alloc]initWithURL:[baseURL URLByAppendingPathComponent:cfgPath]];
-        if( part )
+        if( part ) {
+            NSLog(@"inventory part %@",part.baseURL);
             [results addObject:part];
+        }
     }
 
     return results;

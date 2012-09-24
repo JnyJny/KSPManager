@@ -53,6 +53,8 @@
 @property (strong, nonatomic, readonly) NSMutableArray *scenarios;
 @property (strong, nonatomic, readonly) NSMutableArray *sandboxes;
 
+@property (strong, nonatomic, readonly) NSDictionary *managedAssets;
+
 @property (strong, nonatomic, readonly) NSURL *unzipURL;
 @property (strong, nonatomic, readonly) NSURL *unrarURL;
 @property (strong, nonatomic, readonly) NSURL *userPreferencesPlist;

@@ -57,12 +57,12 @@
 
 - (BOOL)isInstalled
 {
-    return [self.baseURL.path rangeOfString:kKSP_MODS_SHIPS].location == NSNotFound;
+    return [self.baseURL.path rangeOfString:kKSPManagedShips].location == NSNotFound;
 }
 
 - (BOOL)isAvailable
 {
-    return [self.baseURL.path rangeOfString:kKSP_MODS_SHIPS].location != NSNotFound;
+    return [self.baseURL.path rangeOfString:kKSPManagedShips].location != NSNotFound;
 }
 
 #pragma mark -
@@ -241,7 +241,7 @@
     return YES;
 }
 
-- (void)willEndParsingWithConfiguration:(ConfigurationParser *)tokenizer
+- (void)didEndParsingWithConfiguration:(ConfigurationParser *)tokenizer
 {
     NSLog(@"endParsing %@",self.baseURL.lastPathComponent);
 }
