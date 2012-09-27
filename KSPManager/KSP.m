@@ -8,7 +8,6 @@
 
 #import "KSP.h"
 #import "KSP_Constants.h"
-#import "PersistenceFile.h"
 #import "Part.h"
 #import "Plugin.h"
 #import "Ship.h"
@@ -65,7 +64,7 @@
 
 @synthesize unzipURL = _unzipURL;
 @synthesize unrarURL = _unrarURL;
-@synthesize userPreferencesPlist = _userPreferencesPlist;
+@synthesize userPreferencesPlistURL = _userPreferencesPlistURL;
 @synthesize savedApplicationStateURL = _savedApplicationStateURL;
 
 
@@ -446,10 +445,10 @@
 
 - (NSURL *)userPreferencesPlistURL
 {
-    if( _userPreferencesPlist == nil ) {
-        _userPreferencesPlist = [NSURL fileURLWithPath:[kKSPPreferencesPlistPath stringByExpandingTildeInPath]];
+    if( _userPreferencesPlistURL == nil ) {
+        _userPreferencesPlistURL = [NSURL fileURLWithPath:[kKSPPreferencesPlistPath stringByExpandingTildeInPath]];
     }
-    return _userPreferencesPlist;
+    return _userPreferencesPlistURL;
 }
 
 

@@ -9,11 +9,9 @@
 #import <Cocoa/Cocoa.h>
 
 #import "AddonsViewController.h"
-#import "MissionsViewController.h"
-#import "CrewViewController.h"
+
 #import "ShipViewController.h"
 #import "InventoryViewController.h"
-#import "SavesViewController.h"
 #import "KerbalNetViewController.h"
 #import "UtilityViewController.h"
 #import "KSP.h"
@@ -26,11 +24,10 @@
 @property (unsafe_unretained) IBOutlet NSPathControl *pathControl;
 
 @property (unsafe_unretained) IBOutlet AddonsViewController *addonsViewController;
-@property (unsafe_unretained) IBOutlet MissionsViewController *missionsViewController;
-@property (unsafe_unretained) IBOutlet CrewViewController *crewViewController;
+
 @property (unsafe_unretained) IBOutlet ShipViewController *shipViewController;
 @property (unsafe_unretained) IBOutlet InventoryViewController *inventoryViewController;
-@property (unsafe_unretained) IBOutlet SavesViewController *savesViewController;
+
 @property (unsafe_unretained) IBOutlet KerbalNetViewController *kerbalNetViewController;
 @property (unsafe_unretained) IBOutlet UtilityViewController *utilityViewController;
 

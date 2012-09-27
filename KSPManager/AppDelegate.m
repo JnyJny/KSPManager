@@ -15,11 +15,9 @@
 @synthesize tabView;
 @synthesize pathControl;
 @synthesize addonsViewController;
-@synthesize missionsViewController;
-@synthesize crewViewController;
 @synthesize shipViewController;
 @synthesize inventoryViewController;
-@synthesize savesViewController;
+
 @synthesize kerbalNetViewController;
 @synthesize utilityViewController;
 @synthesize terminateKSPButton;

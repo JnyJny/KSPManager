@@ -10,6 +10,7 @@
 
 @interface Sandbox : Asset
 
+@property (strong, nonatomic, readonly) NSMutableArray *ships;
 
 + (NSArray *)inventory:(NSURL *)url;
 

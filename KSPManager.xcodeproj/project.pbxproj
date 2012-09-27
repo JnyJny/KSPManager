@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		1D03984F15FA8E7400BA3D2F /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D03984715FA8D7A00BA3D2F /* Sparkle.framework */; };
 		1D03985015FA8EC300BA3D2F /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1D03984715FA8D7A00BA3D2F /* Sparkle.framework */; };
-		1D03985515FA99EC00BA3D2F /* CrewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D03985315FA99EC00BA3D2F /* CrewViewController.m */; };
-		1D03985615FA99EC00BA3D2F /* CrewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D03985415FA99EC00BA3D2F /* CrewViewController.xib */; };
 		1D16222115EB315500C0F3CC /* KSPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D16222015EB315500C0F3CC /* KSPViewController.m */; };
 		1D16222415EBC82900C0F3CC /* Asset.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D16222315EBC82900C0F3CC /* Asset.m */; };
 		1D16222815EBC87200C0F3CC /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D16222715EBC87200C0F3CC /* Plugin.m */; };
@@ -20,6 +18,13 @@
 		1D16223615EE721300C0F3CC /* PortableExecutableFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D16223515EE721300C0F3CC /* PortableExecutableFormat.m */; };
 		1D16223815EE97D800C0F3CC /* KSPM-Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1D16223715EE97D800C0F3CC /* KSPM-Icon.icns */; };
 		1D16223C15EE9F2B00C0F3CC /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 1D16223A15EE9F2B00C0F3CC /* LICENSE */; };
+		1D24FB721613B3B500066392 /* CRAFT.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D24FB711613B3B500066392 /* CRAFT.m */; };
+		1D24FB751613B40000066392 /* BaseConfigurationFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D24FB741613B40000066392 /* BaseConfigurationFile.m */; };
+		1D24FB781613EFEE00066392 /* CFG.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D24FB771613EFEE00066392 /* CFG.m */; };
+		1D24FB7B1613F1A300066392 /* CFGPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D24FB7A1613F1A200066392 /* CFGPart.m */; };
+		1D24FB7F1613F1EE00066392 /* CFGModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D24FB7E1613F1EE00066392 /* CFGModule.m */; };
+		1D24FB851613F21100066392 /* CFGProp.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D24FB841613F21100066392 /* CFGProp.m */; };
+		1D24FB881613F63E00066392 /* CFGSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D24FB871613F63E00066392 /* CFGSpace.m */; };
 		1D261D89160E731500AE02F6 /* Training.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D261D88160E731500AE02F6 /* Training.m */; };
 		1D261D8D160E733500AE02F6 /* Scenario.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D261D8C160E733500AE02F6 /* Scenario.m */; };
 		1D261D91160E736F00AE02F6 /* Sandbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D261D90160E736F00AE02F6 /* Sandbox.m */; };
@@ -27,7 +32,6 @@
 		1D28B8B3160622C6009C7FD0 /* UtilityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D28B8B1160622C6009C7FD0 /* UtilityViewController.xib */; };
 		1D2ED54215EB156900402EF1 /* InventoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D2ED54015EB156900402EF1 /* InventoryViewController.m */; };
 		1D2ED54315EB156900402EF1 /* InventoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D2ED54115EB156900402EF1 /* InventoryViewController.xib */; };
-		1D3746AC15F7F23F00F858B3 /* PersistentObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3746AB15F7F23F00F858B3 /* PersistentObject.m */; };
 		1D56F41615FA377C0047042A /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1D56F41515FA377C0047042A /* dsa_pub.pem */; };
 		1D572152160274DB00D2427C /* KerbalNet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D572151160274DA00D2427C /* KerbalNet.m */; };
 		1D57215716028B5400D2427C /* Remote.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D57215616028B5400D2427C /* Remote.m */; };
@@ -36,16 +40,24 @@
 		1D58B0FB1607B77E0072A9D0 /* Prop.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D58B0FA1607B77E0072A9D0 /* Prop.m */; };
 		1D58B0FF1607B7980072A9D0 /* Space.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D58B0FE1607B7980072A9D0 /* Space.m */; };
 		1D58B1051608C29E0072A9D0 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 1D58B1041608C29E0072A9D0 /* Credits.html */; };
-		1D58B10B1609031B0072A9D0 /* RealizedPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D58B10A1609031B0072A9D0 /* RealizedPart.m */; };
 		1D682A2615FCD93E007C84CB /* ConfigurationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D682A2515FCD93E007C84CB /* ConfigurationParser.m */; };
-		1D75BD6D15F79FA40037393E /* PersistenceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D75BD6C15F79FA40037393E /* PersistenceFile.m */; };
-		1D75BD7015F7A6770037393E /* Crew.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D75BD6F15F7A6770037393E /* Crew.m */; };
-		1D82916515F7A90600463E99 /* Vessel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D82916415F7A90600463E99 /* Vessel.m */; };
+		1D8D57B916134D2000304975 /* KSPBucket.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8D57B816134D2000304975 /* KSPBucket.m */; };
+		1D8D57BC16134F2400304975 /* SFSGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8D57BB16134F2400304975 /* SFSGame.m */; };
+		1D8D57BF16134F6500304975 /* SFSFlight.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8D57BE16134F6500304975 /* SFSFlight.m */; };
+		1D8D57C216134F8A00304975 /* SFSEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8D57C116134F8A00304975 /* SFSEditor.m */; };
+		1D8D57C516134FB700304975 /* SFSTrackingStation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8D57C416134FB700304975 /* SFSTrackingStation.m */; };
+		1D8D57C816134FCB00304975 /* SFSSpaceCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8D57C716134FCB00304975 /* SFSSpaceCenter.m */; };
+		1D8D57CE16134FFA00304975 /* SFSCrew.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8D57CD16134FFA00304975 /* SFSCrew.m */; };
+		1D8D57D11613501300304975 /* SFSVessel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8D57D01613501200304975 /* SFSVessel.m */; };
+		1D8D57D41613501E00304975 /* SFSPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8D57D31613501D00304975 /* SFSPart.m */; };
+		1D8D57D71613503900304975 /* SFSModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8D57D61613503800304975 /* SFSModule.m */; };
+		1D8D57DA1613504C00304975 /* SFSScenario.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8D57D91613504B00304975 /* SFSScenario.m */; };
+		1D8D57DE161360A700304975 /* SFSOrbit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8D57DD161360A700304975 /* SFSOrbit.m */; };
 		1D9C8D7216021861001C095F /* badge-24x24.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D9C8D6F16021861001C095F /* badge-24x24.png */; };
 		1D9C8D7316021861001C095F /* badge-36x36.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D9C8D7016021861001C095F /* badge-36x36.png */; };
 		1D9C8D7416021861001C095F /* badge-48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D9C8D7116021861001C095F /* badge-48x48.png */; };
 		1D9C8D7616021914001C095F /* badge-red-24x24.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D9C8D7516021914001C095F /* badge-red-24x24.png */; };
-		1DA65DBC160F8DFD00092123 /* SFSData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA65DBB160F8DFD00092123 /* SFSData.m */; };
+		1DA65DC01613384F00092123 /* SFS.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA65DBF1613384B00092123 /* SFS.m */; };
 		1DB2E08F15FE97B500B1E0AF /* Ship.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB2E08E15FE97B500B1E0AF /* Ship.m */; };
 		1DB2E09315FFA7B900B1E0AF /* AddonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB2E09115FFA7B900B1E0AF /* AddonsViewController.m */; };
 		1DB2E09415FFA7B900B1E0AF /* AddonsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DB2E09215FFA7B900B1E0AF /* AddonsViewController.xib */; };
@@ -55,15 +67,9 @@
 		1DB405C915DB3E230041807D /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1DB405C715DB3E230041807D /* Credits.rtf */; };
 		1DB405CC15DB3E230041807D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB405CB15DB3E230041807D /* AppDelegate.m */; };
 		1DB405CF15DB3E230041807D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DB405CD15DB3E230041807D /* MainMenu.xib */; };
-		1DB405E415DB3F3D0041807D /* MissionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB405E215DB3F3D0041807D /* MissionsViewController.m */; };
-		1DB405E515DB3F3D0041807D /* MissionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DB405E315DB3F3D0041807D /* MissionsViewController.xib */; };
 		1DB405ED15DB45390041807D /* KSP.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB405EC15DB45390041807D /* KSP.m */; };
 		1DB405F915DBFF4C0041807D /* Part.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB405F815DBFF4C0041807D /* Part.m */; };
 		1DB7013515F12C90002EC18D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1DB7013415F12C90002EC18D /* README.md */; };
-		1DD06E9215F7FCB100202CB4 /* Orbit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD06E9115F7FCB100202CB4 /* Orbit.m */; };
-		1DD06E9615F7FCC700202CB4 /* VesselPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD06E9515F7FCC600202CB4 /* VesselPart.m */; };
-		1DD06E9A15F93DC700202CB4 /* SavesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD06E9815F93DC700202CB4 /* SavesViewController.m */; };
-		1DD06E9B15F93DC700202CB4 /* SavesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DD06E9915F93DC700202CB4 /* SavesViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -81,9 +87,6 @@
 
 /* Begin PBXFileReference section */
 		1D03984715FA8D7A00BA3D2F /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
-		1D03985215FA99EC00BA3D2F /* CrewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrewViewController.h; sourceTree = "<group>"; };
-		1D03985315FA99EC00BA3D2F /* CrewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrewViewController.m; sourceTree = "<group>"; };
-		1D03985415FA99EC00BA3D2F /* CrewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CrewViewController.xib; sourceTree = "<group>"; };
 		1D16221F15EB315500C0F3CC /* KSPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPViewController.h; sourceTree = "<group>"; };
 		1D16222015EB315500C0F3CC /* KSPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPViewController.m; sourceTree = "<group>"; };
 		1D16222215EBC82900C0F3CC /* Asset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Asset.h; sourceTree = "<group>"; };
@@ -99,6 +102,20 @@
 		1D16223515EE721300C0F3CC /* PortableExecutableFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PortableExecutableFormat.m; sourceTree = "<group>"; };
 		1D16223715EE97D800C0F3CC /* KSPM-Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "KSPM-Icon.icns"; sourceTree = "<group>"; };
 		1D16223A15EE9F2B00C0F3CC /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
+		1D24FB701613B3B500066392 /* CRAFT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRAFT.h; sourceTree = "<group>"; };
+		1D24FB711613B3B500066392 /* CRAFT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRAFT.m; sourceTree = "<group>"; };
+		1D24FB731613B40000066392 /* BaseConfigurationFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseConfigurationFile.h; sourceTree = "<group>"; };
+		1D24FB741613B40000066392 /* BaseConfigurationFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseConfigurationFile.m; sourceTree = "<group>"; };
+		1D24FB761613EFED00066392 /* CFG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFG.h; sourceTree = "<group>"; };
+		1D24FB771613EFEE00066392 /* CFG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFG.m; sourceTree = "<group>"; };
+		1D24FB791613F1A100066392 /* CFGPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFGPart.h; sourceTree = "<group>"; };
+		1D24FB7A1613F1A200066392 /* CFGPart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFGPart.m; sourceTree = "<group>"; };
+		1D24FB7D1613F1ED00066392 /* CFGModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFGModule.h; sourceTree = "<group>"; };
+		1D24FB7E1613F1EE00066392 /* CFGModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFGModule.m; sourceTree = "<group>"; };
+		1D24FB831613F21000066392 /* CFGProp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFGProp.h; sourceTree = "<group>"; };
+		1D24FB841613F21100066392 /* CFGProp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFGProp.m; sourceTree = "<group>"; };
+		1D24FB861613F63D00066392 /* CFGSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFGSpace.h; sourceTree = "<group>"; };
+		1D24FB871613F63E00066392 /* CFGSpace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFGSpace.m; sourceTree = "<group>"; };
 		1D261D87160E731500AE02F6 /* Training.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Training.h; sourceTree = "<group>"; };
 		1D261D88160E731500AE02F6 /* Training.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Training.m; sourceTree = "<group>"; };
 		1D261D8B160E733500AE02F6 /* Scenario.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scenario.h; sourceTree = "<group>"; };
@@ -111,8 +128,6 @@
 		1D2ED53F15EB156900402EF1 /* InventoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryViewController.h; sourceTree = "<group>"; };
 		1D2ED54015EB156900402EF1 /* InventoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryViewController.m; sourceTree = "<group>"; };
 		1D2ED54115EB156900402EF1 /* InventoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InventoryViewController.xib; sourceTree = "<group>"; };
-		1D3746AA15F7F23F00F858B3 /* PersistentObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistentObject.h; sourceTree = "<group>"; };
-		1D3746AB15F7F23F00F858B3 /* PersistentObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistentObject.m; sourceTree = "<group>"; };
 		1D56F41515FA377C0047042A /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		1D572150160274DA00D2427C /* KerbalNet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KerbalNet.h; sourceTree = "<group>"; };
 		1D572151160274DA00D2427C /* KerbalNet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KerbalNet.m; sourceTree = "<group>"; };
@@ -127,23 +142,39 @@
 		1D58B0FD1607B7980072A9D0 /* Space.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Space.h; sourceTree = "<group>"; };
 		1D58B0FE1607B7980072A9D0 /* Space.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Space.m; sourceTree = "<group>"; };
 		1D58B1041608C29E0072A9D0 /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
-		1D58B1091609031B0072A9D0 /* RealizedPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealizedPart.h; sourceTree = "<group>"; };
-		1D58B10A1609031B0072A9D0 /* RealizedPart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealizedPart.m; sourceTree = "<group>"; };
 		1D682A2415FCD93E007C84CB /* ConfigurationParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationParser.h; sourceTree = "<group>"; };
 		1D682A2515FCD93E007C84CB /* ConfigurationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationParser.m; sourceTree = "<group>"; };
 		1D682A2715FCD9CC007C84CB /* ConfigurationTokenizerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationTokenizerDelegate.h; sourceTree = "<group>"; };
-		1D75BD6B15F79FA40037393E /* PersistenceFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistenceFile.h; sourceTree = "<group>"; };
-		1D75BD6C15F79FA40037393E /* PersistenceFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistenceFile.m; sourceTree = "<group>"; };
-		1D75BD6E15F7A6770037393E /* Crew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crew.h; sourceTree = "<group>"; };
-		1D75BD6F15F7A6770037393E /* Crew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Crew.m; sourceTree = "<group>"; };
-		1D82916315F7A90600463E99 /* Vessel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vessel.h; sourceTree = "<group>"; };
-		1D82916415F7A90600463E99 /* Vessel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vessel.m; sourceTree = "<group>"; };
+		1D8D57B716134D2000304975 /* KSPBucket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPBucket.h; sourceTree = "<group>"; };
+		1D8D57B816134D2000304975 /* KSPBucket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPBucket.m; sourceTree = "<group>"; };
+		1D8D57BA16134F2400304975 /* SFSGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSGame.h; sourceTree = "<group>"; };
+		1D8D57BB16134F2400304975 /* SFSGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSGame.m; sourceTree = "<group>"; };
+		1D8D57BD16134F6500304975 /* SFSFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSFlight.h; sourceTree = "<group>"; };
+		1D8D57BE16134F6500304975 /* SFSFlight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSFlight.m; sourceTree = "<group>"; };
+		1D8D57C016134F8A00304975 /* SFSEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSEditor.h; sourceTree = "<group>"; };
+		1D8D57C116134F8A00304975 /* SFSEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSEditor.m; sourceTree = "<group>"; };
+		1D8D57C316134FB600304975 /* SFSTrackingStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSTrackingStation.h; sourceTree = "<group>"; };
+		1D8D57C416134FB700304975 /* SFSTrackingStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSTrackingStation.m; sourceTree = "<group>"; };
+		1D8D57C616134FCA00304975 /* SFSSpaceCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSSpaceCenter.h; sourceTree = "<group>"; };
+		1D8D57C716134FCB00304975 /* SFSSpaceCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSSpaceCenter.m; sourceTree = "<group>"; };
+		1D8D57CC16134FFA00304975 /* SFSCrew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSCrew.h; sourceTree = "<group>"; };
+		1D8D57CD16134FFA00304975 /* SFSCrew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSCrew.m; sourceTree = "<group>"; };
+		1D8D57CF1613501200304975 /* SFSVessel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSVessel.h; sourceTree = "<group>"; };
+		1D8D57D01613501200304975 /* SFSVessel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSVessel.m; sourceTree = "<group>"; };
+		1D8D57D21613501D00304975 /* SFSPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSPart.h; sourceTree = "<group>"; };
+		1D8D57D31613501D00304975 /* SFSPart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSPart.m; sourceTree = "<group>"; };
+		1D8D57D51613503800304975 /* SFSModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSModule.h; sourceTree = "<group>"; };
+		1D8D57D61613503800304975 /* SFSModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSModule.m; sourceTree = "<group>"; };
+		1D8D57D81613504B00304975 /* SFSScenario.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSScenario.h; sourceTree = "<group>"; };
+		1D8D57D91613504B00304975 /* SFSScenario.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSScenario.m; sourceTree = "<group>"; };
+		1D8D57DC161360A700304975 /* SFSOrbit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSOrbit.h; sourceTree = "<group>"; };
+		1D8D57DD161360A700304975 /* SFSOrbit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSOrbit.m; sourceTree = "<group>"; };
 		1D9C8D6F16021861001C095F /* badge-24x24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badge-24x24.png"; sourceTree = "<group>"; };
 		1D9C8D7016021861001C095F /* badge-36x36.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badge-36x36.png"; sourceTree = "<group>"; };
 		1D9C8D7116021861001C095F /* badge-48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badge-48x48.png"; sourceTree = "<group>"; };
 		1D9C8D7516021914001C095F /* badge-red-24x24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badge-red-24x24.png"; sourceTree = "<group>"; };
-		1DA65DBA160F8DFD00092123 /* SFSData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSData.h; sourceTree = "<group>"; };
-		1DA65DBB160F8DFD00092123 /* SFSData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSData.m; sourceTree = "<group>"; };
+		1DA65DBE1613384A00092123 /* SFS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFS.h; sourceTree = "<group>"; };
+		1DA65DBF1613384B00092123 /* SFS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFS.m; sourceTree = "<group>"; };
 		1DB2E08D15FE97B500B1E0AF /* Ship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ship.h; sourceTree = "<group>"; };
 		1DB2E08E15FE97B500B1E0AF /* Ship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ship.m; sourceTree = "<group>"; };
 		1DB2E09015FFA7B900B1E0AF /* AddonsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddonsViewController.h; sourceTree = "<group>"; };
@@ -163,9 +194,6 @@
 		1DB405CA15DB3E230041807D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1DB405CB15DB3E230041807D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1DB405CE15DB3E230041807D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		1DB405E115DB3F3D0041807D /* MissionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissionsViewController.h; sourceTree = "<group>"; };
-		1DB405E215DB3F3D0041807D /* MissionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionsViewController.m; sourceTree = "<group>"; };
-		1DB405E315DB3F3D0041807D /* MissionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MissionsViewController.xib; sourceTree = "<group>"; };
 		1DB405EB15DB45390041807D /* KSP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSP.h; sourceTree = "<group>"; };
 		1DB405EC15DB45390041807D /* KSP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSP.m; sourceTree = "<group>"; };
 		1DB405F615DBFD060041807D /* KSP_Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSP_Constants.h; sourceTree = "<group>"; };
@@ -174,13 +202,6 @@
 		1DB7013415F12C90002EC18D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		1DB7013B15F2864F002EC18D /* pe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pe.h; sourceTree = "<group>"; };
 		1DB7013C15F2864F002EC18D /* msve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = msve.h; sourceTree = "<group>"; };
-		1DD06E9015F7FCB100202CB4 /* Orbit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Orbit.h; sourceTree = "<group>"; };
-		1DD06E9115F7FCB100202CB4 /* Orbit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Orbit.m; sourceTree = "<group>"; };
-		1DD06E9415F7FCC600202CB4 /* VesselPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VesselPart.h; sourceTree = "<group>"; };
-		1DD06E9515F7FCC600202CB4 /* VesselPart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VesselPart.m; sourceTree = "<group>"; };
-		1DD06E9715F93DC700202CB4 /* SavesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavesViewController.h; sourceTree = "<group>"; };
-		1DD06E9815F93DC700202CB4 /* SavesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavesViewController.m; sourceTree = "<group>"; };
-		1DD06E9915F93DC700202CB4 /* SavesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SavesViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,15 +217,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1D03984A15FA8DFA00BA3D2F /* Missions Tab */ = {
-			isa = PBXGroup;
-			children = (
-				1DB405E115DB3F3D0041807D /* MissionsViewController.h */,
-				1DB405E215DB3F3D0041807D /* MissionsViewController.m */,
-			);
-			name = "Missions Tab";
-			sourceTree = "<group>";
-		};
 		1D03984C15FA8E1200BA3D2F /* Inventory Tab */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,24 +233,6 @@
 				1D16222D15EDBB8F00C0F3CC /* ShipViewController.m */,
 			);
 			name = "Ship Tab";
-			sourceTree = "<group>";
-		};
-		1D03984E15FA8E3000BA3D2F /* Saves Tab */ = {
-			isa = PBXGroup;
-			children = (
-				1DD06E9715F93DC700202CB4 /* SavesViewController.h */,
-				1DD06E9815F93DC700202CB4 /* SavesViewController.m */,
-			);
-			name = "Saves Tab";
-			sourceTree = "<group>";
-		};
-		1D03985115FA99D100BA3D2F /* Crew Tab */ = {
-			isa = PBXGroup;
-			children = (
-				1D03985215FA99EC00BA3D2F /* CrewViewController.h */,
-				1D03985315FA99EC00BA3D2F /* CrewViewController.m */,
-			);
-			name = "Crew Tab";
 			sourceTree = "<group>";
 		};
 		1D16222515EBC83800C0F3CC /* Assets */ = {
@@ -266,6 +260,21 @@
 				1DB7013415F12C90002EC18D /* README.md */,
 			);
 			name = Documentation;
+			sourceTree = "<group>";
+		};
+		1D24FB7C1613F1AA00066392 /* CFG Objects */ = {
+			isa = PBXGroup;
+			children = (
+				1D24FB791613F1A100066392 /* CFGPart.h */,
+				1D24FB7A1613F1A200066392 /* CFGPart.m */,
+				1D24FB7D1613F1ED00066392 /* CFGModule.h */,
+				1D24FB7E1613F1EE00066392 /* CFGModule.m */,
+				1D24FB831613F21000066392 /* CFGProp.h */,
+				1D24FB841613F21100066392 /* CFGProp.m */,
+				1D24FB861613F63D00066392 /* CFGSpace.h */,
+				1D24FB871613F63E00066392 /* CFGSpace.m */,
+			);
+			name = "CFG Objects";
 			sourceTree = "<group>";
 		};
 		1D261D8A160E731A00AE02F6 /* Training */ = {
@@ -344,11 +353,8 @@
 			children = (
 				1DB405CD15DB3E230041807D /* MainMenu.xib */,
 				1DB2E09215FFA7B900B1E0AF /* AddonsViewController.xib */,
-				1DB405E315DB3F3D0041807D /* MissionsViewController.xib */,
-				1D03985415FA99EC00BA3D2F /* CrewViewController.xib */,
-				1D2ED54115EB156900402EF1 /* InventoryViewController.xib */,
 				1D16222E15EDBB8F00C0F3CC /* ShipViewController.xib */,
-				1DD06E9915F93DC700202CB4 /* SavesViewController.xib */,
+				1D2ED54115EB156900402EF1 /* InventoryViewController.xib */,
 				1D57215B1603737900D2427C /* KerbalNetViewController.xib */,
 				1D28B8B1160622C6009C7FD0 /* UtilityViewController.xib */,
 			);
@@ -368,11 +374,8 @@
 				1D16221F15EB315500C0F3CC /* KSPViewController.h */,
 				1D16222015EB315500C0F3CC /* KSPViewController.m */,
 				1DB2E09515FFA7C300B1E0AF /* Addons Tab */,
-				1D03984A15FA8DFA00BA3D2F /* Missions Tab */,
-				1D03985115FA99D100BA3D2F /* Crew Tab */,
-				1D03984C15FA8E1200BA3D2F /* Inventory Tab */,
 				1D03984D15FA8E1D00BA3D2F /* Ship Tab */,
-				1D03984E15FA8E3000BA3D2F /* Saves Tab */,
+				1D03984C15FA8E1200BA3D2F /* Inventory Tab */,
 				1D5721581603735B00D2427C /* KerbalNet */,
 				1D28B8B4160622D2009C7FD0 /* Utility */,
 			);
@@ -402,8 +405,6 @@
 			children = (
 				1DB2E08D15FE97B500B1E0AF /* Ship.h */,
 				1DB2E08E15FE97B500B1E0AF /* Ship.m */,
-				1D58B1091609031B0072A9D0 /* RealizedPart.h */,
-				1D58B10A1609031B0072A9D0 /* RealizedPart.m */,
 			);
 			name = Ships;
 			sourceTree = "<group>";
@@ -426,23 +427,33 @@
 			name = Plugins;
 			sourceTree = "<group>";
 		};
-		1D75BD6715F79F570037393E /* Mission */ = {
+		1D8D57DB1613505A00304975 /* SFS Objects */ = {
 			isa = PBXGroup;
 			children = (
-				1D75BD6B15F79FA40037393E /* PersistenceFile.h */,
-				1D75BD6C15F79FA40037393E /* PersistenceFile.m */,
-				1D3746AA15F7F23F00F858B3 /* PersistentObject.h */,
-				1D3746AB15F7F23F00F858B3 /* PersistentObject.m */,
-				1D75BD6E15F7A6770037393E /* Crew.h */,
-				1D75BD6F15F7A6770037393E /* Crew.m */,
-				1D82916315F7A90600463E99 /* Vessel.h */,
-				1D82916415F7A90600463E99 /* Vessel.m */,
-				1DD06E9015F7FCB100202CB4 /* Orbit.h */,
-				1DD06E9115F7FCB100202CB4 /* Orbit.m */,
-				1DD06E9415F7FCC600202CB4 /* VesselPart.h */,
-				1DD06E9515F7FCC600202CB4 /* VesselPart.m */,
+				1D8D57BA16134F2400304975 /* SFSGame.h */,
+				1D8D57BB16134F2400304975 /* SFSGame.m */,
+				1D8D57BD16134F6500304975 /* SFSFlight.h */,
+				1D8D57BE16134F6500304975 /* SFSFlight.m */,
+				1D8D57C016134F8A00304975 /* SFSEditor.h */,
+				1D8D57C116134F8A00304975 /* SFSEditor.m */,
+				1D8D57C316134FB600304975 /* SFSTrackingStation.h */,
+				1D8D57C416134FB700304975 /* SFSTrackingStation.m */,
+				1D8D57C616134FCA00304975 /* SFSSpaceCenter.h */,
+				1D8D57C716134FCB00304975 /* SFSSpaceCenter.m */,
+				1D8D57CC16134FFA00304975 /* SFSCrew.h */,
+				1D8D57CD16134FFA00304975 /* SFSCrew.m */,
+				1D8D57CF1613501200304975 /* SFSVessel.h */,
+				1D8D57D01613501200304975 /* SFSVessel.m */,
+				1D8D57DC161360A700304975 /* SFSOrbit.h */,
+				1D8D57DD161360A700304975 /* SFSOrbit.m */,
+				1D8D57D21613501D00304975 /* SFSPart.h */,
+				1D8D57D31613501D00304975 /* SFSPart.m */,
+				1D8D57D51613503800304975 /* SFSModule.h */,
+				1D8D57D61613503800304975 /* SFSModule.m */,
+				1D8D57D81613504B00304975 /* SFSScenario.h */,
+				1D8D57D91613504B00304975 /* SFSScenario.m */,
 			);
-			name = Mission;
+			name = "SFS Objects";
 			sourceTree = "<group>";
 		};
 		1D9C8D6E16021842001C095F /* Art */ = {
@@ -457,6 +468,25 @@
 			name = Art;
 			sourceTree = "<group>";
 		};
+		1DA65DC11613385500092123 /* Configuration Files */ = {
+			isa = PBXGroup;
+			children = (
+				1D24FB731613B40000066392 /* BaseConfigurationFile.h */,
+				1D24FB741613B40000066392 /* BaseConfigurationFile.m */,
+				1DA65DBE1613384A00092123 /* SFS.h */,
+				1DA65DBF1613384B00092123 /* SFS.m */,
+				1D24FB701613B3B500066392 /* CRAFT.h */,
+				1D24FB711613B3B500066392 /* CRAFT.m */,
+				1D24FB761613EFED00066392 /* CFG.h */,
+				1D24FB771613EFEE00066392 /* CFG.m */,
+				1D8D57B716134D2000304975 /* KSPBucket.h */,
+				1D8D57B816134D2000304975 /* KSPBucket.m */,
+				1D8D57DB1613505A00304975 /* SFS Objects */,
+				1D24FB7C1613F1AA00066392 /* CFG Objects */,
+			);
+			name = "Configuration Files";
+			sourceTree = "<group>";
+		};
 		1DB2E08815FE2DD500B1E0AF /* File Parsing */ = {
 			isa = PBXGroup;
 			children = (
@@ -465,8 +495,7 @@
 				1D682A2415FCD93E007C84CB /* ConfigurationParser.h */,
 				1D682A2715FCD9CC007C84CB /* ConfigurationTokenizerDelegate.h */,
 				1D682A2515FCD93E007C84CB /* ConfigurationParser.m */,
-				1DA65DBA160F8DFD00092123 /* SFSData.h */,
-				1DA65DBB160F8DFD00092123 /* SFSData.m */,
+				1DA65DC11613385500092123 /* Configuration Files */,
 			);
 			name = "File Parsing";
 			sourceTree = "<group>";
@@ -574,7 +603,6 @@
 				1DB405EC15DB45390041807D /* KSP.m */,
 				1D57215E1603739000D2427C /* KerbalNet */,
 				1D16222515EBC83800C0F3CC /* Assets */,
-				1D75BD6715F79F570037393E /* Mission */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -655,15 +683,12 @@
 				1DB405C315DB3E230041807D /* InfoPlist.strings in Resources */,
 				1DB405C915DB3E230041807D /* Credits.rtf in Resources */,
 				1DB405CF15DB3E230041807D /* MainMenu.xib in Resources */,
-				1DB405E515DB3F3D0041807D /* MissionsViewController.xib in Resources */,
 				1D2ED54315EB156900402EF1 /* InventoryViewController.xib in Resources */,
 				1D16223015EDBB8F00C0F3CC /* ShipViewController.xib in Resources */,
 				1D16223815EE97D800C0F3CC /* KSPM-Icon.icns in Resources */,
 				1D16223C15EE9F2B00C0F3CC /* LICENSE in Resources */,
 				1DB7013515F12C90002EC18D /* README.md in Resources */,
-				1DD06E9B15F93DC700202CB4 /* SavesViewController.xib in Resources */,
 				1D56F41615FA377C0047042A /* dsa_pub.pem in Resources */,
-				1D03985615FA99EC00BA3D2F /* CrewViewController.xib in Resources */,
 				1DB2E09415FFA7B900B1E0AF /* AddonsViewController.xib in Resources */,
 				1D9C8D7216021861001C095F /* badge-24x24.png in Resources */,
 				1D9C8D7316021861001C095F /* badge-36x36.png in Resources */,
@@ -700,7 +725,6 @@
 			files = (
 				1DB405C515DB3E230041807D /* main.m in Sources */,
 				1DB405CC15DB3E230041807D /* AppDelegate.m in Sources */,
-				1DB405E415DB3F3D0041807D /* MissionsViewController.m in Sources */,
 				1DB405ED15DB45390041807D /* KSP.m in Sources */,
 				1DB405F915DBFF4C0041807D /* Part.m in Sources */,
 				1D2ED54215EB156900402EF1 /* InventoryViewController.m in Sources */,
@@ -710,14 +734,6 @@
 				1D16222B15EBCCFB00C0F3CC /* LineToken.m in Sources */,
 				1D16222F15EDBB8F00C0F3CC /* ShipViewController.m in Sources */,
 				1D16223615EE721300C0F3CC /* PortableExecutableFormat.m in Sources */,
-				1D75BD6D15F79FA40037393E /* PersistenceFile.m in Sources */,
-				1D75BD7015F7A6770037393E /* Crew.m in Sources */,
-				1D82916515F7A90600463E99 /* Vessel.m in Sources */,
-				1D3746AC15F7F23F00F858B3 /* PersistentObject.m in Sources */,
-				1DD06E9215F7FCB100202CB4 /* Orbit.m in Sources */,
-				1DD06E9615F7FCC700202CB4 /* VesselPart.m in Sources */,
-				1DD06E9A15F93DC700202CB4 /* SavesViewController.m in Sources */,
-				1D03985515FA99EC00BA3D2F /* CrewViewController.m in Sources */,
 				1D682A2615FCD93E007C84CB /* ConfigurationParser.m in Sources */,
 				1DB2E08F15FE97B500B1E0AF /* Ship.m in Sources */,
 				1DB2E09315FFA7B900B1E0AF /* AddonsViewController.m in Sources */,
@@ -727,11 +743,29 @@
 				1D28B8B2160622C6009C7FD0 /* UtilityViewController.m in Sources */,
 				1D58B0FB1607B77E0072A9D0 /* Prop.m in Sources */,
 				1D58B0FF1607B7980072A9D0 /* Space.m in Sources */,
-				1D58B10B1609031B0072A9D0 /* RealizedPart.m in Sources */,
 				1D261D89160E731500AE02F6 /* Training.m in Sources */,
 				1D261D8D160E733500AE02F6 /* Scenario.m in Sources */,
 				1D261D91160E736F00AE02F6 /* Sandbox.m in Sources */,
-				1DA65DBC160F8DFD00092123 /* SFSData.m in Sources */,
+				1DA65DC01613384F00092123 /* SFS.m in Sources */,
+				1D8D57B916134D2000304975 /* KSPBucket.m in Sources */,
+				1D8D57BC16134F2400304975 /* SFSGame.m in Sources */,
+				1D8D57BF16134F6500304975 /* SFSFlight.m in Sources */,
+				1D8D57C216134F8A00304975 /* SFSEditor.m in Sources */,
+				1D8D57C516134FB700304975 /* SFSTrackingStation.m in Sources */,
+				1D8D57C816134FCB00304975 /* SFSSpaceCenter.m in Sources */,
+				1D8D57CE16134FFA00304975 /* SFSCrew.m in Sources */,
+				1D8D57D11613501300304975 /* SFSVessel.m in Sources */,
+				1D8D57D41613501E00304975 /* SFSPart.m in Sources */,
+				1D8D57D71613503900304975 /* SFSModule.m in Sources */,
+				1D8D57DA1613504C00304975 /* SFSScenario.m in Sources */,
+				1D8D57DE161360A700304975 /* SFSOrbit.m in Sources */,
+				1D24FB721613B3B500066392 /* CRAFT.m in Sources */,
+				1D24FB751613B40000066392 /* BaseConfigurationFile.m in Sources */,
+				1D24FB781613EFEE00066392 /* CFG.m in Sources */,
+				1D24FB7B1613F1A300066392 /* CFGPart.m in Sources */,
+				1D24FB7F1613F1EE00066392 /* CFGModule.m in Sources */,
+				1D24FB851613F21100066392 /* CFGProp.m in Sources */,
+				1D24FB881613F63E00066392 /* CFGSpace.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

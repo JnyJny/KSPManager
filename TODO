@@ -10,6 +10,8 @@ This TODO list is for tracking feature ideas/snafus
 - action menus when right clicking on stuff
 - action menus when clicking action buttons
 - more tool tips
+- utility: change values of CONIC_PATCH_LIMIT in settings.cfg
+- part name changer to organize parts in the VAB/SPH tabs for each category
 
 
 Fix For .17
@@ -18,6 +20,7 @@ Fix For .17
 - fix Crew tab
 - Plugins directory was missing in stock distribution.. weird
 - Screenshot directory was missing in stock distribution, no bigs
+
 
 
 Version 2

@@ -16,15 +16,20 @@
 @property (strong, nonatomic) NSMutableArray *lines;
 
 @property (strong, nonatomic, readonly) NSMutableArray *context;
+@property (strong, nonatomic, readonly) NSString *lastContext;
 @property (strong, nonatomic, readonly) NSString *currentContext;
 @property (assign, nonatomic) NSStringEncoding encoding;
 @property (strong, nonatomic) NSString *globalContextId;
 @property (assign, nonatomic,readonly) BOOL isGlobal;
 
+
+
 + (id)parserWithURL:(NSURL *)url;
 + (id)parserWithLineTokens:(NSArray *)lines;
 
 - (id)initWithLineTokens:(NSArray *)lines;
+
+- (BOOL)currentContextMatches:(NSString *)contextName;
 
 - (BOOL)writeToURL:(NSURL *)url;
 

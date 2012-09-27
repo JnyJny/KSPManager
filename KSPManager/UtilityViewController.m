@@ -8,6 +8,7 @@
 
 #import "UtilityViewController.h"
 
+
 @interface UtilityViewController ()
 
 @end
@@ -40,14 +41,12 @@
            forKeyPath:@"userPrefs"
               options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
               context:nil];
-
-    
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if( object == self.userPrefs ) {
-        [self.userPrefs writeToURL:self.ksp.userPreferencesPlist atomically:YES];
+        [self.userPrefs writeToURL:self.ksp.userPreferencesPlistURL atomically:YES];
         return ;
     }
     
@@ -56,16 +55,19 @@
 - (NSMutableDictionary *)userPrefs
 {
     if( _userPrefs == nil ) {
-        _userPrefs = [NSMutableDictionary dictionaryWithContentsOfURL:self.ksp.userPreferencesPlist];
+        _userPrefs = [NSMutableDictionary dictionaryWithContentsOfURL:self.ksp.userPreferencesPlistURL];
     }
     return _userPrefs;
 }
+
+
+
 
 - (void)setFullScreenMode:(BOOL)fullScreenMode
 {
     [self.userPrefs setValue:[NSNumber numberWithBool:fullScreenMode]
                       forKey:kKSPPreferencesKeyIsFullscreenMode];
-    [self.userPrefs writeToURL:self.ksp.userPreferencesPlist atomically:YES];
+    [self.userPrefs writeToURL:self.ksp.userPreferencesPlistURL atomically:YES];
 }
 
 - (BOOL)isFullScreenMode
@@ -79,7 +81,7 @@
 - (void)setScreenHeight:(NSInteger)screenHeight
 {
     [self.userPrefs setValue:[NSNumber numberWithInteger:screenHeight] forKey:kKSPPreferencesKeyResolutionHeight];
-    [self.userPrefs writeToURL:self.ksp.userPreferencesPlist atomically:YES];
+    [self.userPrefs writeToURL:self.ksp.userPreferencesPlistURL atomically:YES];
 }
 
 - (NSInteger)screenHeight
@@ -94,7 +96,7 @@
 - (void)setScreenWidth:(NSInteger)screenWidth
 {
     [self.userPrefs setValue:[NSNumber numberWithInteger:screenWidth] forKey:kKSPPerferencesKeyResolutionWidth];
-    [self.userPrefs writeToURL:self.ksp.userPreferencesPlist atomically:YES];
+    [self.userPrefs writeToURL:self.ksp.userPreferencesPlistURL atomically:YES];
 }
 
 - (NSInteger)screenWidth
@@ -109,7 +111,7 @@
 - (void)setGraphicsQuality:(NSInteger)gQ
 {
     [self.userPrefs setValue:[NSNumber numberWithInteger:gQ] forKey:kKSPPreferencesKeyGraphicsQuality];
-    [self.userPrefs writeToURL:self.ksp.userPreferencesPlist atomically:YES];
+    [self.userPrefs writeToURL:self.ksp.userPreferencesPlistURL atomically:YES];
 }
 
 - (NSInteger)graphicsQuality
@@ -147,7 +149,7 @@
 
     _userPrefs = nil;
     NSError *error = nil;
-    [[NSFileManager defaultManager] removeItemAtURL:self.ksp.userPreferencesPlist
+    [[NSFileManager defaultManager] removeItemAtURL:self.ksp.userPreferencesPlistURL
                                               error:&error];
     //    NSLog(@"deleting %@",self.ksp.userPreferencesPlist);
     
@@ -161,9 +163,6 @@
     
     [[NSFileManager defaultManager] removeItemAtURL:self.ksp.savedApplicationStateURL
                                               error:&error];
-    
-    
-    
     [sender setEnabled:NO];
     [self.yesIUnderstandButton setIntValue:NO];
 }

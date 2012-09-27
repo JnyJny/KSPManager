@@ -7,6 +7,13 @@
 //
 
 #import "Scenario.h"
+#import "SFS.h"
+
+@interface Scenario () {
+    SFSGame *_game;
+}
+
+@end
 
 @implementation Scenario
 
@@ -16,8 +23,7 @@
 - (id)initWithURL:(NSURL *)baseURL
 {
     if( self = [super initWithURL:baseURL] ) {
-        
-        
+        _game = [SFS gameFromContentsOfURL:self.baseURL];
     }
     return self;
 }
@@ -37,7 +43,7 @@
 
 - (NSString *)assetTitle
 {
-    return @"scenario";
+    return _game.title;
 }
 
 - (NSString *)assetCategory

@@ -160,9 +160,6 @@
 }
 
 @property (strong, nonatomic)              NSURL  *configurationURL;
-@property (strong, nonatomic, readonly) NSString  *partDirectoryName;
-
-@property (strong, nonatomic)           NSString  *detail;
 @property (strong, nonatomic)           NSString  *categoryName;
 
 + (NSArray *)inventory:(NSURL *)baseURL;

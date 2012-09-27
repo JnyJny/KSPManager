@@ -7,13 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PersistenceFile.h"
+#import "KSP_Constants.h"
 
 @class Asset;
 
-@interface KSP : NSObject {
+@interface KSP : NSObject
 
-}
 @property (strong, nonatomic, readonly) NSURL *baseURL;
 @property (strong, nonatomic, readonly) NSURL *bundleURL;
 @property (strong, nonatomic, readonly) NSURL *propsURL;
@@ -57,7 +56,7 @@
 
 @property (strong, nonatomic, readonly) NSURL *unzipURL;
 @property (strong, nonatomic, readonly) NSURL *unrarURL;
-@property (strong, nonatomic, readonly) NSURL *userPreferencesPlist;
+@property (strong, nonatomic, readonly) NSURL *userPreferencesPlistURL;
 @property (strong, nonatomic, readonly) NSURL *savedApplicationStateURL;
 
 

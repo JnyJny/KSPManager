@@ -7,8 +7,17 @@
 //
 
 #import "Ship.h"
+#import "CRAFT.h"
+
+@interface Ship () {
+    SFSVessel *_vessel;
+}
+
+
+@end
 
 @implementation Ship
+
 
 @synthesize hanger = _hanger;
 @synthesize isInSpacePlaneHanger = _isInSpacePlaneHanger;
@@ -18,23 +27,12 @@
 {
     if ( self = [super initWithURL:url] ) {
         
-        if( [url.pathExtension isNotEqualTo:kCRAFT_EXT])
+        if( [self.baseURL.pathExtension isNotEqualTo:kCRAFT_EXT])
             return nil;
-        
-        NSStringEncoding encoding;
-        
-        NSArray *lines = [LineToken linesFromURL:self.baseURL
-                                    withEncoding:&encoding
-                                     withOptions:@{ kLineOptionCommentTokenKey : @"//" }];
-        
-        _parser = [ConfigurationParser parserWithLineTokens:lines];
-        
-        _parser.delegate = self;
-        [_parser beginParsing];
+        _vessel = [CRAFT vesselForContentsOfURL:self.baseURL];
     }
     return self;
 }
-
 
 #pragma mark -
 #pragma mark Overriden Properties
@@ -47,7 +45,7 @@
     if( [self.baseURL.lastPathComponent rangeOfString:kShipFilenameAutoSaved].location != NSNotFound    )
         return [NSString stringWithFormat:@"Auto-Saved %@",[self valueForKey:kShipKeyShipName]];
     
-    return [self valueForKey:kShipKeyShipName];
+    return [_vessel valueForKey:kShipKeyShipName];
 }
 
 - (NSString *)assetCategory
@@ -181,70 +179,8 @@
 #pragma mark -
 #pragma mark Class Methods
 
-#pragma mark -
-#pragma mark ConfigurationParserDelegate Methods
 
-- (void)willBeginParsingWithConfiguration:(ConfigurationParser *)tokenizer
-{
-    NSLog(@"beginParsing %@",self.baseURL);
-}
 
-- (BOOL)handleNewContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
-{
-#define kShipPartContext @"PART"
-    if( [tokenizer.currentContext isEqualToString:kShipPartContext] ) {
-        
-        _currentPart = [[NSMutableDictionary alloc] init];
-        
-        return YES;
-    }
-    
-    return NO;
-}
-
-- (BOOL)handleBeginContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
-{
-    return YES;
-}
-
-- (BOOL)handleKeyValue:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
-{
-    if( tokenizer.isGlobal ) {
-        [self setValue:line.value forKey:line.key];
-        return YES;
-    }
-    
-    if( [tokenizer.currentContext isEqualToString:kShipPartContext] ) {
-        [_currentPart setValue:line.value forKey:line.key];
-        return YES;
-    }
-    
-    return NO;
-}
-
-- (BOOL)handleEndContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
-{
-    if( [tokenizer.currentContext isEqualToString:kShipPartContext] ) {
-        [self.parts addObject:_currentPart];
-        _currentPart = nil;
-        return YES;
-    }
-    
-    return NO;
-}
-
-- (BOOL)handleUnknownContent:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
-{
-    
-    NSLog(@"unknownContent: %@ %@ %@",self.baseURL.lastPathComponent,tokenizer.currentContext,line);
-    
-    return YES;
-}
-
-- (void)didEndParsingWithConfiguration:(ConfigurationParser *)tokenizer
-{
-    NSLog(@"endParsing %@",self.baseURL.lastPathComponent);
-}
 
 #pragma mark -
 #pragma mark Class methods

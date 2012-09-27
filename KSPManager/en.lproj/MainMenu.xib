@@ -754,7 +754,7 @@
 							<string key="NSFrame">{{13, 10}, {967, 619}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="788245704"/>
+							<reference key="NSNextKeyView" ref="988456558"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<array class="NSMutableArray" key="NSTabViewItems">
 								<object class="NSTabViewItem" id="1062185358">
@@ -777,37 +777,17 @@
 									</object>
 									<reference key="NSTabView" ref="899860836"/>
 								</object>
-								<object class="NSTabViewItem" id="885225946">
-									<string key="NSIdentifier">missionsViewController</string>
-									<object class="NSView" key="NSView" id="790219910">
-										<nil key="NSNextResponder"/>
-										<int key="NSvFlags">256</int>
-										<string key="NSFrame">{{10, 33}, {947, 573}}</string>
-										<string key="NSReuseIdentifierKey">_NS:28</string>
-									</object>
-									<string key="NSLabel">Missions</string>
-									<reference key="NSColor" ref="979994694"/>
-									<reference key="NSTabView" ref="899860836"/>
-								</object>
-								<object class="NSTabViewItem" id="99670365">
-									<string key="NSIdentifier">crewViewController</string>
-									<object class="NSView" key="NSView" id="702861523">
-										<nil key="NSNextResponder"/>
-										<int key="NSvFlags">256</int>
-										<string key="NSFrame">{{10, 33}, {947, 573}}</string>
-									</object>
-									<string key="NSLabel">Crew</string>
-									<reference key="NSColor" ref="979994694"/>
-									<reference key="NSTabView" ref="899860836"/>
-								</object>
 								<object class="NSTabViewItem" id="393424031">
 									<string key="NSIdentifier">shipViewController</string>
 									<object class="NSView" key="NSView" id="988456558">
-										<nil key="NSNextResponder"/>
+										<reference key="NSNextResponder" ref="899860836"/>
 										<int key="NSvFlags">256</int>
 										<string key="NSFrame">{{10, 33}, {947, 573}}</string>
+										<reference key="NSSuperview" ref="899860836"/>
+										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView"/>
 									</object>
-									<string key="NSLabel">Vehicles</string>
+									<string key="NSLabel">Ships</string>
 									<reference key="NSColor" ref="979994694"/>
 									<reference key="NSTabView" ref="899860836"/>
 								</object>
@@ -817,19 +797,9 @@
 										<nil key="NSNextResponder"/>
 										<int key="NSvFlags">256</int>
 										<string key="NSFrame">{{10, 33}, {947, 573}}</string>
+										<reference key="NSNextKeyView" ref="899860836"/>
 									</object>
 									<string key="NSLabel">Inventory</string>
-									<reference key="NSColor" ref="979994694"/>
-									<reference key="NSTabView" ref="899860836"/>
-								</object>
-								<object class="NSTabViewItem" id="389359178">
-									<string key="NSIdentifier">savesViewController</string>
-									<object class="NSView" key="NSView" id="941948176">
-										<nil key="NSNextResponder"/>
-										<int key="NSvFlags">256</int>
-										<string key="NSFrame">{{10, 33}, {947, 573}}</string>
-									</object>
-									<string key="NSLabel">Saves</string>
 									<reference key="NSColor" ref="979994694"/>
 									<reference key="NSTabView" ref="899860836"/>
 								</object>
@@ -847,27 +817,24 @@
 								<object class="NSTabViewItem" id="180559918">
 									<string key="NSIdentifier">utilityViewController</string>
 									<object class="NSView" key="NSView" id="788245704">
-										<reference key="NSNextResponder" ref="899860836"/>
+										<nil key="NSNextResponder"/>
 										<int key="NSvFlags">256</int>
 										<string key="NSFrame">{{10, 33}, {947, 573}}</string>
-										<reference key="NSSuperview" ref="899860836"/>
-										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView"/>
 									</object>
 									<string key="NSLabel">Utility</string>
 									<reference key="NSColor" ref="979994694"/>
 									<reference key="NSTabView" ref="899860836"/>
 								</object>
 							</array>
-							<reference key="NSSelectedTabViewItem" ref="180559918"/>
-							<object class="NSFont" key="NSFont">
-								<string key="NSName">LucidaGrande-Bold</string>
+							<reference key="NSSelectedTabViewItem" ref="393424031"/>
+							<object class="NSFont" key="NSFont" id="19120441">
+								<string key="NSName">LucidaGrande</string>
 								<double key="NSSize">13</double>
-								<int key="NSfFlags">2072</int>
+								<int key="NSfFlags">1044</int>
 							</object>
 							<int key="NSTvFlags">0</int>
 							<array class="NSMutableArray" key="NSSubviews">
-								<reference ref="788245704"/>
+								<reference ref="988456558"/>
 							</array>
 						</object>
 						<object class="NSPathControl" id="1052576584">
@@ -890,11 +857,7 @@
 									<nil key="NS.base"/>
 									<string key="NS.relative">file://localhost/Applications/</string>
 								</object>
-								<object class="NSFont" key="NSSupport" id="19120441">
-									<string key="NSName">LucidaGrande</string>
-									<double key="NSSize">13</double>
-									<int key="NSfFlags">1044</int>
-								</object>
+								<reference key="NSSupport" ref="19120441"/>
 								<string key="NSCellIdentifier">_NS:9</string>
 								<reference key="NSControlView" ref="1052576584"/>
 								<object class="NSColor" key="NSBackgroundColor">
@@ -956,7 +919,7 @@
 							<string key="NSFrame">{{741, 631}, {111, 32}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="59323685"/>
+							<reference key="NSNextKeyView"/>
 							<bool key="NSViewIsLayerTreeHost">YES</bool>
 							<array key="NSViewContentFilters">
 								<object class="CIColorControls">
@@ -1002,7 +965,7 @@
 							<string key="NSFrame">{{862, 631}, {111, 32}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="899860836"/>
+							<reference key="NSNextKeyView"/>
 							<bool key="NSViewIsLayerTreeHost">YES</bool>
 							<array key="NSViewContentFilters">
 								<object class="CIColorControls">
@@ -1058,20 +1021,11 @@
 			<object class="NSViewController" id="17346583">
 				<string key="NSNibName">AddonsViewController</string>
 			</object>
-			<object class="NSViewController" id="451843730">
-				<string key="NSNibName">MissionsViewController</string>
-			</object>
-			<object class="NSViewController" id="456000243">
-				<string key="NSNibName">CrewViewController</string>
-			</object>
 			<object class="NSViewController" id="488647843">
 				<string key="NSNibName">ShipViewController</string>
 			</object>
 			<object class="NSViewController" id="700140848">
 				<string key="NSNibName">InventoryViewController</string>
-			</object>
-			<object class="NSViewController" id="550691458">
-				<string key="NSNibName">SavesViewController</string>
 			</object>
 			<object class="NSViewController" id="842693444">
 				<string key="NSNibName">KerbalNetViewController</string>
@@ -1559,35 +1513,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">savesViewController</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="550691458"/>
-					</object>
-					<int key="connectionID">775</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">crewViewController</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="456000243"/>
-					</object>
-					<int key="connectionID">782</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">addonsViewController</string>
 						<reference key="source" ref="976324537"/>
 						<reference key="destination" ref="17346583"/>
 					</object>
 					<int key="connectionID">786</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">missionsViewController</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="451843730"/>
-					</object>
-					<int key="connectionID">787</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -2402,29 +2332,13 @@
 						<int key="objectID">536</int>
 						<reference key="object" ref="899860836"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="885225946"/>
 							<reference ref="330571608"/>
 							<reference ref="393424031"/>
-							<reference ref="389359178"/>
-							<reference ref="99670365"/>
 							<reference ref="1062185358"/>
 							<reference ref="468730538"/>
 							<reference ref="180559918"/>
 						</array>
 						<reference key="parent" ref="439893737"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">538</int>
-						<reference key="object" ref="885225946"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="790219910"/>
-						</array>
-						<reference key="parent" ref="899860836"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">539</int>
-						<reference key="object" ref="790219910"/>
-						<reference key="parent" ref="885225946"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">562</int>
@@ -2567,25 +2481,6 @@
 						<reference key="parent" ref="439893737"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">770</int>
-						<reference key="object" ref="389359178"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="941948176"/>
-						</array>
-						<reference key="parent" ref="899860836"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">771</int>
-						<reference key="object" ref="941948176"/>
-						<reference key="parent" ref="389359178"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">774</int>
-						<reference key="object" ref="550691458"/>
-						<reference key="parent" ref="0"/>
-						<string key="objectName">Saves View Controller</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">776</int>
 						<reference key="object" ref="811383296"/>
 						<reference key="parent" ref="0"/>
@@ -2594,25 +2489,6 @@
 						<int key="objectID">777</int>
 						<reference key="object" ref="184037336"/>
 						<reference key="parent" ref="110575045"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">779</int>
-						<reference key="object" ref="99670365"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="702861523"/>
-						</array>
-						<reference key="parent" ref="899860836"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">780</int>
-						<reference key="object" ref="702861523"/>
-						<reference key="parent" ref="99670365"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">781</int>
-						<reference key="object" ref="456000243"/>
-						<reference key="parent" ref="0"/>
-						<string key="objectName">Crew View Controller</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">783</int>
@@ -2626,12 +2502,6 @@
 						<int key="objectID">784</int>
 						<reference key="object" ref="755969487"/>
 						<reference key="parent" ref="1062185358"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">785</int>
-						<reference key="object" ref="451843730"/>
-						<reference key="parent" ref="0"/>
-						<string key="objectName">Missions View Controller</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">796</int>
@@ -2820,8 +2690,8 @@
 				<string key="350.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="351.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="354.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<boolean value="NO" key="371.IBNSWindowAutoPositionCentersHorizontal"/>
-				<boolean value="NO" key="371.IBNSWindowAutoPositionCentersVertical"/>
+				<boolean value="YES" key="371.IBNSWindowAutoPositionCentersHorizontal"/>
+				<boolean value="YES" key="371.IBNSWindowAutoPositionCentersVertical"/>
 				<string key="371.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="371.IBWindowTemplateEditedContentRect">{{380, 496}, {480, 360}}</string>
 				<integer value="1" key="371.NSWindowTemplate.visibleAtLaunch"/>
@@ -2862,8 +2732,6 @@
 				<dictionary class="NSMutableDictionary" key="536.IBAttributePlaceholdersKey"/>
 				<boolean value="NO" key="536.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="536.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="538.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="539.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="NO" key="545.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="545.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="546.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2900,20 +2768,10 @@
 				<string key="721.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="723.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="765.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="770.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="771.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="774.CustomClassName">SavesViewController</string>
-				<string key="774.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="776.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="777.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="779.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="780.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="781.CustomClassName">CrewViewController</string>
-				<string key="781.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="783.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="784.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="785.CustomClassName">MissionsViewController</string>
-				<string key="785.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="796.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="797.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="798.CustomClassName">KerbalNetViewController</string>
@@ -2945,7 +2803,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">844</int>
+			<int key="maxID">845</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3034,13 +2892,10 @@
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="addonsViewController">AddonsViewController</string>
-						<string key="crewViewController">CrewViewController</string>
 						<string key="inventoryViewController">InventoryViewController</string>
 						<string key="kerbalNetViewController">KerbalNetViewController</string>
 						<string key="launchKSPButton">NSButton</string>
-						<string key="missionsViewController">MissionsViewController</string>
 						<string key="pathControl">NSPathControl</string>
-						<string key="savesViewController">SavesViewController</string>
 						<string key="shipViewController">ShipViewController</string>
 						<string key="tabView">NSTabView</string>
 						<string key="terminateKSPButton">NSButton</string>
@@ -3051,10 +2906,6 @@
 						<object class="IBToOneOutletInfo" key="addonsViewController">
 							<string key="name">addonsViewController</string>
 							<string key="candidateClassName">AddonsViewController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="crewViewController">
-							<string key="name">crewViewController</string>
-							<string key="candidateClassName">CrewViewController</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="inventoryViewController">
 							<string key="name">inventoryViewController</string>
@@ -3068,17 +2919,9 @@
 							<string key="name">launchKSPButton</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="missionsViewController">
-							<string key="name">missionsViewController</string>
-							<string key="candidateClassName">MissionsViewController</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="pathControl">
 							<string key="name">pathControl</string>
 							<string key="candidateClassName">NSPathControl</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="savesViewController">
-							<string key="name">savesViewController</string>
-							<string key="candidateClassName">SavesViewController</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="shipViewController">
 							<string key="name">shipViewController</string>
@@ -3104,28 +2947,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/AppDelegate.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">CrewViewController</string>
-					<string key="superclassName">KSPViewController</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="crewArrayController">NSArrayController</string>
-						<string key="tableView">NSTableView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="crewArrayController">
-							<string key="name">crewArrayController</string>
-							<string key="candidateClassName">NSArrayController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="tableView">
-							<string key="name">tableView</string>
-							<string key="candidateClassName">NSTableView</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/CrewViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -3258,62 +3079,6 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">MissionsViewController</string>
-					<string key="superclassName">KSPViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="didPushAction:">id</string>
-						<string key="didPushAdd:">id</string>
-						<string key="didPushRemove:">id</string>
-						<string key="switchTableContent:">NSSegmentedControl</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="didPushAction:">
-							<string key="name">didPushAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="didPushAdd:">
-							<string key="name">didPushAdd:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="didPushRemove:">
-							<string key="name">didPushRemove:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="switchTableContent:">
-							<string key="name">switchTableContent:</string>
-							<string key="candidateClassName">NSSegmentedControl</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="detailTableView">NSScrollView</string>
-						<string key="missionTableView">NSTableView</string>
-						<string key="tableSwitchControl">NSSegmentedControl</string>
-						<string key="vesselArrayController">NSArrayController</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="detailTableView">
-							<string key="name">detailTableView</string>
-							<string key="candidateClassName">NSScrollView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="missionTableView">
-							<string key="name">missionTableView</string>
-							<string key="candidateClassName">NSTableView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="tableSwitchControl">
-							<string key="name">tableSwitchControl</string>
-							<string key="candidateClassName">NSSegmentedControl</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="vesselArrayController">
-							<string key="name">vesselArrayController</string>
-							<string key="candidateClassName">NSArrayController</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/MissionsViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
 					<string key="className">NSLayoutConstraint</string>
 					<string key="superclassName">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -3349,14 +3114,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/SUUpdater.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">SavesViewController</string>
-					<string key="superclassName">KSPViewController</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/SavesViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

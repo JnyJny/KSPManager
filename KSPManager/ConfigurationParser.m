@@ -8,6 +8,14 @@
 
 #import "ConfigurationParser.h"
 
+@interface ConfigurationParser ()
+
+@property (strong, nonatomic, readwrite) NSString *lastContext;
+@property (strong, nonatomic, readwrite) NSString *currentContext;
+
+
+@end
+
 @implementation NSMutableArray (LIFOCategory)
 
 - (id)push:(id)object
@@ -37,6 +45,7 @@
 @synthesize lines = _lines;
 @synthesize context = _context;
 @synthesize isGlobal;
+@synthesize lastContext = _lastContext;
 @synthesize currentContext = _currentContext;
 @synthesize encoding = _encoding;
 @synthesize globalContextId = _globalContextId;
@@ -106,10 +115,12 @@
 {
     id o = [self.context top];
     
-    if ( o == nil )
+    if ( o == nil ) {
         [self.context push:self.globalContextId];
-    
-    return [self.context top];
+        return [self.context top];
+    }
+
+    return o;
 }
 
 - (NSString *)globalContextId
@@ -128,6 +139,11 @@
 
 #pragma mark -
 #pragma mark Instance Methods
+
+- (BOOL)currentContextMatches:(NSString *)contextName
+{
+    return [self.currentContext isEqualToString:contextName];
+}
 
 - (BOOL)writeToURL:(NSURL *)url
 {
@@ -161,6 +177,7 @@
         }
         
         if( line.hasKeyword ) {
+            self.lastContext = self.currentContext;
             [self.context push:line.keyword];
             
             if( YES == [self informDelegateOfLine:line
@@ -175,15 +192,12 @@
         }
         
         if( line.hasDictEnd ) {
-            
-            BOOL consume = [self informDelegateOfLine:line
-                                        usingSelector:@selector(handleEndContext:inConfiguration:)];
-
-            [self.context pop];
-            
-            if( consume )
+            if( YES == [self informDelegateOfLine:line
+                                    usingSelector:@selector(handleEndContext:inConfiguration:)]) {
+                self.lastContext = self.currentContext;
+                [self.context pop];
                 continue;
-            
+            }
         }
         
         if( line.hasKeyValue ) {
@@ -194,10 +208,10 @@
         
         if( YES == [self informDelegateOfLine:line
                                 usingSelector:@selector(handleUnknownContent:inConfiguration:)] ) {
-            NSLog(@"%@: delegate %@ terminated processing at line # %lu",
-                  self.class,
+            NSLog(@"delegate %@ : %@ barfed on line # %lu %@",
+                  self.currentContext,
                   self.delegate.class,
-                  [self.lines indexOfObject:line]);
+                  [self.lines indexOfObject:line],line);
             break;
         }
     }

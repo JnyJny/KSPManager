@@ -7,8 +7,21 @@
 //
 
 #import "Sandbox.h"
+#import "SFS.h"
+#import "Ship.h"
+
+@interface Sandbox () {
+    SFSGame *_game;
+}
+
+@property (strong, nonatomic, readwrite) NSMutableArray *ships;
+
+@end
+
 
 @implementation Sandbox
+
+@synthesize ships = _ships;
 
 #pragma mark -
 #pragma mark Lifecycle
@@ -16,14 +29,22 @@
 - (id)initWithURL:(NSURL *)baseURL
 {
     if( self = [super initWithURL:baseURL] ) {
-        
-        
+        _game = [SFS gameFromContentsOfURL:self.baseURL];
     }
     return self;
 }
 
 #pragma mark -
 #pragma mark Properties
+
+- (NSMutableArray *)ships
+{
+    if( _ships == nil ) {
+        _ships = [[NSMutableArray alloc] init];
+        [_ships addObjectsFromArray:[Ship inventory:[self.baseURL URLByDeletingLastPathComponent]]];
+    }
+    return _ships;
+}
 
 - (BOOL)isInstalled
 {

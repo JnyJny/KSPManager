@@ -7,9 +7,15 @@
 //
 
 #import "Training.h"
+#import "SFS.h"
+
+@interface Training () {
+    SFSGame *_game;
+}
+
+@end
 
 @implementation Training
-
 
 
 #pragma mark -
@@ -18,8 +24,7 @@
 - (id)initWithURL:(NSURL *)baseURL
 {
     if( self = [super initWithURL:baseURL] ) {
-        
-        
+        _game = [SFS gameFromContentsOfURL:self.baseURL];
     }
     return self;
 }
@@ -39,7 +44,7 @@
 
 - (NSString *)assetTitle
 {
-    return @"training";
+    return _game.title;
 }
 
 - (NSString *)assetCategory

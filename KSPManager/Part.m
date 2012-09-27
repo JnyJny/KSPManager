@@ -16,9 +16,8 @@
 
 @implementation Part
 
-@synthesize partDirectoryName = _partDirectoryName;
+
 @synthesize configurationURL = _configurationURL;
-@synthesize detail = _detail;
 @synthesize categoryName = _categoryName;
 
 
@@ -50,15 +49,6 @@
 #pragma mark Properties
 
 
-- (NSString *)partDirectoryName
-{
-    if( _partDirectoryName == nil ){
-        _partDirectoryName = [self.baseURL lastPathComponent];
-    }
-    return _partDirectoryName;
-}
-
-
 - (void)setConfigurationURL:(NSURL *)configurationURL
 {
     if( _configurationURL == configurationURL )
@@ -67,35 +57,6 @@
     _configurationURL = configurationURL;
     
     self.baseURL = [_configurationURL URLByDeletingLastPathComponent];
-}
-
-
-
-- (NSString *)detail
-{
-    if( _detail == nil ) {
-        _detail = @"";
-        
-        for(NSDictionary *ctx in [self.contexts arrayByAddingObject:self.global] ) {
-         
-            for(NSString *key in [ctx.allKeys sortedArrayUsingSelector:@selector(localizedCompare:)]) {
-                
-                if( [key isEqualToString:@"ContextName"] )
-                    continue;
-                
-                NSString *prefix = @"";
-                
-                if( ctx != self.global )
-                    prefix = [NSString stringWithFormat:@"%@.",[ctx valueForKey:@"ContextName"]];
-                
-                _detail = [_detail stringByAppendingFormat:@"\t%@%@ -> %@\n",prefix,key,[ctx valueForKey:key]];
-
-            }
-            
-        }
-
-    }
-    return _detail;
 }
 
 - (NSString *)categoryName
@@ -150,7 +111,8 @@
 {
 
     
-    NSURL *targetURL = [destinationDirURL URLByAppendingPathComponent:self.partDirectoryName isDirectory:YES];
+    NSURL *targetURL = [destinationDirURL URLByAppendingPathComponent:self.baseURL.lastPathComponent
+                                                          isDirectory:YES];
     
     NSError *error = nil;
     
@@ -170,7 +132,8 @@
 - (BOOL)copyTo:(NSURL *)destinationDirURL
 {
     
-    NSURL *targetURL = [destinationDirURL URLByAppendingPathComponent:self.partDirectoryName isDirectory:YES];
+    NSURL *targetURL = [destinationDirURL URLByAppendingPathComponent:self.baseURL.lastPathComponent
+                                                          isDirectory:YES];
     
     NSError *error = nil;
     
@@ -284,10 +247,8 @@
 
     for(NSString *cfgPath in partCfgPaths){
         Part *part = [[Part alloc]initWithURL:[baseURL URLByAppendingPathComponent:cfgPath]];
-        if( part ) {
-            NSLog(@"inventory part %@",part.baseURL);
+        if( part )
             [results addObject:part];
-        }
     }
 
     return results;

@@ -7,12 +7,9 @@
 //
 
 #import "Asset.h"
-#import "ConfigurationParser.h"
 
-@interface Ship : Asset <ConfigurationParserDelegate> {
-    ConfigurationParser *_parser;
-    NSMutableDictionary *_currentPart;
-}
+
+@interface Ship : Asset
 
 @property (strong,nonatomic, readonly) NSMutableArray *parts;
 @property (strong,nonatomic) NSString *hanger;
