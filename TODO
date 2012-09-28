@@ -46,7 +46,7 @@ Nice To Have, Not Holding My Breath
 
 
 BUG
-
+- plugin naming seems to be broken ( moving from installed to available with multiple instances )
 
 DONE
 - clean out cached unzipped distributions

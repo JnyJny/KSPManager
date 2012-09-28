@@ -24,7 +24,6 @@
     if( self = [super init] ) {
         self.url = url;
         self.parser.delegate = self;
-        [self.parser beginParsing];
     }
     return self;
 }

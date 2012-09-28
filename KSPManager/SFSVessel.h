@@ -6,18 +6,15 @@
 //  Copyright (c) 2012 Symbolic Armageddon. All rights reserved.
 //
 
-#import "KSPBucket.h"
+#import "CRAFTVessel.h"
 #import "SFSOrbit.h"
 #import "SFSPart.h"
 
 
-@interface SFSVessel : KSPBucket
+@interface SFSVessel : CRAFTVessel
 
 @property (strong, nonatomic, readonly) SFSOrbit *orbit;
-@property (strong, nonatomic, readonly) NSMutableArray *parts;
 
 - (void)addOrbitWithOptions:(NSDictionary *)options;
-- (void)addPartWithOptions:(NSDictionary *)options;
-- (void)addPart:(SFSPart *)part;
 
 @end

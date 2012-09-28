@@ -52,9 +52,14 @@
     return [_info allKeys];
 }
 
+- (NSArray *)allValues
+{
+    return [_info allValues];
+}
+
 + (NSString *)keyword
 {
-    return [[[self className] stringByReplacingOccurrencesOfString:@"SFS" withString:@""] uppercaseString];
+    return @"KSPBUCKET";
 }
 
 + (BOOL)keywordMatch:(NSString *)candidate

@@ -10,7 +10,7 @@
 #import "CRAFT.h"
 
 @interface Ship () {
-    SFSVessel *_vessel;
+    CRAFTVessel *_vessel;
 }
 
 
@@ -36,6 +36,11 @@
 
 #pragma mark -
 #pragma mark Overriden Properties
+
+- (id)valueForUndefinedKey:(NSString *)key
+{
+    return [_vessel valueForKey:key];
+}
 
 #define kShipKeyShipName @"ship"
 #define kShipFilenameAutoSaved @"Auto-Saved Ship"
@@ -101,6 +106,11 @@
 - (NSString *)description
 {
     return [self.baseURL.path stringByAppendingFormat:@": %@, %@",self.assetTitle,self.assetCategory];
+}
+
+- (NSMutableArray *)parts
+{
+    return _vessel.parts;
 }
 
 #pragma mark -

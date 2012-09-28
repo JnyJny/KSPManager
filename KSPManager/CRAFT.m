@@ -7,14 +7,14 @@
 //
 
 #import "CRAFT.h"
-#import "SFSVessel.h"
+#import "CRAFTVessel.h"
 
 @interface CRAFT () {
     NSMutableDictionary *_options;
 }
 
-@property (strong, nonatomic, readwrite) SFSVessel *vessel;
-@property (strong, nonatomic, readwrite) SFSPart *part;
+@property (strong, nonatomic, readwrite) CRAFTVessel *vessel;
+@property (strong, nonatomic, readwrite) CRAFTPart *part;
 
 @end
 
@@ -31,18 +31,18 @@
 #pragma mark -
 #pragma mark Properties
 
-- (SFSVessel *)vessel
+- (CRAFTVessel *)vessel
 {
     if( _vessel == nil ) {
-        _vessel = [[SFSVessel alloc] init];
+        _vessel = [[CRAFTVessel alloc] init];
     }
     return _vessel;
 }
 
-- (SFSPart *)part
+- (CRAFTPart *)part
 {
     if( _part == nil ) {
-        _part = [[SFSPart alloc] init];
+        _part = [[CRAFTPart alloc] init];
     }
     return _part;
 }
@@ -101,13 +101,16 @@
 
 - (BOOL)handleEndContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
 {
+    if( tokenizer.isGlobal )
+        return YES; // version 0.14 ships have braces around parts but no PART decl. 
+    
     if( [SFSPart keywordMatch:tokenizer.currentContext] ) {
         [self.vessel addPart:self.part];
         self.part = nil;
         return YES;
     }
 
-    if( [SFSModule keywordMatch:tokenizer.currentContext] ) {
+    if( [CRAFTModule keywordMatch:tokenizer.currentContext] ) {
         [self.part addModuleWithOptions:_options];
         return YES;
     }
@@ -115,14 +118,26 @@
     return NO;
 }
 
+- (BOOL)handleUnknownContent:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
+{
+    return YES;
+}
 
+- (void)didEndParsingWithConfiguration:(ConfigurationParser *)tokenizer
+{
+    NSLog(@"vessel %@ part count %ld",self.vessel,self.vessel.parts.count);
+}
 
 #pragma mark -
 #pragma mark Class Methods
 
-+ (SFSVessel *)vesselForContentsOfURL:(NSURL *)url
++ (CRAFTVessel *)vesselForContentsOfURL:(NSURL *)url
 {
     CRAFT *craft = [[CRAFT alloc] initWithContentsOfURL:url];
+    
+    craft.parser.delegate = craft;
+    
+    [craft.parser beginParsing];
     
     return craft.vessel;
 }

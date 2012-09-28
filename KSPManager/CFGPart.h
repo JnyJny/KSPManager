@@ -6,8 +6,12 @@
 //  Copyright (c) 2012 Symbolic Armageddon. All rights reserved.
 //
 
-#import "KSPBucket.h"
+#import "CFGObject.h"
+#import "CFGModule.h"
+@interface CFGPart : CFGObject
 
-@interface CFGPart : KSPBucket
+@property (strong, nonatomic, readonly) CFGModule *module;
+
+- (void)addModuleWithOptions:(NSDictionary *)options;
 
 @end

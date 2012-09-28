@@ -11,6 +11,6 @@
 
 @interface CRAFT : BaseConfigurationFile
 
-+ (SFSVessel *)vesselForContentsOfURL:(NSURL *)url;
++ (CRAFTVessel *)vesselForContentsOfURL:(NSURL *)url;
 
 @end

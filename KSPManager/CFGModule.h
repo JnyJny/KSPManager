@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Symbolic Armageddon. All rights reserved.
 //
 
-#import "KSPBucket.h"
+#import "CFGObject.h"
 
-@interface CFGModule : KSPBucket
+@interface CFGModule : CFGObject
 
 @end

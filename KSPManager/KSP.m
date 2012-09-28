@@ -692,6 +692,13 @@ AddAndInstall:
     return assets;
 }
 
+
+- (id)assetMatchingValue:(NSString *)value forKey:(NSString *)key
+{
+    
+    return nil;
+}
+
 #pragma mark -
 #pragma mark Utility Methods
 

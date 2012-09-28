@@ -384,13 +384,13 @@
 								<object class="NSSegmentItem">
 									<double key="NSSegmentItemWidth">80</double>
 									<string key="NSSegmentItemLabel">All</string>
+									<bool key="NSSegmentItemSelected">YES</bool>
 									<int key="NSSegmentItemImageScaling">0</int>
 								</object>
 								<object class="NSSegmentItem">
 									<double key="NSSegmentItemWidth">80</double>
 									<string key="NSSegmentItemLabel">Propulsion</string>
 									<int key="NSSegmentItemTag">1</int>
-									<bool key="NSSegmentItemSelected">YES</bool>
 									<int key="NSSegmentItemImageScaling">0</int>
 								</object>
 								<object class="NSSegmentItem">
@@ -419,7 +419,6 @@
 									<int key="NSSegmentItemImageScaling">0</int>
 								</object>
 							</array>
-							<int key="NSSelectedSegment">1</int>
 							<int key="NSSegmentStyle">6</int>
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -473,6 +472,22 @@
 						</object>
 					</object>
 					<int key="connectionID">146</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: arrangedObjects.assetTitle</string>
+						<reference key="source" ref="198094998"/>
+						<reference key="destination" ref="60650073"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="198094998"/>
+							<reference key="NSDestination" ref="60650073"/>
+							<string key="NSLabel">value: arrangedObjects.assetTitle</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">arrangedObjects.assetTitle</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">335</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1037,7 +1052,7 @@
 				<string key="131.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="NO" key="184.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="184.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<integer value="6" key="185.IBNSSegmentedControlInspectorSelectedSegmentMetadataKey"/>
+				<integer value="0" key="185.IBNSSegmentedControlInspectorSelectedSegmentMetadataKey"/>
 				<string key="185.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="NO" key="197.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="197.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1088,7 +1103,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">333</int>
+			<int key="maxID">335</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

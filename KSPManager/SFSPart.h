@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 Symbolic Armageddon. All rights reserved.
 //
 
-#import "KSPBucket.h"
+#import "SFSObject.h"
 #import "SFSModule.h"
 
-@interface SFSPart : KSPBucket
+@interface SFSPart : SFSObject
 
 @property (strong, nonatomic, readonly) SFSModule *module;
 

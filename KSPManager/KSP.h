@@ -73,6 +73,8 @@
 - (NSURL *)downloadCacheURLforPath:(NSString *)path;
 - (NSURL *)cacheURLforPath:(NSString *)path;
 
+- (id)assetMatchingValue:(NSString *)value forKey:(NSString *)key;
+
 - (BOOL)launchKSP;
 
 - (void)cleanUp;

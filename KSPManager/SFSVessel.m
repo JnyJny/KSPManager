@@ -18,18 +18,11 @@
 @implementation SFSVessel
 
 @synthesize orbit = _orbit;
-@synthesize parts = _parts;
+
 
 #pragma mark -
 #pragma mark Properties
 
-- (NSMutableArray *)parts
-{
-    if( _parts == nil ) {
-        _parts = [[NSMutableArray alloc] init];
-    }
-    return _parts;
-}
 
 #pragma mark -
 #pragma mark Instance Methods
@@ -41,12 +34,13 @@
 
 - (void)addPartWithOptions:(NSDictionary *)options
 {
-    [self.parts addObject:[[SFSPart alloc] initWithOptions:options]];
+    [self addPart:[[SFSPart alloc] initWithOptions:options]];
 }
 
-- (void)addPart:(SFSPart *)part
++ (NSString *)keyword
 {
-    [self.parts addObject:part];
+    return @"VESSEL";
 }
+
 
 @end

@@ -17,4 +17,5 @@
 + (NSString *)keyword;
 + (BOOL)keywordMatch:(NSString *)candidate;
 - (NSArray *)allKeys;
+- (NSArray *)allValues;
 @end

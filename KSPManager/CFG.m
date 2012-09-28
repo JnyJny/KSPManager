@@ -7,96 +7,31 @@
 //
 
 #import "CFG.h"
+#import "KSP_Constants.h"
+
 
 
 @interface CFG ()
-
-@property (strong, nonatomic, readwrite) CFGPart *part;
-@property (strong, nonatomic, readwrite) CFGProp *prop;
-@property (strong, nonatomic, readwrite) CFGSpace *space;
-
+@property (strong, nonatomic, readwrite)ConfigurationParser *parser;
 @end
 
 @implementation CFG
 
-@synthesize part = _part;
-@synthesize prop = _prop;
-@synthesize space = _space;
+@synthesize parser = _parser;
 
-- (CFGPart *)part
+
+- (ConfigurationParser *)parser
 {
-    if( _part == nil ) {
-        _part = [[CFGPart alloc] init];
+    if( _parser == nil ) {
+        NSStringEncoding encoding;
+        
+        NSArray *lines = [LineToken linesFromURL:self.url
+                                    withEncoding:&encoding
+                                     withOptions:@{ kLineOptionCommentTokenKey : @"//" }];
+        
+        _parser = [ConfigurationParser parserWithLineTokens:lines];
     }
-    return _part;
+    return _parser;
 }
-
-- (CFGProp *)prop
-{
-    if( _prop == nil ) {
-        _prop = [[CFGProp alloc] init];
-    }
-    return _prop;
-}
-
-- (CFGSpace *)space
-{
-    if( _space == nil ) {
-        _space = [[CFGSpace alloc] init];
-    }
-    return _space;
-}
-
-
-+ (CFGPart *)partForContentsOfURL:(NSURL *)url
-{
-    CFG *cfg = [[CFG alloc] initWithContentsOfURL:url];
-    
-    return cfg.part;
-}
-
-+ (CFGProp *)propForContentsOfURL:(NSURL *)url
-{
-    CFG *cfg = [[CFG alloc] initWithContentsOfURL:url];
-    
-    return  cfg.prop;
-}
-
-
-+ (CFGSpace *)spaceForContentsOfURL:(NSURL *)url
-{
-    CFG *cfg = [[CFG alloc] initWithContentsOfURL:url];
-
-    return  cfg.space;
-}
-
-#pragma mark -
-#pragma mark ConfigurationParserDelegate Methods
-
-
-
-- (BOOL)handleNewContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
-{
-
-    return NO;
-}
-
-- (BOOL)handleBeginContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
-{
-    return NO;
-}
-
-- (BOOL)handleKeyValue:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
-{
-    return NO;
-}
-
-- (BOOL)handleEndContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
-{
- 
-    return NO;
-}
-
-
 
 @end

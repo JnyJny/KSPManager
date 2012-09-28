@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Symbolic Armageddon. All rights reserved.
 //
 
-#import "KSPBucket.h"
+#import "SFSObject.h"
 
-@interface SFSSpaceCenter : KSPBucket
+@interface SFSSpaceCenter : SFSObject
 
 @end

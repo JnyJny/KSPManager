@@ -24,7 +24,14 @@
 		1D24FB7B1613F1A300066392 /* CFGPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D24FB7A1613F1A200066392 /* CFGPart.m */; };
 		1D24FB7F1613F1EE00066392 /* CFGModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D24FB7E1613F1EE00066392 /* CFGModule.m */; };
 		1D24FB851613F21100066392 /* CFGProp.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D24FB841613F21100066392 /* CFGProp.m */; };
-		1D24FB881613F63E00066392 /* CFGSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D24FB871613F63E00066392 /* CFGSpace.m */; };
+		1D24FB8C1613FBAE00066392 /* CRAFTVessel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D24FB8B1613FBAE00066392 /* CRAFTVessel.m */; };
+		1D24FB8F1613FBBD00066392 /* CRAFTPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D24FB8E1613FBBD00066392 /* CRAFTPart.m */; };
+		1D24FB921613FBD000066392 /* CRAFTModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D24FB911613FBD000066392 /* CRAFTModule.m */; };
+		1D24FB951614A58600066392 /* CFGInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D24FB941614A58600066392 /* CFGInternal.m */; };
+		1D24FB981614DD8A00066392 /* SFSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D24FB971614DD8900066392 /* SFSObject.m */; };
+		1D24FB9B1614DEC200066392 /* CFGObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D24FB9A1614DEC000066392 /* CFGObject.m */; };
+		1D24FB9E1614DF3400066392 /* CRAFTObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D24FB9D1614DF3300066392 /* CRAFTObject.m */; };
+		1D24FBA11614E7E100066392 /* CFGSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D24FBA01614E7E000066392 /* CFGSettings.m */; };
 		1D261D89160E731500AE02F6 /* Training.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D261D88160E731500AE02F6 /* Training.m */; };
 		1D261D8D160E733500AE02F6 /* Scenario.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D261D8C160E733500AE02F6 /* Scenario.m */; };
 		1D261D91160E736F00AE02F6 /* Sandbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D261D90160E736F00AE02F6 /* Sandbox.m */; };
@@ -40,6 +47,10 @@
 		1D58B0FB1607B77E0072A9D0 /* Prop.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D58B0FA1607B77E0072A9D0 /* Prop.m */; };
 		1D58B0FF1607B7980072A9D0 /* Space.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D58B0FE1607B7980072A9D0 /* Space.m */; };
 		1D58B1051608C29E0072A9D0 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 1D58B1041608C29E0072A9D0 /* Credits.html */; };
+		1D58F3211614EA460083C97B /* PartCFG.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D58F3201614EA460083C97B /* PartCFG.m */; };
+		1D58F3241614EA670083C97B /* PropCFG.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D58F3231614EA670083C97B /* PropCFG.m */; };
+		1D58F3271614EA7C0083C97B /* InternalCFG.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D58F3261614EA7C0083C97B /* InternalCFG.m */; };
+		1D58F32A1614EA8F0083C97B /* SettingsCFG.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D58F3291614EA8F0083C97B /* SettingsCFG.m */; };
 		1D682A2615FCD93E007C84CB /* ConfigurationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D682A2515FCD93E007C84CB /* ConfigurationParser.m */; };
 		1D8D57B916134D2000304975 /* KSPBucket.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8D57B816134D2000304975 /* KSPBucket.m */; };
 		1D8D57BC16134F2400304975 /* SFSGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8D57BB16134F2400304975 /* SFSGame.m */; };
@@ -114,8 +125,22 @@
 		1D24FB7E1613F1EE00066392 /* CFGModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFGModule.m; sourceTree = "<group>"; };
 		1D24FB831613F21000066392 /* CFGProp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFGProp.h; sourceTree = "<group>"; };
 		1D24FB841613F21100066392 /* CFGProp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFGProp.m; sourceTree = "<group>"; };
-		1D24FB861613F63D00066392 /* CFGSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFGSpace.h; sourceTree = "<group>"; };
-		1D24FB871613F63E00066392 /* CFGSpace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFGSpace.m; sourceTree = "<group>"; };
+		1D24FB8A1613FBAE00066392 /* CRAFTVessel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRAFTVessel.h; sourceTree = "<group>"; };
+		1D24FB8B1613FBAE00066392 /* CRAFTVessel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRAFTVessel.m; sourceTree = "<group>"; };
+		1D24FB8D1613FBBD00066392 /* CRAFTPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRAFTPart.h; sourceTree = "<group>"; };
+		1D24FB8E1613FBBD00066392 /* CRAFTPart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRAFTPart.m; sourceTree = "<group>"; };
+		1D24FB901613FBD000066392 /* CRAFTModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRAFTModule.h; sourceTree = "<group>"; };
+		1D24FB911613FBD000066392 /* CRAFTModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRAFTModule.m; sourceTree = "<group>"; };
+		1D24FB931614A58500066392 /* CFGInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFGInternal.h; sourceTree = "<group>"; };
+		1D24FB941614A58600066392 /* CFGInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFGInternal.m; sourceTree = "<group>"; };
+		1D24FB961614DD8800066392 /* SFSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSObject.h; sourceTree = "<group>"; };
+		1D24FB971614DD8900066392 /* SFSObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSObject.m; sourceTree = "<group>"; };
+		1D24FB991614DEBF00066392 /* CFGObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFGObject.h; sourceTree = "<group>"; };
+		1D24FB9A1614DEC000066392 /* CFGObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFGObject.m; sourceTree = "<group>"; };
+		1D24FB9C1614DF3200066392 /* CRAFTObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRAFTObject.h; sourceTree = "<group>"; };
+		1D24FB9D1614DF3300066392 /* CRAFTObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRAFTObject.m; sourceTree = "<group>"; };
+		1D24FB9F1614E7DE00066392 /* CFGSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFGSettings.h; sourceTree = "<group>"; };
+		1D24FBA01614E7E000066392 /* CFGSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFGSettings.m; sourceTree = "<group>"; };
 		1D261D87160E731500AE02F6 /* Training.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Training.h; sourceTree = "<group>"; };
 		1D261D88160E731500AE02F6 /* Training.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Training.m; sourceTree = "<group>"; };
 		1D261D8B160E733500AE02F6 /* Scenario.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scenario.h; sourceTree = "<group>"; };
@@ -142,6 +167,14 @@
 		1D58B0FD1607B7980072A9D0 /* Space.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Space.h; sourceTree = "<group>"; };
 		1D58B0FE1607B7980072A9D0 /* Space.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Space.m; sourceTree = "<group>"; };
 		1D58B1041608C29E0072A9D0 /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
+		1D58F31F1614EA460083C97B /* PartCFG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartCFG.h; sourceTree = "<group>"; };
+		1D58F3201614EA460083C97B /* PartCFG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartCFG.m; sourceTree = "<group>"; };
+		1D58F3221614EA670083C97B /* PropCFG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropCFG.h; sourceTree = "<group>"; };
+		1D58F3231614EA670083C97B /* PropCFG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropCFG.m; sourceTree = "<group>"; };
+		1D58F3251614EA7C0083C97B /* InternalCFG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InternalCFG.h; sourceTree = "<group>"; };
+		1D58F3261614EA7C0083C97B /* InternalCFG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InternalCFG.m; sourceTree = "<group>"; };
+		1D58F3281614EA8F0083C97B /* SettingsCFG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsCFG.h; sourceTree = "<group>"; };
+		1D58F3291614EA8F0083C97B /* SettingsCFG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsCFG.m; sourceTree = "<group>"; };
 		1D682A2415FCD93E007C84CB /* ConfigurationParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationParser.h; sourceTree = "<group>"; };
 		1D682A2515FCD93E007C84CB /* ConfigurationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationParser.m; sourceTree = "<group>"; };
 		1D682A2715FCD9CC007C84CB /* ConfigurationTokenizerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationTokenizerDelegate.h; sourceTree = "<group>"; };
@@ -265,16 +298,35 @@
 		1D24FB7C1613F1AA00066392 /* CFG Objects */ = {
 			isa = PBXGroup;
 			children = (
+				1D24FB991614DEBF00066392 /* CFGObject.h */,
+				1D24FB9A1614DEC000066392 /* CFGObject.m */,
 				1D24FB791613F1A100066392 /* CFGPart.h */,
 				1D24FB7A1613F1A200066392 /* CFGPart.m */,
 				1D24FB7D1613F1ED00066392 /* CFGModule.h */,
 				1D24FB7E1613F1EE00066392 /* CFGModule.m */,
+				1D24FB931614A58500066392 /* CFGInternal.h */,
+				1D24FB941614A58600066392 /* CFGInternal.m */,
 				1D24FB831613F21000066392 /* CFGProp.h */,
 				1D24FB841613F21100066392 /* CFGProp.m */,
-				1D24FB861613F63D00066392 /* CFGSpace.h */,
-				1D24FB871613F63E00066392 /* CFGSpace.m */,
+				1D24FB9F1614E7DE00066392 /* CFGSettings.h */,
+				1D24FBA01614E7E000066392 /* CFGSettings.m */,
 			);
 			name = "CFG Objects";
+			sourceTree = "<group>";
+		};
+		1D24FB891613FB7600066392 /* CRAFT Objects */ = {
+			isa = PBXGroup;
+			children = (
+				1D24FB9C1614DF3200066392 /* CRAFTObject.h */,
+				1D24FB9D1614DF3300066392 /* CRAFTObject.m */,
+				1D24FB8A1613FBAE00066392 /* CRAFTVessel.h */,
+				1D24FB8B1613FBAE00066392 /* CRAFTVessel.m */,
+				1D24FB8D1613FBBD00066392 /* CRAFTPart.h */,
+				1D24FB8E1613FBBD00066392 /* CRAFTPart.m */,
+				1D24FB901613FBD000066392 /* CRAFTModule.h */,
+				1D24FB911613FBD000066392 /* CRAFTModule.m */,
+			);
+			name = "CRAFT Objects";
 			sourceTree = "<group>";
 		};
 		1D261D8A160E731A00AE02F6 /* Training */ = {
@@ -311,6 +363,44 @@
 				1D28B8B0160622C6009C7FD0 /* UtilityViewController.m */,
 			);
 			name = Utility;
+			sourceTree = "<group>";
+		};
+		1D38C46C1615080B00C85E88 /* CFG */ = {
+			isa = PBXGroup;
+			children = (
+				1D24FB761613EFED00066392 /* CFG.h */,
+				1D24FB771613EFEE00066392 /* CFG.m */,
+				1D58F31F1614EA460083C97B /* PartCFG.h */,
+				1D58F3201614EA460083C97B /* PartCFG.m */,
+				1D58F3221614EA670083C97B /* PropCFG.h */,
+				1D58F3231614EA670083C97B /* PropCFG.m */,
+				1D58F3251614EA7C0083C97B /* InternalCFG.h */,
+				1D58F3261614EA7C0083C97B /* InternalCFG.m */,
+				1D58F3281614EA8F0083C97B /* SettingsCFG.h */,
+				1D58F3291614EA8F0083C97B /* SettingsCFG.m */,
+				1D24FB7C1613F1AA00066392 /* CFG Objects */,
+			);
+			name = CFG;
+			sourceTree = "<group>";
+		};
+		1D38C46E1615081900C85E88 /* CRAFT */ = {
+			isa = PBXGroup;
+			children = (
+				1D24FB701613B3B500066392 /* CRAFT.h */,
+				1D24FB711613B3B500066392 /* CRAFT.m */,
+				1D24FB891613FB7600066392 /* CRAFT Objects */,
+			);
+			name = CRAFT;
+			sourceTree = "<group>";
+		};
+		1D38C46F1615082900C85E88 /* SFS */ = {
+			isa = PBXGroup;
+			children = (
+				1DA65DBE1613384A00092123 /* SFS.h */,
+				1DA65DBF1613384B00092123 /* SFS.m */,
+				1D8D57DB1613505A00304975 /* SFS Objects */,
+			);
+			name = SFS;
 			sourceTree = "<group>";
 		};
 		1D57215416028B3600D2427C /* Remote */ = {
@@ -430,6 +520,8 @@
 		1D8D57DB1613505A00304975 /* SFS Objects */ = {
 			isa = PBXGroup;
 			children = (
+				1D24FB961614DD8800066392 /* SFSObject.h */,
+				1D24FB971614DD8900066392 /* SFSObject.m */,
 				1D8D57BA16134F2400304975 /* SFSGame.h */,
 				1D8D57BB16134F2400304975 /* SFSGame.m */,
 				1D8D57BD16134F6500304975 /* SFSFlight.h */,
@@ -473,16 +565,9 @@
 			children = (
 				1D24FB731613B40000066392 /* BaseConfigurationFile.h */,
 				1D24FB741613B40000066392 /* BaseConfigurationFile.m */,
-				1DA65DBE1613384A00092123 /* SFS.h */,
-				1DA65DBF1613384B00092123 /* SFS.m */,
-				1D24FB701613B3B500066392 /* CRAFT.h */,
-				1D24FB711613B3B500066392 /* CRAFT.m */,
-				1D24FB761613EFED00066392 /* CFG.h */,
-				1D24FB771613EFEE00066392 /* CFG.m */,
-				1D8D57B716134D2000304975 /* KSPBucket.h */,
-				1D8D57B816134D2000304975 /* KSPBucket.m */,
-				1D8D57DB1613505A00304975 /* SFS Objects */,
-				1D24FB7C1613F1AA00066392 /* CFG Objects */,
+				1D38C46F1615082900C85E88 /* SFS */,
+				1D38C46E1615081900C85E88 /* CRAFT */,
+				1D38C46C1615080B00C85E88 /* CFG */,
 			);
 			name = "Configuration Files";
 			sourceTree = "<group>";
@@ -610,6 +695,8 @@
 		1DB405FD15DC4E010041807D /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				1D8D57B716134D2000304975 /* KSPBucket.h */,
+				1D8D57B816134D2000304975 /* KSPBucket.m */,
 				1DB7013A15F193FF002EC18D /* Portable Executable */,
 				1DB2E08815FE2DD500B1E0AF /* File Parsing */,
 			);
@@ -765,7 +852,18 @@
 				1D24FB7B1613F1A300066392 /* CFGPart.m in Sources */,
 				1D24FB7F1613F1EE00066392 /* CFGModule.m in Sources */,
 				1D24FB851613F21100066392 /* CFGProp.m in Sources */,
-				1D24FB881613F63E00066392 /* CFGSpace.m in Sources */,
+				1D24FB8C1613FBAE00066392 /* CRAFTVessel.m in Sources */,
+				1D24FB8F1613FBBD00066392 /* CRAFTPart.m in Sources */,
+				1D24FB921613FBD000066392 /* CRAFTModule.m in Sources */,
+				1D24FB951614A58600066392 /* CFGInternal.m in Sources */,
+				1D24FB981614DD8A00066392 /* SFSObject.m in Sources */,
+				1D24FB9B1614DEC200066392 /* CFGObject.m in Sources */,
+				1D24FB9E1614DF3400066392 /* CRAFTObject.m in Sources */,
+				1D24FBA11614E7E100066392 /* CFGSettings.m in Sources */,
+				1D58F3211614EA460083C97B /* PartCFG.m in Sources */,
+				1D58F3241614EA670083C97B /* PropCFG.m in Sources */,
+				1D58F3271614EA7C0083C97B /* InternalCFG.m in Sources */,
+				1D58F32A1614EA8F0083C97B /* SettingsCFG.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

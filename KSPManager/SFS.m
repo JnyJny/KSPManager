@@ -28,8 +28,6 @@
 #pragma mark -
 #pragma mark Lifecycle
 
-
-
 #pragma mark -
 #pragma mark Properties
 
@@ -187,6 +185,8 @@
 + (SFSGame *)gameFromContentsOfURL:(NSURL *)url
 {
     SFS *sfs = [[SFS alloc] initWithContentsOfURL:url];
+
+    [sfs.parser beginParsing];
 
     return sfs.sfsGame;
 }

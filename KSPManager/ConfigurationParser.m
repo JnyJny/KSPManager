@@ -207,17 +207,17 @@
         }
         
         if( YES == [self informDelegateOfLine:line
-                                usingSelector:@selector(handleUnknownContent:inConfiguration:)] ) {
-            NSLog(@"delegate %@ : %@ barfed on line # %lu %@",
-                  self.currentContext,
-                  self.delegate.class,
-                  [self.lines indexOfObject:line],line);
-            break;
-        }
+                                usingSelector:@selector(handleUnknownContent:inConfiguration:)] )
+            continue;
+        
+        NSLog(@"delegate %@ : %@ didn't consume unknown content on line # %lu %@",
+                    self.currentContext,
+                    self.delegate.class,
+                    [self.lines indexOfObject:line],line);
     }
     
-    if( [self.delegate respondsToSelector:@selector(willEndParsingWithConfiguration:)] )
-        [self.delegate performSelector:@selector(willEndParsingWithConfiguration:) withObject:self];
+    if( [self.delegate respondsToSelector:@selector(didEndParsingWithConfiguration:)] )
+        [self.delegate performSelector:@selector(didEndParsingWithConfiguration:) withObject:self];
 
 
     return YES;

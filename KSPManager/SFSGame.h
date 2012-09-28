@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Symbolic Armageddon. All rights reserved.
 //
 
-#import "KSPBucket.h"
+#import "SFSObject.h"
 
 #import "SFSFlight.h"
 #import "SFSEditor.h"
@@ -25,7 +25,7 @@
 #define kSFSGameKeyStatus      @"Status"
 #define kSFSGameKeyScene       @"Scene"
 
-@interface SFSGame : KSPBucket
+@interface SFSGame : SFSObject
 
 @property (strong, nonatomic, readonly) NSMutableArray *parameters;
 @property (strong, nonatomic, readonly) NSMutableArray *crew;

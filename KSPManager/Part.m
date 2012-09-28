@@ -7,9 +7,10 @@
 //
 
 #import "Part.h"
+#import "PartCFG.h"
 
 @interface Part () {
-    NSMutableDictionary *_curCtx;
+    CFGPart *_cfgPart;
 }
 
 @end
@@ -20,7 +21,6 @@
 @synthesize configurationURL = _configurationURL;
 @synthesize categoryName = _categoryName;
 
-
 - (id)initWithURL:(NSURL *)configurationFileURL
 {
     
@@ -29,17 +29,7 @@
         if( [configurationFileURL checkResourceIsReachableAndReturnError:nil]   == NO )
             return nil;
         
-        self.configurationURL = configurationFileURL;
-
-        NSStringEncoding encoding;
-        
-        NSArray *lines = [LineToken linesFromURL:self.configurationURL
-                                    withEncoding:&encoding
-                                     withOptions:@{ kLineOptionCommentTokenKey : @"//" }];
-
-        _parser = [ConfigurationParser parserWithLineTokens:lines];
-        _parser.delegate = self;
-        [_parser beginParsing];
+        _cfgPart = [PartCFG partForContentsOfURL:configurationFileURL];
     }
 
     return self;
@@ -47,6 +37,7 @@
 
 #pragma mark -
 #pragma mark Properties
+
 
 
 - (void)setConfigurationURL:(NSURL *)configurationURL
@@ -59,6 +50,8 @@
     self.baseURL = [_configurationURL URLByDeletingLastPathComponent];
 }
 
+
+
 - (NSString *)categoryName
 {
 
@@ -68,6 +61,11 @@
         return [@"Unknown: " stringByAppendingString:val];
 
     return [[Part categoryNames] objectAtIndex:val.integerValue];
+}
+
+- (id)valueForUndefinedKey:(NSString *)key
+{
+    return [_cfgPart valueForKey:key];
 }
 
 
@@ -88,11 +86,12 @@
 {
     NSString *title =  [self valueForKey:kPartKeyTitle];
     
-    if( title == nil )
+    if( !title || (title.length == 0) )
         title = [self valueForKey:kPartKeyName];
     
-    if( title == nil )
+    if( !title || (title.length == 0) )
         title = self.baseURL.lastPathComponent;
+
     
     return title;
 }
@@ -173,64 +172,6 @@
 }
 
 
-#pragma mark -
-#pragma mark ConfigurationParserDelegate
-
-#if 0
-- (void)willBeginParsingWithConfiguration:(ConfigurationParser *)tokenizer
-{
-    NSLog(@"beginParse %ld lines for %@",tokenizer.lines.count,self.configurationURL.lastPathComponent);
-}
-#endif
-
-- (BOOL)handleNewContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
-{
-    
-    if( !tokenizer.isGlobal ) {
-        _curCtx = [[NSMutableDictionary alloc] initWithDictionary:@{ @"ContextName" : tokenizer.currentContext }];
-        return YES;
-    }
-    
-    return NO;
-}
-
-- (BOOL)handleBeginContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
-{
-    return YES;
-}
-
-- (BOOL)handleEndContext:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
-{
-    if( !tokenizer.isGlobal ) {
-        if( _curCtx)
-            [self.contexts addObject:_curCtx];
-        _curCtx = nil;
-        return YES;
-    }
-    
-    return NO;
-}
-
-
-- (BOOL)handleKeyValue:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
-{
-
-    if( tokenizer.isGlobal ) {
-        [self addEntriesFromDictionary:line.keyValue];
-        return YES;
-    }
-    
-    [_curCtx addEntriesFromDictionary:line.keyValue];
-
-    return YES;
-}
-
-
-- (BOOL)handleUnknownContent:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
-{
-    NSLog(@"UnknownContent:%@ %@ %@",self.baseURL.lastPathComponent, tokenizer.currentContext,line);
-    return NO;
-}
 
 
 #pragma mark -
