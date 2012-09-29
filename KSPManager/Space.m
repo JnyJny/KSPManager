@@ -6,20 +6,32 @@
 //  Copyright (c) 2012 Symbolic Armageddon. All rights reserved.
 //
 
+// XXX Space & Internal need to be resolved
+
 #import "Space.h"
+#import "CFGInternal.h"
+
+@interface Space ()
+@property (strong, nonatomic) NSURL *configFile;
+@property (strong, nonatomic) CFGInternal *cfgInternal;
+@end
 
 @implementation Space
 
+@synthesize cfgInternal = _cfgInternal;
 @synthesize configFile = _configFile;
 
-- (id)initWithURL:(NSURL *)baseURL
+- (CFGInternal *)cfgInternal
 {
-    if ( self = [super initWithURL:[baseURL URLByDeletingLastPathComponent]] ) {
-        _configFile = baseURL;
-        // parse the config file later
+    if( _cfgInternal == nil ) {
+        //_cfgInternal = [CFGInternal propForContentsOfURL:self.url];
     }
-    return self;
+    return _cfgInternal;
+}
 
+- (NSURL *)configFile
+{
+    return [self.url URLByAppendingPathComponent:kINTERNAL_CONFG];
 }
 
 #pragma mark -
@@ -27,7 +39,7 @@
 
 - (NSString *)assetTitle
 {
-    return self.baseURL.lastPathComponent;
+    return self.url.lastPathComponent;
 }
 
 - (NSString *)assetCategory
@@ -37,12 +49,12 @@
 
 - (BOOL)isInstalled
 {
-    return [self.baseURL.path rangeOfString:kKSP_SPACES].location != NSNotFound;
+    return [self.url.path rangeOfString:kKSP_SPACES].location != NSNotFound;
 }
 
 - (BOOL)isAvailable
 {
-    return [self.baseURL.path rangeOfString:kKSPManagedSpaces].location != NSNotFound;
+    return [self.url.path rangeOfString:kKSPManagedSpaces].location != NSNotFound;
 }
 
 
@@ -51,11 +63,11 @@
 
 - (BOOL)moveTo:(NSURL *)destinationDirURL
 {
-    NSURL *targetURL = [destinationDirURL URLByAppendingPathComponent:self.baseURL.lastPathComponent];
+    NSURL *targetURL = [destinationDirURL URLByAppendingPathComponent:self.url.lastPathComponent];
     
     NSError *error = nil;
     
-    [self.fileManager moveItemAtURL:self.baseURL
+    [self.fileManager moveItemAtURL:self.url
                               toURL:targetURL
                               error:&error];
     
@@ -63,8 +75,7 @@
     if( error )
         return NO;
     
-    self.baseURL = targetURL;
-    _configFile = [self.baseURL URLByAppendingPathComponent:self.configFile.lastPathComponent];
+    self.url = targetURL;
 
     return YES;
 }
@@ -78,7 +89,7 @@
 {
     NSError *error = nil;
     
-    [self.fileManager removeItemAtURL:self.baseURL error:&error];
+    [self.fileManager removeItemAtURL:self.url error:&error];
     
     self.error = error;
     
@@ -88,24 +99,16 @@
     return YES;
 }
 
-- (BOOL)rename:(NSURL *)newName
-{
-    NSLog(@"%@ rename unimplimented",self.class);
-    return NO;
-}
-
-
-+ (NSArray *)inventory:(NSURL *)baseURL
++ (NSArray *)inventory:(NSURL *)url
 {
     NSMutableArray *results = [[NSMutableArray alloc] init];
     
-    
-    NSArray *spaceCfgPaths = [self assetSearch:baseURL usingBlock:^BOOL(NSString *path) {
+    NSArray *spaceCfgPaths = [self assetSearch:url usingBlock:^BOOL(NSString *path) {
         return [path.lastPathComponent isEqualToString:kINTERNAL_CONFG];
     }];
     
     for(NSString *path in spaceCfgPaths) {
-        Space *space = [[Space alloc] initWithURL:[baseURL URLByAppendingPathComponent:path]];
+        Space *space = [[Space alloc] initWithURL:[url URLByAppendingPathComponent:path]];
         if( space )
             [results addObject:space];
     }

@@ -10,5 +10,5 @@
 
 @interface Training : Asset
 
-+ (NSArray *)inventory:(NSURL *)baseURL;
+
 @end

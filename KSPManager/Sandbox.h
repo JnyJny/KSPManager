@@ -12,6 +12,4 @@
 
 @property (strong, nonatomic, readonly) NSMutableArray *ships;
 
-+ (NSArray *)inventory:(NSURL *)url;
-
 @end

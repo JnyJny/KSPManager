@@ -12,13 +12,9 @@
 @interface Ship : Asset
 
 @property (strong,nonatomic, readonly) NSMutableArray *parts;
-@property (strong,nonatomic) NSString *hanger;
+@property (strong,nonatomic, readonly) NSString *hangerName;
 @property (assign,nonatomic, readonly) BOOL isInSpacePlaneHanger;
 @property (assign,nonatomic, readonly) BOOL isInVehicleAssemblyBuilding;
-
-- (id)initWithURL:(NSURL *)url;
-
-+ (NSArray *)inventory:(NSURL *)url;
-
+@property (assign,nonatomic, readonly) BOOL isSandboxed;
 
 @end

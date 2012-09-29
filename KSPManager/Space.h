@@ -10,7 +10,4 @@
 
 @interface Space : Asset
 
-@property (strong, nonatomic, readonly) NSURL *configFile;
-
-+ (NSArray *)inventory:(NSURL *)baseURL;
 @end

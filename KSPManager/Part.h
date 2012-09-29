@@ -7,9 +7,6 @@
 //
 
 #import "Asset.h"
-#import "ConfigurationParser.h"
-
-@class ConfigurationParser;
 
 #define kPartKeyCoMOffset                  @"CoMOffset"
 #define kPartKeyCrewCapacity               @"CrewCapacity"
@@ -155,14 +152,11 @@
 #define kPartKeyModuleContext              @"MODULE"
 #define kPartKeyPartContext                @"PART"
 
-@interface Part : Asset <ConfigurationParserDelegate> {
-    ConfigurationParser *_parser;
-}
+@interface Part : Asset
 
-@property (strong, nonatomic)              NSURL  *configurationURL;
-@property (strong, nonatomic)           NSString  *categoryName;
+@property (strong, nonatomic,readonly)  NSURL  *configurationURL;
+@property (strong, nonatomic,readonly)  NSString  *categoryName;
 
-+ (NSArray *)inventory:(NSURL *)baseURL;
 + (NSArray *)categoryNames;
 
 

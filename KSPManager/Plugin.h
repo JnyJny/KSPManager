@@ -16,6 +16,6 @@
 @property (strong, nonatomic, readonly) NSString *productName;
 @property (strong, nonatomic, readonly) NSString *companyName;
 
-+ (NSArray *)inventory:(NSURL *)baseURL;
+
 
 @end

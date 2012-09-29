@@ -14,4 +14,5 @@
 {
     return [[[self className] stringByReplacingOccurrencesOfString:@"SFS" withString:@""] uppercaseString];
 }
+
 @end

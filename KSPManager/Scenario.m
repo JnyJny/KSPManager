@@ -9,41 +9,43 @@
 #import "Scenario.h"
 #import "SFS.h"
 
-@interface Scenario () {
-    SFSGame *_game;
-}
+@interface Scenario ()
+
+@property (strong, nonatomic) SFSGame *game;
 
 @end
 
 @implementation Scenario
 
+@synthesize game = _game;
+
 #pragma mark -
 #pragma mark Lifecycle
-
-- (id)initWithURL:(NSURL *)baseURL
-{
-    if( self = [super initWithURL:baseURL] ) {
-        _game = [SFS gameFromContentsOfURL:self.baseURL];
-    }
-    return self;
-}
 
 #pragma mark -
 #pragma mark Properties
 
+- (SFSGame *)game
+{
+    if( _game == nil ) {
+        _game = [SFS gameFromContentsOfURL:self.url];
+    }
+    return _game;
+}
+
 - (BOOL)isInstalled
 {
-    return [self.baseURL.path rangeOfString:kKSPManagedRoot].location == NSNotFound;
+    return [self.url.path rangeOfString:kKSPManagedRoot].location == NSNotFound;
 }
 
 - (BOOL)isAvailable
 {
-    return [self.baseURL.path rangeOfString:kKSPManagedRoot].location != NSNotFound;
+    return [self.url.path rangeOfString:kKSPManagedRoot].location != NSNotFound;
 }
 
 - (NSString *)assetTitle
 {
-    return _game.title;
+    return self.game.title;
 }
 
 - (NSString *)assetCategory
@@ -56,38 +58,21 @@
 #pragma mark -
 #pragma mark Instance Methods
 
-- (BOOL)moveTo:(NSURL *)destinationDirURL
-{
-    return NO;
-}
 
-- (BOOL)copyTo:(NSURL *)destinationDirURL
-{
-    return NO;
-}
 
-- (BOOL)remove
-{
-    return NO;
-}
-
-- (BOOL)rename:(NSURL *)newName
-{
-    return NO;
-}
 
 #pragma mark -
 #pragma mark Class Methods
-+ (NSArray *)inventory:(NSURL *)baseURL
++ (NSArray *)inventory:(NSURL *)url
 {
     NSMutableArray *results = [[NSMutableArray alloc] init];
     
-    NSArray *sfsPaths = [self assetSearch:baseURL usingBlock:^BOOL(NSString *path) {
+    NSArray *sfsPaths = [self assetSearch:url usingBlock:^BOOL(NSString *path) {
         return [[path pathExtension] isEqualToString:kSFS_EXT];
     }];
     
     for(NSString *sfsPath in sfsPaths) {
-        Scenario *scenario = [[Scenario alloc] initWithURL:[baseURL URLByAppendingPathComponent:sfsPath]];
+        Scenario *scenario = [[Scenario alloc] initWithURL:[url URLByAppendingPathComponent:sfsPath]];
         if( scenario )
             [results addObject:scenario];
     }

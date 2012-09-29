@@ -9,17 +9,20 @@
 #import "Plugin.h"
 #import "PortableExecutableFormat.h"
 
-@interface Plugin () {
-    PortableExecutableFormat *_pef;
-}
+@interface Plugin ()
+@property (strong, nonatomic) PortableExecutableFormat *pef;
+@property (strong, nonatomic) NSString *baseFilename;
+@property (strong, nonatomic, readwrite) NSString *installedFileName;
+@property (strong, nonatomic, readwrite) NSString *availableFileName;
 @end
 
 @implementation Plugin
 
+@synthesize pef = _pef;
+@synthesize baseFilename = _baseFilename;
 @synthesize installedFileName = _installedFileName;
 @synthesize availableFileName = _availableFileName;
 @synthesize version = _version;
-
 
 
 /* A Plugin can be found in one of three locations
@@ -45,60 +48,57 @@
 
 #define kKSP_PLUGIN_VERSEP @"-KSPMPV-"
 
-- (id)initWithURL:(NSURL *)pluginFileURL
-{
-
-    if( self = [super initWithURL:pluginFileURL] ) {
-
-        _pef = [[PortableExecutableFormat alloc] initWithContentsOfURL:self.baseURL];
-        
-        NSString *fname = self.baseURL.lastPathComponent;
-        
-        NSArray *components = [fname componentsSeparatedByString:kKSP_PLUGIN_VERSEP];
-        
-        switch(components.count){
-            case 1:
-                _installedFileName = _pef.originalFileName;
-                _availableFileName = [fname stringByAppendingFormat:@"%@%@",kKSP_PLUGIN_VERSEP,self.version];
-                break;
-                
-            case 2:
-                _installedFileName = [components objectAtIndex:0];
-                _availableFileName = fname;
-                break;
-            default:
-                NSLog(@"Plugin:initWithURL failed with weird name: %@",fname);
-                self = nil;
-        }
-    }
-    
-    return self;
-}
-
-
 
 #pragma mark -
 #pragma mark Properties
 
 
+- (PortableExecutableFormat *)pef
+{
+    if( _pef == nil ) {
+        _pef = [[PortableExecutableFormat alloc] initWithContentsOfURL:self.url];
+    }
+    return _pef;
+}
+
+
+// installedFileName == originalFile;
+
+- (NSString *)installedFileName
+{
+    if( _installedFileName == nil ) {
+        _installedFileName = self.pef.originalFileName;
+    }
+    return _installedFileName;
+}
+
+- (NSString *)availableFileName
+{
+    if( _availableFileName == nil ) {
+        _availableFileName = [self.pef.originalFileName stringByAppendingFormat:@"%@%@",kKSP_PLUGIN_VERSEP,self.version];
+    }
+    return _availableFileName;
+}
+
+
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"PLUGIN %@, %@ pef:%@",self.installedFileName,self.version,_pef];
+    return [NSString stringWithFormat:@"PLUGIN %@, %@ pef:%@",self.installedFileName,self.version,self.pef];
 }
 
 - (NSString *)version
 {
-    return _pef.productVersion;
+    return self.pef.productVersion;
 }
 
 - (NSString *)productName
 {
-    return _pef.productName;
+    return self.pef.productName;
 }
 
 - (NSString *)companyName
 {
-    return _pef.companyName;
+    return self.pef.companyName;
 }
 
 #pragma mark -
@@ -106,12 +106,12 @@
 
 - (BOOL)isInstalled
 {
-    return [self.baseURL.path rangeOfString:kKSPManagedPlugins].location == NSNotFound;
+    return [self.url.path rangeOfString:kKSPManagedPlugins].location == NSNotFound;
 }
 
 - (BOOL)isAvailable
 {
-    return [self.baseURL.path rangeOfString:kKSPManagedPlugins].location != NSNotFound;
+    return [self.url.path rangeOfString:kKSPManagedPlugins].location != NSNotFound;
 }
 
 - (NSString *)assetTitle
@@ -132,9 +132,7 @@
 
 - (NSString *)filenameForPath:(NSString *)path
 {
- 
-    NSRange range = [path rangeOfString:kKSP_MODS_PLUGINS];
-    
+    NSRange range = [path rangeOfString:kKSPManagedPlugins];
     if( range.location == NSNotFound )
         return self.installedFileName;
     return self.availableFileName;
@@ -149,13 +147,14 @@
     
     //xxx need to handle overwriting and file exists conditions
     
-    [self.fileManager moveItemAtURL:self.baseURL toURL:targetURL error:&error];
+    [self.fileManager moveItemAtURL:self.url toURL:targetURL error:&error];
     
     self.error = error;
     if( error )
         return NO;
 
-    self.baseURL = targetURL;
+    self.pef = nil;
+    self.url = targetURL;
 
     return YES;
 }
@@ -168,13 +167,13 @@
 
     //xxx need to handle overwriting and file exists conditions
     
-    [self.fileManager copyItemAtURL:self.baseURL toURL:targetURL error:&error];
+    [self.fileManager copyItemAtURL:self.url toURL:targetURL error:&error];
     
     self.error = error;
     if( error )
         return NO;
     
-    self.baseURL = targetURL;
+    self.url = targetURL;
 
     return YES;
 }
@@ -183,41 +182,34 @@
 {
     NSError *error = nil;
     
-    [self.fileManager removeItemAtURL:self.baseURL error:&error];
+    [self.fileManager removeItemAtURL:self.url error:&error];
     
     self.error = error;
     
     if( error )
         return NO;
     
+    self.url = nil;
+    
+    
     return YES;
 }
-
-
-- (BOOL)rename:(NSURL *)newName
-{
-    NSLog(@"plugin rename unimplimented");
-    return NO;
-}
-
 
 
 #pragma mark -
 #pragma mark Class Methods
 
-+ (NSArray *)inventory:(NSURL *)baseURL
++ (NSArray *)inventory:(NSURL *)url
 {
     NSMutableArray *results = [[NSMutableArray alloc] init];
     
-    
-    NSArray *paths = [self assetSearch:baseURL usingBlock:^BOOL(NSString *path){
+    NSArray *paths = [self assetSearch:url usingBlock:^BOOL(NSString *path){
         NSRange range = [path rangeOfString:kPLUGIN_EXT];
         return range.location==NSNotFound?NO:YES;
     }];
                 
     for(NSString *path in paths){
-        Plugin *plugin = [[Plugin alloc] initWithURL:[baseURL URLByAppendingPathComponent:path isDirectory:NO]];
-        
+        Plugin *plugin = [[Plugin alloc] initWithURL:[url URLByAppendingPathComponent:path isDirectory:NO]];
         if( plugin )
             [results addObject:plugin];
     }

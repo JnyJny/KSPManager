@@ -22,8 +22,6 @@
 
 
 @interface PortableExecutableFormat : NSObject {
-    IMAGE_DOS_HEADER *_doshdr;
-    IMAGE_PE_HEADERS *_pehdr;
     NSString         *_rsrcStrings0;
     NSString         *_rsrcStrings1;
 

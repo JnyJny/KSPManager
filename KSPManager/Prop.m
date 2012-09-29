@@ -7,20 +7,31 @@
 //
 
 #import "Prop.h"
+#import "CFGProp.h"
+
+@interface Prop ()
+@property (strong,nonatomic, readwrite) NSString *propFileName;
+@property (strong,nonatomic) CFGProp *cfgProp;
+@end
 
 @implementation Prop
 
-@synthesize configURL = _configURL;
+@synthesize cfgProp = _cfgProp;
 
-- (id)initWithURL:(NSURL *)baseURL
+- (id)initWithURL:(NSURL *)url
 {
-    if( self = [super initWithURL:[baseURL URLByDeletingLastPathComponent]] ) {
-
-        _configURL = baseURL;
-        
-        // XXX parse it when the file parser is really done
+    if( self = [super initWithURL:[url URLByDeletingLastPathComponent]] ) {
+        self.propFileName = url.lastPathComponent;
     }
     return self;
+}
+
+- (CFGProp *)cfgProp
+{
+    if( _cfgProp == nil ) {
+        // _cfgProp = [PropCFG propForContentsOfURL:self.url];
+    }
+    return _cfgProp;
 }
 
 #pragma mark -
@@ -28,7 +39,7 @@
 
 - (NSString *)assetTitle
 {
-    return self.baseURL.lastPathComponent;
+    return self.url.lastPathComponent;
 }
 
 - (NSString *)assetCategory
@@ -38,14 +49,12 @@
 
 - (BOOL)isInstalled
 {
-    return [self.baseURL.path rangeOfString:kKSP_PROPS].location != NSNotFound;
-    
-    return NO;
+    return [self.url.path rangeOfString:kKSP_PROPS].location != NSNotFound;
 }
 
 - (BOOL)isAvailable
 {
-    return [self.baseURL.path rangeOfString:kKSPManagedProps].location != NSNotFound;
+    return [self.url.path rangeOfString:kKSPManagedProps].location != NSNotFound;
 }
 
 #pragma mark -
@@ -54,19 +63,19 @@
 - (BOOL)moveTo:(NSURL *)destinationDirURL
 {
 
-    NSURL *targetURL = [destinationDirURL URLByAppendingPathComponent:self.baseURL.lastPathComponent isDirectory:YES];
+    NSURL *targetURL = [destinationDirURL URLByAppendingPathComponent:self.url.lastPathComponent isDirectory:YES];
     
     NSError *error = nil;
     
-    [self.fileManager moveItemAtURL:self.baseURL toURL:targetURL error:&error];
+    [self.fileManager moveItemAtURL:self.url toURL:targetURL error:&error];
     
     if( error ){
         self.error = error;
         return NO;
     }
     
-    self.baseURL = targetURL;
-    _configURL = [targetURL URLByAppendingPathComponent:self.configURL.lastPathComponent];
+    self.url = targetURL;
+
     self.error = nil;
     
     return YES;
@@ -75,21 +84,19 @@
 - (BOOL)copyTo:(NSURL *)destinationDirURL
 {
     
-    NSURL *targetURL = [destinationDirURL URLByAppendingPathComponent:self.baseURL.lastPathComponent isDirectory:YES];
+    NSURL *targetURL = [destinationDirURL URLByAppendingPathComponent:self.url.lastPathComponent isDirectory:YES];
     
     NSError *error = nil;
     
-    [self.fileManager copyItemAtURL:self.baseURL toURL:targetURL error:&error];
+    [self.fileManager copyItemAtURL:self.url toURL:targetURL error:&error];
     
     if( error ) {
         self.error = error;
         return NO;
     }
     
-    self.baseURL = targetURL;
-    
+    self.url = targetURL;
     self.error = nil;
-    
     return YES;
 }
 
@@ -97,7 +104,7 @@
 {
     NSError *error = nil;
     
-    [self.fileManager removeItemAtURL:self.baseURL error:&error];
+    [self.fileManager removeItemAtURL:self.url error:&error];
     
     self.error = error;
     
@@ -105,12 +112,6 @@
         return NO;
     
     return YES;
-}
-
-- (BOOL)rename:(NSURL *)newName
-{
-    NSLog(@"%@ rename unimplemented",self.class);
-    return NO;
 }
 
 #pragma mark -

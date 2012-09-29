@@ -10,6 +10,8 @@
 
 @interface KSPBucket : NSObject
 
+@property (strong, nonatomic) NSMutableDictionary *options;
+
 - (id)initWithOptions:(NSDictionary *)options;
 
 - (void)addEntriesFromDictionary:(NSDictionary *)otherDictionary;

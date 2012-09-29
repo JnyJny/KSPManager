@@ -485,7 +485,7 @@
 
     if( [object isMemberOfClass:[Ship class]] ) {
         Ship *ship = (Ship *)object;
-        return [object moveTo:[self.shipsURL URLByAppendingPathComponent:ship.hanger]];
+        return [object moveTo:[self.shipsURL URLByAppendingPathComponent:ship.hangerName]];
     }
     
     if( [object isMemberOfClass:[Prop class]] )
@@ -518,7 +518,7 @@
 
     if( [object isMemberOfClass:[Ship class]] ) {
         Ship *ship = (Ship *)object;
-        return [object moveTo:[self.availableShipsURL URLByAppendingPathComponent:ship.hanger]];
+        return [object moveTo:[self.availableShipsURL URLByAppendingPathComponent:ship.hangerName]];
     }
     
     if( [object isMemberOfClass:[Prop class]] ) {

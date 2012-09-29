@@ -9,42 +9,44 @@
 #import "Training.h"
 #import "SFS.h"
 
-@interface Training () {
-    SFSGame *_game;
-}
+@interface Training ()
+
+@property (strong, nonatomic) SFSGame *game;
 
 @end
 
 @implementation Training
 
+@synthesize game = _game;
 
 #pragma mark -
 #pragma mark Lifecycle
 
-- (id)initWithURL:(NSURL *)baseURL
-{
-    if( self = [super initWithURL:baseURL] ) {
-        _game = [SFS gameFromContentsOfURL:self.baseURL];
-    }
-    return self;
-}
 
 #pragma mark -
 #pragma mark Properties
 
+- (SFSGame *)game
+{
+    if( _game == nil ) {
+        _game = [SFS gameFromContentsOfURL:self.url];
+    }
+    return _game;
+}
+
 - (BOOL)isInstalled
 {
-    return [self.baseURL.path rangeOfString:kKSPManagedRoot].location == NSNotFound;
+    return [self.url.path rangeOfString:kKSPManagedRoot].location == NSNotFound;
 }
 
 - (BOOL)isAvailable
 {
-    return [self.baseURL.path rangeOfString:kKSPManagedRoot].location != NSNotFound;
+    return [self.url.path rangeOfString:kKSPManagedRoot].location != NSNotFound;
 }
 
 - (NSString *)assetTitle
 {
-    return _game.title;
+    return self.game.title;
 }
 
 - (NSString *)assetCategory
@@ -55,25 +57,6 @@
 #pragma mark -
 #pragma mark Instance Methods
 
-- (BOOL)moveTo:(NSURL *)destinationDirURL
-{
-    return NO;
-}
-
-- (BOOL)copyTo:(NSURL *)destinationDirURL
-{
-    return NO;
-}
-
-- (BOOL)remove
-{
-    return NO;
-}
-
-- (BOOL)rename:(NSURL *)newName
-{
-    return NO;
-}
 
 #pragma mark -
 #pragma mark Class Methods

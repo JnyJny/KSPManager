@@ -189,7 +189,7 @@
 											<int key="NSCellFlags2">272630784</int>
 											<string key="NSContents"/>
 											<reference key="NSSupport" ref="645131541"/>
-											<string key="NSPlaceholderString">Placeholder Text</string>
+											<string key="NSPlaceholderString">Placeholder</string>
 											<string key="NSCellIdentifier">_NS:1535</string>
 											<reference key="NSControlView" ref="665595698"/>
 											<reference key="NSBackgroundColor" ref="42013062"/>
@@ -2233,10 +2233,10 @@
 				<string key="1139.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1146.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1148.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<array class="NSMutableArray" key="1149.IBNSViewMetadataConstraints">
-					<reference ref="841966351"/>
-					<reference ref="871580652"/>
+				<array key="1149.IBNSViewMetadataConstraints">
 					<reference ref="334942505"/>
+					<reference ref="871580652"/>
+					<reference ref="841966351"/>
 				</array>
 				<boolean value="NO" key="1149.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="1149.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>

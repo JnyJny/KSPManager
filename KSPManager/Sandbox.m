@@ -10,50 +10,48 @@
 #import "SFS.h"
 #import "Ship.h"
 
-@interface Sandbox () {
-    SFSGame *_game;
-}
-
+@interface Sandbox ()
+@property (strong, nonatomic) SFSGame *game;
 @property (strong, nonatomic, readwrite) NSMutableArray *ships;
-
 @end
 
 
 @implementation Sandbox
-
+@synthesize game = _game;
 @synthesize ships = _ships;
 
 #pragma mark -
 #pragma mark Lifecycle
 
-- (id)initWithURL:(NSURL *)baseURL
-{
-    if( self = [super initWithURL:baseURL] ) {
-        _game = [SFS gameFromContentsOfURL:self.baseURL];
-    }
-    return self;
-}
 
 #pragma mark -
 #pragma mark Properties
+
+- (SFSGame *)game
+{
+    if( _game == nil ) {
+        _game = [SFS gameFromContentsOfURL:self.url];
+    }
+    return _game;
+}
 
 - (NSMutableArray *)ships
 {
     if( _ships == nil ) {
         _ships = [[NSMutableArray alloc] init];
-        [_ships addObjectsFromArray:[Ship inventory:[self.baseURL URLByDeletingLastPathComponent]]];
+        [_ships addObjectsFromArray:[Ship inventory:[self.url URLByDeletingLastPathComponent]]];
     }
     return _ships;
 }
 
 - (BOOL)isInstalled
 {
-    return [self.baseURL.path rangeOfString:kKSPManagedRoot].location == NSNotFound;
+    return [self.url.path rangeOfString:kKSPManagedRoot].location == NSNotFound;
 }
 
 - (BOOL)isAvailable
 {
-    return [self.baseURL.path rangeOfString:kKSPManagedRoot].location != NSNotFound;
+    return [self.url.path rangeOfString:kKSPManagedRoot].location != NSNotFound;
 }
 
 - (NSString *)assetTitle
@@ -71,38 +69,19 @@
 #pragma mark -
 #pragma mark Instance Methods
 
-- (BOOL)moveTo:(NSURL *)destinationDirURL
-{
-    return NO;
-}
-
-- (BOOL)copyTo:(NSURL *)destinationDirURL
-{
-    return NO;
-}
-
-- (BOOL)remove
-{
-    return NO;
-}
-
-- (BOOL)rename:(NSURL *)newName
-{
-    return NO;
-}
 
 #pragma mark -
 #pragma mark Class Methods
-+ (NSArray *)inventory:(NSURL *)baseURL
++ (NSArray *)inventory:(NSURL *)url
 {
     NSMutableArray *results = [[NSMutableArray alloc] init];
     
-    NSArray *sfsPaths = [self assetSearch:baseURL usingBlock:^BOOL(NSString *path) {
+    NSArray *sfsPaths = [self assetSearch:url usingBlock:^BOOL(NSString *path) {
         return [path.lastPathComponent isEqualToString:kKSP_PERSISTENT];
     }];
     
     for(NSString *sfsPath in sfsPaths) {
-        Sandbox *sandbox = [[Sandbox alloc] initWithURL:[baseURL URLByAppendingPathComponent:sfsPath]];
+        Sandbox *sandbox = [[Sandbox alloc] initWithURL:[url URLByAppendingPathComponent:sfsPath]];
         if( sandbox )
             [results addObject:sandbox];
     }

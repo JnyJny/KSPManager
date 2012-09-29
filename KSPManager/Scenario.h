@@ -10,5 +10,4 @@
 
 @interface Scenario : Asset
 
-+ (NSArray *)inventory:(NSURL *)url;
 @end

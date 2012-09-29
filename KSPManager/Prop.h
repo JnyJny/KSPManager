@@ -10,8 +10,6 @@
 
 @interface Prop : Asset
 
-@property (strong,nonatomic,readonly) NSURL *configURL;
-
-+ (NSArray *)inventory:(NSURL *)targetDir;
+@property (strong,nonatomic, readonly) NSString *propFileName;
 
 @end

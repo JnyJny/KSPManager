@@ -9,37 +9,25 @@
 #import "Ship.h"
 #import "CRAFT.h"
 
-@interface Ship () {
-    CRAFTVessel *_vessel;
-}
-
-
+@interface Ship ()
+@property (strong,nonatomic, readwrite) NSString *hangerName;
+@property (strong,nonatomic) CRAFTVessel *vessel;
 @end
 
 @implementation Ship
 
-
-@synthesize hanger = _hanger;
+@synthesize vessel = _vessel;
+@synthesize hangerName = _hangerName;
 @synthesize isInSpacePlaneHanger = _isInSpacePlaneHanger;
 @synthesize isInVehicleAssemblyBuilding = _isInVehicleAssemblyBuilding;
-
-- (id)initWithURL:(NSURL *)url
-{
-    if ( self = [super initWithURL:url] ) {
-        
-        if( [self.baseURL.pathExtension isNotEqualTo:kCRAFT_EXT])
-            return nil;
-        _vessel = [CRAFT vesselForContentsOfURL:self.baseURL];
-    }
-    return self;
-}
+@synthesize isSandboxed = _isSandboxed;
 
 #pragma mark -
 #pragma mark Overriden Properties
 
 - (id)valueForUndefinedKey:(NSString *)key
 {
-    return [_vessel valueForKey:key];
+    return [self.vessel valueForKey:key];
 }
 
 #define kShipKeyShipName @"ship"
@@ -47,65 +35,81 @@
 
 - (NSString *)assetTitle
 {
-    if( [self.baseURL.lastPathComponent rangeOfString:kShipFilenameAutoSaved].location != NSNotFound    )
+    if( [self.url.lastPathComponent rangeOfString:kShipFilenameAutoSaved].location != NSNotFound    )
         return [NSString stringWithFormat:@"Auto-Saved %@",[self valueForKey:kShipKeyShipName]];
     
-    return [_vessel valueForKey:kShipKeyShipName];
+    return [self.vessel valueForKey:kShipKeyShipName];
 }
 
 - (NSString *)assetCategory
 {
-    return self.hanger;
+    return self.hangerName;
 }
 
 - (BOOL)isInstalled
 {
-    return [self.baseURL.path rangeOfString:kKSPManagedShips].location == NSNotFound;
+    return [self.url.path rangeOfString:kKSPManagedShips].location == NSNotFound;
 }
 
 - (BOOL)isAvailable
 {
-    return [self.baseURL.path rangeOfString:kKSPManagedShips].location != NSNotFound;
+    return [self.url.path rangeOfString:kKSPManagedShips].location != NSNotFound;
+}
+
+- (BOOL)isSandboxed
+{
+    return ([self.url.path rangeOfString:kKSPManagedSandboxes].location != NSNotFound) ||
+        ([self.url.path rangeOfString:kKSP_SANDBOXES].location != NSNotFound) ;
 }
 
 #pragma mark -
 #pragma mark Properties
 
-- (NSString *)hanger
+- (CRAFTVessel *)vessel
 {
-    if( _hanger == nil ){
-        _hanger = kKSP_VAB; // Default to being in the VAB
-        if( self.isInSpacePlaneHanger )
-            _hanger = kKSP_SPH;
+    if( _vessel == nil ) {
+        _vessel = [CRAFT vesselForContentsOfURL:self.url];
     }
-    return _hanger;
+    return _vessel;
 }
 
-- (void)setHanger:(NSString *)hanger
+- (NSString *)hangerName
 {
-    if( [_hanger isEqualToString:hanger] )
+    if( _hangerName == nil ){
+        _hangerName = kKSP_VAB; // Default to being in the VAB
+        if( self.isInSpacePlaneHanger )
+            _hangerName = kKSP_SPH;
+    }
+    return _hangerName;
+}
+
+- (void)setHangerName:(NSString *)hanger
+{
+    if( [_hangerName isEqualToString:hanger] )
         return ;
     
-    _hanger = hanger;
+    _hangerName = hanger;
     
-    NSURL *url = [[[self.baseURL URLByDeletingLastPathComponent] URLByDeletingLastPathComponent] URLByAppendingPathComponent:_hanger];;
+    // XXX not sure this right,  Ships/[VAB|SPH]/ship.craft -> Ships/_hangerName? and moveTo: appends the ship name back on
     
-    [self moveTo:url];
+    NSURL *dst = [[[self.url URLByDeletingLastPathComponent] URLByDeletingLastPathComponent] URLByAppendingPathComponent:_hangerName];
+    
+    [self moveTo:dst];
 }
 
 - (BOOL)isInVehicleAssemblyBuilding
 {
-    return [self.baseURL.path rangeOfString:kKSP_VAB].location != NSNotFound;
+    return [self.url.path rangeOfString:kKSP_VAB].location != NSNotFound;
 }
 
 - (BOOL)isInSpacePlaneHanger
 {
-    return [self.baseURL.path rangeOfString:kKSP_SPH].location != NSNotFound;
+    return [self.url.path rangeOfString:kKSP_SPH].location != NSNotFound;
 }
 
 - (NSString *)description
 {
-    return [self.baseURL.path stringByAppendingFormat:@": %@, %@",self.assetTitle,self.assetCategory];
+    return [self.url.path stringByAppendingFormat:@": %@, %@",self.assetTitle,self.assetCategory];
 }
 
 - (NSMutableArray *)parts
@@ -115,8 +119,6 @@
 
 #pragma mark -
 #pragma mark Instance Methods
-
-
 
 - (BOOL)moveTo:(NSURL *)destinationDirURL
 {
@@ -135,16 +137,16 @@
     
     error = nil;
     
-    targetURL = [destinationDirURL URLByAppendingPathComponent:self.baseURL.lastPathComponent];
+    targetURL = [destinationDirURL URLByAppendingPathComponent:self.url.lastPathComponent];
 
-    [self.fileManager moveItemAtURL:self.baseURL toURL:targetURL error:&error];
+    [self.fileManager moveItemAtURL:self.url toURL:targetURL error:&error];
     
     self.error = error;
     
     if( self.error )
         return NO;
     
-    self.baseURL = targetURL;
+    self.url = targetURL;
     
     return YES;
 }
@@ -153,15 +155,15 @@
 {
     NSError *error = nil;
     
-    NSURL *targetURL = [destinationDirURL URLByAppendingPathComponent:self.baseURL.lastPathComponent];
+    NSURL *targetURL = [destinationDirURL URLByAppendingPathComponent:self.url.lastPathComponent];
     
-    [self.fileManager copyItemAtURL:self.baseURL toURL:targetURL error:&error];
+    [self.fileManager copyItemAtURL:self.url toURL:targetURL error:&error];
     
     self.error = error;
     if( self.error )
         return NO;
 
-    self.baseURL = targetURL;
+    self.url = targetURL;
     
     return YES;
 }
@@ -170,32 +172,20 @@
 {
     NSError *error = nil;
     
-    [self.fileManager removeItemAtURL:self.baseURL error:&error];
+    [self.fileManager removeItemAtURL:self.url error:&error];
     
     self.error = error;
     
     if( error )
         return NO;
     
+    self.url = nil;
+    
     return YES;
-}
-
-- (BOOL)rename:(NSURL *)newName
-{
-    NSLog(@"ship rename unimplimented");
-    return NO;
 }
 
 #pragma mark -
 #pragma mark Class Methods
-
-
-
-
-#pragma mark -
-#pragma mark Class methods
-
-
 
 + (NSArray *)inventory:(NSURL *)baseUrl
 {

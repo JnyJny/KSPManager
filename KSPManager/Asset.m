@@ -8,46 +8,31 @@
 
 #import "Asset.h"
 
+
+
 @implementation Asset
 
-@synthesize global = _global;
-@synthesize contexts = _contexts;
+@synthesize url = _url;
 @synthesize fileManager = _fileManager;
-@synthesize baseURL = _baseURL;
-@synthesize error = _error;
-
 @synthesize assetTitle = _assetTitle;
 @synthesize assetCategory = _assetCategory;
+@synthesize isInstalled = _isInstalled;
+@synthesize isAvailable = _isAvailable;
+@synthesize error = _error;
 
+#pragma mark -
+#pragma mark LifeCycle
 
-- (id)initWithURL:(NSURL *)baseURL
+- (id)initWithURL:(NSURL *)url
 {
-    self = [super init];
-    if (self) {
-        _baseURL = baseURL;
-        _error = nil;
-     }
+    if( self = [super init] ) {
+        self.url = url;
+    }
     return self;
 }
 
 #pragma mark -
 #pragma mark Properties
-
-- (NSMutableDictionary *)global
-{
-    if( _global == nil ) {
-        _global = [[NSMutableDictionary alloc] init];
-    }
-    return _global;
-}
-
-- (NSMutableArray *)contexts
-{
-    if ( _contexts == nil ) {
-        _contexts = [[NSMutableArray alloc] init];
-    }
-    return _contexts;
-}
 
 - (NSFileManager *)fileManager
 {
@@ -57,18 +42,6 @@
     return _fileManager;
 }
 
-
-- (BOOL)isInstalled
-{
-    NSLog(@"%@ isInstalled falling back to Asset implementation",self.class);
-    return NO;
-}
-
-- (BOOL)isAvailable
-{
-    NSLog(@"%@ isAvailable falling back to Asset implementation",self.class);
-    return NO;
-}
 
 - (NSString *)assetTitle
 {
@@ -83,74 +56,76 @@
 }
 
 
+- (BOOL)isInstalled
+{
+    return [self.url.path rangeOfString:kKSPManagedRoot].location == NSNotFound;
+}
+
+- (BOOL)isAvailable
+{
+    return [self.url.path rangeOfString:kKSPManagedRoot].location != NSNotFound;
+}
+
+
+
 #pragma mark -
 #pragma mark Instance Private Methods
 
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key
-{
-    [self.global setValue:value forKey:key];
-}
-
-- (id)valueForUndefinedKey:(NSString *)key
-{
-    return [self.global valueForKey:key];
-}
-
-- (void)addEntriesFromDictionary:(NSDictionary *)newEntries
-{
-    
-    [self.global addEntriesFromDictionary:newEntries];
-    
-}
-
-- (NSMutableDictionary *)contextNamed:(NSString *)name withIdentifer:(NSString *)identifier
-{
-    return nil;
-}
 
 #pragma mark -
 #pragma mark Instance Methods
 
+// default implementations of moveTo: copyTo: and remove will
+// handle the single file asset model.  asset's which manage
+// multiple files and/or directories will need to override
+// the default methods to get the desired results.
+
 - (BOOL)moveTo:(NSURL *)destinationDirURL
 {
-    assert(0);
-    return NO;
+    NSError *error = nil;
+    NSURL *targetURL;
+    
+    targetURL = [destinationDirURL URLByAppendingPathComponent:self.url.lastPathComponent];
+    
+    //xxx need to handle overwriting and file exists conditions
+    
+    [self.fileManager moveItemAtURL:self.url toURL:targetURL error:&error];
+    
+    self.error = error;
+    if( error )
+        return NO;
+    
+    self.url = targetURL;
+    
+    return YES;
 }
 
 - (BOOL)copyTo:(NSURL *)destinationDirURL
 {
-    assert(0);
+
     return NO;
 }
 
 - (BOOL)remove
 {
-    assert(0);
+
     return NO;
 }
-
-- (BOOL)rename:(NSURL *)newName
-{
-    assert(0);
-    return NO;
-}
-
-
 
 
 #pragma mark -
 #pragma mark Class Methods
 
-+ (NSArray *)assetSearch:(NSURL *)baseURL usingBlock:(BOOL (^)(NSString *path))pathTest
++ (NSArray *)assetSearch:(NSURL *)url usingBlock:(BOOL (^)(NSString *path))pathTest
 {
-   return [self assetSearch:baseURL usingBlock:pathTest error:nil];
+   return [self assetSearch:url usingBlock:pathTest error:nil];
 }
 
-+ (NSArray *)assetSearch:(NSURL *)baseURL usingBlock:(BOOL (^)(NSString *path))pathTest error:(NSError **)error
++ (NSArray *)assetSearch:(NSURL *)url usingBlock:(BOOL (^)(NSString *path))pathTest error:(NSError **)error
 {
     NSMutableArray *results = [[NSMutableArray alloc] init];
     
-    NSArray *paths = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:baseURL.path
+    NSArray *paths = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:url.path
                                                                          error:error];
     
     if( error && (*error != nil))
@@ -162,6 +137,12 @@
      }];
 
     return results;
+}
+
++ (NSArray *)inventory:(NSURL *)url
+{
+    NSLog(@"%@ inventory falling back to Asset implementation",self.class);
+    return nil;
 }
 
 @end

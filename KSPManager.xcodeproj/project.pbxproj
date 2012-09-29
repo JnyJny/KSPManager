@@ -153,6 +153,7 @@
 		1D2ED53F15EB156900402EF1 /* InventoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryViewController.h; sourceTree = "<group>"; };
 		1D2ED54015EB156900402EF1 /* InventoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryViewController.m; sourceTree = "<group>"; };
 		1D2ED54115EB156900402EF1 /* InventoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InventoryViewController.xib; sourceTree = "<group>"; };
+		1D38C4701615F7B300C85E88 /* KSPAssetProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSPAssetProtocol.h; sourceTree = "<group>"; };
 		1D56F41515FA377C0047042A /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		1D572150160274DA00D2427C /* KerbalNet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KerbalNet.h; sourceTree = "<group>"; };
 		1D572151160274DA00D2427C /* KerbalNet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KerbalNet.m; sourceTree = "<group>"; };
@@ -580,7 +581,6 @@
 				1D682A2415FCD93E007C84CB /* ConfigurationParser.h */,
 				1D682A2715FCD9CC007C84CB /* ConfigurationTokenizerDelegate.h */,
 				1D682A2515FCD93E007C84CB /* ConfigurationParser.m */,
-				1DA65DC11613385500092123 /* Configuration Files */,
 			);
 			name = "File Parsing";
 			sourceTree = "<group>";
@@ -686,6 +686,8 @@
 				1DB405FD15DC4E010041807D /* Utility */,
 				1DB405EB15DB45390041807D /* KSP.h */,
 				1DB405EC15DB45390041807D /* KSP.m */,
+				1D38C4701615F7B300C85E88 /* KSPAssetProtocol.h */,
+				1DA65DC11613385500092123 /* Configuration Files */,
 				1D57215E1603739000D2427C /* KerbalNet */,
 				1D16222515EBC83800C0F3CC /* Assets */,
 			);

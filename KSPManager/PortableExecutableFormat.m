@@ -8,12 +8,23 @@
 
 #import "PortableExecutableFormat.h"
 
+@interface PortableExecutableFormat () {
+    IMAGE_DOS_HEADER *_doshdr;
+    IMAGE_PE_HEADERS *_pehdr;
+}
 
+@property (strong, nonatomic) NSString *rsrcStrings0;
+@property (strong, nonatomic) NSString *rsrcStrings1;
+
+@end
 
 @implementation PortableExecutableFormat
 
 @synthesize url = _url;
 @synthesize data = _data;
+
+@synthesize rsrcStrings0 = _rsrcStrings0;
+@synthesize rsrcStrings1 = _rsrcStrings1;
 
 #ifdef EXPOSED_POINTERS
 
@@ -41,26 +52,39 @@
 - (id)initWithContentsOfURL:(NSURL *)url
 {
     if( self = [super init] ){
-        
         self.url = url;
         
         _doshdr = IMAGE_GET_DOS_HEADER(self.data.bytes);
         _pehdr = IMAGE_GET_PE_HEADER(_doshdr);
-        
-        _rsrcStrings0 = [[NSString alloc] initWithBytes:self.resourceSection
-                                                length:self.resourceSectionHeader->SizeOfRawData
-                                              encoding:NSUTF16StringEncoding];
-        
-        _rsrcStrings1 = [[NSString alloc] initWithBytes:((BYTE *)self.resourceSection) + 1
-                                                 length:self.resourceSectionHeader->SizeOfRawData - 1
-                                               encoding:NSUTF16StringEncoding];
-
     }
     return self;
 }
 
 #pragma mark -
 #pragma mark Properties
+
+- (NSString *)rsrcStrings0
+{
+    if( _rsrcStrings0 == nil ) {
+        _rsrcStrings0 = [[NSString alloc] initWithBytes:self.resourceSection
+                                                 length:self.resourceSectionHeader->SizeOfRawData
+                                               encoding:NSUTF16StringEncoding];
+        
+    }
+    return _rsrcStrings0;
+}
+
+- (NSString *)rsrcStrings1
+{
+    if( _rsrcStrings1 == nil ) {
+        _rsrcStrings1 = [[NSString alloc] initWithBytes:((BYTE *)self.resourceSection) + 1
+                                                 length:self.resourceSectionHeader->SizeOfRawData - 1
+                                               encoding:NSUTF16StringEncoding];
+        
+    }
+    return _rsrcStrings1;
+}
+
 
 - (NSString *)description
 {
@@ -180,7 +204,7 @@
 // string WRT UTF16.
 //
 // Making the huge assumption that the kPEString* strings exist in the resource section,
-// we first search _rsrcString0 and then _rsrcString1
+// we first search rsrcString0 and then rsrcString1
 // if we find the key string, we skip over zero bytes until the first non-zero byte
 // which is the beginning of the Value UTF16 string.  Unfortunately, we need to know the
 // the length of the string before we can turn it into a NSString.  So skip thru the
@@ -194,7 +218,7 @@
     WORD *vEnd;
     NSUInteger len;
     
-    NSRange range = [_rsrcStrings0 rangeOfString:key];
+    NSRange range = [self.rsrcStrings0 rangeOfString:key];
     
     if( range.location != NSNotFound ) {
         
@@ -223,7 +247,7 @@
         return [[NSString alloc] initWithBytes:vStart length:len encoding:NSUTF16StringEncoding];
     }
     
-    range = [_rsrcStrings1 rangeOfString:key];
+    range = [self.rsrcStrings1 rangeOfString:key];
     
     if( range.location != NSNotFound ) {
 

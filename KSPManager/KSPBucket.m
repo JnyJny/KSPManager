@@ -8,53 +8,56 @@
 
 #import "KSPBucket.h"
 
-@interface KSPBucket () {
-    NSMutableDictionary *_info;
-}
-
-@end
 
 @implementation KSPBucket
 
+@synthesize options = _options;
+
 - (id)init
 {
-    return [self initWithOptions:nil];
+    return [super init];
 }
 
 - (id)initWithOptions:(NSDictionary *)options
 {
-    self = [super init];
-    if (self) {
-        _info = [[NSMutableDictionary alloc] init];
+    if( self = [super init] ) {
         if( options )
-            [self addEntriesFromDictionary:options];
+            self.options = [NSMutableDictionary dictionaryWithDictionary:options];
     }
     return self;
 }
 
+- (NSMutableDictionary *)options
+{
+    if( _options == nil ) {
+        _options = [[NSMutableDictionary alloc] init];
+    }
+    return _options;
+}
+
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key
 {
-    [_info setValue:value forKey:key];
+    [self.options setValue:value forKey:key];
 }
 
 - (id)valueForUndefinedKey:(NSString *)key
 {
-    return [_info valueForKey:key];
+    return [self.options valueForKey:key];
 }
 
 - (void)addEntriesFromDictionary:(NSDictionary *)otherDictionary
 {
-    [_info addEntriesFromDictionary:otherDictionary];
+    [self.options addEntriesFromDictionary:otherDictionary];
 }
 
 - (NSArray *)allKeys
 {
-    return [_info allKeys];
+    return [self.options allKeys];
 }
 
 - (NSArray *)allValues
 {
-    return [_info allValues];
+    return [self.options allValues];
 }
 
 + (NSString *)keyword
