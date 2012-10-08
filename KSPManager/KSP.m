@@ -349,8 +349,8 @@
 {
     if( _ships == nil ) {
         _ships = [[NSMutableArray alloc] init];
-        [_ships addObjectsFromArray:[Ship inventory:self.shipsURL]];
-        [_ships addObjectsFromArray:[Ship inventory:self.availableShipsURL]];
+        [_ships addObjectsFromArray:[Ship inventory:self.shipsURL withPartList:self.parts]];
+        [_ships addObjectsFromArray:[Ship inventory:self.availableShipsURL withPartList:self.parts]];
     }
     return _ships;
 }
@@ -408,20 +408,18 @@
 
 - (NSDictionary *)managedAssets
 {
-    if( _managedAssets == nil ) {
-        NSMutableDictionary *tmp = [[NSMutableDictionary alloc] init];
-        [tmp addEntriesFromDictionary:@{ [Part class].description:self.parts}];
-        [tmp addEntriesFromDictionary:@{ [Plugin class].description:self.plugins}];
-        [tmp addEntriesFromDictionary:@{ [Ship class].description:self.ships}];
-        [tmp addEntriesFromDictionary:@{ [Prop class].description:self.props}];
-        [tmp addEntriesFromDictionary:@{ [Space class].description:self.spaces}];
-        [tmp addEntriesFromDictionary:@{ [Training class].description:self.training}];
-        [tmp addEntriesFromDictionary:@{ [Scenario class].description:self.scenarios}];
-        [tmp addEntriesFromDictionary:@{ [Sandbox class].description:self.sandboxes}];
 
-        _managedAssets = [NSDictionary dictionaryWithDictionary:tmp];
-    }
-    return _managedAssets;
+    NSMutableDictionary *tmp = [[NSMutableDictionary alloc] init];
+    [tmp addEntriesFromDictionary:@{ [Part class].description:self.parts}];
+    [tmp addEntriesFromDictionary:@{ [Plugin class].description:self.plugins}];
+    [tmp addEntriesFromDictionary:@{ [Ship class].description:self.ships}];
+    [tmp addEntriesFromDictionary:@{ [Prop class].description:self.props}];
+    [tmp addEntriesFromDictionary:@{ [Space class].description:self.spaces}];
+    [tmp addEntriesFromDictionary:@{ [Training class].description:self.training}];
+    [tmp addEntriesFromDictionary:@{ [Scenario class].description:self.scenarios}];
+    [tmp addEntriesFromDictionary:@{ [Sandbox class].description:self.sandboxes}];
+    
+    return tmp;
 }
 
 #pragma mark -
@@ -693,11 +691,6 @@ AddAndInstall:
 }
 
 
-- (id)assetMatchingValue:(NSString *)value forKey:(NSString *)key
-{
-    
-    return nil;
-}
 
 #pragma mark -
 #pragma mark Utility Methods

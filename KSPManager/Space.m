@@ -21,10 +21,18 @@
 @synthesize cfgInternal = _cfgInternal;
 @synthesize configFile = _configFile;
 
+- (id)initWithURL:(NSURL *)url
+{
+    if( self = [super initWithURL:[url URLByDeletingLastPathComponent]] ) {
+
+    }
+    return self;
+}
+
 - (CFGInternal *)cfgInternal
 {
     if( _cfgInternal == nil ) {
-        //_cfgInternal = [CFGInternal propForContentsOfURL:self.url];
+        //_cfgInternal = [CFGInternal propForContentsOfURL:self.configFile];
     }
     return _cfgInternal;
 }

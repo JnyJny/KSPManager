@@ -7,6 +7,7 @@
 //
 
 #import "CRAFTPart.h"
+#import "Part.h"
 
 @interface CRAFTPart ()
 
@@ -18,11 +19,13 @@
 
 @implementation CRAFTPart
 
+@synthesize definition = _definition;
 @synthesize name = _name;
 @synthesize pid = _pid;
 
-#define kCRAFTKeyPart @"part"
 
+
+#define kCRAFTKeyPart @"part"
 
 - (NSString *)name
 {

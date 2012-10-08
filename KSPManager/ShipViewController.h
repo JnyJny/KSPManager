@@ -13,4 +13,6 @@
 @property (strong) IBOutlet NSTableView *partTableView;
 @property (strong) IBOutlet NSArrayController *shipsArrayController;
 
+
+@property (strong, nonatomic) NSMutableArray *definedParts;
 @end

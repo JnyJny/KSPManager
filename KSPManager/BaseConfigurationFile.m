@@ -36,6 +36,7 @@
     return _parser;
 }
 
+#if 0
 - (void)willBeginParsingWithConfiguration:(ConfigurationParser *)tokenizer
 {
     NSLog(@"%@ willBeginParsing %@",self.className,self.url);
@@ -45,6 +46,7 @@
 {
     NSLog(@"%@ didEndParsing %@",self.className,self.url);
 }
+#endif
 
 - (BOOL)handleComment:(LineToken *)line inConfiguration:(ConfigurationParser *)tokenizer
 {

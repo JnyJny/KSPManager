@@ -59,7 +59,7 @@
 
 - (id)valueForUndefinedKey:(NSString *)key
 {
-    return [_cfgPart valueForKey:key];
+    return [self.cfgPart valueForKey:key];
 }
 
 
@@ -82,10 +82,10 @@
     
     if( !title || (title.length == 0) )
         title = [self valueForKey:kPartKeyName];
-    
+
     if( !title || (title.length == 0) )
         title = [self.url.lastPathComponent capitalizedString];
-
+    
     return title;
 }
 

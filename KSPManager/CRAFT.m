@@ -61,7 +61,6 @@
     }
     
     if( [SFSModule keywordMatch:tokenizer.currentContext] ) {
-
         return YES;
     }
     
@@ -122,12 +121,6 @@
 {
     return YES;
 }
-
-- (void)didEndParsingWithConfiguration:(ConfigurationParser *)tokenizer
-{
-    NSLog(@"vessel %@ part count %ld",self.vessel,self.vessel.parts.count);
-}
-
 #pragma mark -
 #pragma mark Class Methods
 

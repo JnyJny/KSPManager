@@ -8,6 +8,7 @@
 
 #import "Asset.h"
 
+@class KSP;
 
 @interface Ship : Asset
 
@@ -16,5 +17,9 @@
 @property (assign,nonatomic, readonly) BOOL isInSpacePlaneHanger;
 @property (assign,nonatomic, readonly) BOOL isInVehicleAssemblyBuilding;
 @property (assign,nonatomic, readonly) BOOL isSandboxed;
+
+- (id)initWithURL:(NSURL *)url andPartList:(NSArray *)partList;
+
++ (NSArray *)inventory:(NSURL *)baseUrl withPartList:(NSArray *)partList;
 
 @end

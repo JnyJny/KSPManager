@@ -8,10 +8,12 @@
 
 #import "Ship.h"
 #import "CRAFT.h"
+#import "KSP.h"
+#import "Part.h"
 
 @interface Ship ()
-@property (strong,nonatomic, readwrite) NSString *hangerName;
 @property (strong,nonatomic) CRAFTVessel *vessel;
+@property (strong,nonatomic, readwrite) NSString *hangerName;
 @end
 
 @implementation Ship
@@ -21,6 +23,23 @@
 @synthesize isInSpacePlaneHanger = _isInSpacePlaneHanger;
 @synthesize isInVehicleAssemblyBuilding = _isInVehicleAssemblyBuilding;
 @synthesize isSandboxed = _isSandboxed;
+@synthesize parts = _parts;
+
+
+- (id)initWithURL:(NSURL *)url andPartList:(NSArray *)partList
+{
+    if( self = [super initWithURL:url] ) {
+        
+        for (CRAFTPart *cp in self.parts) {
+            for(Part *p in partList ) {
+                NSString *name = [p valueForKey:kPartKeyName];
+                if( [cp.name isEqualToString:name] )
+                    cp.definition = p;
+            }
+        }
+    }
+    return self;
+}
 
 #pragma mark -
 #pragma mark Overriden Properties
@@ -38,7 +57,7 @@
     if( [self.url.lastPathComponent rangeOfString:kShipFilenameAutoSaved].location != NSNotFound    )
         return [NSString stringWithFormat:@"Auto-Saved %@",[self valueForKey:kShipKeyShipName]];
     
-    return [self.vessel valueForKey:kShipKeyShipName];
+    return [self valueForKey:kShipKeyShipName];
 }
 
 - (NSString *)assetCategory
@@ -114,7 +133,7 @@
 
 - (NSMutableArray *)parts
 {
-    return _vessel.parts;
+    return self.vessel.parts;
 }
 
 #pragma mark -
@@ -187,7 +206,7 @@
 #pragma mark -
 #pragma mark Class Methods
 
-+ (NSArray *)inventory:(NSURL *)baseUrl
++ (NSArray *)inventory:(NSURL *)baseUrl withPartList:(NSArray *)partList
 {
     NSMutableArray *results = [[NSMutableArray alloc] init];
     
@@ -196,7 +215,7 @@
     }];
     
     for(NSString *path in paths) {
-        Ship *ship = [[Ship alloc] initWithURL:[baseUrl URLByAppendingPathComponent:path isDirectory:NO]];
+        Ship *ship = [[Ship alloc] initWithURL:[baseUrl URLByAppendingPathComponent:path isDirectory:NO] andPartList:partList ];
         if( ship )
             [results addObject:ship];
     }
