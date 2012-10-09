@@ -54,6 +54,7 @@
 
 - (void)chooseAnInstallation
 {
+#if 0
     // user defaults check here
 
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -81,7 +82,7 @@
     }
     
     // otherwise ask the user to locate it for us, will terminiate if the user fails to pick a valid installation
-
+#endif
     [self chooseInstallationDirectory:self];
 }
 
@@ -158,6 +159,8 @@
     openPanel.canCreateDirectories = NO;
     openPanel.canSelectHiddenExtension = NO;
     openPanel.allowsMultipleSelection = NO;
+    [openPanel setMessage:@"Choose a Kerbal Space Program installation to manage."];
+    [openPanel setPrompt:@"Manage"];
     
     [openPanel beginSheetModalForWindow:self.window
                       completionHandler:^(NSInteger result) {

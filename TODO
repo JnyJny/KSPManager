@@ -14,6 +14,7 @@ This TODO list is for tracking feature ideas/snafus
 - part name changer to organize parts in the VAB/SPH tabs for each category
 
 
+
 Fix For .17
 - Ship heirarchy is weird now
 -   one big pot of available ships, seperate VAB, SPH and Sandbox (VAB|SPH) destinations ugh
@@ -46,7 +47,7 @@ Nice To Have, Not Holding My Breath
 
 
 BUG
-- plugin naming seems to be broken ( moving from installed to available with multiple instances )
+- Initial Open dialog needs text to explain what the user needs to supply ( where is their KSP folder? ).
 
 DONE
 - clean out cached unzipped distributions
@@ -58,6 +59,7 @@ DONE
 - downloads on seperate operations queue to free up main thread
 - change from "Mod" subdirectory within KSP ROOT to "Managed"
 - migrate process for "Mod" to "Managed" change
+- plugin naming seems to be broken ( moving from installed to available with multiple instances )
 
 GOOD Idea, Not Gonna Do It For V1
 - video demonstrating usage
