@@ -1,6 +1,6 @@
 # KSPManager: A Kerbal Space Program Part & Plugin Manager
 
-**Version 1.8 available now in the Downloads page!**
+**Version 1.11 available now in the Downloads page!**
 
 KSP Manager is a native Mac OS X application designed to make it easy to manage the amazing
 wealth of add-on parts and plugins for Kerbal Space Program.
